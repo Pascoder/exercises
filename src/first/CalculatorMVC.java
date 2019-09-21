@@ -16,7 +16,7 @@ public class CalculatorMVC extends Application{
 	@Override
 	public void start(Stage primaryStage)  {
 		model = new CalculatorModel();
-		view = new CalculatorView(primaryStage, model);
+		view = new CalculatorView(PrimaryStage, model);
 		controller = new CalculatorController(model, view);
 		
 		
