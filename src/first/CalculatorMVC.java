@@ -11,7 +11,7 @@ public class CalculatorMVC extends Application{
 	private CalculatorModel model;
 
 	public static void main(String[] args) {
-		launch(args);
+		launch(args);//kommentar
 
 	}
 
