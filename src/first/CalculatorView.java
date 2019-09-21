@@ -7,8 +7,10 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class CalculatorView {
-private TextField ausgabe;
-private Button eins,zwei,drei,vier,fuenf,sechs,sieben,acht,neun,nulll,plus,gleich,c;
+//TextField muss protected sein
+protected TextField ausgabe;
+//Buttons muessen protected sein, nicht private
+protected Button eins,zwei,drei,vier,fuenf,sechs,sieben,acht,neun,nulll,plus,gleich,c;
 private Stage stage;
 private CalculatorModel model;
 
@@ -24,7 +26,7 @@ public CalculatorView(Stage stage, CalculatorModel model) {
 	//AusgabeFeld
 	this.ausgabe =  new TextField();
 	grid.add(ausgabe, 0, 0);
-	grid.setColumnSpan(ausgabe, 4); //2 Zellen für Ausgabe Feld benutzen, damit Format passt
+	grid.setColumnSpan(ausgabe, 4); //2 Zellen fï¿½r Ausgabe Feld benutzen, damit Format passt
 	
 	//1. Zeile
 	this.sieben = new Button ("  7  ");
@@ -56,8 +58,8 @@ public CalculatorView(Stage stage, CalculatorModel model) {
 	this.gleich = new Button("  =  \r\n" + 
 			"");
 	grid.add(gleich, 3, 3);
-	grid.setRowSpan(gleich, 2);//Zeilen anpassen für =
-	grid.setColumnSpan(gleich, 2);//Spalten anpassen für =
+	grid.setRowSpan(gleich, 2);//Zeilen anpassen fï¿½r =
+	grid.setColumnSpan(gleich, 2);//Spalten anpassen fï¿½r =
 	
 	//4.Zeile
 	this.nulll = new Button("	      0 	    ");
@@ -65,7 +67,7 @@ public CalculatorView(Stage stage, CalculatorModel model) {
 	grid.setColumnSpan(nulll, 3);
 	
 	
-	//grid also die root wird der scene übergeben
+	//grid also die root wird der scene ï¿½bergeben
 	Scene scene = new Scene(grid);
 	stage.setScene(scene);
 	

@@ -9,13 +9,14 @@ private CalculatorView view;
 private CalculatorController controller;
 	public static void main(String[] args) {
 		launch(args);
-
 	}
+	
+	
 	public void start(Stage PrimaryStage) {
 		model = new CalculatorModel();
 		view = new CalculatorView(PrimaryStage,model);
 		//Ausgeblendet damit Programm leuft
-		//controller = new CalculatorController(model,view);
+		controller = new CalculatorController(model,view);
 		view.start();
 	}
 
