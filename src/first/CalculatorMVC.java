@@ -1,5 +1,7 @@
 package first;
 
+import Exercises.CalculatorModel;
+import Exercises.CalculatorView;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -14,11 +16,11 @@ public class CalculatorMVC extends Application{
 	}
 
 	@Override
-	public void start(Stage primaryStage)  {
+	public void start(Stage PrimaryStage) {
 		model = new CalculatorModel();
-		view = new CalculatorView(PrimaryStage, model);
-		controller = new CalculatorController(model, view);
-		
+		view = new CalculatorView(PrimaryStage,model);
+		//controller = new CalculatorController(model,view);
+		view.start();
 		
 	}
 
