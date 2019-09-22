@@ -15,7 +15,6 @@ private CalculatorController controller;
 	public void start(Stage PrimaryStage) {
 		model = new CalculatorModel();
 		view = new CalculatorView(PrimaryStage,model);
-		//Ausgeblendet damit Programm leuft
 		controller = new CalculatorController(model,view);
 		view.start();
 	}
