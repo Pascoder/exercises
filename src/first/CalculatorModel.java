@@ -35,7 +35,7 @@ public CalculatorModel() {
 		}
 		String endresultat1 = Integer.toString(endresultat);
 		
-		return endresultat1;
+		return endresultat1;//von hier weiter rechnen
 		
 		
 		

@@ -87,9 +87,8 @@ public void gleichProcess(Event gleich) {
 	//wenn gleich gedrückt wird muss berechnet werden
 	this.counter = 0;
 	String ziel = model.Umformatieren(this.totaltext);
-	setTotalText("");
-	view.ausgabe.clear();
 	view.ausgabe.setText(ziel); //Endgülitges resultat
+	this.totaltext = ziel;
 	
 }
 public void nulllProcess(Event nulll) {

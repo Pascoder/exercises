@@ -71,9 +71,6 @@ public CalculatorView(Stage stage, CalculatorModel model) {
 	Scene scene = new Scene(grid);
 	stage.setScene(scene);
 	
-
-	
-	
 }
 
 
