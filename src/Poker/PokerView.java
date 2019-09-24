@@ -1,6 +1,6 @@
 package Poker;
 
-import com.sun.prism.paint.Color;
+
 
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -17,7 +17,7 @@ private Stage stage;
 private PokerModel model;
 //GridPane als 1. Pane festlegen
 private GridPane pane;
-//Elemenete für Pokerspiel erstellen (Button....
+//Elemenete fï¿½r Pokerspiel erstellen (Button....
 private Label player0,player1,twopair,highcard,points;
 private Image card1,card2,card3,card4,card5,card6,card7,card8,card9,card10;
 private Button shuffle,deal;
@@ -29,14 +29,14 @@ public PokerView(Stage stage, PokerModel model) {
 	stage.setTitle("Poker MiniProject");
 	this.pane = new GridPane();
 	
-	//Labels hinzufügen pane.add(...,spalte,zeile)
+	//Labels hinzufï¿½gen pane.add(...,spalte,zeile)
 	this.player0 =  new Label("	Player 0");
 	pane.add(player0, 2, 0);
 	
 	this.player1 = new Label("	Player 1");
 	pane.add(player1, 7, 0);
 	
-	//PokerKarten hinzufügen (Bilder) !!@todo hier muss eine Variabel mit den verschieden Image Links reinkommen die per Random per zufall eine karte auswählt
+	//PokerKarten hinzufï¿½gen (Bilder) !!@todo hier muss eine Variabel mit den verschieden Image Links reinkommen die per Random per zufall eine karte auswï¿½hlt
 	this.card1 = new Image("10_of_clubs.png");
 	this.imageview1 = new ImageView(card1);
 	this.pane.add(imageview1, 0, 1);
@@ -104,7 +104,7 @@ public PokerView(Stage stage, PokerModel model) {
 	this.highcard = new Label("	Punkte");
 	this.pane.add(highcard, 7, 2);
 	
-	//Hbox für die 2 Buttons erstellen
+	//Hbox fï¿½r die 2 Buttons erstellen
 	Label platzhalter1 = new Label("	");
 	this.points = new Label("42");
 	Label platzhalter = new Label("																																	");
@@ -116,7 +116,7 @@ public PokerView(Stage stage, PokerModel model) {
 	
 	
 	//Scene setzen
-	Scene scene = new Scene(pane,1050,200);//@todo remove grösse
+	Scene scene = new Scene(pane,1050,200);//@todo remove grï¿½sse
 	stage.setScene(scene);
 	pane.setVgap(10);
 	pane.setHgap(5);
