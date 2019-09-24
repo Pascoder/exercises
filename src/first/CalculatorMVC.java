@@ -7,6 +7,7 @@ public class CalculatorMVC extends Application{
 private CalculatorModel model;
 private CalculatorView view;
 private CalculatorController controller;
+
 	public static void main(String[] args) {
 		launch(args);
 	}

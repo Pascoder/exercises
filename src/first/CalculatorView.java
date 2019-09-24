@@ -20,7 +20,6 @@ public CalculatorView(Stage stage, CalculatorModel model) {
 	this.model = model;
 	stage.setTitle("Calculator");
 	
-	
 	GridPane grid = new GridPane();
 	
 	//AusgabeFeld
