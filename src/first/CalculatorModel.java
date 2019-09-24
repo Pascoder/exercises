@@ -11,7 +11,7 @@ public CalculatorModel() {
 
 	public String  Umformatieren(String text) {
 		String totalzahlen ="";
-		int Lösung[] = new int [10];
+		int Loesung[] = new int [10];
 		int endresultat = 0;
 		
 		for(int i = 0;i<text.length();i++) {
@@ -27,11 +27,11 @@ public CalculatorModel() {
 		
 		String[] strValues = totalzahlen.split("\\+");//Zahlen werden im Array abgelegt
 		for(int b =0;b<strValues.length;b++) {
-			Lösung[b] = Integer.parseInt(strValues[b]);//String wird zu Int darum anderes Array nötig für berrechnung
+			Loesung[b] = Integer.parseInt(strValues[b]);//String wird zu Int darum anderes Array nï¿½tig fï¿½r berrechnung
 		}
 		
-		for(int c = 0; c<Lösung.length;c++) {
-			endresultat+= Lösung[c];//Berrechnung des Ergebnis
+		for(int c = 0; c<Loesung.length;c++) {
+			endresultat+= Loesung[c];//Berrechnung des Ergebnis
 		}
 		String endresultat1 = Integer.toString(endresultat);
 		
