@@ -16,7 +16,7 @@ protected ChessView(Stage stage, ChessModel model) {
 	
 	GridPane root = new GridPane();
 	
-	Scene scene = new Scene (root);
+	Scene scene = new Scene (root,1000,500);
 	
 	
 	
