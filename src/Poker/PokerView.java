@@ -20,12 +20,14 @@ private GridPane pane;
 //Create elements of the poker game
 private Label player0,player1,twopair,highcard,points;
 private Image card1,card2,card3,card4,card5,card6,card7,card8,card9,card10;
-private Button shuffle,deal;
-private ImageView imageview1, imageview2, imageview3, imageview4, imageview5, imageview6, imageview7, imageview8, imageview9, imageview10;
-	
+protected Button shuffle,deal;
+protected ImageView imageview1, imageview2, imageview3, imageview4, imageview5, imageview6, imageview7, imageview8, imageview9, imageview10; //must be an image array
+protected Image imageArray []; //places for 52 pokercard images
+
 public PokerView(Stage stage, PokerModel model) {
 	this.stage = stage;
 	this.model = model;
+	this.imageArray = imageArray;
 	stage.setTitle("Poker MiniProject");
 	this.pane = new GridPane();
 	
@@ -36,9 +38,10 @@ public PokerView(Stage stage, PokerModel model) {
 	this.player1 = new Label("	Player 1");
 	pane.add(player1, 7, 0);
 	
-	//add pokercards (image) <--!!@todo here must be a variable with the different images
+	
+	//add pokercards (image) <--!!@todo here must be a variable with different images
 	this.card1 = new Image("10_of_clubs.png");
-	this.imageview1 = new ImageView(card1);
+	this.imageview1 = new ImageView(card1);//<-- here we have to insert the imageArray variables
 	this.pane.add(imageview1, 0, 1);
 	this.imageview1.setFitHeight(100);
 	this.imageview1.setFitWidth(100);
@@ -96,6 +99,18 @@ public PokerView(Stage stage, PokerModel model) {
 	this.pane.add(imageview10, 9, 1);
 	this.imageview10.setFitHeight(100);
 	this.imageview10.setFitWidth(100);
+	
+	//add Image in Array, we need this to shuffle the cards --> !!Issue create a solution!!
+	/*this.imageArray[0] = card1;
+	this.imageArray[1] = card2;
+	this.imageArray[2] = card3;
+	this.imageArray[3] = card4;
+	this.imageArray[4] = card5;
+	this.imageArray[5] = card6;
+	this.imageArray[6] = card7;
+	this.imageArray[8] = card8;
+	this.imageArray[9] = card9;
+	this.imageArray[10] = card10;*/
 	
 	//Label below of the pokercards @todo -->add variable with result of pokercards
 	this.twopair = new Label("	Punkte");
