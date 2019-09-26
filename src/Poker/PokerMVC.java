@@ -4,7 +4,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 public class PokerMVC extends Application{
-//Instanzieren von PokerView, PokerController und PokerModel objekt um Aufgaben in verschiedene klassen aufzuteilen
+//Create instance of PokerView, PokerController and PokerModel to outsource the task's
 	private PokerView view;
 	private PokerController controller;
 	private PokerModel model;
