@@ -12,33 +12,36 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class PokerView {
-//Verbindungen zu anderen Klassen erstellen
+//Create connection to other classe's
 private Stage stage;
 private PokerModel model;
-//GridPane als 1. Pane festlegen
+//Create the main paine --> Grid Pane
 private GridPane pane;
-//Elemenete f�r Pokerspiel erstellen (Button....
+//Create elements of the poker game
 private Label player0,player1,twopair,highcard,points;
 private Image card1,card2,card3,card4,card5,card6,card7,card8,card9,card10;
-private Button shuffle,deal;
-private ImageView imageview1, imageview2, imageview3, imageview4, imageview5, imageview6, imageview7, imageview8, imageview9, imageview10;
-	
+protected Button shuffle,deal;
+protected ImageView imageview1, imageview2, imageview3, imageview4, imageview5, imageview6, imageview7, imageview8, imageview9, imageview10; //must be an image array
+protected Image imageArray []; //places for 52 pokercard images
+
 public PokerView(Stage stage, PokerModel model) {
 	this.stage = stage;
 	this.model = model;
+	this.imageArray = imageArray;
 	stage.setTitle("Poker MiniProject");
 	this.pane = new GridPane();
 	
-	//Labels hinzuf�gen pane.add(...,spalte,zeile)
+	//add labels pane.add(...,spalte,zeile)
 	this.player0 =  new Label("	Player 0");
 	pane.add(player0, 2, 0);
 	
 	this.player1 = new Label("	Player 1");
 	pane.add(player1, 7, 0);
 	
-	//PokerKarten hinzuf�gen (Bilder) !!@todo hier muss eine Variabel mit den verschieden Image Links reinkommen die per Random per zufall eine karte ausw�hlt
+	
+	//add pokercards (image) <--!!@todo here must be a variable with different images
 	this.card1 = new Image("10_of_clubs.png");
-	this.imageview1 = new ImageView(card1);
+	this.imageview1 = new ImageView(card1);//<-- here we have to insert the imageArray variables
 	this.pane.add(imageview1, 0, 1);
 	this.imageview1.setFitHeight(100);
 	this.imageview1.setFitWidth(100);
@@ -97,14 +100,26 @@ public PokerView(Stage stage, PokerModel model) {
 	this.imageview10.setFitHeight(100);
 	this.imageview10.setFitWidth(100);
 	
-	//Label unterhalb von Pokerkarten @todo --> resultat der karten hier festlegen
+	//add Image in Array, we need this to shuffle the cards --> !!Issue create a solution!!
+	/*this.imageArray[0] = card1;
+	this.imageArray[1] = card2;
+	this.imageArray[2] = card3;
+	this.imageArray[3] = card4;
+	this.imageArray[4] = card5;
+	this.imageArray[5] = card6;
+	this.imageArray[6] = card7;
+	this.imageArray[8] = card8;
+	this.imageArray[9] = card9;
+	this.imageArray[10] = card10;*/
+	
+	//Label below of the pokercards @todo -->add variable with result of pokercards
 	this.twopair = new Label("	Punkte");
 	this.pane.add(twopair, 2, 2);
 	
 	this.highcard = new Label("	Punkte");
 	this.pane.add(highcard, 7, 2);
 	
-	//Hbox f�r die 2 Buttons erstellen
+	//create hbox with two buttons (deal and shuffle)
 	Label platzhalter1 = new Label("	");
 	this.points = new Label("42");
 	Label platzhalter = new Label("																																	");
@@ -115,8 +130,8 @@ public PokerView(Stage stage, PokerModel model) {
 	pane.add(hbox, 0, 3,11,11);
 	
 	
-	//Scene setzen
-	Scene scene = new Scene(pane,1050,200);//@todo remove gr�sse
+	//set Scene
+	Scene scene = new Scene(pane,1050,200);//@todo remove size
 	stage.setScene(scene);
 	pane.setVgap(10);
 	pane.setHgap(5);
