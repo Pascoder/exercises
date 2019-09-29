@@ -3,6 +3,8 @@ package Poker;
 
 
 public class CardDeck {
+	
+	private static PokerCard [] cardDeck;
 
 	
 	public CardDeck() {
@@ -15,7 +17,7 @@ public class CardDeck {
 		
 		int cardNumber = 1;
 		final int TOTAL_CARDS = 60;
-		PokerCard [] cardDeck = new PokerCard [TOTAL_CARDS];
+		cardDeck = new PokerCard [TOTAL_CARDS];
 		
 		for(int i = 1;i<=13;i++) {
 			
@@ -24,7 +26,7 @@ public class CardDeck {
 				PokerCard pc = new PokerCard(s,i);
 				cardDeck[cardNumber] = pc;
 				cardNumber ++;
-				System.out.println(pc);
+//				System.out.println(pc);
 				
 		}
 	
@@ -35,7 +37,7 @@ public class CardDeck {
 				PokerCard pc = new PokerCard(s,i);
 				cardDeck[cardNumber] = pc;
 				cardNumber ++;
-				System.out.println(pc);
+//				System.out.println(pc);
 
 		}
 		
@@ -46,7 +48,7 @@ public class CardDeck {
 				PokerCard pc = new PokerCard(s,i);
 				cardDeck[cardNumber] = pc;
 				cardNumber ++;
-				System.out.println(pc);
+//				System.out.println(pc);
 
 		}
 		
@@ -57,7 +59,7 @@ public class CardDeck {
 				PokerCard pc = new PokerCard(s,i);
 				cardDeck[cardNumber] = pc;
 				cardNumber ++;
-				System.out.println(pc);
+//				System.out.println(pc);
 
 		}
 	
@@ -70,7 +72,10 @@ public class CardDeck {
 
 	@Override
 	public String toString() {
-		return "CardDeck [toString()=" + super.toString() + "]";
+		for(int i=0; i<this.cardDeck.length;i++) {
+			
+		}
+		return;
 	}
 	
 	
