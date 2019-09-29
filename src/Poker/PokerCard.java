@@ -3,41 +3,21 @@ package Poker;
 public class PokerCard {
 	
 
-//	public cardSuit cardSuit;
-	private int cardRank;
-	private String suit;
+	private CardRank cardRank;
+	private CardSuit cardSuit;
 	
 
 	
-	public PokerCard(String suit, int cardRank) {
+	public PokerCard(CardRank cardRank, CardSuit cardSuit) {
 		
 		this.cardRank = cardRank;
-		this.suit = suit;
+		this.cardSuit = cardSuit;
 		
 		
 		
 	}
 
-	@Override
-	public String toString() {
-		return "PokerCard [cardRank=" + cardRank + ", suit=" + suit + "]";
-	}
-
-	public int getCardRank() {
-		return cardRank;
-	}
-
-	public String getSuit() {
-		return suit;
-	}
-
-	public void setCardRank(int cardRank) {
-		this.cardRank = cardRank;
-	}
-
-	public void setSuit(String suit) {
-		this.suit = suit;
-	}
+	
 
 	
 }
