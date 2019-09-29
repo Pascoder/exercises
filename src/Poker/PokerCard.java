@@ -5,9 +5,9 @@ public class PokerCard {
 
 //	public cardSuit cardSuit;
 	private int cardRank;
-	public String suit;
+	private String suit;
 	
-//	public enum cardSuit {HEARTS, SPADES, CLUBS, DIAMONDS};
+
 	
 	public PokerCard(String suit, int cardRank) {
 		

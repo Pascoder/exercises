@@ -1,33 +1,30 @@
 package Poker;
 
-
+import java.util.ArrayList;
 
 public class CardDeck {
 	
-	private static PokerCard [] cardDeck;
-
+	final static int TOTAL_CARDS = 52;
 	
 	public CardDeck() {
-		CardDeck.deckGenerator();
-	}
+		ArrayList<PokerCard> cardArrayList = new ArrayList<PokerCard>();
+		CardDeck.deckGenerator(cardArrayList);
+		}
 	
 	
 	
-	public static PokerCard[] deckGenerator() {
+	public static ArrayList<PokerCard> deckGenerator(ArrayList<PokerCard> cardArrayList) {
 		
-		int cardNumber = 1;
-		final int TOTAL_CARDS = 60;
-		cardDeck = new PokerCard [TOTAL_CARDS];
+		int cardNumber = 0;
 		
 		for(int i = 1;i<=13;i++) {
 			
 			String s = new String ("Clubs");
 			
 				PokerCard pc = new PokerCard(s,i);
-				cardDeck[cardNumber] = pc;
+				cardArrayList.add(cardNumber,pc);
 				cardNumber ++;
-//				System.out.println(pc);
-				
+//				System.out.println(pc);		
 		}
 	
 		for(int i = 1;i<=13;i++) {
@@ -35,7 +32,7 @@ public class CardDeck {
 			String s = new String ("Hearts");
 			
 				PokerCard pc = new PokerCard(s,i);
-				cardDeck[cardNumber] = pc;
+				cardArrayList.add(cardNumber,pc);
 				cardNumber ++;
 //				System.out.println(pc);
 
@@ -46,7 +43,7 @@ public class CardDeck {
 			String s = new String ("Spades");
 			
 				PokerCard pc = new PokerCard(s,i);
-				cardDeck[cardNumber] = pc;
+				cardArrayList.add(cardNumber,pc);
 				cardNumber ++;
 //				System.out.println(pc);
 
@@ -57,27 +54,28 @@ public class CardDeck {
 			String s = new String ("Diamonds");
 			
 				PokerCard pc = new PokerCard(s,i);
-				cardDeck[cardNumber] = pc;
+				cardArrayList.add(cardNumber,pc);
 				cardNumber ++;
 //				System.out.println(pc);
 
 		}
 	
-		return cardDeck;
+		return cardArrayList;
 		
 	
 	}
 
 
 
-	@Override
-	public String toString() {
-		for(int i=0; i<this.cardDeck.length;i++) {
+
+
+
+
 			
-		}
-		return;
+		
+		
 	}
 	
 	
 
-}
+
