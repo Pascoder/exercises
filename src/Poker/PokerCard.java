@@ -17,6 +17,14 @@ public class PokerCard {
 		
 	}
 
+	public enum CardSuit {
+	
+	HEARTS, 
+	SPADES, 
+	CLUBS, 
+	DIAMONDS;
+
+	}
 	
 
 	
