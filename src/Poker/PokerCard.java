@@ -11,8 +11,6 @@ public class PokerCard {
 		this.cardSuit = cardSuit;
 	}
 	
-	
-
 	public enum CardSuit {
 	HEARTS, 
 	SPADES, 
@@ -25,6 +23,10 @@ public class PokerCard {
 	TWO, THREE, FOUR, FIVE, SIX,
 	SEVEN, EIGHT, NINE, TEN,
 	JACK, QUEEN, KING, ACE
+	}
+	
+	public String toString(){
+   		return cardSuit.name()+"-"+cardRank.name();
 	}
 	
 }
