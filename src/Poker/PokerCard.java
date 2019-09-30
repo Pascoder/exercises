@@ -1,18 +1,17 @@
 package Poker;
 
 public class PokerCard {
+	final CardRank cardRank;
+	final CardSuit cardSuit;
 	
 
-	private CardRank cardRank;
-	private CardSuit cardSuit;
-	
-
-	
 	public PokerCard(CardRank cardRank, CardSuit cardSuit) {
 		
 		this.cardRank = cardRank;
-		this.cardSuit = cardSuit;	
+		this.cardSuit = cardSuit;
 	}
+	
+	
 
 	public enum CardSuit {
 	HEARTS, 
