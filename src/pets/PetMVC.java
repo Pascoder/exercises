@@ -1,11 +1,7 @@
 package pets;
 
-
 import javafx.application.Application;
 import javafx.stage.Stage;
-
-
-	
 
 /**
  * Version 0 is just the basic program structure,
