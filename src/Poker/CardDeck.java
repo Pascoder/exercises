@@ -10,14 +10,16 @@ public class CardDeck {
 	
 	public CardDeck() {
 		ArrayList<PokerCard> cardArrayList = new ArrayList<PokerCard>();
-		this.cardArrayList = CardDeck.deckGenerator(cardArrayList);
+		this.cardArrayList = CardDeck.generateDeck(cardArrayList);
 		
 		
 		}
 	
 	
+	//Seite 204 im Java Script! Im Kontruktor die Methode CardDeck.generateDeck() aufrufen und dann ein Objekt des Typs CardDeck 
+	//erzeugen.
 	
-	public static ArrayList<PokerCard> deckGenerator(ArrayList<PokerCard> cardArrayList) {
+	public static ArrayList<PokerCard> generateDeck(ArrayList<PokerCard> cardArrayList) {
 		
 	//Add all PokerCards to cardArrayList in an ugly way!! how to do for-Loop through enum???	
 		
