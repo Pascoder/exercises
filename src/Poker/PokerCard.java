@@ -12,17 +12,17 @@ public class PokerCard {
 	}
 	
 	public enum CardSuit {
-	HEARTS, 
-	SPADES, 
-	CLUBS, 
-	DIAMONDS
+		HEARTS, 
+		SPADES, 
+		CLUBS, 
+		DIAMONDS
 	}
 	
 	
 	public enum CardRank {
-	TWO, THREE, FOUR, FIVE, SIX,
-	SEVEN, EIGHT, NINE, TEN,
-	JACK, QUEEN, KING, ACE
+		TWO, THREE, FOUR, FIVE, SIX,
+		SEVEN, EIGHT, NINE, TEN,
+		JACK, QUEEN, KING, ACE
 	}
 	
 	public String toString(){

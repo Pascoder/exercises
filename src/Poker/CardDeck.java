@@ -6,10 +6,7 @@ import java.util.Collections;
 
 public class CardDeck {
 	
-	final static int TOTAL_CARDS = 52;
 	private ArrayList<PokerCard> cardArrayList;
-	
-	
 	
 	public CardDeck() {
 		ArrayList<PokerCard> cardArrayList = new ArrayList<PokerCard>();
@@ -24,20 +21,20 @@ public class CardDeck {
             }
         }
 		
-        this.cardArrayList=cardArrayList;
+        this.cardArrayList = cardArrayList;
         
 	}  
         
         
 	
-	
+	//Methode um Karten zu mischen
 	public CardDeck shuffleDeck(CardDeck cd) {
 		Collections.shuffle(cd.cardArrayList);
         	return cd;  
         	
 	}
 	
-	
+	//Test Methode um alle Karten im Deck in der Konsole auszugeben
 	public void printDeck(CardDeck cd) {
 		int n = cardArrayList.size();
 
