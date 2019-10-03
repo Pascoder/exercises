@@ -36,6 +36,7 @@ public void einsProcess(Event eins) {
 this.counter++;//um zu wissen wie viel zahlen schon gedrückt wurden vor C (deleten)
 setTotalText("1");
 
+
 	
 }
 public void zweiProcess(Event zwei) {

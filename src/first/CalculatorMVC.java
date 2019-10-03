@@ -13,7 +13,7 @@ private CalculatorController controller;
 	}
 	
 	
-	public void start(Stage PrimaryStage) {
+	public void start(Stage PrimaryStage) throws Exception{
 		model = new CalculatorModel();
 		view = new CalculatorView(PrimaryStage,model);
 		controller = new CalculatorController(model,view);

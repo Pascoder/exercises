@@ -68,8 +68,11 @@ public CalculatorView(Stage stage, CalculatorModel model) {
 	
 	//grid also die root wird der scene �bergeben
 	Scene scene = new Scene(grid);
-	stage.setScene(scene);
 	
+	//CSS Style Sheed
+	scene.getStylesheets().add(
+			getClass().getResource("Calculator.css").toExternalForm());
+	stage.setScene(scene);
 }
 
 
