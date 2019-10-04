@@ -3,10 +3,15 @@ package Poker;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import javafx.scene.image.Image;
+
+
+
 
 public class CardDeck {
 	
 	private ArrayList<PokerCard> cardArrayList;
+	
 	
 	public CardDeck() {
 		ArrayList<PokerCard> cardArrayList = new ArrayList<PokerCard>();
@@ -42,6 +47,10 @@ public class CardDeck {
             System.out.println((i + 1)  + ": " + cardArrayList.get(i));
 		}
 	}
+	public ArrayList<PokerCard> getArrayList(){
+		return this.cardArrayList;
+	}
+	
 		
 		
 }

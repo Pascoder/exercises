@@ -51,7 +51,7 @@ protected ImageView imageview1, imageview2, imageview3, imageview4, imageview5, 
 
 protected Image imageArray []; //places for 52 pokercard images
 
-protected CardDeck deck;
+
 
 public PokerView(Stage stage, PokerModel model) {
 
@@ -258,9 +258,7 @@ public PokerView(Stage stage, PokerModel model) {
 
 	hbox.setStyle("-fx-background-color: burlywood");
 
-	//Create CardDeck
-	this.deck = new CardDeck();
-	deck.printDeck(deck); //Test ob deck erzeugt wird
+	
 	
 
 }
