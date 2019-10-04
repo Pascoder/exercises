@@ -46,6 +46,8 @@ public PokerCard[] generateHand(CardDeck cd) {
 		
 		
 	}
+	//Test ob es Funktioniert kann nachher gelöscht werden
+	System.out.println("Created Hands:");
 	for(int b = 0; b<handSize;b++) {
 		System.out.println(hand[b]);
 	}

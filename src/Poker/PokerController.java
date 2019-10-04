@@ -30,7 +30,7 @@ public PokerController(PokerModel model, PokerView view) {
 	PokerPlayer player = new PokerPlayer(this.playernumber);
 	this.playernumber++; //muss am Anfang des Spieles gefragt werden wie viele Spieler
 	
-	//PokerPlayer wird ganzes Deck übergeben und bekommt ein Array zurück
+	//PokerPlayer wird ganzes Deck übergeben und daraus Hands generiert
 	player.generateHand(deck);
 	
 	//Shuffle method
