@@ -1,6 +1,5 @@
 package Poker;
 
-import java.awt.List;
 import java.util.ArrayList;
 
 
@@ -9,7 +8,7 @@ public class PokerPlayer {
 	private String playerName;
 	private PokerCard [] hand;
 	private HandType handType;
-	private final int handSize = 5;
+	private final int HANDSIZE = 5;
 		
 	public enum HandType{
 			
@@ -34,21 +33,21 @@ public PokerPlayer(int a) {
 public void setName(String name) {
 	this.playerName = name;
 }
-//CardDeck cd ist ein Objekt das ein ArrayListe enthält
+//CardDeck cd ist ein Objekt das ein ArrayListe enthaelt
 public PokerCard[] generateHand(CardDeck cd) {
-	 this.hand = new PokerCard[this.handSize];
+	 this.hand = new PokerCard[this.HANDSIZE];
 	
 	
-	for(int i = 0; i<handSize;i++) {
+	for(int i = 0; i<HANDSIZE;i++) {
 	 
 		hand[i] = cd.getArrayList().get(i);//Funktioniert
 		
 		
 		
 	}
-	//Test ob es Funktioniert kann nachher gelöscht werden
+	//Test ob es Funktioniert kann nachher geloescht werden
 	System.out.println("Created Hands:");
-	for(int b = 0; b<handSize;b++) {
+	for(int b = 0; b<HANDSIZE;b++) {
 		System.out.println(hand[b]);
 	}
 	return hand;
@@ -61,7 +60,7 @@ public void setHandType(HandType handtype) {
 public String getName() {
 	return this.playerName;
 }
-//nur für den Test benötigt um Hand anzuschauen
+//nur fuer den Test benoetigt um Hand anzuschauen
 
 public HandType getHandtype() {
 	return this.handType;
