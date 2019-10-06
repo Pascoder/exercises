@@ -25,7 +25,6 @@ public class PokerView {
 private Stage stage;
 
 private PokerModel model;
-
 private BorderPane pane;
 
 //Create elements of the poker game
@@ -35,8 +34,6 @@ private HBox gamePane, controlPane, cardBox;
 
 
 private Label playerName, evaluationLabel, totalPoints;
-
-
 private Button shuffle,deal;
 
 
@@ -46,10 +43,20 @@ private Button shuffle,deal;
 public PokerView(Stage stage, PokerModel model) {
 
 	this.stage = stage;
-
 	this.model = model;
 
 
+	gamePane = new HBox();
+	for (int i = 0; i < Poker.PokerMVC.NUMBER_OF_PLAYERS; i++) {
+		PlayerPane pPane = new PlayerPane();
+		pPane.setPlayer(PokerController.)
+	}
+	
+	
+	
+	
+	
+	
 	stage.setTitle("Poker MiniProject");
 
 	this.pane = new BorderPane();
