@@ -1,11 +1,5 @@
 package Poker;
 
-
-
-
-
-
-
 import javafx.scene.Scene;
 
 import javafx.scene.control.Button;
@@ -15,11 +9,11 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 
 import javafx.scene.image.ImageView;
-
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
 import javafx.scene.layout.HBox;
-
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 
@@ -32,24 +26,20 @@ private Stage stage;
 
 private PokerModel model;
 
-
-
-
-//Create the main paine --> Grid Pane
-
-private GridPane pane;
+private BorderPane pane;
 
 //Create elements of the poker game
 
-private Label player0,player1,twopair,highcard,points;
+private VBox playerPane;
+private HBox gamePane, controlPane, cardBox;
 
-private Image card1,card2,card3,card4,card5,card6,card7,card8,card9,card10;
 
-protected Button shuffle,deal;
+private Label playerName, evaluationLabel, totalPoints;
 
-protected ImageView imageview1, imageview2, imageview3, imageview4, imageview5, imageview6, imageview7, imageview8, imageview9, imageview10; //must be an image array
 
-protected Image imageArray []; //places for 52 pokercard images
+private Button shuffle,deal;
+
+
 
 
 
@@ -59,11 +49,18 @@ public PokerView(Stage stage, PokerModel model) {
 
 	this.model = model;
 
-	this.imageArray = imageArray;
 
 	stage.setTitle("Poker MiniProject");
 
-	this.pane = new GridPane();
+	this.pane = new BorderPane();
+	
+	this.playerPane = new VBox();
+	
+	this.gamePane = new HBox();
+	
+	this.controlPane = new HBox();
+	
+	this.cardBox = new HBox();
 
 	
 
@@ -71,7 +68,7 @@ public PokerView(Stage stage, PokerModel model) {
 
 	this.player0 =  new Label("	Player 0");
 
-	pane.add(player0, 2, 0);
+	pane.(player0, 2, 0);
 
 	
 

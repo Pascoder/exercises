@@ -8,7 +8,7 @@ public class PokerPlayer {
 	private String playerName;
 	private PokerCard [] hand;
 	private HandType handType;
-	private final int HANDSIZE = 5;
+	public static final int HANDSIZE = 5;
 		
 	public enum HandType{
 			
@@ -26,16 +26,17 @@ public class PokerPlayer {
 		}
 	
 	
-public PokerPlayer(int a) {
-	this.playerName = "Player " + a;
+public PokerPlayer(String s) {
+	this.playerName = "Player " + s;
 
 	}
 public void setName(String name) {
 	this.playerName = name;
 }
 //CardDeck cd ist ein Objekt das ein ArrayListe enthaelt
+
 public PokerCard[] generateHand(CardDeck cd) {
-	 this.hand = new PokerCard[this.HANDSIZE];
+	 this.hand = new PokerCard[HANDSIZE];
 	
 	
 	for(int i = 0; i<HANDSIZE;i++) {
@@ -45,6 +46,7 @@ public PokerCard[] generateHand(CardDeck cd) {
 		
 		
 	}
+	
 	//Test ob es Funktioniert kann nachher geloescht werden
 	System.out.println("Created Hands:");
 	for(int b = 0; b<HANDSIZE;b++) {
@@ -66,7 +68,9 @@ public HandType getHandtype() {
 	return this.handType;
 }
 	
-	
+public PokerCard[] getHand() {
+	return this.hand;
+}
 
 	
 	
