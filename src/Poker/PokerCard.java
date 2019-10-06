@@ -3,8 +3,8 @@ package Poker;
 
 
 public class PokerCard {
-	private final CardRank cardRank;
-	private final CardSuit cardSuit;
+	final CardRank cardRank; //darf nicht private sein für model
+	final CardSuit cardSuit;
 //	public Image images; //Moeglichkeit bieten Pokerkarten ein Bild zu hinterlegen
 	
 
