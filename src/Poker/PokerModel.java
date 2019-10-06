@@ -32,7 +32,7 @@ public PokerModel() {
 		int [] spades = {0,0,0,0,0,0,0,0,0,0,0,0,0};
 		int [] clubs = {0,0,0,0,0,0,0,0,0,0,0,0,0};
 		int [] diamonds = {0,0,0,0,0,0,0,0,0,0,0,0,0};
-		HandType hand;
+		HandType hand = null;
 		
 	
 		
