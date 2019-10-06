@@ -32,6 +32,7 @@ public PokerModel() {
 		int [] spades = {0,0,0,0,0,0,0,0,0,0,0,0,0};
 		int [] clubs = {0,0,0,0,0,0,0,0,0,0,0,0,0};
 		int [] diamonds = {0,0,0,0,0,0,0,0,0,0,0,0,0};
+		HandType hand;
 		
 	
 		
@@ -250,44 +251,63 @@ public PokerModel() {
 	
 	
 	//Royal Flush
-	HandType hand;
-	if(
-	(HEARTS_ace == 1 && HEARTS_king == 1 && HEARTS_queen == 1 && HEARTS_jack == 1 && HEARTS_ten == 1 )
-	|| (Spades_ace == 1 && Spades_king == 1 && Spades_queen == 1 && Spades_jack == 1 && Spades_ten == 1 )
-	|| (Clubs_ace == 1 && Clubs_king == 1 && Clubs_queen == 1 && Clubs_jack == 1 && Clubs_ten == 1)
-	|| (Diamonds_ace == 1 && Diamonds_king == 1 && Diamonds_queen == 1 && Diamonds_jack == 1 && Diamonds_ten == 1)
-	) {
+	int flash_hearts=0;
+	int flash_spades = 0;
+	int flash_clubs = 0;
+	int flash_diamonds = 0;
+	
+	for(int i = 8; i<=hearts.length;i++) {
+	flash_hearts+=hearts[i];
+	flash_spades+=spades[i];
+	flash_clubs+=clubs[i];
+	flash_diamonds+=diamonds[i];
+	}
+	if(flash_hearts ==4|| flash_spades==4||flash_clubs==4||flash_diamonds==4) {
 		hand = HandType.ROYALFLUSH;
 	}else {
+		
+		
 	//Straight Flush
-	if(
-	(HEARTS_nine == 1 && HEARTS_eight == 1 && HEARTS_seven == 1 && HEARTS_six == 1 && HEARTS_five == 1)
-	|| (Spades_nine == 1 && Spades_eight == 1 && Spades_seven == 1 && Spades_six == 1 && Spades_five == 1)
-	|| (Clubs_nine == 1 && Clubs_eight == 1 && Clubs_seven == 1 && Clubs_six == 1 && Clubs_five == 1)
-	|| (Diamonds_nine == 1 && Diamonds_eight == 1 && Diamonds_seven == 1 && Diamonds_six == 1 && Diamonds_five == 1)
-	) {
+	int straight_hearts = 0;
+	int straight_spades = 0;
+	int straight_clubs = 0;
+	int straight_diamonds = 0;
+	for(int b = 3; b<= 7;b++) {
+	straight_hearts+=hearts[b];
+	straight_spades+=spades[b];
+	straight_clubs+=clubs[b];
+	straight_diamonds+=diamonds[b];
+	}
+	if(straight_hearts==4||straight_spades==4||straight_clubs==4||straight_diamonds==4) {
 		hand = HandType.STRAIGHTFLUSH;
 	}else {
-		//Four of a Kind	
-	if((HEARTS_ace == 1 && Spades_ace == 1 && Clubs_ace == 1 && Diamonds_ace == 1)
-	||(HEARTS_king == 1 && Spades_king == 1 && Clubs_king == 1 && Diamonds_king == 1)
-	||(HEARTS_queen == 1 && Spades_queen == 1 && Clubs_queen == 1 && Diamonds_queen == 1) 
-	||(HEARTS_two == 1 && Spades_two == 1 && Clubs_two == 1 && Diamonds_two ==  1)
-	||(HEARTS_tree == 1 && Spades_tree == 1 && Clubs_tree == 1 && Diamonds_tree == 1)
-	||(HEARTS_four == 1 && Spades_four == 1 && Clubs_four == 1 && Diamonds_four == 1)
-	||(HEARTS_five == 1 && Spades_five == 1 && Clubs_five == 1 && Diamonds_five == 1)
-	||(HEARTS_six == 1 && Spades_six == 1 && Clubs_six == 1 && Diamonds_six == 1)
-	||(HEARTS_seven == 1 && Spades_seven == 1 && Clubs_seven == 1 && Diamonds_seven == 1)
-	||(HEARTS_eight == 1 && Spades_eight == 1 && Clubs_eight == 1 && Diamonds_eight == 1)
-	||(HEARTS_nine == 1 && Spades_nine == 1 && Clubs_nine == 1 && Diamonds_nine == 1)
-	||(HEARTS_ten == 1 && Spades_ten == 1 && Clubs_ten == 1 && Diamonds_ten == 1)
-	||(HEARTS_jack == 1 && Spades_jack == 1 && Clubs_jack == 1 && Diamonds_jack == 1)
-	) {
-		hand = HandType.FOUROFAKIND;
 		
-	}else {
-	//Full house
+		
 	
+	//Four of a Kind	
+	boolean four_of_a_kind = false;
+	for(int c = 0; c<hearts.length;c++) {
+	if(hearts[c]==1 &&clubs[c]==1&&diamonds[c]==1&&spades[c]==1) {
+		
+	four_of_a_kind = true;
+	}
+	}
+	if(four_of_a_kind ==true) {
+		hand = HandType.FOUROFAKIND;	
+	}else {
+		
+		
+	//Full house sehr komplex muss man sich  noch überlegen wie drei gleiche werden bereits verglichen jetzt noch 2 andere die nicht gleich sind wie die vorherigen raus finden
+		boolean dreigleiche = false;
+		boolean zweigleiche = false;
+	for(int d = 0; d<hearts.length;d++) {
+		  //3gleiche
+	if(((hearts[d]==1&&clubs[d]==1&&diamonds[d]==1)||(hearts[d]==1&&spades[d]==1&&clubs[d]==1)||(hearts[d]==1&&spades[d]==1&&diamonds[d]==1)||(spades[d]==1&&clubs[d]==1&&diamonds[d]==1))) {
+		dreigleiche = true;
+	}
+		//2gleiche
+	
+	}
 	
 		
 	
@@ -314,7 +334,7 @@ public PokerModel() {
 	//High Card
 		
 	
-	return null;
+	return hand;
 		
 		
 	}
