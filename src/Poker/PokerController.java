@@ -29,7 +29,7 @@ public PokerController(PokerModel model, PokerView view) {
 	deck.printDeck(deck); //Test ob deck erzeugt wird
 	
 	//Player
-	this.player = new PokerPlayer(this.playernumber);
+	this.player = new PokerPlayer("BeispielNamen");
 	this.playernumber++; //muss am Anfang des Spieles gefragt werden wie viele Spieler
 	
 	//PokerPlayer wird ganzes Deck übergeben und daraus Hands generiert
