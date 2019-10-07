@@ -52,10 +52,19 @@ public enum HandType {
         // If a first pair was found, see if there is a second pair
         return firstPairFound && isOnePair(clonedCards);
     }
-    
+    	//Created by Frank
     public static boolean isThreeOfAKind(ArrayList<Card> cards) {
-        // TODO        
-        return false;
+        boolean found = false;
+        for (int i = 0; i < cards.size() - 1 && !found; i++) {
+            for (int j = i+1; j < cards.size() && !found; j++) {
+            	for(int k = j+1;k<cards.size() && !found;k++) {
+                if (cards.get(i).getRank() == cards.get(j).getRank() && cards.get(j).getRank()== cards.get(k).getRank() ) found = true;
+                
+            	}
+            }
+            	
+        }
+        return found;
     }
     
     public static boolean isStraight(ArrayList<Card> cards) {

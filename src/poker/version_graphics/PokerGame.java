@@ -7,6 +7,7 @@ import poker.version_graphics.model.PokerGameModel;
 import poker.version_graphics.view.PokerGameView;
 
 public class PokerGame extends Application {
+	//two players are given, we can change here the number of players
 	public static final int NUM_PLAYERS = 2;
 	PokerGameModel model;
 	PokerGameView view;
