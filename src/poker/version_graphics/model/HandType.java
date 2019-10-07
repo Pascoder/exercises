@@ -58,7 +58,8 @@ public enum HandType {
         for (int i = 0; i < cards.size() - 1 && !found; i++) {
             for (int j = i+1; j < cards.size() && !found; j++) {
             	for(int k = j+1;k<cards.size() && !found;k++) {
-                if (cards.get(i).getRank() == cards.get(j).getRank() && cards.get(j).getRank()== cards.get(k).getRank() ) found = true;
+                if (cards.get(i).getRank() == cards.get(j).getRank() && cards.get(j).getRank()== cards.get(k).getRank() ) 
+                found = true;
                 
             	}
             }
@@ -66,15 +67,29 @@ public enum HandType {
         }
         return found;
     }
-    
+    	//Created by Pascoder
     public static boolean isStraight(ArrayList<Card> cards) {
-        // TODO        
-        return false;
+    	boolean isStraight = false;
+        if (cards.size() == 5) {
+                  
+                isStraight = cards.get(0).getRank().ordinal() == cards.get(1).getRank().ordinal() + 1
+                            && cards.get(1).getRank().ordinal() == cards.get(2).getRank().ordinal() + 1
+                            && cards.get(2).getRank().ordinal() == cards.get(3).getRank().ordinal() + 1
+                            && cards.get(3).getRank().ordinal() == cards.get(4).getRank().ordinal() + 1;
+            }
+            
+        return isStraight;
     }
-    
+    	//Created by Pascoder
     public static boolean isFlush(ArrayList<Card> cards) {
-        // TODO        
-        return false;
+    	boolean isFlush = false;
+        if (cards.size() == 5) {
+            isFlush = cards.get(0).getSuit() == cards.get(1).getSuit() 
+                            && cards.get(1).getSuit() == cards.get(2).getSuit()
+                            && cards.get(1).getSuit() == cards.get(3).getSuit() 
+                            && cards.get(1).getSuit() == cards.get(4).getSuit();
+        }       
+        return isFlush;
     }
     
     public static boolean isFullHouse(ArrayList<Card> cards) {
