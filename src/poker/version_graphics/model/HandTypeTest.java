@@ -13,6 +13,7 @@ public class HandTypeTest {
 	// Another method takes a set of five cards, and translates the whole hand
 	//
 	// Yet another method does this for a whole set of hands
+	
 	private static String[][] highCards = {
 			{ "2S", "9C", "3H", "5D", "7H" },
 			{ "7S", "5C", "AH", "JD", "6H" },
@@ -34,11 +35,20 @@ public class HandTypeTest {
 			{ "9S", "2C", "2H", "5D", "5H" }
 			};
 	
+//	private static String[][] straights = {
+//			{ "2S", "3C", "4H", "5D", "6H" },
+//			{ "5S", "6C", "7H", "8D", "9H" },
+//			{ "10S", "JC", "QH", "KD", "AH" },
+//			{ "3S", "4C", "5H", "6D", "7H" }
+//			};
+	
 	
 	// This is where we store the translated hands
 	ArrayList<ArrayList<Card>> highCardHands;
 	ArrayList<ArrayList<Card>> pairHands;
 	ArrayList<ArrayList<Card>> twoPairHands;
+//	ArrayList<ArrayList<Card>> straightHands;
+
 	
 	
 	/**
@@ -51,6 +61,7 @@ public class HandTypeTest {
 		highCardHands = makeHands(highCards);
 		pairHands = makeHands(pairs);
 		twoPairHands = makeHands(twoPairs);
+//		straightHands = makeHands(straights);
 	}
 
 	/**
@@ -69,6 +80,10 @@ public class HandTypeTest {
 		for (ArrayList<Card> hand : twoPairHands) {
 			assertTrue(HandType.isOnePair(hand)); // Two-pair contains a pair
 		}
+//		for (ArrayList<Card> hand : straightHands) {
+//			assertFalse(HandType.isOnePair(hand)); 
+//		}
+		
 	}
 
 	/**
@@ -85,7 +100,29 @@ public class HandTypeTest {
 		for (ArrayList<Card> hand : twoPairHands) {
 			assertTrue(HandType.isTwoPair(hand));
 		}
+//		for (ArrayList<Card> hand : straightHands) {
+//			assertFalse(HandType.isTwoPair(hand));
+//		}
 	}
+	
+	//This is the test Method for iStraight in HandType.
+	
+//	@Test
+//	public void testIsStraight() {
+//		for (ArrayList<Card> hand : highCardHands) {
+//			assertFalse(HandType.isStraight(hand));
+//		}
+//		for (ArrayList<Card> hand : pairHands) {
+//			assertFalse(HandType.isStraight(hand));
+//		}
+//		for (ArrayList<Card> hand : twoPairHands) {
+//			assertFalse(HandType.isStraight(hand));
+//		}
+//		for(ArrayList<Card> hand : straightHands) {
+//			assertTrue(HandType.isStraight(hand));
+//		}
+//		
+//	}
 	
 	/**
 	 * Make an ArrayList of hands from an array of string-arrays

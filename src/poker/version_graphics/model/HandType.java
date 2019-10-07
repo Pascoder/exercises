@@ -15,18 +15,17 @@ public enum HandType {
     public static HandType evaluateHand(ArrayList<Card> cards) {
         HandType currentEval = HighCard;
         //vereinfachtes test Szenario
-        /*cards.clear();
-        Card karte1 = new Card(Suit.Clubs,Rank.Five);
+        cards.clear();
+        Card karte1 = new Card(Suit.Diamonds,Rank.Five);
         Card karte2 = new Card(Suit.Clubs,Rank.Six);
         Card karte3 = new Card(Suit.Clubs, Rank.Seven);
-        Card karte4 = new Card(Suit.Clubs, Rank.Eight);
+        Card karte4 = new Card(Suit.Hearts, Rank.Eight);
         Card karte5 = new Card(Suit.Clubs, Rank.Nine);
         cards.add(karte1);
         cards.add(karte2);
         cards.add(karte3);
         cards.add(karte4);
-        cards.add(karte5);*/
-        //
+        cards.add(karte5);
         
         if (isOnePair(cards)) currentEval = OnePair;
         if (isTwoPair(cards)) currentEval = TwoPair;
@@ -89,17 +88,17 @@ public enum HandType {
     	//Created by Pascoder
 
     public static boolean isStraight(ArrayList<Card> cards) {
-
-    	boolean isStraight = false;
-        if (cards.size() == 5) {
-                  
-                isStraight = cards.get(0).getRank().ordinal() == cards.get(1).getRank().ordinal() + 1
-                            && cards.get(1).getRank().ordinal() == cards.get(2).getRank().ordinal() + 1
-                            && cards.get(2).getRank().ordinal() == cards.get(3).getRank().ordinal() + 1
-                            && cards.get(3).getRank().ordinal() == cards.get(4).getRank().ordinal() + 1;
-            }
+    		boolean found = false;
+        if  (
+        			cards.get(0).getRank().ordinal() == cards.get(1).getRank().ordinal() - 1
+        			&& cards.get(1).getRank().ordinal() == cards.get(2).getRank().ordinal() - 1
+                    && cards.get(2).getRank().ordinal() == cards.get(3).getRank().ordinal() - 1
+                    && cards.get(3).getRank().ordinal() == cards.get(4).getRank().ordinal() - 1
+            ) 
             
-        return isStraight;
+        found = true;
+
+        return found;
 
 //    	ArrayList<Card> clonedCards = (ArrayList<Card>) cards.clone();
 //    	String straight[] = {"5","6","7","8","9"};
