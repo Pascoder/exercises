@@ -15,7 +15,7 @@ public enum HandType {
     public static HandType evaluateHand(ArrayList<Card> cards) {
         HandType currentEval = HighCard;
         //vereinfachtes test Szenario
-        cards.clear();
+        /*cards.clear();
         Card karte1 = new Card(Suit.Clubs,Rank.Five);
         Card karte2 = new Card(Suit.Clubs,Rank.Six);
         Card karte3 = new Card(Suit.Clubs, Rank.Seven);
@@ -25,7 +25,7 @@ public enum HandType {
         cards.add(karte2);
         cards.add(karte3);
         cards.add(karte4);
-        cards.add(karte5);
+        cards.add(karte5);*/
         //
         
         if (isOnePair(cards)) currentEval = OnePair;
