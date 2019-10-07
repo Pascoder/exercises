@@ -80,7 +80,7 @@ public enum HandType {
             
         return isStraight;
     }
-    	//Created by Pascoder
+    	//Created by Passcoder
     public static boolean isFlush(ArrayList<Card> cards) {
     	boolean isFlush = false;
         if (cards.size() == 5) {
