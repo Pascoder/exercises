@@ -13,19 +13,23 @@ public enum HandType {
      * account for any tie-breaking
      */
     public static HandType evaluateHand(ArrayList<Card> cards) {
+        
+    	
         HandType currentEval = HighCard;
-        //vereinfachtes test Szenario
-        cards.clear();
-        Card karte1 = new Card(Suit.Diamonds,Rank.Five);
-        Card karte2 = new Card(Suit.Clubs,Rank.Six);
-        Card karte3 = new Card(Suit.Clubs, Rank.Seven);
-        Card karte4 = new Card(Suit.Hearts, Rank.Eight);
-        Card karte5 = new Card(Suit.Clubs, Rank.Nine);
-        cards.add(karte1);
-        cards.add(karte2);
-        cards.add(karte3);
-        cards.add(karte4);
-        cards.add(karte5);
+//        //vereinfachtes test Szenario
+//        cards.clear();
+//        Card karte1 = new Card(Suit.Diamonds,Rank.Five);
+//        Card karte2 = new Card(Suit.Clubs,Rank.Seven);
+//        Card karte3 = new Card(Suit.Clubs, Rank.Six);
+//        Card karte4 = new Card(Suit.Hearts, Rank.Eight);
+//        Card karte5 = new Card(Suit.Clubs, Rank.Nine);
+//        cards.add(karte1);
+//        cards.add(karte2);
+//        cards.add(karte3);
+//        cards.add(karte4);
+//        cards.add(karte5);
+        
+    
         
         if (isOnePair(cards)) currentEval = OnePair;
         if (isTwoPair(cards)) currentEval = TwoPair;
@@ -88,7 +92,9 @@ public enum HandType {
     	//Created by Pascoder
 
     public static boolean isStraight(ArrayList<Card> cards) {
+    	
     		boolean found = false;
+    		
         if  (
         			cards.get(0).getRank().ordinal() == cards.get(1).getRank().ordinal() - 1
         			&& cards.get(1).getRank().ordinal() == cards.get(2).getRank().ordinal() - 1
