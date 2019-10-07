@@ -2,6 +2,9 @@ package poker.version_graphics.model;
 
 import java.util.ArrayList;
 
+import poker.version_graphics.model.Card.Rank;
+import poker.version_graphics.model.Card.Suit;
+
 public enum HandType {
     HighCard, OnePair, TwoPair, ThreeOfAKind, Straight, Flush, FullHouse, FourOfAKind, StraightFlush;
     
@@ -11,6 +14,19 @@ public enum HandType {
      */
     public static HandType evaluateHand(ArrayList<Card> cards) {
         HandType currentEval = HighCard;
+        //vereinfachtes test Szenario
+        cards.clear();
+        Card karte1 = new Card(Suit.Clubs,Rank.Five);
+        Card karte2 = new Card(Suit.Clubs,Rank.Six);
+        Card karte3 = new Card(Suit.Clubs, Rank.Seven);
+        Card karte4 = new Card(Suit.Clubs, Rank.Eight);
+        Card karte5 = new Card(Suit.Clubs, Rank.Nine);
+        cards.add(karte1);
+        cards.add(karte2);
+        cards.add(karte3);
+        cards.add(karte4);
+        cards.add(karte5);
+        //
         
         if (isOnePair(cards)) currentEval = OnePair;
         if (isTwoPair(cards)) currentEval = TwoPair;
@@ -52,12 +68,14 @@ public enum HandType {
         // If a first pair was found, see if there is a second pair
         return firstPairFound && isOnePair(clonedCards);
     }
+    
     	//Created by Frank
     public static boolean isThreeOfAKind(ArrayList<Card> cards) {
         boolean found = false;
         for (int i = 0; i < cards.size() - 1 && !found; i++) {
             for (int j = i+1; j < cards.size() && !found; j++) {
             	for(int k = j+1;k<cards.size() && !found;k++) {
+            		
                 if (cards.get(i).getRank() == cards.get(j).getRank() && cards.get(j).getRank()== cards.get(k).getRank() ) found = true;
                 
             	}
@@ -66,10 +84,29 @@ public enum HandType {
         }
         return found;
     }
-    
+    	//Created by Frank
     public static boolean isStraight(ArrayList<Card> cards) {
-        // TODO        
-        return false;
+    	 ArrayList<Card> clonedCards = (ArrayList<Card>) cards.clone();
+    	String straight[] = {"5","6","7","8","9"};
+    	boolean found = false;
+    	int correctcards = 0;
+        for(int i = 0; i < clonedCards.size() - 1 &&!found;i++) {
+        	System.out.println("innen  "+clonedCards.get(i).getRank().toString());
+        	for(int b = 0; b< straight.length;b++ ) {
+        		System.out.println("aussen  "+straight[b]);
+        		if(clonedCards.get(i).getRank().toString() == straight[b]) { 
+        		correctcards++;
+        		
+        	
+        		}
+        	}
+        }
+      
+        if(correctcards == 5)
+        found = true;
+        System.out.println(correctcards);
+		return found;
+		
     }
     
     public static boolean isFlush(ArrayList<Card> cards) {
