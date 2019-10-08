@@ -33,6 +33,8 @@ public class Player implements Comparable<Player> {
     public int getNumCards() {
         return cards.size();
     }
+    
+    
 
     /**
      * If the hand has not been evaluated, but does have all cards, 
