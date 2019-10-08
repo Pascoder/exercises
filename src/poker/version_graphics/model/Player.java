@@ -44,6 +44,8 @@ public class Player implements Comparable<Player> {
         }
         return handType;
     }
+    
+  
 
     /**
      * Hands are compared, based on the evaluation they have.

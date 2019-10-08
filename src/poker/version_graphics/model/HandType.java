@@ -141,6 +141,8 @@ public enum HandType {
         return isFlush;
     }
     
+    
+    
     public static boolean isFullHouse(ArrayList<Card> cards) {
         // TODO        
         return false;
