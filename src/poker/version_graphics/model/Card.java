@@ -1,6 +1,8 @@
 package poker.version_graphics.model;
 
-public class Card {
+import java.util.ArrayList;
+
+public class Card implements Comparable<Card>{
     public enum Suit { Clubs, Diamonds, Hearts, Spades;
         @Override
         public String toString() {
@@ -50,11 +52,24 @@ public class Card {
         return rank;
     }
     
-
+    public static ArrayList<Card> sortCards(ArrayList<Card> cards){
+    	return cards;
+    }
     
     @Override
     public String toString() {
         return rank.toString() + suit.toString();
     }
+
+	@Override
+	public int compareTo(Card otherCard) {
+		if ( this.rank.ordinal() > otherCard.rank.ordinal())
+			return 1;
+		else
+			if (this.rank.ordinal()<otherCard.rank.ordinal())
+				return -1;
+			else
+				return 0;
+	}
     
 }
