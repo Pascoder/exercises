@@ -13,31 +13,28 @@ public enum HandType {
      * account for any tie-breaking
      */
     public static HandType evaluateHand(ArrayList<Card> cards) {
-        
+//      //vereinfachtes test Szenario
+    /* cards.clear();
+    Card karte1 = new Card(Suit.Hearts,Rank.Seven);
+     Card karte2 = new Card(Suit.Clubs,Rank.Eight);
+    Card karte3 = new Card(Suit.Clubs, Rank.Seven);
+      Card karte4 = new Card(Suit.Spades, Rank.Seven);
+     Card karte5 = new Card(Suit.Diamonds, Rank.Seven);
+     cards.add(karte1);
+    cards.add(karte2);
+     cards.add(karte3);
+     cards.add(karte4);
+     cards.add(karte5);*/
     	
         HandType currentEval = HighCard;
-//        //vereinfachtes test Szenario
-//        cards.clear();
-//        Card karte1 = new Card(Suit.Diamonds,Rank.Five);
-//        Card karte2 = new Card(Suit.Clubs,Rank.Seven);
-//        Card karte3 = new Card(Suit.Clubs, Rank.Six);
-//        Card karte4 = new Card(Suit.Hearts, Rank.Eight);
-//        Card karte5 = new Card(Suit.Clubs, Rank.Nine);
-//        cards.add(karte1);
-//        cards.add(karte2);
-//        cards.add(karte3);
-//        cards.add(karte4);
-//        cards.add(karte5);
-        
-    
-        
+
         if (isOnePair(cards)) currentEval = OnePair;
         if (isTwoPair(cards)) currentEval = TwoPair;
         if (isThreeOfAKind(cards)) currentEval = ThreeOfAKind;
+        if (isFourOfAKind(cards)) currentEval = FourOfAKind;
         if (isStraight(cards)) currentEval = Straight;
         if (isFlush(cards)) currentEval = Flush;
         if (isFullHouse(cards)) currentEval = FullHouse;
-        if (isFourOfAKind(cards)) currentEval = FourOfAKind;
         if (isStraightFlush(cards)) currentEval = StraightFlush;
         
         return currentEval;
@@ -144,13 +141,38 @@ public enum HandType {
     
     
     public static boolean isFullHouse(ArrayList<Card> cards) {
+    	
+    	
         // TODO        
         return false;
     }
-    
+    //Created by frank is FourOfAKind kann evt mit einer Forschleife einfacher gelöst werden
     public static boolean isFourOfAKind(ArrayList<Card> cards) {
-        // TODO        
-        return false;
+    	boolean four = false;
+    	int i = 0;
+    	int b = 1;
+    	int c = 2;
+    	int d = 3;
+    	
+    	if(cards.get(i).getRank()==cards.get(b).getRank()&& cards.get(b).getRank() == cards.get(c).getRank()&&cards.get(c).getRank() == cards.get(d).getRank()) {
+    		four = true;
+    	}else {
+    		d++;
+    		if(cards.get(i).getRank()==cards.get(b).getRank()&& cards.get(b).getRank() == cards.get(c).getRank()&&cards.get(c).getRank() == cards.get(d).getRank()) {
+    			four = true;
+    		}else {
+    			b++; c++;
+    			if(cards.get(i).getRank()==cards.get(b).getRank()&& cards.get(b).getRank() == cards.get(c).getRank()&&cards.get(c).getRank() == cards.get(d).getRank()) {
+    				four = true;
+    			}else {
+    				i++;
+    				if(cards.get(i).getRank()==cards.get(b).getRank()&& cards.get(b).getRank() == cards.get(c).getRank()&&cards.get(c).getRank() == cards.get(d).getRank()) {
+    					four = true;
+    				}
+    			}
+    		}
+    	}
+        return four;
     }
     
     public static boolean isStraightFlush(ArrayList<Card> cards) {
