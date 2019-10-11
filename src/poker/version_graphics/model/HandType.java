@@ -16,11 +16,11 @@ public enum HandType {
     public static HandType evaluateHand(ArrayList<Card> cards) {
       //vereinfachtes test Szenario
 //    cards.clear();
-//    Card karte1 = new Card(Suit.Hearts,Rank.Seven);
+//    Card karte1 = new Card(Suit.Clubs,Rank.Seven);
 //     Card karte2 = new Card(Suit.Clubs,Rank.Eight);
 //    Card karte3 = new Card(Suit.Clubs, Rank.Nine);
-//      Card karte4 = new Card(Suit.Spades, Rank.Jack);
-//     Card karte5 = new Card(Suit.Diamonds, Rank.Ten);
+//      Card karte4 = new Card(Suit.Clubs, Rank.Jack);
+//     Card karte5 = new Card(Suit.Clubs, Rank.Ten);
 //     cards.add(karte1);
 //    cards.add(karte2);
 //     cards.add(karte3);
@@ -148,7 +148,7 @@ public enum HandType {
         // TODO        
         return false;
     }
-    //Created by frank is FourOfAKind kann evt mit einer Forschleife einfacher gel�st werden
+    //Created by frank is FourOfAKind kann evt mit einer Forschleife einfacher geloest werden
     public static boolean isFourOfAKind(ArrayList<Card> cards) {
     	boolean four = false;
     	int i = 0;
@@ -178,7 +178,10 @@ public enum HandType {
     }
     
     public static boolean isStraightFlush(ArrayList<Card> cards) {
-        // TODO        
-        return false;
+    	boolean found=false;
+       if (isFlush(cards) && isStraight(cards)) {
+    	   found=true;
+       }
+    return found;
     }
 }
