@@ -1,6 +1,7 @@
 package poker.version_graphics.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import poker.version_graphics.model.Card.Rank;
 import poker.version_graphics.model.Card.Suit;
@@ -13,18 +14,18 @@ public enum HandType {
      * account for any tie-breaking
      */
     public static HandType evaluateHand(ArrayList<Card> cards) {
-//      //vereinfachtes test Szenario
-    /* cards.clear();
-    Card karte1 = new Card(Suit.Hearts,Rank.Seven);
-     Card karte2 = new Card(Suit.Clubs,Rank.Eight);
-    Card karte3 = new Card(Suit.Clubs, Rank.Seven);
-      Card karte4 = new Card(Suit.Spades, Rank.Seven);
-     Card karte5 = new Card(Suit.Diamonds, Rank.Seven);
-     cards.add(karte1);
-    cards.add(karte2);
-     cards.add(karte3);
-     cards.add(karte4);
-     cards.add(karte5);*/
+      //vereinfachtes test Szenario
+//    cards.clear();
+//    Card karte1 = new Card(Suit.Hearts,Rank.Seven);
+//     Card karte2 = new Card(Suit.Clubs,Rank.Eight);
+//    Card karte3 = new Card(Suit.Clubs, Rank.Nine);
+//      Card karte4 = new Card(Suit.Spades, Rank.Jack);
+//     Card karte5 = new Card(Suit.Diamonds, Rank.Ten);
+//     cards.add(karte1);
+//    cards.add(karte2);
+//     cards.add(karte3);
+//     cards.add(karte4);
+//     cards.add(karte5);
     	
         HandType currentEval = HighCard;
 
@@ -89,11 +90,12 @@ public enum HandType {
     	//Created by Pascoder
 
     public static boolean isStraight(ArrayList<Card> cards) {
-    	
-    		boolean found = false;
+    	boolean found = false;
     		
-        if  (
-        			cards.get(0).getRank().ordinal() == cards.get(1).getRank().ordinal() - 1
+    	//Sortiert alle Karten in der Hand, nach compareTo
+    	Collections.sort(cards);
+    		
+        if  (		cards.get(0).getRank().ordinal() == cards.get(1).getRank().ordinal() - 1
         			&& cards.get(1).getRank().ordinal() == cards.get(2).getRank().ordinal() - 1
                     && cards.get(2).getRank().ordinal() == cards.get(3).getRank().ordinal() - 1
                     && cards.get(3).getRank().ordinal() == cards.get(4).getRank().ordinal() - 1
@@ -146,7 +148,7 @@ public enum HandType {
         // TODO        
         return false;
     }
-    //Created by frank is FourOfAKind kann evt mit einer Forschleife einfacher gelöst werden
+    //Created by frank is FourOfAKind kann evt mit einer Forschleife einfacher gelï¿½st werden
     public static boolean isFourOfAKind(ArrayList<Card> cards) {
     	boolean four = false;
     	int i = 0;
