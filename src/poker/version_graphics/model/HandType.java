@@ -15,17 +15,17 @@ public enum HandType {
      */
     public static HandType evaluateHand(ArrayList<Card> cards) {
       //vereinfachtes test Szenario
-//    cards.clear();
-//    Card karte1 = new Card(Suit.Clubs,Rank.Queen);
-//     Card karte2 = new Card(Suit.Clubs,Rank.King);
-//    Card karte3 = new Card(Suit.Clubs, Rank.Ace);
-//      Card karte4 = new Card(Suit.Clubs, Rank.Jack);
-//     Card karte5 = new Card(Suit.Clubs, Rank.Ten);
-//     cards.add(karte1);
-//    cards.add(karte2);
-//     cards.add(karte3);
-//     cards.add(karte4);
-//     cards.add(karte5);
+    cards.clear();
+    Card karte1 = new Card(Suit.Clubs,Rank.Queen);
+     Card karte2 = new Card(Suit.Diamonds,Rank.Queen);
+    Card karte3 = new Card(Suit.Clubs, Rank.Ace);
+      Card karte4 = new Card(Suit.Spades, Rank.Ace);
+     Card karte5 = new Card(Suit.Diamonds, Rank.Ace);
+     cards.add(karte1);
+    cards.add(karte2);
+     cards.add(karte3);
+     cards.add(karte4);
+     cards.add(karte5);
     	
         HandType currentEval = HighCard;
 

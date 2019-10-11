@@ -47,7 +47,7 @@ public class HandTypeTest {
 	ArrayList<ArrayList<Card>> highCardHands;
 	ArrayList<ArrayList<Card>> pairHands;
 	ArrayList<ArrayList<Card>> twoPairHands;
-//	ArrayList<ArrayList<Card>> straightHands;
+	ArrayList<ArrayList<Card>> straightHands;
 
 	
 	
@@ -80,9 +80,7 @@ public class HandTypeTest {
 		for (ArrayList<Card> hand : twoPairHands) {
 			assertTrue(HandType.isOnePair(hand)); // Two-pair contains a pair
 		}
-//		for (ArrayList<Card> hand : straightHands) {
-//			assertFalse(HandType.isOnePair(hand)); 
-//		}
+
 		
 	}
 
@@ -100,10 +98,10 @@ public class HandTypeTest {
 		for (ArrayList<Card> hand : twoPairHands) {
 			assertTrue(HandType.isTwoPair(hand));
 		}
-//		for (ArrayList<Card> hand : straightHands) {
-//			assertFalse(HandType.isTwoPair(hand));
-//		}
+
 	}
+	
+
 	
 	//This is the test Method for iStraight in HandType.
 	
