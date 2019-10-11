@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import poker.version_graphics.PokerGame;
+import poker.version_graphics.view.PokerGameView;
 
 public class PokerGameModel {
 	private final ArrayList<Player> players = new ArrayList<>();

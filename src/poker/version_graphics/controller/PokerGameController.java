@@ -8,6 +8,7 @@ import poker.version_graphics.model.DeckOfCards;
 import poker.version_graphics.model.Player;
 import poker.version_graphics.model.PokerGameModel;
 import poker.version_graphics.view.ControlArea;
+import poker.version_graphics.view.EnterMenu;
 import poker.version_graphics.view.PlayerPane;
 import poker.version_graphics.view.PokerGameView;
 
@@ -15,17 +16,52 @@ public class PokerGameController {
 	private PokerGameModel model;
 	private PokerGameView view;
 	
+	
 	public PokerGameController(PokerGameModel model, PokerGameView view) {
 		this.model = model;
 		this.view = view;
 		
 		view.getShuffleButton().setOnAction( e -> shuffle() );
 		view.getDealButton().setOnAction( e -> deal() );
+		view.getEnterButton().setOnAction(e-> StartGame());
+		view.getaddPlayerButton().setOnAction(e-> addPlayer());
+		
 	}
 	
 
 
-    /**
+ 
+
+	private void addPlayer() {
+		String playername = view.getEnterMenuText();
+		EnterMenu.setPlayerCounter();
+		
+		
+	}
+
+
+
+
+	private void StartGame() {
+		// TODO Auto-generated method stub
+		
+		EnterMenu.closeEnterMenu();
+	
+		
+		
+	}
+
+
+
+
+
+
+
+
+
+
+
+	/**
      * Remove all cards from players hands, and shuffle the deck
      */
     private void shuffle() {
