@@ -7,7 +7,7 @@ import poker.version_graphics.model.Card.Rank;
 import poker.version_graphics.model.Card.Suit;
 
 public enum HandType {
-    HighCard, OnePair, TwoPair, ThreeOfAKind, Straight, Flush, FullHouse, FourOfAKind, StraightFlush;
+    HighCard, OnePair, TwoPair, ThreeOfAKind, Straight, Flush, FullHouse, FourOfAKind, StraightFlush, RoyalFlush;
     
     /**
      * Determine the value of this hand. Note that this does not
@@ -16,9 +16,9 @@ public enum HandType {
     public static HandType evaluateHand(ArrayList<Card> cards) {
       //vereinfachtes test Szenario
 //    cards.clear();
-//    Card karte1 = new Card(Suit.Clubs,Rank.Seven);
-//     Card karte2 = new Card(Suit.Clubs,Rank.Eight);
-//    Card karte3 = new Card(Suit.Clubs, Rank.Nine);
+//    Card karte1 = new Card(Suit.Clubs,Rank.Queen);
+//     Card karte2 = new Card(Suit.Clubs,Rank.King);
+//    Card karte3 = new Card(Suit.Clubs, Rank.Ace);
 //      Card karte4 = new Card(Suit.Clubs, Rank.Jack);
 //     Card karte5 = new Card(Suit.Clubs, Rank.Ten);
 //     cards.add(karte1);
@@ -37,6 +37,7 @@ public enum HandType {
         if (isFlush(cards)) currentEval = Flush;
         if (isFullHouse(cards)) currentEval = FullHouse;
         if (isStraightFlush(cards)) currentEval = StraightFlush;
+        if (isRoyalFlush(cards)) currentEval = RoyalFlush;
         
         return currentEval;
     }
@@ -184,4 +185,28 @@ public enum HandType {
        }
     return found;
     }
+    
+    public static boolean isRoyalFlush(ArrayList<Card> cards) {
+    	boolean found = false;
+    	if(isStraightFlush(cards) && cards.get(4).getRank()== Rank.Ace) {
+    		found=true;
+    	}
+    	return found;
+    } 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
