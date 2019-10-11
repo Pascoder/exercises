@@ -144,11 +144,15 @@ public enum HandType {
     
     
     public static boolean isFullHouse(ArrayList<Card> cards) {
-    	
-    	
-        // TODO        
-        return false;
+    	boolean found = false;
+    	if (isThreeOfAKind(cards) && isOnePair(cards)) {
+    		found=true;	
+    	}       
+        return found;
     }
+    
+    
+    
     //Created by frank is FourOfAKind kann evt mit einer Forschleife einfacher geloest werden
     public static boolean isFourOfAKind(ArrayList<Card> cards) {
     	boolean four = false;
