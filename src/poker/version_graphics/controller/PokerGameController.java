@@ -7,6 +7,7 @@ import poker.version_graphics.model.Card;
 import poker.version_graphics.model.DeckOfCards;
 import poker.version_graphics.model.Player;
 import poker.version_graphics.model.PokerGameModel;
+import poker.version_graphics.view.ControlArea;
 import poker.version_graphics.view.PlayerPane;
 import poker.version_graphics.view.PokerGameView;
 
@@ -33,6 +34,7 @@ public class PokerGameController {
     		p.discardHand();
     		PlayerPane pp = view.getPlayerPane(i);
     		pp.updatePlayerDisplay();
+    		ControlArea.updateWinnerLabel(" ");
     	}
 
     	model.getDeck().shuffle();
@@ -54,8 +56,10 @@ public class PokerGameController {
         		}
         		
         		p.evaluateHand();
+//        		model.evaluateWinner();
         		PlayerPane pp = view.getPlayerPane(i);
         		pp.updatePlayerDisplay();
+        		ControlArea.updateWinnerLabel("Winner is : " );
         	}
     	} else {
             Alert alert = new Alert(AlertType.ERROR, "Not enough cards - shuffle first");

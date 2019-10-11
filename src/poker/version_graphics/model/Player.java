@@ -1,6 +1,9 @@
 package poker.version_graphics.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
+
+import poker.version_graphics.controller.PokerGameController;
 
 public class Player implements Comparable<Player> {
     public static final int HAND_SIZE = 5;
@@ -34,19 +37,7 @@ public class Player implements Comparable<Player> {
         return cards.size();
     }
     
-    //Sortiert ArrayList von Card Objekten
-    public static ArrayList<Card> sortCards(ArrayList<Card> cards){
-    	while (cards.size() > 0) {
-            Card highestCard = cards.get(0);
-            for (int i = 1; i < cards.size(); i++)
-                if (cards.get(i).getRank().ordinal() > highestCard.getRank().ordinal() ||
-                        cards.get(i).getRank().ordinal() == highestCard.getRank().ordinal() && cards.get(i).getSuit().ordinal() > highestCard.getSuit().ordinal())
-               	 highestCard = cards.get(i);
-            cards.remove(highestCard);
-            cards.add(highestCard);
-        }
-    	return cards;
-    }
+   
 
     /**
      * If the hand has not been evaluated, but does have all cards, 
@@ -66,6 +57,8 @@ public class Player implements Comparable<Player> {
      */
     @Override
     public int compareTo(Player o) {
-        return handType.compareTo(o.handType);
+    	return handType.compareTo(o.handType);
     }
+
+	
 }

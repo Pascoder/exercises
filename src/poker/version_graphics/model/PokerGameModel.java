@@ -1,6 +1,7 @@
 package poker.version_graphics.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import poker.version_graphics.PokerGame;
 
@@ -23,4 +24,18 @@ public class PokerGameModel {
 	public DeckOfCards getDeck() {
 		return deck;
 	}
+	
+//	public String evaluateWinner() {
+	//Methode soll die ArrayList<Player> sortieren und dann den ersten als Gewinner ausgeben--> ToDO!!!
+//		String WinnerName;
+//		ArrayList <Player> clone = (ArrayList<Player>) (players).clone();
+//		Collections.sort(clone);
+//		if(clone.get(0).compareTo(clone.get(1)) == 1) {
+//			return clone.get(0).getPlayerName();
+//		}else 
+//			return clone.get(1).getPlayerName();
+//		
+//	
+//		
+//	}
 }
