@@ -1,5 +1,7 @@
 package poker.version_graphics.view;
 
+import java.util.ArrayList;
+
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -10,12 +12,15 @@ import poker.version_graphics.PokerGame;
 
 public class EnterMenu{
 	
-	private static int playercounter = 2;
+	public static int playercounter = 0;
 	Button enter = new Button("Start Game");
 	Button addplayer = new Button("Add Player");
 	TextField t1 = new TextField();
 	private static Label name = new Label("Name of Player "+playercounter+": ");
 	static Stage startmenuStage = new Stage();
+	private int players = 0;
+	private ArrayList<String> playersname;
+	public boolean gamestarten = false;
 	
 	
 public EnterMenu() {
@@ -40,22 +45,35 @@ public EnterMenu() {
 	startmenuStage.setScene(startmenuScene);
 	startmenuStage.show();
 	
-
+	enter.setOnAction(e-> StartGame());
+	addplayer.setOnAction(e-> addPlayer());
 }
 
 
-public static void closeEnterMenu() {
-	startmenuStage.close();
-}
-public static void setPlayerCounter() {
-	if(playercounter <=5)
-	playercounter++;
-	name.setText("Name of Player "+playercounter+": ");
-	PokerGame.NUM_PLAYERS = playercounter;
+
+private void addPlayer() {
+	if(PokerGame.NUM_PLAYERS <=5) {
+		PokerGame.NUM_PLAYERS++;
+		name.setText("Name of Player "+PokerGame.NUM_PLAYERS+": ");
+		
+	
+		this.playersname.add(t1.getText());
+	}
+	
 	
 }
-public static int getPlayerCounter() {
-	return playercounter;
+
+
+
+
+private void StartGame() {
+	// TODO Auto-generated method stub
+	gamestarten = true;
+	startmenuStage.close();
+
+	
+	
+}
 }
 
-}
+
