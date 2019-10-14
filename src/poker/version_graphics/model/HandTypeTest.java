@@ -17,7 +17,7 @@ public class HandTypeTest {
 	private static String[][] highCards = {
 			{ "2S", "9C", "3H", "5D", "7H" },
 			{ "7S", "5C", "AH", "JD", "6H" },
-			{ "2S", "3S", "4S", "5S", "7S" },
+			{ "2S", "3S", "4H", "5S", "7S" },
 			{ "AS", "KC", "QH", "JD", "9H" }
 			};
 	
@@ -49,6 +49,13 @@ public class HandTypeTest {
 			{ "3S", "4C", "4H", "4D", "3H" }
 			};
 	
+	private static String[][] flushs = {
+			{ "4S", "2S", "KS", "JS", "TS" },
+			{ "KD", "8D", "4D", "JD", "6D" },
+			{ "7H", "TH", "8H", "AH", "9H" },
+			{ "3C", "4C", "8C", "JC", "KC" }
+			};
+	
 	
 	// This is where we store the translated hands
 	ArrayList<ArrayList<Card>> highCardHands;
@@ -56,6 +63,8 @@ public class HandTypeTest {
 	ArrayList<ArrayList<Card>> twoPairHands;
 	ArrayList<ArrayList<Card>> straightHands;
 	ArrayList<ArrayList<Card>> fullHands;
+	ArrayList<ArrayList<Card>> flushHands;
+
 
 	
 	
@@ -71,6 +80,7 @@ public class HandTypeTest {
 		twoPairHands = makeHands(twoPairs);
 		straightHands = makeHands(straights);
 		fullHands = makeHands(fulls);
+		flushHands = makeHands(flushs);
 	}
 
 	/**
@@ -147,6 +157,28 @@ public class HandTypeTest {
 		}
 		for(ArrayList<Card> hand : fullHands) {
 			assertTrue(HandType.isFullHouse(hand));
+		}
+	}
+	
+	@Test
+	public void testIsFlush() {
+		for (ArrayList<Card> hand : highCardHands) {
+			assertFalse(HandType.isFullHouse(hand));
+		}
+		for (ArrayList<Card> hand : pairHands) {
+			assertFalse(HandType.isFullHouse(hand));
+		}
+		for (ArrayList<Card> hand : twoPairHands) {
+			assertFalse(HandType.isFullHouse(hand));
+		}
+		for(ArrayList<Card> hand : straightHands) {
+			assertFalse(HandType.isFullHouse(hand));
+		}
+		for(ArrayList<Card> hand : fullHands) {
+			assertFalse(HandType.isFullHouse(hand));
+		}
+		for(ArrayList<Card> hand : fullHands) {
+			assertTrue(HandType.isFlush(hand));
 		}
 	}
 	
