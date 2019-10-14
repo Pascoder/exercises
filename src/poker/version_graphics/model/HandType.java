@@ -93,7 +93,7 @@ public enum HandType {
     public static boolean isStraight(ArrayList<Card> cards) {
     	boolean found = false;
     		
-    	//Sortiert alle Karten in der Hand, nach compareTo
+    	//Sortiert alle Karten in der Hand, nach Rank
     	Collections.sort(cards);
     		
         if  (		cards.get(0).getRank().ordinal() == cards.get(1).getRank().ordinal() - 1
@@ -142,7 +142,7 @@ public enum HandType {
     }
     
     
-    
+    //Achtung bei FullHouse stimmt etwas noch nicht!!
     public static boolean isFullHouse(ArrayList<Card> cards) {
     	boolean found = false;
     	if (isThreeOfAKind(cards) && isOnePair(cards)) {
@@ -197,19 +197,6 @@ public enum HandType {
     	}
     	return found;
     } 
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

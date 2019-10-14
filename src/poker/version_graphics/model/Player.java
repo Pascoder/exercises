@@ -37,6 +37,14 @@ public class Player implements Comparable<Player> {
         return cards.size();
     }
     
+    public void setHandType(HandType ht) {
+    	this.handType = ht;
+    }
+    
+    public HandType getHandType() {
+    	return handType;
+    }
+    
    
 
     /**
@@ -58,6 +66,8 @@ public class Player implements Comparable<Player> {
     @Override
     public int compareTo(Player o) {
     	return handType.compareTo(o.handType);
+	
+    	
     }
 
 	

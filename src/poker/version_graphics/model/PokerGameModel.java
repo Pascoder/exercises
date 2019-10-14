@@ -27,17 +27,15 @@ public class PokerGameModel {
 		return deck;
 	}
 	
-//	public String evaluateWinner() {
-	//Methode soll die ArrayList<Player> sortieren und dann den ersten als Gewinner ausgeben--> ToDO!!!
-//		String WinnerName;
-//		ArrayList <Player> clone = (ArrayList<Player>) (players).clone();
-//		Collections.sort(clone);
-//		if(clone.get(0).compareTo(clone.get(1)) == 1) {
-//			return clone.get(0).getPlayerName();
-//		}else 
-//			return clone.get(1).getPlayerName();
-//		
-//	
-//		
-//	}
+	public String evaluateWinner() {
+//	Methode soll die ArrayList<Player> sortieren und dann den ersten als Gewinner ausgeben--> ToDO!!!
+		String winnerName;
+		ArrayList <Player> clone = (ArrayList<Player>) players.clone();
+		Collections.sort(clone);
+		winnerName = clone.get(clone.size()-1).getPlayerName();
+		return winnerName;
+		
+	
+		
+	}
 }

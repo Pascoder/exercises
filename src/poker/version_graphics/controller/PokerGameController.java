@@ -61,14 +61,16 @@ public class PokerGameController {
         		}
         		
         		p.evaluateHand();
-//        		model.evaluateWinner();
         		PlayerPane pp = view.getPlayerPane(i);
         		pp.updatePlayerDisplay();
-        		ControlArea.updateWinnerLabel("Winner is : " );
+        		
         	}
+        	
     	} else {
             Alert alert = new Alert(AlertType.ERROR, "Not enough cards - shuffle first");
             alert.showAndWait();
     	}
+    	
+    	ControlArea.updateWinnerLabel("Winner is : " + model.evaluateWinner() );
     }
 }
