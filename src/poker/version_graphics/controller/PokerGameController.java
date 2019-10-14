@@ -23,7 +23,8 @@ public class PokerGameController {
 		
 		view.getShuffleButton().setOnAction( e -> shuffle() );
 		view.getDealButton().setOnAction( e -> deal() );
-		
+		view.getEnterButton().setOnAction(e-> StartGame());
+		view.getaddPlayerButton().setOnAction(e-> addPlayer());
 		
 	}
 	
@@ -31,7 +32,24 @@ public class PokerGameController {
 
  
 
+	private void addPlayer() {
+		String playername = view.getEnterMenuText();
+		EnterMenu.setPlayerCounter();
+		
+		
+	}
+
+
+
+
+	private void StartGame() {
+		// TODO Auto-generated method stub
+		
+		EnterMenu.closeEnterMenu();
 	
+		
+		
+	}
 
 
 
