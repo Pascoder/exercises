@@ -145,6 +145,10 @@ public enum HandType {
     //Achtung bei FullHouse stimmt etwas noch nicht!!
     public static boolean isFullHouse(ArrayList<Card> cards) {
     	boolean found = false;
+    	boolean twoFirst, threeFirst;
+    	twoFirst = cards.get(0).getRank()==cards.get(1).getRank()&&
+    			cards.get(1).getRank()==cards.get(2).getRank()&&
+    					cards.get(3).getRank()==cards.get(4).getRank();
     	if (isThreeOfAKind(cards) && isOnePair(cards)) {
     		found=true;	
     	}       
