@@ -62,7 +62,7 @@ public class PokerGameView {
         
         stage.show();	
       //start EnterMenu (Num_Players muss abgefangen werden im Model bis start Menu generiert wurde und start Game geklickt wird)
-  		this.entermenu = new EnterMenu();
+  		
 		 
 		 
 	}
@@ -79,15 +79,7 @@ public class PokerGameView {
 	public Button getDealButton() {
 		return controls.btnDeal;
 	}
-	public Button getEnterButton() {
-		return entermenu.enter;
-	}
-	public Button getaddPlayerButton() {
-		return entermenu.addplayer;
-	}
-	public String getEnterMenuText() {
-		return entermenu.t1.getText();
-	}
+
 	
 	
 	
