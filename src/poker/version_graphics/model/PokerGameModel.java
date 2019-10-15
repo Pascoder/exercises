@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import poker.version_graphics.PokerGame;
+import poker.version_graphics.view.EnterMenu;
 import poker.version_graphics.view.PokerGameView;
 
 public class PokerGameModel {
@@ -12,9 +13,12 @@ public class PokerGameModel {
 	private String winnerName;
 	
 	
+	
+	
 	public PokerGameModel() {
 		for (int i = 0; i < PokerGame.NUM_PLAYERS; i++) {
-			players.add(new Player("Player " + i));
+			players.add(new Player(EnterMenu.playersname.get(i)));
+			
 		}
 		
 		deck = new DeckOfCards();

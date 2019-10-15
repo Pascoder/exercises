@@ -26,15 +26,16 @@ public class PokerGame extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-    	// Create and initialize the MVC components
+    	// Create and initialize EnterMenu components
     	this.primaryStage = primaryStage;
     		
     		startEnterMenu();
-    		menu.enter.pressedProperty().addListener((etwas,alt,neu)->continueProcess(neu));	
+    		menu.enter.pressedProperty().addListener((something,old,neu)->continueProcess(neu));	
     		
     	}
 
 	private Object continueProcess(Boolean neu)  {
+		// Create and initialize the MVC components
 		PokerGame.NUM_PLAYERS = menu.getCounter();
 		model = new PokerGameModel();
        	view = new PokerGameView(primaryStage, model);
