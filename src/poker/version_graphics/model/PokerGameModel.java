@@ -27,32 +27,29 @@ public class PokerGameModel {
 	public DeckOfCards getDeck() {
 		return deck;
 	}
-	
+	/**Methode klont die ArrayList<Player> und sortiert diese anhand des HandType der Spieler.
+	 * Wenn der HandType der letzten beiden in der Liste gleich ist, wird ermittelt wer die höhere Hand hat
+	 */
 	public String evaluateWinner() {
-/**	Methode klont die ArrayList<Player> und sortiert diese anhand des HandType der Spieler.
- * Wenn der HandType der letzten beiden in der Liste gleich ist, wird ermittelt wer die höhere Hand hat
- */
-		
+
 		ArrayList <Player> clone = (ArrayList<Player>) players.clone();
 		
 		Collections.sort(clone);
 		
 		HandType firstHand = clone.get(clone.size()-1).getHandType();
 		HandType secondHand = clone.get(clone.size()-2).getHandType();
+		Card firstPlayerBestCard = clone.get(0).getCards().get(Player.HAND_SIZE-1);
+		Card secondPlayerBestCard = clone.get(1).getCards().get(Player.HAND_SIZE-1);
 		
 		if(firstHand.equals(secondHand)) {
-			if(firstHand.ordinal()==0) {
-				int j = clone.get(0).getCards().get(Player.HAND_SIZE-1).compareTo(clone.get(1).getCards().get(Player.HAND_SIZE-1));
+				int j = firstPlayerBestCard.compareTo(secondPlayerBestCard);
 				if(j==1) {
 					winnerName=clone.get(0).getPlayerName();
 				} else
 					if(j==-1) {
 						winnerName=clone.get(1).getPlayerName();
 					} 
-			}
-			
-			
-		}else winnerName = clone.get(clone.size()-1).getPlayerName();
+			} else winnerName = clone.get(clone.size()-1).getPlayerName();
 		
 		return winnerName;
 		
