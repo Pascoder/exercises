@@ -1,7 +1,11 @@
 package poker.version_graphics.controller;
 
+import java.io.File;
+
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import poker.version_graphics.PokerGame;
 import poker.version_graphics.model.Card;
 import poker.version_graphics.model.DeckOfCards;
@@ -43,6 +47,12 @@ public class PokerGameController {
     	}
 
     	model.getDeck().shuffle();
+    	
+    	//Sound abspielen wenn Button gedrückt wird
+    	String musicFile = "shuffle.mp3";
+		Media sound = new Media(new File(musicFile).toURI().toString());
+		MediaPlayer mp = new MediaPlayer(sound);
+		mp.play();
     }
     
     /**
@@ -62,15 +72,21 @@ public class PokerGameController {
         		
         		p.evaluateHand();
         		PlayerPane pp = view.getPlayerPane(i);
-        		pp.updatePlayerDisplay();
-        		
+        		pp.updatePlayerDisplay();	
         	}
         	
+        //Sound abspielen wenn Button gedrückt wird
+    	String musicFile = "deal.mp3";
+        Media sound = new Media(new File(musicFile).toURI().toString());
+        MediaPlayer mp = new MediaPlayer(sound);
+        mp.play();
+        
     	} else {
             Alert alert = new Alert(AlertType.ERROR, "Not enough cards - shuffle first");
             alert.showAndWait();
     	}
     	
     	ControlArea.updateWinnerLabel("Winner is : " + model.evaluateWinner() );
+    	
     }
 }

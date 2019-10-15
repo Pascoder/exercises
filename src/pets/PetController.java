@@ -1,7 +1,11 @@
 package pets;
 
 
+import java.io.File;
+
 import javafx.event.ActionEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import pets.Pet.Gender;
 import pets.Pet.Species;
 
@@ -28,6 +32,10 @@ public class PetController {
 		Species species = view.cmbSpecies.getValue();
 		Gender gender = view.cmbGender.getValue();
 		String name = view.txtName.getText();
+		String musicFile = "shuffle.mp3";
+		Media sound = new Media(new File(musicFile).toURI().toString());
+		MediaPlayer mp = new MediaPlayer(sound);
+		mp.play();
 		if (species != null && gender != null && name != null && name.length() > 0) {
 			model.savePet(species, gender, name);
 			updateView(model.getPet());
