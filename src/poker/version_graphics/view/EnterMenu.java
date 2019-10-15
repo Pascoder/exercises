@@ -2,6 +2,7 @@ package poker.version_graphics.view;
 
 import java.util.ArrayList;
 
+import javafx.beans.property.BooleanProperty;
 import javafx.event.Event;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -14,15 +15,14 @@ import poker.version_graphics.PokerGame;
 
 public class EnterMenu{
 	
-	private int counter = 0;
-	Button addplayer = new Button("Add Player");
-	Button enter = new Button("Start Game");
-	TextField t1 = new TextField();
-	private static Label name = new Label("Name of Player "+PokerGame.NUM_PLAYERS+": ");
+	private static int counter = 0;
+	public Button addplayer = new Button("Add Player");
+	public Button enter = new Button("Start Game");
+	public TextField t1 = new TextField();
+	private static Label name = new Label("Name of Player "+(counter+1)+": ");
 	static Stage startmenuStage = new Stage();
-	private int players = 0;
-	private ArrayList<String> playersname;
-	public boolean gamestarten = false;
+	private ArrayList<String> playersname = new ArrayList();
+	
 	
 	
 	
@@ -49,41 +49,31 @@ public EnterMenu() {
 	
 	this.addplayer.setOnAction(this::addPlayer);
 	this.enter.setOnAction(this::StartGame);
+	
 }
 
 
 
 private void addPlayer(Event e) {
 	if(counter <=5) {
-		counter ++;
-		name.setText("Name of Player "+counter+": ");
-		String nameumwandeln = t1.getText();
-		System.out.println(playersname);
-		//this.playersname.add(nameumwandeln);
 		
+		counter ++;
+		name.setText("Name of Player "+(counter+1)+": ");
+		this.playersname.add(t1.getText());
 	}
 	
-
-	
 }
-
-
-
 
 public void StartGame(Event a) {
 	
-	System.out.println(this.counter);
-	PokerGame.NUM_PLAYERS = this.counter;
-	System.out.println(PokerGame.NUM_PLAYERS);
 	
-	startmenuStage.close();
-	
-	gamestarten =true;
-	
-
-	
+	startmenuStage.close();	
 	
 }
+public int getCounter() {
+	return this.counter;
+}
+
 }
 
 

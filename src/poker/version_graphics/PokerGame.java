@@ -1,6 +1,7 @@
 package poker.version_graphics;
 
 import javafx.application.Application;
+import javafx.beans.property.BooleanProperty;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
@@ -11,12 +12,12 @@ import poker.version_graphics.view.PokerGameView;
 
 public class PokerGame extends Application {
 	//two players are given, we can change here the number of players
-	
-	public static int NUM_PLAYERS = 2;
+	public static int NUM_PLAYERS;
 	EnterMenu menu;
 	PokerGameModel model;
 	PokerGameView view;
 	PokerGameController controller;
+	Stage primaryStage;
 
 	
     public static void main(String[] args) {
@@ -26,35 +27,24 @@ public class PokerGame extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
     	// Create and initialize the MVC components
-
+    	this.primaryStage = primaryStage;
     		
     		startEnterMenu();
-    		startGUI(primaryStage);
-    				
+    		menu.enter.pressedProperty().addListener((etwas,alt,neu)->continueProcess(neu));	
     		
     	}
 
-	private void startEnterMenu() {
-		menu = new EnterMenu();
-		
-		
-		
+	private Object continueProcess(Boolean neu)  {
+		PokerGame.NUM_PLAYERS = menu.getCounter();
+		model = new PokerGameModel();
+       	view = new PokerGameView(primaryStage, model);
+       	controller = new PokerGameController(model, view);
+		return true;
 	}
 
-	private void startGUI(Stage primaryStage) throws Exception{
+	private void startEnterMenu() {
+		menu = new EnterMenu();		
 		
-			model = new PokerGameModel();
-	       	view = new PokerGameView(primaryStage, model);
-	       	controller = new PokerGameController(model, view);
-	       	
-		
-		
-	}
-    	
-    	
-    	 
-    	
-    	
-    	
+	}	
     
 }
