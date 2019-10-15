@@ -17,10 +17,10 @@ public enum HandType {
       //vereinfachtes test Szenario
 //    cards.clear();
 //    Card karte1 = new Card(Suit.Clubs,Rank.Queen);
-//     Card karte2 = new Card(Suit.Diamonds,Rank.Queen);
-//    Card karte3 = new Card(Suit.Clubs, Rank.Ace);
-//      Card karte4 = new Card(Suit.Spades, Rank.Ace);
-//     Card karte5 = new Card(Suit.Diamonds, Rank.Ace);
+//     Card karte2 = new Card(Suit.Hearts,Rank.Queen);
+//    Card karte3 = new Card(Suit.Clubs, Rank.Queen);
+//      Card karte4 = new Card(Suit.Spades, Rank.Queen);
+//     Card karte5 = new Card(Suit.Diamonds, Rank.Queen);
 //     cards.add(karte1);
 //    cards.add(karte2);
 //     cards.add(karte3);
@@ -96,11 +96,11 @@ public enum HandType {
     	//Sortiert alle Karten in der Hand, nach Rank
     	Collections.sort(cards);
     		
-        if  (		cards.get(0).getRank().ordinal() == cards.get(1).getRank().ordinal() - 1
+        if  	(	cards.get(0).getRank().ordinal() == cards.get(1).getRank().ordinal() - 1
         			&& cards.get(1).getRank().ordinal() == cards.get(2).getRank().ordinal() - 1
                     && cards.get(2).getRank().ordinal() == cards.get(3).getRank().ordinal() - 1
                     && cards.get(3).getRank().ordinal() == cards.get(4).getRank().ordinal() - 1
-            ) 
+        		) 
             
         found = true;
 
@@ -142,16 +142,21 @@ public enum HandType {
     }
     
     
-    //Achtung bei FullHouse stimmt etwas noch nicht!!
+    //Prüft ob die ersten beiden oder die ersten drei karten gleich sind
     public static boolean isFullHouse(ArrayList<Card> cards) {
     	boolean found = false;
     	boolean twoFirst, threeFirst;
+    	
     	twoFirst = cards.get(0).getRank()==cards.get(1).getRank()&&
-    			cards.get(1).getRank()==cards.get(2).getRank()&&
-    					cards.get(3).getRank()==cards.get(4).getRank();
-    	if (isThreeOfAKind(cards) && isOnePair(cards)) {
-    		found=true;	
-    	}       
+    				cards.get(1).getRank()==cards.get(2).getRank()&&
+    				cards.get(3).getRank()==cards.get(4).getRank();
+    	
+    	threeFirst = cards.get(0).getRank()==cards.get(1).getRank()&&
+    				cards.get(2).getRank()==cards.get(3).getRank()&&
+    				cards.get(3).getRank()==cards.get(4).getRank();
+    	
+    	if (threeFirst || twoFirst) found=true;	
+    	       
         return found;
     }
     

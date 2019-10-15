@@ -36,12 +36,12 @@ public class PokerGameModel {
 		
 		Collections.sort(clone);
 		
-		HandType firstHand = clone.get(clone.size()-1).getHandType();
-		HandType secondHand = clone.get(clone.size()-2).getHandType();
+		HandType firstHandType = clone.get(clone.size()-1).getHandType();
+		HandType secondHandType = clone.get(clone.size()-2).getHandType();
 		Card firstPlayerBestCard = clone.get(0).getCards().get(Player.HAND_SIZE-1);
 		Card secondPlayerBestCard = clone.get(1).getCards().get(Player.HAND_SIZE-1);
 		
-		if(firstHand.equals(secondHand)) {
+		if(firstHandType.equals(secondHandType)) {
 				int j = firstPlayerBestCard.compareTo(secondPlayerBestCard);
 				if(j==1) {
 					winnerName=clone.get(0).getPlayerName();
