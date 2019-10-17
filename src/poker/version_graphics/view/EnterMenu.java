@@ -38,9 +38,9 @@ public EnterMenu() {
 	entergrid.add(addplayer, 1, 1);
 	entergrid.add(enter, 2, 1);
 	
-	Scene startmenuScene = new Scene(entergrid);
+	Scene startmenuScene = new Scene(entergrid,900,400);
 	startmenuScene.getStylesheets().add(
-            getClass().getResource("TicTacToe.css").toExternalForm()); 
+            getClass().getResource("PokerStyle.css").toExternalForm()); 
 	startmenuStage.setScene(startmenuScene);
 	startmenuStage.setTitle("Player Selection");
 	startmenuStage.show();
