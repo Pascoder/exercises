@@ -20,7 +20,7 @@ public class EnterMenu{
 	public TextField t1 = new TextField();
 	private static Label name = new Label("	Name of Player "+(counter+1)+": ");
 	static Stage startmenuStage = new Stage();
-	public static ArrayList<String> playersname = new ArrayList();
+	public static ArrayList<String> playersname = new ArrayList<String>();
 	
 	
 	
@@ -73,7 +73,7 @@ public void StartGame(Event a) {
 public int getCounter() {
 	return this.counter;
 }
-public ArrayList getPlayer() {
+public ArrayList<String> getPlayer() {
 	return this.playersname;
 	
 }
