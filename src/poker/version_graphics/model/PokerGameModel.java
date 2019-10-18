@@ -11,6 +11,7 @@ public class PokerGameModel {
 	private final ArrayList<Player> players = new ArrayList<>();
 	private DeckOfCards deck;
 	private String winnerName;
+	private int sameHandType = 0;
 	
 	
 	
@@ -37,28 +38,44 @@ public class PokerGameModel {
 	public String evaluateWinner() {
 
 		ArrayList <Player> clone = (ArrayList<Player>) players.clone();
-		
 		Collections.sort(clone);
 		
-		HandType firstHandType = clone.get(clone.size()-1).getHandType();
-		HandType secondHandType = clone.get(clone.size()-2).getHandType();
-		Card firstPlayerBestCard = clone.get(0).getCards().get(Player.HAND_SIZE-1);
-		Card secondPlayerBestCard = clone.get(1).getCards().get(Player.HAND_SIZE-1);
 		
-		if(firstHandType.equals(secondHandType)) {
-				int j = firstPlayerBestCard.compareTo(secondPlayerBestCard);
-				if(j==1) {
-					winnerName=clone.get(0).getPlayerName();
-				} else
-					if(j==-1) {
-						winnerName=clone.get(1).getPlayerName();
-					} 
-			} else winnerName = clone.get(clone.size()-1).getPlayerName();
+			for(int i=clone.size()-1;i==0;i--) {
+				
+			if(clone.get(i).compareTo(clone.get(i-1))==0 ){
+			System.out.println("Gleich");
+		}else
+				System.out.println("nicht gleich");
 		
-		return winnerName;
+			}
+			
 		
-
+		
+//		HandType firstHandType = clone.get(clone.size()-1).getHandType();
+//		HandType secondHandType = clone.get(clone.size()-2).getHandType();
+//		Card firstPlayerBestCard = clone.get(0).getCards().get(Player.HAND_SIZE-1);
+//		Card secondPlayerBestCard = clone.get(1).getCards().get(Player.HAND_SIZE-1);
+//		
+		
+		
+		
+		return "Pascal";
+		
+//		if(firstHandType.equals(secondHandType)) {
+//				int j = firstPlayerBestCard.compareTo(secondPlayerBestCard);
+//				if(j==1) {
+//					winnerName=clone.get(0).getPlayerName();
+//				} else
+//					if(j==-1) {
+//						winnerName=clone.get(1).getPlayerName();
+//					} 
+//			} else winnerName = clone.get(clone.size()-1).getPlayerName();
+//		
+//		return winnerName;
+//		
+//
 	}
-	
-	
+//	
+//	
 }
