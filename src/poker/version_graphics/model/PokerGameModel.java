@@ -41,7 +41,7 @@ public class PokerGameModel {
 		Collections.sort(clone);
 		
 		
-			for(int i=clone.size()-1;i==0;i--) {
+			for(int i=clone.size()-1;i>=1;i--) {
 				
 			if(clone.get(i).compareTo(clone.get(i-1))==0 ){
 			System.out.println("Gleich");
