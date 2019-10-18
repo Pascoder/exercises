@@ -3,6 +3,8 @@ package poker.version_graphics.view;
 import java.util.ArrayList;
 
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.Event;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -22,12 +24,17 @@ public class EnterMenu{
 	static Stage startmenuStage = new Stage();
 	public static ArrayList<String> playersname = new ArrayList<String>();
 	
+	private final SimpleObjectProperty<String> starter = new SimpleObjectProperty<>();
+	
+	public EnterMenu() {
 	
 	
+	addplayer.disableProperty().bind(t1.textProperty().isEmpty());
+	enter.disableProperty().bind(starter.isNull());
 	
-public EnterMenu() {
 	
-	 
+
+	
    
 	GridPane entergrid = new GridPane();
 
@@ -77,6 +84,9 @@ public ArrayList<String> getPlayer() {
 	return this.playersname;
 	
 	
+}
+public void setProperty() {
+	starter.set("start");
 }
 
 }
