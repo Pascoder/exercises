@@ -38,15 +38,52 @@ public class PokerGameModel {
 	public String evaluateWinner() {
 
 		ArrayList <Player> clone = (ArrayList<Player>) players.clone();
+		//Array List wird sortiert
 		Collections.sort(clone);
 		
-		
+		int handTypeBestPlayer = clone.get(clone.size()-1).getHandType().ordinal();
+		//Wenn die beiden besten Hände gleich sind, wird gezählt wieviele Hände insgesamt gleich sind
+		if(clone.get(clone.size()-1).getHandType().equals(clone.get(clone.size()-2).getHandType())) {
+		//Wieviele Spieler haben die gleiche Hand?
 			for(int i = clone.size()-1;i >= 1;i --) {
 				
-			if(clone.get(i).compareTo(clone.get(i-1))==0 )sameHandType++;
+				if (clone.get(i).compareTo(clone.get(i-1))==0 )  {
+				sameHandType++;
+				} 
+			}
+			
+			//Herausfinden welche Handtypes die gleichen Hände haben
+			switch(handTypeBestPlayer) {
+			//Highcards
+			case 0: System.out.println("Mehrere Highcards");
+			//Durch alle Hände und alle Karten interirenen
+			for(int i = 0; i<sameHandType;i++ ) {
+				for(int j=0;j<Player.HAND_SIZE;j++) {
+				clone.get(clone.size()-1-i).getCards().get(j).getRank().ordinal();
+				
+				
+				
+				
+				System.out.println("Karte: "+j +"von Spieler: " +i);
+				}
+			}
+			break;
+			//onePairs	
+			case 1: System.out.println("Mehrere Onepairs");
+			break;
+			//twoPairs
+			case 2: System.out.println("Mehrere TwoPairs");
 			}
 			
 			
+			
+			
+			} else winnerName = clone.get(clone.size()-1).getPlayerName();
+			
+		
+			
+			
+			sameHandType=1;
 		
 		
 			
@@ -61,7 +98,7 @@ public class PokerGameModel {
 		
 		
 		
-		return "Pascal";
+		return winnerName;
 		
 //		if(firstHandType.equals(secondHandType)) {
 //				int j = firstPlayerBestCard.compareTo(secondPlayerBestCard);
