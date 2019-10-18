@@ -30,7 +30,7 @@ public class EnterMenu{
 	
 	
 	addplayer.disableProperty().bind(t1.textProperty().isEmpty());
-	enter.disableProperty().bind(starter.isNull());
+	
 	
 	
 

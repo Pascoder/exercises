@@ -37,9 +37,7 @@ public class PokerGame extends Application {
 	private Object continueProcess(Boolean neu)  {
 		// Create and initialize the MVC components
 		PokerGame.NUM_PLAYERS = menu.getCounter();
-		if(menu.getCounter()>2) {
-			menu.setProperty();
-		}
+		
 		model = new PokerGameModel();
        	view = new PokerGameView(primaryStage, model);
        	controller = new PokerGameController(model, view);
