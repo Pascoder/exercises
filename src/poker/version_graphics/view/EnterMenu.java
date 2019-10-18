@@ -76,6 +76,7 @@ public int getCounter() {
 public ArrayList<String> getPlayer() {
 	return this.playersname;
 	
+	
 }
 
 }
