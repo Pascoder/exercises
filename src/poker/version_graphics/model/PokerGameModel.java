@@ -11,7 +11,7 @@ public class PokerGameModel {
 	private final ArrayList<Player> players = new ArrayList<>();
 	private DeckOfCards deck;
 	private String winnerName;
-	private int sameHandType = 0;
+	private int sameHandType = 1;
 	
 	
 	
@@ -41,14 +41,15 @@ public class PokerGameModel {
 		Collections.sort(clone);
 		
 		
-			for(int i=clone.size()-1;i>=1;i--) {
+			for(int i = clone.size()-1;i >= 1;i --) {
 				
-			if(clone.get(i).compareTo(clone.get(i-1))==0 ){
-			System.out.println("Gleich");
-		}else
-				System.out.println("nicht gleich");
-		
+			if(clone.get(i).compareTo(clone.get(i-1))==0 )sameHandType++;
 			}
+			
+			
+		
+		
+			
 			
 		
 		
