@@ -55,7 +55,7 @@ public class PokerGameModel {
 			
 			//Herausfinden welche Handtypes die gleichen Hände haben
 			switch(handTypeBestPlayer) {
-			//Highcards--Läuft mit 2 Players
+			//Highcards--Läuft mit 2 Playersv
 			case 0: 
 				
 				winnerName = clone.get(0).getPlayerName();
