@@ -95,6 +95,8 @@ public enum HandType {
     		
     	//Sortiert alle Karten in der Hand, nach Rank
     	Collections.sort(cards);
+    	//Hoechste Karte kommt zuerst
+    	Collections.reverse(cards);
     		
         if  	(	cards.get(0).getRank().ordinal() == cards.get(1).getRank().ordinal() - 1
         			&& cards.get(1).getRank().ordinal() == cards.get(2).getRank().ordinal() - 1

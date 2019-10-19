@@ -12,7 +12,7 @@ public class PokerGameModel {
 	private DeckOfCards deck;
 	private String winnerName;
 	private int sameHandType = 1;
-	
+	private ArrayList<Player> sameHands;
 	
 	
 	
@@ -40,36 +40,54 @@ public class PokerGameModel {
 		ArrayList <Player> clone = (ArrayList<Player>) players.clone();
 		//Array List wird sortiert
 		Collections.sort(clone);
+		Collections.reverse(clone);
 		
-		int handTypeBestPlayer = clone.get(clone.size()-1).getHandType().ordinal();
+		int handTypeBestPlayer = clone.get(0).getHandType().ordinal();
 		//Wenn die beiden besten Hände gleich sind, wird gezählt wieviele Hände insgesamt gleich sind
-		if(clone.get(clone.size()-1).getHandType().equals(clone.get(clone.size()-2).getHandType())) {
+		if(clone.get(0).getHandType().equals(clone.get(1).getHandType())) {
 		//Wieviele Spieler haben die gleiche Hand?
-			for(int i = clone.size()-1;i >= 1;i --) {
+			for(int i = 0;i <clone.size()-1;i ++) {
 				
-				if (clone.get(i).compareTo(clone.get(i-1))==0 )  {
+				if (clone.get(i).getHandType().compareTo(clone.get(i+1).getHandType())==0 )  {
 				sameHandType++;
 				} 
 			}
 			
 			//Herausfinden welche Handtypes die gleichen Hände haben
 			switch(handTypeBestPlayer) {
-			//Highcards
-			case 0: System.out.println("Mehrere Highcards");
-			//Durch alle Hände und alle Karten iterieren
-			for(int i = 0; i<sameHandType;i++ ) {
-				for(int j=0;j<Player.HAND_SIZE;j++) {
+			//Highcards--Läuft mit 2 Players
+			case 0: 
 				
+				winnerName = clone.get(0).getPlayerName();
 				
-				
-				
-				
-//				System.out.println("Karte: "+j +"von Spieler: " +i);
-				} System.out.println("Spieler : " + i);
-			}
+				for(int i=0; i < sameHandType;i++) {
+					for(int j = 0;j < Player.HAND_SIZE;j++) {
+					
+						if(clone.get(i).getCards().get(j).compareTo(clone.get(0).getCards().get(0)) == 1)
+							winnerName = clone.get(i).getPlayerName();	
+						}
+					}
+				System.out.println("Mehrere Highcards");
+			
 			break;
-			//onePairs	
-			case 1: System.out.println("Mehrere Onepairs");
+			//onePairs--Läuft mit 2 Players
+			case 1:
+				int highest=-1;
+				winnerName = clone.get(0).getPlayerName();
+				
+				for(int i=0; i < sameHandType;i++) {
+					for(int j = 0;j < Player.HAND_SIZE-1;j++) {
+						
+						if(clone.get(i).getCards().get(j).compareTo(clone.get(i).getCards().get(j+1))==0 && 
+								clone.get(i).getCards().get(j).getRank().ordinal() > highest) {
+							highest = clone.get(i).getCards().get(j).getRank().ordinal();
+							winnerName = clone.get(i).getPlayerName();	
+						}
+						
+					}
+				}
+				
+				System.out.println("Mehrere Onepairs");
 			break;
 			//twoPairs
 			case 2: System.out.println("Mehrere TwoPairs");
@@ -78,7 +96,7 @@ public class PokerGameModel {
 			
 			
 			
-			} else winnerName = clone.get(clone.size()-1).getPlayerName();
+			} else winnerName = clone.get(0).getPlayerName();
 			
 		
 			
