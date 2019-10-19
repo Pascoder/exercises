@@ -24,15 +24,13 @@ public class EnterMenu{
 	static Stage startmenuStage = new Stage();
 	public static ArrayList<String> playersname = new ArrayList<String>();
 	
-	private final SimpleObjectProperty<String> starter = new SimpleObjectProperty<>();
+	private final SimpleObjectProperty<Integer> start = new SimpleObjectProperty<>();
 	
 	public EnterMenu() {
 	
 	
 	addplayer.disableProperty().bind(t1.textProperty().isEmpty());
-	
-	
-	
+	enter.disableProperty().bind(start.isNull());
 
 	
    
@@ -68,6 +66,9 @@ private void addPlayer(Event e) {
 		this.playersname.add(t1.getText());
 		t1.clear();
 	}
+	if(counter >1) {
+		setProperty();
+	}
 	
 }
 
@@ -86,7 +87,7 @@ public ArrayList<String> getPlayer() {
 	
 }
 public void setProperty() {
-	starter.set("start");
+	start.setValue(2);
 }
 
 }
