@@ -56,14 +56,10 @@ public class PokerGameModel {
 			switch(handTypeBestPlayer) {
 			//Highcards
 			case 0: System.out.println("Mehrere Highcards");
-			//Durch alle Hände und alle Karten interirenen
+			//Durch alle Hände und alle Karten iterieren
 			for(int i = 0; i<sameHandType;i++ ) {
 				for(int j=0;j<Player.HAND_SIZE;j++) {
 				clone.get(clone.size()-1-i).getCards().get(j).getRank().ordinal();
-				
-				
-				
-				
 				System.out.println("Karte: "+j +"von Spieler: " +i);
 				}
 			}
