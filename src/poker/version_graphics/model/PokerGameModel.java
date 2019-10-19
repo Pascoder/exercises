@@ -59,9 +59,13 @@ public class PokerGameModel {
 			//Durch alle Hände und alle Karten iterieren
 			for(int i = 0; i<sameHandType;i++ ) {
 				for(int j=0;j<Player.HAND_SIZE;j++) {
-				clone.get(clone.size()-1-i).getCards().get(j).getRank().ordinal();
-				System.out.println("Karte: "+j +"von Spieler: " +i);
-				}
+				
+				
+				
+				
+				
+//				System.out.println("Karte: "+j +"von Spieler: " +i);
+				} System.out.println("Spieler : " + i);
 			}
 			break;
 			//onePairs	
