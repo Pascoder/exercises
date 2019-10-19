@@ -88,6 +88,7 @@ public ArrayList<String> getPlayer() {
 }
 public void setProperty() {
 	start.setValue(2);
+	
 }
 
 }
