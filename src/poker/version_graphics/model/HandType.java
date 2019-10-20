@@ -98,10 +98,10 @@ public enum HandType {
     	//Hoechste Karte kommt zuerst
     	Collections.reverse(cards);
     		
-        if  	(	cards.get(0).getRank().ordinal() == cards.get(1).getRank().ordinal() - 1
-        			&& cards.get(1).getRank().ordinal() == cards.get(2).getRank().ordinal() - 1
-                    && cards.get(2).getRank().ordinal() == cards.get(3).getRank().ordinal() - 1
-                    && cards.get(3).getRank().ordinal() == cards.get(4).getRank().ordinal() - 1
+        if  	(	cards.get(0).getRank().ordinal() == cards.get(1).getRank().ordinal() + 1
+        			&& cards.get(1).getRank().ordinal() == cards.get(2).getRank().ordinal() + 1
+                    && cards.get(2).getRank().ordinal() == cards.get(3).getRank().ordinal() + 1
+                    && cards.get(3).getRank().ordinal() == cards.get(4).getRank().ordinal() + 1
         		) 
             
         found = true;
@@ -203,7 +203,7 @@ public enum HandType {
     
     public static boolean isRoyalFlush(ArrayList<Card> cards) {
     	boolean found = false;
-    	if(isStraightFlush(cards) && cards.get(4).getRank()== Rank.Ace) {
+    	if(isStraightFlush(cards) && cards.get(1).getRank()== Rank.Ace) {
     		found=true;
     	}
     	return found;

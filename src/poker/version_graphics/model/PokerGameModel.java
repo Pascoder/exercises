@@ -89,8 +89,21 @@ public class PokerGameModel {
 				
 				System.out.println("Mehrere Onepairs");
 			break;
+			
+			
 			//twoPairs
 			case 2: System.out.println("Mehrere TwoPairs");
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			}
 			
 			
