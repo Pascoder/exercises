@@ -92,15 +92,25 @@ public class PokerGameModel {
 			
 			
 			//twoPairs
-			case 2: System.out.println("Mehrere TwoPairs");
-			
-			
-			
-			
-			
-			
-			
-			
+			case 2: 
+				
+				int highest2=-1;
+				winnerName = clone.get(0).getPlayerName();
+				
+				for(int i=0; i < sameHandType;i++) {
+					for(int j = 0;j < Player.HAND_SIZE-1;j++) {
+						
+						if(clone.get(i).getCards().get(j).compareTo(clone.get(i).getCards().get(j+1))==0 && 
+								clone.get(i).getCards().get(j).getRank().ordinal() > highest2) {
+							highest2 = clone.get(i).getCards().get(j).getRank().ordinal();
+							winnerName = clone.get(i).getPlayerName();	
+						}
+						
+					}
+				}
+				
+				
+				System.out.println("Mehrere TwoPairs");
 			
 			
 			
