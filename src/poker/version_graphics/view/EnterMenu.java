@@ -60,9 +60,17 @@ public class EnterMenu{
 
 private void addPlayer(Event e) {
 	if(counter <=5) {
-		
 		counter ++;
-		name.setText("	Name of Player "+(counter+1)+": ");
+		
+		if(counter <=5) {
+			name.setText("	Name of Player "+(counter+1)+": ");
+		}else {
+			name.setText("	!reached maximum!");
+		}
+		
+		
+		
+		
 		this.playersname.add(t1.getText());
 		t1.clear();
 	}

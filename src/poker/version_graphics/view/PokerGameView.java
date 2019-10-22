@@ -10,13 +10,14 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import poker.version_graphics.PokerGame;
 import poker.version_graphics.model.PokerGameModel;
 
 public class PokerGameView {
-	private HBox players;
+	private TilePane players;
 	private ControlArea controls;
 	private PokerGameModel model;
 	
@@ -28,7 +29,7 @@ public class PokerGameView {
 		
 		this.model = model;
 		// Create all of the player panes we need, and put them into an HBox
-		players = new HBox();
+		players = new TilePane();
 		
 		for (int i = 0; i < PokerGame.NUM_PLAYERS; i++) {
 			PlayerPane pp = new PlayerPane();
@@ -47,11 +48,29 @@ public class PokerGameView {
 		root.setBottom(controls);
 		
 		// Disallow resizing - which is difficult to get right with images
-		stage.setResizable(false);
+		stage.setResizable(true);
+		
+		
+		
+		//Tailpane verwenden damit grösse automatisch anpasst
 
-        // Create the scene using our layout; then display it
-         
-        Scene scene = new Scene(root);
+        // Create the scene using our layout; then display it MAX 1140
+		
+		int height = 0;
+		if((PokerGame.NUM_PLAYERS)<3) {
+			height = 271;
+		}else {
+		if((PokerGame.NUM_PLAYERS)>=3&& PokerGame.NUM_PLAYERS<=4) {
+			height =  501;
+		}else {
+		if(PokerGame.NUM_PLAYERS >4) {
+			height = 731;
+		}
+		}
+		
+		}
+        
+        Scene scene = new Scene(root,1138,height);
         scene.getStylesheets().add(
                 getClass().getResource("poker.css").toExternalForm());
         stage.setTitle("Poker Miniproject");
