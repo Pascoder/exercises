@@ -45,7 +45,7 @@ public class PokerGameModel {
 		int handTypeBestPlayer = clone.get(0).getHandType().ordinal();
 		//Wenn die beiden besten Hände gleich sind, wird gezählt wieviele Hände insgesamt gleich sind
 		if(clone.get(0).getHandType().equals(clone.get(1).getHandType())) {
-		//Wieviele Spieler haben die gleiche Hand?
+			//Herausfinden welche Handtypes die gleichen Hände haben
 			for(int i = 0;i <clone.size()-1;i ++) {
 				
 				if (clone.get(i).getHandType().compareTo(clone.get(i+1).getHandType())==0 )  {
@@ -53,9 +53,9 @@ public class PokerGameModel {
 				} 
 			}
 			
-			//Herausfinden welche Handtypes die gleichen Hände haben
+			
 			switch(handTypeBestPlayer) {
-			//Highcards--Läuft mit 2 Playersv
+			//zwei oder mehrere Spieler haben Highcards
 			case 0: 
 				
 				winnerName = clone.get(0).getPlayerName();
@@ -66,11 +66,10 @@ public class PokerGameModel {
 						if(clone.get(i).getCards().get(j).compareTo(clone.get(0).getCards().get(0)) == 1)
 							winnerName = clone.get(i).getPlayerName();	
 						}
-					}
-				System.out.println("Mehrere Highcards");
+				}
 			
 			break;
-			//onePairs--Läuft mit 2 Players
+			//zwei oder mehrere Spieler haben onePair
 			case 1:
 				int highest=-1;
 				winnerName = clone.get(0).getPlayerName();
@@ -80,18 +79,17 @@ public class PokerGameModel {
 						
 						if(clone.get(i).getCards().get(j).compareTo(clone.get(i).getCards().get(j+1))==0 && 
 								clone.get(i).getCards().get(j).getRank().ordinal() > highest) {
-							highest = clone.get(i).getCards().get(j).getRank().ordinal();
-							winnerName = clone.get(i).getPlayerName();	
-						}
-						
+								highest = clone.get(i).getCards().get(j).getRank().ordinal();
+								winnerName = clone.get(i).getPlayerName();	
+						}	
 					}
 				}
 				
-				System.out.println("Mehrere Onepairs");
+				
 			break;
 			
 			
-			//twoPairs
+			//zwei oder mehrere Spieler haben twoPairs
 			case 2: 
 				
 				int highest2=-1;
@@ -105,7 +103,6 @@ public class PokerGameModel {
 							highest2 = clone.get(i).getCards().get(j).getRank().ordinal();
 							winnerName = clone.get(i).getPlayerName();	
 						}
-						
 					}
 				}
 				
