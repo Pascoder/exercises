@@ -48,7 +48,7 @@ public class PokerGameView {
 		root.setBottom(controls);
 		
 		// Disallow resizing - which is difficult to get right with images
-		stage.setResizable(true);
+		stage.setResizable(false);
 		
 		
 		
