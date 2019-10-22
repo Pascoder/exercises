@@ -19,9 +19,6 @@ public class PokerGameView {
 	private HBox players;
 	private ControlArea controls;
 	private PokerGameModel model;
-	private EnterMenu entermenu;
-	
-
 	
 	
 	
@@ -61,7 +58,7 @@ public class PokerGameView {
         stage.setScene(scene);
         
         stage.show();	
-      //start EnterMenu (Num_Players muss abgefangen werden im Model bis start Menu generiert wurde und start Game geklickt wird)
+      
   		
 		 
 		 
