@@ -58,13 +58,13 @@ public class PokerGameModel {
 			//zwei oder mehrere Spieler haben Highcards
 			case 0: 
 				
-				winnerName = clone.get(0).getPlayerName();
+				winnerName = clone.get(0).getPlayerName()+  " --- Hand: " + clone.get(0).getHandType().toString();
 				
 				for(int i=0; i < sameHandType;i++) {
 					for(int j = 0;j < Player.HAND_SIZE;j++) {
 					
 						if(clone.get(i).getCards().get(j).compareTo(clone.get(0).getCards().get(0)) == 1)
-							winnerName = clone.get(i).getPlayerName();	
+							winnerName = clone.get(i).getPlayerName()+  " --- Hand: " + clone.get(i).getHandType().toString();	
 						}
 				}
 			
@@ -72,7 +72,7 @@ public class PokerGameModel {
 			//zwei oder mehrere Spieler haben onePair
 			case 1:
 				int highest=-1;
-				winnerName = clone.get(0).getPlayerName();
+				winnerName = clone.get(0).getPlayerName()+  " --- Hand: " + clone.get(0).getHandType().toString();
 				
 				for(int i=0; i < sameHandType;i++) {
 					for(int j = 0;j < Player.HAND_SIZE-1;j++) {
@@ -80,7 +80,7 @@ public class PokerGameModel {
 						if(clone.get(i).getCards().get(j).compareTo(clone.get(i).getCards().get(j+1))==0 && 
 								clone.get(i).getCards().get(j).getRank().ordinal() > highest) {
 								highest = clone.get(i).getCards().get(j).getRank().ordinal();
-								winnerName = clone.get(i).getPlayerName();	
+								winnerName = clone.get(i).getPlayerName()+  " --- Hand: " + clone.get(i).getHandType().toString();	
 						}	
 					}
 				}
@@ -93,7 +93,7 @@ public class PokerGameModel {
 			case 2: 
 				
 				int highest2=-1;
-				winnerName = clone.get(0).getPlayerName();
+				winnerName = clone.get(0).getPlayerName()+  " --- Hand: " + clone.get(0).getHandType().toString();
 				
 				for(int i=0; i < sameHandType;i++) {
 					for(int j = 0;j < Player.HAND_SIZE-1;j++) {
@@ -101,7 +101,7 @@ public class PokerGameModel {
 						if(clone.get(i).getCards().get(j).compareTo(clone.get(i).getCards().get(j+1))==0 && 
 								clone.get(i).getCards().get(j).getRank().ordinal() > highest2) {
 							highest2 = clone.get(i).getCards().get(j).getRank().ordinal();
-							winnerName = clone.get(i).getPlayerName();	
+							winnerName = clone.get(i).getPlayerName() +  " --- Hand: " + clone.get(i).getHandType().toString();
 						}
 					}
 				}
@@ -116,7 +116,7 @@ public class PokerGameModel {
 			
 			
 			
-			} else winnerName = clone.get(0).getPlayerName();
+			} else winnerName = clone.get(0).getPlayerName() + " --- Hand: " + clone.get(0).getHandType().toString();
 			
 		
 			

@@ -86,7 +86,7 @@ public class PokerGameController {
             alert.showAndWait();
     	}
     	
-    	ControlArea.updateWinnerLabel("Winner is : " + model.evaluateWinner() );
+    	ControlArea.updateWinnerLabel("Winner is: " + model.evaluateWinner());
     	
     }
 }
