@@ -75,7 +75,7 @@ public class PokerGameModel {
 				winnerName = clone.get(0).getPlayerName()+  " --- Hand: " + clone.get(0).getHandType().toString();
 				
 				for(int i=0; i < sameHandType;i++) {
-					for(int j = 0;j < Player.HAND_SIZE-1;j++) {
+					for(int j = 0;j <Player.HAND_SIZE-1;j++) {
 						
 						if(clone.get(i).getCards().get(j).compareTo(clone.get(i).getCards().get(j+1))==0 && 
 								clone.get(i).getCards().get(j).getRank().ordinal() > highest) {
@@ -84,7 +84,7 @@ public class PokerGameModel {
 						}	
 					}
 				}
-				
+				System.out.println("Mehrere OnePair");
 				
 			break;
 			
