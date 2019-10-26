@@ -38,14 +38,14 @@ public class PokerGameModel {
 	public String evaluateWinner() {
 
 		ArrayList <Player> clone = (ArrayList<Player>) players.clone();
-		//Array List wird sortiert
+		//sort Array List using handTypes
 		Collections.sort(clone);
 		Collections.reverse(clone);
-		
+		//Which is the best handType?
 		int handTypeBestPlayer = clone.get(0).getHandType().ordinal();
-		//Wenn die beiden besten Hände gleich sind, wird gezählt wieviele Hände insgesamt gleich sind
+		//Counts how many best players having the same hand
 		if(clone.get(0).getHandType().equals(clone.get(1).getHandType())) {
-			//Herausfinden welche Handtypes die gleichen Hände haben
+			//
 			for(int i = 0;i <clone.size()-1;i ++) {
 				
 				if (clone.get(i).getHandType().compareTo(clone.get(i+1).getHandType())==0 )  {
@@ -55,7 +55,7 @@ public class PokerGameModel {
 			
 			
 			switch(handTypeBestPlayer) {
-			//zwei oder mehrere Spieler haben Highcards
+			//two or more players have Highcard
 			case 0: 
 				
 				winnerName = clone.get(0).getPlayerName()+  " --- Hand: " + clone.get(0).getHandType().toString();
@@ -69,7 +69,7 @@ public class PokerGameModel {
 				}
 			
 			break;
-			//zwei oder mehrere Spieler haben onePair
+			//two or more players have onePair
 			case 1:
 				int highest=-1;
 				winnerName = clone.get(0).getPlayerName()+  " --- Hand: " + clone.get(0).getHandType().toString();
@@ -84,12 +84,12 @@ public class PokerGameModel {
 						}	
 					}
 				}
-				System.out.println("Mehrere OnePair");
+				
 				
 			break;
 			
 			
-			//zwei oder mehrere Spieler haben twoPairs
+			//two or more players have twoPairs
 			case 2: 
 				
 				int highest2=-1;
@@ -106,52 +106,14 @@ public class PokerGameModel {
 					}
 				}
 				
-				
-				System.out.println("Mehrere TwoPairs");
-			
-			
-			
 			}
-			
-			
-			
+		
 			
 			} else winnerName = clone.get(0).getPlayerName() + " --- Hand: " + clone.get(0).getHandType().toString();
-			
 		
-			
-			
 			sameHandType=1;
-		
-		
-			
-			
-		
-		
-//		HandType firstHandType = clone.get(clone.size()-1).getHandType();
-//		HandType secondHandType = clone.get(clone.size()-2).getHandType();
-//		Card firstPlayerBestCard = clone.get(0).getCards().get(Player.HAND_SIZE-1);
-//		Card secondPlayerBestCard = clone.get(1).getCards().get(Player.HAND_SIZE-1);
-//		
-		
-		
-		
-		return winnerName;
-		
-//		if(firstHandType.equals(secondHandType)) {
-//				int j = firstPlayerBestCard.compareTo(secondPlayerBestCard);
-//				if(j==1) {
-//					winnerName=clone.get(0).getPlayerName();
-//				} else
-//					if(j==-1) {
-//						winnerName=clone.get(1).getPlayerName();
-//					} 
-//			} else winnerName = clone.get(clone.size()-1).getPlayerName();
-//		
-//		return winnerName;
-//		
-//
+			return winnerName;
+
 	}
-//	
-//	
+	
 }

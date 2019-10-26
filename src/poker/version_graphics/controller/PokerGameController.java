@@ -27,12 +27,9 @@ public class PokerGameController {
 		
 		view.getShuffleButton().setOnAction( e -> shuffle() );
 		view.getDealButton().setOnAction( e -> deal() );
-	
-		
 		
 	}
 	
-
 
 	/**
      * Remove all cards from players hands, and shuffle the deck
@@ -48,7 +45,7 @@ public class PokerGameController {
 
     	model.getDeck().shuffle();
     	
-    	//Sound abspielen wenn Button gedrückt wird
+    	//Play sound when Button is pressed
     	String musicFile = "shuffle.mp3";
 		Media sound = new Media(new File(musicFile).toURI().toString());
 		MediaPlayer mp = new MediaPlayer(sound);
@@ -75,7 +72,7 @@ public class PokerGameController {
         		pp.updatePlayerDisplay();	
         	}
         	
-        //Sound abspielen wenn Button gedrückt wird
+        //Play sound when Button is pressed
     	String musicFile = "deal.mp3";
         Media sound = new Media(new File(musicFile).toURI().toString());
         MediaPlayer mp = new MediaPlayer(sound);

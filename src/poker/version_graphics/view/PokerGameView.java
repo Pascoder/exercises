@@ -52,23 +52,23 @@ public class PokerGameView {
 		
 		
 		
-		//Tailpane verwenden damit grösse automatisch anpasst
+		//use Tailpane to allow increasing the size
 
         // Create the scene using our layout; then display it MAX 1140
 		
 		int height = 0;
 		if((PokerGame.NUM_PLAYERS)<3) {
 			height = 271;
-		}else {
-		if((PokerGame.NUM_PLAYERS)>=3&& PokerGame.NUM_PLAYERS<=4) {
+			} else {
+				if((PokerGame.NUM_PLAYERS)>=3&& PokerGame.NUM_PLAYERS<=4) {
 			height =  501;
-		}else {
-		if(PokerGame.NUM_PLAYERS >4) {
+				} else {
+					if(PokerGame.NUM_PLAYERS >4) {
 			height = 731;
-		}
-		}
+					}
+				}
 		
-		}
+			}
         
         Scene scene = new Scene(root,1138,height);
         scene.getStylesheets().add(
@@ -77,10 +77,7 @@ public class PokerGameView {
         stage.setScene(scene);
         
         stage.show();	
-      
-  		
-		 
-		 
+   	 
 	}
 	
 	
