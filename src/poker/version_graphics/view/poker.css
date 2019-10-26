@@ -1,11 +1,22 @@
+.root {
+-fx-background-image: url("Table.jpg");
+-fx-background-size: 1160px 1000px;
+
+}
+
 .label {
 	-fx-padding: 5.0px;
     -fx-min-width: 200.0;
     -fx-max-width: 2000.0;
   	-fx-alignment: center;
+  	 -fx-text-fill: white;
+  	 -fx-font-size: 12px;
+  	 -fx-font-weight: bold;
+  	
 }
 
 #controlArea {
+	-fx-background-color: black;
     -fx-spacing: 15.0px;
     -fx-padding: 5.0px;
     -fx-border-color: black;
@@ -19,6 +30,7 @@
 }
 
 .card {
+	
   -fx-font-size: 18px;
 	-fx-padding: 2.0px;
     -fx-border-color: black;
