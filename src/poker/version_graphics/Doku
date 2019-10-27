@@ -1,44 +1,34 @@
-Dokumentation Poker Projekt
+Einleitung:
 
-Einleitung
-.
-.
-.GrÃ¼ne Wiese....
-.
-.
-.Change zu seinem Projekt....
-..
-.
-.
-.
-.
-.
-Basis FunktionalitÃ¤t
-.
-.Handtype evaluieren
-gleicher handtype, winner is:----
+Da wir vor der Einführungsvorlesung in das Pokerprojekt, bereits mit dem Pokerspiel gestartet haben um einen möglichst grossen Lerneffekt zu erzielen, begannen wir zuerst ohne Vorlage von der «Grünenwiese» zu Programmieren.
+Als das Projekt dann vorgestellt wurde und im Unterricht detailliert erklärt wurde, waren wir mit unserem Projekt in etwa ähnlich so weit wie die Vorlage, die wir nutzen durften. 
+Wir stellten jedoch fest, dass unser Aufbau des Programmes sich für das weitere Vorgehen nicht gleich gut eignete, als die Vorlage, die wir benutzen dürfen, darum haben wir uns entschlossen als neue Basis die Projektvorlage zu benutzen.
+Trotz des Wechsels zu der Vorlage, sind wir froh einmal von der «Grünenwiese» gestartet zu haben. 
+Es war für uns eine wertvolle Vorarbeit, die wir geleistet haben, um unser Verständnis zu fördern und einige Lösungsvarianten für das endgültige Projekt zu sammeln.
 
 
-.
-.
-.
-.
-.
-.
-Erweitertete FunktionalitÃ¤t
-..
-.Enter Menu
-.Sounds
-.
-.
-..
-.
-.
-Schlusswort
-.
-.
-.
-.
-.
-.
-.
+Basis Funktionalität:
+
+Alle nötigen Basisfunktionalitäten, die im Projekt verlangt waren haben wir implementiert dazu gehören folgende Dinge.
+-alle möglichen HandType programmiert
+-alle HandType mit Junit getestet
+-der Gewinner des Spieles wird ausgewertet im PokerGameModel
+-der Gewinner des Spiels wird in der GUI angezeigt sowie mit welcher Hand er gewonnen hat
+-die GUI so programmiert, dass Sie dynamisch je nach Spieler angepasst wird
+-ein EnterMenu gestaltet (Pop-up), dass es ermöglicht die Anzahl Spieler auszuwählen.
+
+
+Erweiterte Funktionalität:
+
+Zusätzlich haben wir noch einige weiter Funktionalitäten in unser Programm eingebaut, dazu gehören folgende Dinge.
+-Beim dealen von Karten oder beim Mischen werden Geräusche der Karten simuliert
+-Falls 2 oder mehrere Spieler den gleichen HandType haben wird für HighCard, OnePair und TwoPair auf die nächst höchster Karte geschaut um den Gewinner auszuwerten.
+-Die GUI wurde attraktiver gestaltet
+-Beim EnterMenu ist es nur möglich ab 2 Spielern das Spiel zu starten und nur wenn im TextFeld etwas ausgefüllt wurde den addPlayer Button zu drücken.
+
+
+Schlusswort:
+
+Trotz sehr hohem Aufwand und einigen Hürden, konnten wir das Projekt erfolgreich umsetzen, was uns sehr stolz macht. 
+Der Lerneffekt war für uns sehr gross, da wir beide nicht aus dem Informatikbereich kommen und somit bis auf das Studium noch nicht viel Erfahrungen in der Programmierung haben. 
+Die Zusammenarbeit im Team hat durch unsere hohe Motivation sehr gut funktioniert, lediglich einige Konflikte auf GitHub haben unser Projekt teilweise eingebremst. 
