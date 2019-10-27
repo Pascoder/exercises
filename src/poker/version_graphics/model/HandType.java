@@ -84,9 +84,9 @@ public enum HandType {
     public static boolean isStraight(ArrayList<Card> cards) {
     	boolean found = false;
     		
-    	//Sortiert alle Karten in der Hand, nach Rank
+    	//Sort all cards of hand by rank
     	Collections.sort(cards);
-    	//Hoechste Karte kommt zuerst
+    	//Highest card comes first
     	Collections.reverse(cards);
     		
         if  	(	cards.get(0).getRank().ordinal() == cards.get(1).getRank().ordinal() + 1
@@ -113,8 +113,7 @@ public enum HandType {
         return isFlush;
     }
     
-    
-    //Prüft ob die ersten beiden oder die ersten drei karten gleich sind
+    // checks if the first two cards or the first three cards are same
     public static boolean isFullHouse(ArrayList<Card> cards) {
     	boolean found = false;
     	boolean twoFirst, threeFirst;
