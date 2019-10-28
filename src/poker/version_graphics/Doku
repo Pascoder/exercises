@@ -1,34 +1,52 @@
+PROJEKT POKER GAME
+
+Frank Mauchle, Pascal Wyser
+
+28.10.2019
+
+FHNW Olten
+WIBB 2.61
+Dozent: Bradley Richards
+
+
+
 Einleitung:
 
-Da wir vor der Einführungsvorlesung in das Pokerprojekt, bereits mit dem Pokerspiel gestartet haben um einen möglichst grossen Lerneffekt zu erzielen, begannen wir zuerst ohne Vorlage von der «Grünenwiese» zu Programmieren.
-Als das Projekt dann vorgestellt wurde und im Unterricht detailliert erklärt wurde, waren wir mit unserem Projekt in etwa ähnlich so weit wie die Vorlage, die wir nutzen durften. 
-Wir stellten jedoch fest, dass unser Aufbau des Programmes sich für das weitere Vorgehen nicht gleich gut eignete, als die Vorlage, die wir benutzen dürfen, darum haben wir uns entschlossen als neue Basis die Projektvorlage zu benutzen.
-Trotz des Wechsels zu der Vorlage, sind wir froh einmal von der «Grünenwiese» gestartet zu haben. 
-Es war für uns eine wertvolle Vorarbeit, die wir geleistet haben, um unser Verständnis zu fördern und einige Lösungsvarianten für das endgültige Projekt zu sammeln.
+Da wir vor der EinfÃ¼hrungsvorlesung in das Pokerprojekt, bereits mit dem Pokerspiel gestartet haben um einen mÃ¶glichst grossen Lerneffekt zu erzielen, begannen wir zuerst ohne Vorlage von der Â«GrÃ¼nen WieseÂ» zu Programmieren.
+Als das Projekt dann vorgestellt wurde und im Unterricht detailliert erklÃ¤rt wurde, waren wir mit unserem Projekt in etwa Ã¤hnlich so weit wie die Vorlage, die wir nutzen durften. 
+Wir stellten jedoch fest, dass unser Aufbau des Programmes sich fÃ¼r das weitere Vorgehen nicht gleich gut eignete, als die Vorlage, die wir benutzen dÃ¼rfen. Darum haben wir uns entschlossen als neue Basis die Projektvorlage zu benutzen.
+Trotz des Wechsels zu der Vorlage, sind wir froh einmal von der Â«GrÃ¼nen WieseÂ» gestartet zu haben. 
+Es war fÃ¼r uns eine wertvolle Vorarbeit, die wir geleistet haben, um unser VerstÃ¤ndnis zu fÃ¶rdern und einige LÃ¶sungsvarianten fÃ¼r das endgÃ¼ltige Projekt zu sammeln.
 
 
-Basis Funktionalität:
+Basis FunktionalitÃ¤t:
 
-Alle nötigen Basisfunktionalitäten, die im Projekt verlangt waren haben wir implementiert dazu gehören folgende Dinge.
--alle möglichen HandType programmiert
--alle HandType mit Junit getestet
--der Gewinner des Spieles wird ausgewertet im PokerGameModel
--der Gewinner des Spiels wird in der GUI angezeigt sowie mit welcher Hand er gewonnen hat
+Alle nÃ¶tigen BasisfunktionalitÃ¤ten, die im Projekt verlangt waren haben wir implementiert. 
+
+Nachfolgend alle implementierten Funktionen:
+
+-alle mÃ¶glichen HandType's programmiert
+-alle HandType mit JUnit getestet
+-der Gewinner des Spieles wird im PokerGameModel evaluiert
+-der Gewinner des Spiels wird in der GUI angezeigt- ebenfalls mit welcher Hand er gewonnen hat
 -die GUI so programmiert, dass Sie dynamisch je nach Spieler angepasst wird
--ein EnterMenu gestaltet (Pop-up), dass es ermöglicht die Anzahl Spieler auszuwählen.
+-ein EnterMenu gestaltet (Pop-up), dass es ermÃ¶glicht die Anzahl Spieler auszuwÃ¤hlen.
 
 
-Erweiterte Funktionalität:
+Erweiterte FunktionalitÃ¤t:
 
-Zusätzlich haben wir noch einige weiter Funktionalitäten in unser Programm eingebaut, dazu gehören folgende Dinge.
--Beim dealen von Karten oder beim Mischen werden Geräusche der Karten simuliert
--Falls 2 oder mehrere Spieler den gleichen HandType haben wird für HighCard, OnePair und TwoPair auf die nächst höchster Karte geschaut um den Gewinner auszuwerten.
+ZusÃ¤tzlich haben wir noch einige weitere FunktionalitÃ¤ten in unser Programm eingebaut, dazu gehÃ¶ren folgende Dinge:
+
+-Beim dealen von Karten oder beim Mischen werden GerÃ¤usche der Karten simuliert
+-Falls 2 oder mehrere Spieler den gleichen HandType haben wird fÃ¼r HighCard, OnePair und TwoPair auf die nÃ¤chst hÃ¶chster Karte geschaut um den Gewinner auszuwerten.
 -Die GUI wurde attraktiver gestaltet
--Beim EnterMenu ist es nur möglich ab 2 Spielern das Spiel zu starten und nur wenn im TextFeld etwas ausgefüllt wurde den addPlayer Button zu drücken.
+-Beim EnterMenu ist es nur mÃ¶glich ab 2 Spielern das Spiel zu starten. Dies haben wir so realisiert indem wir den Button ausgeblendet haben, sofern weniger als zwei Spieler erstellt wurden.
+- Ebenfalls kann erst ein Spieler hinzugefÃ¼gt werden, sobald im TextFeld etwas ausgefÃ¼llt wurde.
 
 
 Schlusswort:
 
-Trotz sehr hohem Aufwand und einigen Hürden, konnten wir das Projekt erfolgreich umsetzen, was uns sehr stolz macht. 
-Der Lerneffekt war für uns sehr gross, da wir beide nicht aus dem Informatikbereich kommen und somit bis auf das Studium noch nicht viel Erfahrungen in der Programmierung haben. 
+Trotz sehr hohem Aufwand und einigen HÃ¼rden, konnten wir das Projekt erfolgreich umsetzen, was uns sehr stolz macht.
+Da wir vom Scratch gestartet haben, mussten wir uns einige Gedanken Ã¼ber die Objektorientierung machen. Somit konnten wir auch den Vorteil von Java gegenÃ¼ber nicht objekt-orientierten Programmiersprachen erkennen.
+Der Lerneffekt war fÃ¼r uns sehr gross, da wir beide nicht aus dem Informatikbereich kommen und somit bis auf das Studium noch nicht viel Erfahrungen in der Programmierung haben. 
 Die Zusammenarbeit im Team hat durch unsere hohe Motivation sehr gut funktioniert, lediglich einige Konflikte auf GitHub haben unser Projekt teilweise eingebremst. 
