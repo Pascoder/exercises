@@ -106,6 +106,53 @@ public class PokerGameModel {
 					}
 				}
 				
+			break;
+			
+			//two or more players have threeOfAKind
+			case 3:
+				int highest3=-1;
+				winnerName = clone.get(0).getPlayerName()+  " --- Hand: " + clone.get(0).getHandType().toString();
+				
+				for(int i=0; i < sameHandType;i++) {
+					for(int j = 0;j < Player.HAND_SIZE-1;j++) {
+						
+						if(clone.get(i).getCards().get(j).compareTo(clone.get(i).getCards().get(j+1))==0 &&
+								clone.get(i).getCards().get(j+1).compareTo(clone.get(i).getCards().get(j+2))==0 && 
+								clone.get(i).getCards().get(j).getRank().ordinal() > highest3) {
+							highest3 = clone.get(i).getCards().get(j).getRank().ordinal();
+							winnerName = clone.get(i).getPlayerName() +  " --- Hand: " + clone.get(i).getHandType().toString();
+						}
+					}
+				}
+			//two or more players have straight
+			case 4:
+				int highest4=-1;
+				winnerName = clone.get(0).getPlayerName()+  " --- Hand: " + clone.get(0).getHandType().toString();
+				
+				for(int i=0; i < sameHandType;i++) {
+					if(clone.get(i).getCards().get(0).getRank().ordinal() > highest4) {
+						highest4= clone.get(i).getCards().get(0).getRank().ordinal();
+						winnerName = clone.get(i).getPlayerName() +  " --- Hand: " + clone.get(i).getHandType().toString();
+					}
+				}
+				
+				
+				//two or more players have flush
+			case 5:
+				int highest5=-1;
+				winnerName = clone.get(0).getPlayerName()+  " --- Hand: " + clone.get(0).getHandType().toString();
+				
+				for(int i=0; i < sameHandType;i++) {
+					if(clone.get(i).getCards().get(0).getRank().ordinal() > highest5) {
+						highest5= clone.get(i).getCards().get(0).getRank().ordinal();
+						winnerName = clone.get(i).getPlayerName() +  " --- Hand: " + clone.get(i).getHandType().toString();
+					}
+				}
+				
+				
+			
+				
+				
 			}
 		
 			
@@ -114,6 +161,39 @@ public class PokerGameModel {
 			sameHandType=1;
 			return winnerName;
 
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 	}
 	
 }
