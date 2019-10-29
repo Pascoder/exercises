@@ -38,9 +38,10 @@ Erweiterte Funktionalität:
 Zusätzlich haben wir noch einige weitere Funktionalitäten in unser Programm eingebaut, dazu gehören folgende Dinge:
 
 -Beim dealen von Karten oder beim Mischen werden Geräusche der Karten simuliert
--Falls 2 oder mehrere Spieler den gleichen HandType haben wird für HighCard, OnePair und TwoPair auf die nächst höchster Karte geschaut um den Gewinner auszuwerten.
--Die GUI wurde attraktiver gestaltet
--Beim EnterMenu ist es nur möglich ab 2 Spielern das Spiel zu starten. Dies haben wir so realisiert indem wir den Button ausgeblendet haben, sofern weniger als zwei Spieler erstellt wurden.
+- TieBreak für Handtypes bis Straight und unabhängig der Anzahl Spieler
+- Die GUI wurde attraktiver gestaltet
+- Enter Menu mit Möglichkeit 2-5 Spieler hinzuzufügen, GUI wird dementsprechend dynamisch angepasst
+- Beim EnterMenu ist es nur möglich ab 2 Spielern das Spiel zu starten. Dies haben wir so realisiert indem wir den Button ausgeblendet haben, sofern weniger als zwei Spieler erstellt wurden.
 - Ebenfalls kann erst ein Spieler hinzugefügt werden, sobald im TextFeld etwas ausgefüllt wurde.
 
 
