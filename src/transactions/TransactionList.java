@@ -40,8 +40,10 @@ public class TransactionList {
 	 */
 	public List<Trader> traders(String city) {
         return allTransactions.stream()
-        		.map(t -> t.getTrader())
+        		.map(Transaction::getTrader)
         		.filter(t -> t.getCity().equals(city))
+        		.distinct()
+        		.sorted(Comparator.comparing(Trader::getName))
         		.collect(Collectors.toList());
     }
 
@@ -51,9 +53,7 @@ public class TransactionList {
 	 */
 	public boolean traderInCity(String city) {
         return allTransactions.stream()
-        		.map(t -> t.getTrader())
-        		.filter(t -> t.getCity().equals(city))
-        		.collect(Collectors.toList());
+        		.anyMatch(t -> t.getTrader().getCity().equals(city));
     }
 
 	/**
@@ -61,6 +61,10 @@ public class TransactionList {
 	 * @param to   the trader's new location
 	 */
 	public void relocateTraders(String from, String to) {
+		allTransactions.stream()
+        .map(Transaction::getTrader)
+        .filter(trader -> trader.getCity().equals(from))
+        .forEach(trader -> trader.setCity(to));
 
 	}
 
@@ -68,13 +72,20 @@ public class TransactionList {
 	 * @return the highest value in all the transactions
 	 */
 	public int highestValue() {
-		return 0;
+		return allTransactions.stream()
+		.map(Transaction::getValue)
+		.reduce(0, Integer::max);
+		
 	}
 
 	/**
 	 * @return a string of all traders’ names sorted alphabetically
 	 */
 	public String traderNames() {
-        return null;
+        return allTransactions.stream()
+        		.map(t -> t.getTrader().getName())
+        		.distinct()
+        		.sorted()
+        		.collect(Collectors.joining());
     }
 }
