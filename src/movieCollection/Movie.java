@@ -210,13 +210,30 @@ public class Movie {
 	public final void setLocation(final String location) {
 		this.locationProperty().set(location);
 	}
-	
-	
+
+
+	@Override
+	public String toString() {
+		return infoAsLine();
+	}
 
 
 	
-
-	
-	
+		public String infoAsLine() {
+			return String.join("!",
+			getName(),
+			getGenre(),
+			getNumber(),
+			getLanguage(),
+			getRegisseur(),
+			getOwner(),
+			getYear(),
+			getTime(),
+			getLocation(),
+			getStarring()
+			);	
+			
+		
+		}
 
 }

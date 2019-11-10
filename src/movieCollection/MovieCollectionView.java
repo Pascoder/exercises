@@ -11,7 +11,7 @@ public class MovieCollectionView {
 	private final MovieCollectionModel model;
 	private final Stage stage;
 	
-	private TableView<Movie> tableView;
+	private TableView<Movie> tblResult;
 	
 	Button btn = new Button("HEY");
 
@@ -19,11 +19,11 @@ public class MovieCollectionView {
 		this.model = model;
 		this.stage = stage;
 		
-		tableView = createTableView();
+		tblResult = createTableView();
 		
 		GridPane root = new GridPane();
 		root.add(btn, 0, 0);
-		root.add(tableView, 0, 1);
+		root.add(tblResult, 0, 1);
 	
 		
 		Scene scene = new Scene(root);
@@ -33,10 +33,14 @@ public class MovieCollectionView {
 		
 	}
 	
+	public void start() {
+		stage.show();
+
+	}
+	
 
 	private TableView<Movie> createTableView() {
-		
-		tableView = new TableView<>();
+		TableView<Movie> tableView = new TableView<>(model.getResults());
 		
 		TableColumn<Movie, String> colName = new TableColumn<>("Name");
 		tableView.getColumns().add(colName);
@@ -89,8 +93,5 @@ public class MovieCollectionView {
 		
 	}
 	
-	public void start() {
-		stage.show();
-
-	}
+	
 }
