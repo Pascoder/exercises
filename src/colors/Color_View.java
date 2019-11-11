@@ -8,16 +8,21 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 public class Color_View {
 	private Stage stage;
 	private Color_Model model;
+	private Slider redSlider, blueSlider, greenSlider;
 	
 
 	public Color_View(Stage stage, Color_Model model) {
 		this.stage = stage;
 		this.model = model;
+		
+		
 		
 		stage.setTitle("So many Colors...");
 		
@@ -29,19 +34,27 @@ public class Color_View {
 		ListView list = new ListView();
 		Button saveBtn = new Button("Save Color");
 		VBox savedArea = new VBox();
-		ColorPicker colorPicker = new ColorPicker();
-		Slider redSlider = new Slider();
+		Rectangle rectangle = new Rectangle();
+		redSlider = new Slider(0,255,127.5);
 		Label redLabel = new Label("red");
-		Slider blueSlider = new Slider();
+		blueSlider = new Slider(0,255,127.5);
 		Label blueLabel = new Label("blue");
-		Slider greenSlider = new Slider();
+		greenSlider = new Slider(0,255,127.5);
 		Label greenLabel = new Label("green");
+		
+		
+		
+		
+		
+		rectangle.setFill(Color.ALICEBLUE);
+		rectangle.setHeight(200.0);
+		rectangle.setWidth(200.0);
 		
 		sliderArea.getChildren().addAll(redSlider, blueSlider, greenSlider);
 		labelArea.getChildren().addAll(redLabel, blueLabel, greenLabel);
 		topArea.getChildren().addAll(sliderArea, labelArea );
 		
-		root.getChildren().addAll(topArea,saveBtn,colorPicker,list);
+		root.getChildren().addAll(topArea,saveBtn,rectangle,list);
 		
 		
 		
@@ -61,6 +74,30 @@ public class Color_View {
 	
 	public Stage getStage() {
 		return stage;
+	}
+
+	public Slider getRedSlider() {
+		return redSlider;
+	}
+
+	public void setRedSlider(Slider redSlider) {
+		this.redSlider = redSlider;
+	}
+
+	public Slider getBlueSlider() {
+		return blueSlider;
+	}
+
+	public void setBlueSlider(Slider blueSlider) {
+		this.blueSlider = blueSlider;
+	}
+
+	public Slider getGreenSlider() {
+		return greenSlider;
+	}
+
+	public void setGreenSlider(Slider greenSlider) {
+		this.greenSlider = greenSlider;
 	}
 	
 	
