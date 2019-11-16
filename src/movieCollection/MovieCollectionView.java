@@ -84,9 +84,9 @@ public class MovieCollectionView {
 		colLocation.setCellValueFactory(cell -> cell.getValue().locationProperty());
 		colStarring.setCellValueFactory(cell -> cell.getValue().starringProperty());
 		
-		tableView.getColumns().addAll(colName,colGenre, colNumber, 
-										colLanguage, colRegisseur,colOwner,colYear,
-										colTime,colLocation,colStarring);
+//		tableView.getColumns().addAll(colName,colGenre, colNumber, 
+//										colLanguage, colRegisseur,colOwner,colYear,
+//										colTime,colLocation,colStarring);
 		
 		
 		return tableView;

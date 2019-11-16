@@ -20,6 +20,8 @@ public class MovieCollection extends Application{
 		this.view = new MovieCollectionView(stage,model);
 		this.controller = new MovieCollectionController(view, model);
 		view.start();
+		
+		
 	}
 
 }

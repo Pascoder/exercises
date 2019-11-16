@@ -40,13 +40,13 @@ public class Movie {
 
 
 	public final String getName() {
-		return this.nameProperty().get();
+		return this.name.get();
 	}
 	
 
 
 	public final void setName(final String name) {
-		this.nameProperty().set(name);
+		this.name.set(name);
 	}
 	
 
@@ -58,13 +58,13 @@ public class Movie {
 
 
 	public final String getGenre() {
-		return this.genreProperty().get();
+		return this.genre.get();
 	}
 	
 
 
 	public final void setGenre(final String genre) {
-		this.genreProperty().set(genre);
+		this.genre.set(genre);
 	}
 	
 
@@ -76,14 +76,14 @@ public class Movie {
 
 
 	public final String getNumber() {
-		return this.numberProperty().get();
+		return this.number.get();
 	}
 	
 
 
 	public final void setNumber(final String number) {
 		
-		this.numberProperty().set(number);
+		this.number.set(number);
 	}
 	
 
@@ -95,13 +95,13 @@ public class Movie {
 
 
 	public final String getLanguage() {
-		return this.languageProperty().get();
+		return this.language.get();
 	}
 	
 
 
 	public final void setLanguage(final String language) {
-		this.languageProperty().set(language);
+		this.language.set(language);
 	}
 	
 
@@ -113,13 +113,13 @@ public class Movie {
 
 
 	public final String getRegisseur() {
-		return this.regisseurProperty().get();
+		return this.regisseur.get();
 	}
 	
 
 
 	public final void setRegisseur(final String regisseur) {
-		this.regisseurProperty().set(regisseur);
+		this.regisseur.set(regisseur);
 	}
 	
 
@@ -131,13 +131,13 @@ public class Movie {
 
 
 	public final String getOwner() {
-		return this.ownerProperty().get();
+		return this.owner.get();
 	}
 	
 
 
 	public final void setOwner(final String owner) {
-		this.ownerProperty().set(owner);
+		this.owner.set(owner);
 	}
 	
 
@@ -149,13 +149,13 @@ public class Movie {
 
 
 	public final String getYear() {
-		return this.yearProperty().get();
+		return this.year.get();
 	}
 	
 
 
 	public final void setYear(final String year) {
-		this.yearProperty().set(year);
+		this.year.set(year);
 	}
 	
 
@@ -167,13 +167,13 @@ public class Movie {
 
 
 	public final String getTime() {
-		return this.timeProperty().get();
+		return this.time.get();
 	}
 	
 
 
 	public final void setTime(final String time) {
-		this.timeProperty().set(time);
+		this.time.set(time);
 	}
 	
 
@@ -185,13 +185,13 @@ public class Movie {
 
 
 	public final String getStarring() {
-		return this.starringProperty().get();
+		return this.starring.get();
 	}
 	
 
 
 	public final void setStarring(final String starring) {
-		this.starringProperty().set(starring);
+		this.starring.set(starring);
 	}
 
 
@@ -202,13 +202,13 @@ public class Movie {
 
 
 	public final String getLocation() {
-		return this.locationProperty().get();
+		return this.location.get();
 	}
 	
 
 
 	public final void setLocation(final String location) {
-		this.locationProperty().set(location);
+		this.location.set(location);
 	}
 
 
@@ -220,7 +220,7 @@ public class Movie {
 
 	
 		public String infoAsLine() {
-			return String.join("!",
+			return String.join("\\t",
 			getName(),
 			getGenre(),
 			getNumber(),

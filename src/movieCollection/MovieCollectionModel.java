@@ -18,6 +18,8 @@ public class MovieCollectionModel {
 	
 	private static final String FILE_NAME = "output copy.txt";
 	
+	
+	
 	private final ObservableList<Movie> movies = FXCollections.observableArrayList();
 	
 	public MovieCollectionModel() {
