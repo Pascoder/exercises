@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -57,5 +58,11 @@ public class MovieCollectionModel {
 	}
 	public ObservableList<Movie> getResults() {
 		return movies;
+	}
+
+	public String randomMovie() {
+		Random rand = new Random();
+		Movie mv = movies.get(rand.nextInt(movies.size()));
+		return mv.getName() + " / " + mv.getYear() + " / " + mv.getRegisseur();
 	}
 }

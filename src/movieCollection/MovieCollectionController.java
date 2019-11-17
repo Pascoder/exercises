@@ -7,6 +7,8 @@ public class MovieCollectionController {
 	public MovieCollectionController(MovieCollectionView view, MovieCollectionModel model) {
 		this.view = view;
 		this.model = model;
+		
+		
 	}
 
 }

@@ -5,9 +5,9 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 public class MyColor {
 	
-	private IntegerProperty red = new SimpleIntegerProperty();
-	private IntegerProperty green = new SimpleIntegerProperty();
-	private IntegerProperty blue = new SimpleIntegerProperty();
+	private IntegerProperty red = new SimpleIntegerProperty(255);
+	private IntegerProperty green = new SimpleIntegerProperty(0);
+	private IntegerProperty blue = new SimpleIntegerProperty(255);
 	
 	
 	public MyColor (IntegerProperty red,IntegerProperty green, IntegerProperty blue ) {

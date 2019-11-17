@@ -10,8 +10,8 @@ public class Color_Controller {
 		this.model = model;
 		this.view = view;
 		
-		
-		
+		view.getRedSlider().getValue()
+		model.
 	}
 
 }

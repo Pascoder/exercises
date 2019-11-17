@@ -2,31 +2,47 @@ package movieCollection;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+
 
 public class MovieCollectionView {
 	private final MovieCollectionModel model;
 	private final Stage stage;
 	
 	private TableView<Movie> tblResult;
+		
 	
-	Button btn = new Button("HEY");
 
 	public MovieCollectionView(Stage stage, MovieCollectionModel model) {
 		this.model = model;
 		this.stage = stage;
 		
+		HBox box = new HBox();
+		Button btn = new Button("Random Movie");
+		Label label = new Label();
+		
+		box.getChildren().addAll(btn,label);
+		btn.setOnAction((event) -> label.setText(model.randomMovie()));
+		
 		tblResult = createTableView();
 		
+		
+
 		GridPane root = new GridPane();
-		root.add(btn, 0, 0);
+		root.add(box, 0, 0);
 		root.add(tblResult, 0, 1);
 	
+		tblResult.prefHeightProperty().bind(stage.heightProperty());
+		tblResult.prefWidthProperty().bind(stage.widthProperty());
 		
 		Scene scene = new Scene(root);
+		stage.setHeight(400);
+		stage.setWidth(600);
 		stage.setScene(scene);
 		stage.setTitle("Movie Collection Manager 2000");
 		
