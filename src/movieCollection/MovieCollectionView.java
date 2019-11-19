@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -23,11 +24,29 @@ public class MovieCollectionView {
 		this.stage = stage;
 		
 		HBox box = new HBox();
+		HBox addBox = new HBox();
 		Button btn = new Button("Random Movie");
+		Button btnAdd = new Button ("Add Movie");
 		Label label = new Label();
 		
+		TextField nameField 		= new TextField("(Name)");
+		TextField genreField 		= new TextField("(Genre)");
+		TextField numberField 		= new TextField("(Number)");
+		TextField languageField 	= new TextField("(Language)");
+		TextField regisseurField 	= new TextField("(Regisseur)");
+		TextField ownerField 		= new TextField("(Owner)");
+		TextField yearField 		= new TextField("(Year)");
+		TextField timeField 		= new TextField("(Time)");
+		TextField locationField 	= new TextField("(Location)");
+		TextField starringField 	= new TextField("(Starring)");
+		
 		box.getChildren().addAll(btn,label);
+		addBox.getChildren().addAll(btnAdd,nameField,genreField, numberField, languageField, regisseurField, ownerField, yearField, timeField, locationField, starringField);
 		btn.setOnAction((event) -> label.setText(model.randomMovie()));
+		btnAdd.setOnAction((event) -> model.addMovie(nameField.getText(),genreField.getText(),
+				languageField.getText(),regisseurField.getText(), ownerField.getText(), yearField.getText(),timeField.getText(), locationField.getText(), starringField.getText()  ));
+		
+		
 		
 		tblResult = createTableView();
 		
@@ -35,7 +54,8 @@ public class MovieCollectionView {
 
 		GridPane root = new GridPane();
 		root.add(box, 0, 0);
-		root.add(tblResult, 0, 1);
+		root.add(addBox, 0, 1);
+		root.add(tblResult, 0, 2);
 	
 		tblResult.prefHeightProperty().bind(stage.heightProperty());
 		tblResult.prefWidthProperty().bind(stage.widthProperty());
