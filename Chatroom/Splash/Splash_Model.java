@@ -48,7 +48,10 @@ public class Splash_Model extends Model {
             this.updateProgress(5,  6);
             
             // ... more resources would go here...
+
             this.updateProgress(6,  6);
+            
+            
 
             return null;
         }

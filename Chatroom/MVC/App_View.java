@@ -130,6 +130,7 @@ public class App_View extends View<App_Model> {
         
         
         
+        
         updateTexts();
 		
         Scene scene = new Scene(root);

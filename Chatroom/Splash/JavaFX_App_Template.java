@@ -21,6 +21,8 @@ public class JavaFX_App_Template extends Application {
     private static JavaFX_App_Template mainProgram; // singleton
     private Splash_View splashView;
     private App_View view;
+    
+    
 
     private ServiceLocator serviceLocator; // resources, after initialization
 
@@ -85,7 +87,23 @@ public class JavaFX_App_Template extends Application {
      * Thread, which means that it is allowed to work with GUI components.
      * http://docs.oracle.com/javafx/2/threads/jfxpub-threads.htm
      */
-    public void startApp() {
+    //Login Menu wird gestartet
+    public void startLoginMenu() {
+     
+    	Stage primary = new Stage();
+    	Login_Model model = new Login_Model();
+		Login_View view = new Login_View(primary, model);
+		Login_Controller controller = new Login_Controller(model, view);
+		
+		// Mit dem Loggin Button ist es nun möglich in den Messenger zu kommen
+		view.btnlogin.pressedProperty().addListener(c->{primary.close(); startApp();}); 
+		
+    }
+    
+    
+   
+
+	public void startApp() {
         Stage appStage = new Stage();
 
         // Initialize the application MVC components. Note that these components
@@ -105,6 +123,7 @@ public class JavaFX_App_Template extends Application {
 
         view.start();
     }
+    
 
     /**
      * The stop method is the opposite of the start method. It provides an
@@ -132,4 +151,6 @@ public class JavaFX_App_Template extends Application {
     protected static JavaFX_App_Template getMainProgram() {
         return mainProgram;
     }
+
+	
 }
