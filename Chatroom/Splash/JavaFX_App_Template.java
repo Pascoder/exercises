@@ -21,6 +21,8 @@ public class JavaFX_App_Template extends Application {
     private static JavaFX_App_Template mainProgram; // singleton
     private Splash_View splashView;
     private App_View view;
+    protected Stage primary;
+    private Login_View login_view;
     
     
 
@@ -90,13 +92,16 @@ public class JavaFX_App_Template extends Application {
     //Login Menu wird gestartet
     public void startLoginMenu() {
      
-    	Stage primary = new Stage();
+    	primary = new Stage();
     	Login_Model model = new Login_Model();
-		Login_View view = new Login_View(primary, model);
-		Login_Controller controller = new Login_Controller(model, view);
+		login_view = new Login_View(primary, model);
+		Login_Controller controller = new Login_Controller(model, login_view, mainProgram);
 		
-		// Mit dem Loggin Button ist es nun möglich in den Messenger zu kommen
-		view.btnlogin.pressedProperty().addListener(c->{primary.close(); startApp();}); 
+		/* Mit dem Loggin Button ist es nun möglich in den Messenger zu kommen, muss angepasst werden
+		 * wenn dies so gemacht wird wird im controller setOnAction von btnlogin übersprungen
+		*/
+		
+		
 		
     }
     
