@@ -17,20 +17,46 @@ public class Login_Controller {
 		
 		
 		view.btnlogin.setOnAction(this::clickLogin);
-	
+		view.btnerstellen.setOnAction(this::createAccount);
 		
 	
 	}
 	
 	
 	public void clickLogin(Event e) {
-		String [] newaccount = new String[2];
-		newaccount[0] = view.txtusername.getText();
-		newaccount[1] = view.txtpassword.getText();
+		String username, password;
+		username = view.txtusername.getText();
+		password = view.txtpassword.getText();
 		
-		model.createAccount(newaccount[0], newaccount[1]);
 		
-		template.startApp();
+		boolean succsesfull = model.account.checkPassword(password);
+		
+		if(succsesfull == true) {
+			template.startApp();
+			view.stage.close();
+		}else {
+			view.status.setText("wrong password");
+		}
+		
+		
+		
+		
+	}
+	
+	public void createAccount(Event e) {
+		String username, password;
+		username = view.txtusername.getText();
+		password = view.txtpassword.getText();
+		
+		
+		System.out.println(username);
+		if(username.isEmpty() || password.isEmpty()) {
+			view.status.setText("Please try again");
+		}else {
+			
+			String succsesfull = model.createAccount(username, password);
+			view.status.setText(succsesfull);
+		}
 		
 		
 	}

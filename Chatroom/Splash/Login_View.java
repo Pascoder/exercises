@@ -12,9 +12,9 @@ import javafx.stage.Stage;
 
 public class Login_View {
 
-private Stage stage;
+protected Stage stage;
 private Login_Model model;
-private Label username, password, placeholder;
+protected Label username, password, placeholder, status;
 protected TextField txtusername, txtpassword;
 public Button btnlogin, btnerstellen;
 
@@ -28,7 +28,8 @@ public Button btnlogin, btnerstellen;
 		this.txtpassword = new TextField();
 		this.btnlogin = new Button();
 		this.btnerstellen = new Button();
-		this.placeholder = new Label("		");
+		this.placeholder = new Label();
+		this.status = new Label();
 		
 		updateTexts();
 		
@@ -45,6 +46,7 @@ public Button btnlogin, btnerstellen;
 		root.add(placeholder, 0, 2);
 		root.add(btnlogin, 1, 2);
 		root.add(btnerstellen, 2, 2);
+		root.add(status, 1, 3);
 		
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
@@ -66,6 +68,7 @@ public Button btnlogin, btnerstellen;
       
        
        stage.setTitle("Login Menu");
+       status.setText("-");
 		
 	}
 	public Button getButton() {
