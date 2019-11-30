@@ -6,6 +6,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -15,7 +16,9 @@ public class Login_View {
 protected Stage stage;
 private Login_Model model;
 protected Label username, password, placeholder, status;
-protected TextField txtusername, txtpassword;
+protected TextField txtusername;
+protected PasswordField pwpassword;
+
 public Button btnlogin, btnerstellen;
 
 	public Login_View(Stage primary, Login_Model model) {
@@ -25,11 +28,12 @@ public Button btnlogin, btnerstellen;
 		this.username = new Label();
 		this.txtusername = new TextField();
 		this.password = new Label();
-		this.txtpassword = new TextField();
+		this.pwpassword = new PasswordField();
 		this.btnlogin = new Button();
 		this.btnerstellen = new Button();
 		this.placeholder = new Label();
 		this.status = new Label();
+		
 		
 		updateTexts();
 		
@@ -42,7 +46,7 @@ public Button btnlogin, btnerstellen;
 		root.add(username, 0, 0);
 		root.add(txtusername, 1, 0);
 		root.add(password, 0, 1);
-		root.add(txtpassword, 1, 1);
+		root.add(pwpassword, 1, 1);
 		root.add(placeholder, 0, 2);
 		root.add(btnlogin, 1, 2);
 		root.add(btnerstellen, 2, 2);

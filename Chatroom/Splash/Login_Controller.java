@@ -26,7 +26,7 @@ public class Login_Controller {
 	public void clickLogin(Event e) {
 		String username, password;
 		username = view.txtusername.getText();
-		password = view.txtpassword.getText();
+		password = view.pwpassword.getText();
 		
 		
 		boolean succsesfull = model.account.checkPassword(password);
@@ -46,16 +46,18 @@ public class Login_Controller {
 	public void createAccount(Event e) {
 		String username, password;
 		username = view.txtusername.getText();
-		password = view.txtpassword.getText();
+		password = view.pwpassword.getText();
 		
 		
-		System.out.println(username);
+		System.out.println(password);
 		if(username.isEmpty() || password.isEmpty()) {
 			view.status.setText("Please try again");
 		}else {
 			
 			String succsesfull = model.createAccount(username, password);
 			view.status.setText(succsesfull);
+			view.txtusername.clear();
+			view.pwpassword.clear();
 		}
 		
 		
