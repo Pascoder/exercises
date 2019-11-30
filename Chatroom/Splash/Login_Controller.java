@@ -26,7 +26,7 @@ public class Login_Controller {
 	public void clickLogin(Event e) {
 		String username, password;
 		username = view.txtusername.getText();
-		password = view.pwpassword.getText();
+		password = view.pwpassword.getText();// changed to pw TextField
 		
 		
 		boolean succsesfull = model.account.checkPassword(password);

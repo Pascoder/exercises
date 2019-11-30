@@ -17,7 +17,7 @@ protected Stage stage;
 private Login_Model model;
 protected Label username, password, placeholder, status;
 protected TextField txtusername;
-protected PasswordField pwpassword;
+protected PasswordField pwpassword;//TextField to insert a pw
 
 public Button btnlogin, btnerstellen;
 
