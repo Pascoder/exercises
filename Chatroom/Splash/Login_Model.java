@@ -9,6 +9,7 @@ public class Login_Model {
 		String created = null;
 		
 		this.account = new Account(username, password);
+		
 		if(account != null) {
 			succsesfull = true;
 		}

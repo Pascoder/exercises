@@ -2,6 +2,7 @@ package Splash;
 
 
 
+import chatroom.server.Account;
 import javafx.event.Event;
 
 public class Login_Controller {
@@ -29,9 +30,9 @@ public class Login_Controller {
 		password = view.pwpassword.getText();// changed to pw TextField
 		
 		
-		boolean succsesfull = model.account.checkPassword(password);
+	
 		
-		if(succsesfull == true) {
+		if(model.account.checkPassword(password) == true) {
 			template.startApp();
 			view.stage.close();
 		}else {
@@ -55,6 +56,7 @@ public class Login_Controller {
 		}else {
 			
 			String succsesfull = model.createAccount(username, password);
+			
 			view.status.setText(succsesfull);
 			view.txtusername.clear();
 			view.pwpassword.clear();

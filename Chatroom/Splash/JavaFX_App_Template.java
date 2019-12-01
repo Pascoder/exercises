@@ -91,7 +91,7 @@ public class JavaFX_App_Template extends Application {
      */
     //Login Menu wird gestartet
     public void startLoginMenu() {
-     
+    	 splashView.stop();
     	primary = new Stage();
     	Login_Model model = new Login_Model();
 		login_view = new Login_View(primary, model);
