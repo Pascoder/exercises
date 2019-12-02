@@ -1,7 +1,5 @@
 package Splash;
 
-
-
 import chatroom.server.Account;
 import javafx.event.Event;
 
@@ -36,7 +34,8 @@ public class Login_Controller {
 		if(username.isEmpty() || password.isEmpty()) {
 			view.status.setText("Please enter password and Username");	
 		}else {
-			if(model.account.checkPassword(password) == true&& model.account.getUsername()==username) {
+			Account check = Account.exists(username);
+			if(check.checkPassword(password) == true) {
 				template.startApp();
 				view.stage.close();
 			}else {

@@ -6,14 +6,14 @@ public class Login_Model {
 
 	public String createAccount(String username, String password) {
 		
-		boolean succsesfull = false;
+		
 		String created = null;
 		
 		this.account = new Account(username, password);
-		this.account.add(account);
+		Account.add(account);
 		//Test ob nun der Account in der ArrayListe für Accounts ist
 		
-		Account check = account.exists(username);
+		Account check = Account.exists(username);
 		
 		
 		if(check.getUsername() == username) {
