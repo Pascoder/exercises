@@ -29,17 +29,24 @@ public class Login_Controller {
 		username = view.txtusername.getText();
 		password = view.pwpassword.getText();// changed to pw TextField
 		
-		
 	
+			
+		try {
 		
-		if(model.account.checkPassword(password) == true) {
-			template.startApp();
-			view.stage.close();
+		if(username.isEmpty() || password.isEmpty()) {
+			view.status.setText("Please enter password and Username");	
 		}else {
-			view.status.setText("wrong password");
+			if(model.account.checkPassword(password) == true&& model.account.getUsername()==username) {
+				template.startApp();
+				view.stage.close();
+			}else {
+				
+				view.status.setText("wrong password or Username");
+			}
 		}
-		
-		
+		}catch (Exception ex) {
+			view.status.setText("Account don't exist");
+		}
 		
 		
 	}
@@ -50,7 +57,7 @@ public class Login_Controller {
 		password = view.pwpassword.getText();
 		
 		
-		System.out.println(password);
+		
 		if(username.isEmpty() || password.isEmpty()) {
 			view.status.setText("Please try again");
 		}else {

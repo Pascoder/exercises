@@ -4,6 +4,7 @@ import Splash.ServiceLocator;
 import MVC.Model;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.stage.WindowEvent;
 
@@ -20,6 +21,9 @@ public class App_Controller extends Controller<App_Model, App_View> {
     public App_Controller(App_Model model, App_View view) {
         super(model, view);
         
+        //Verbinden mit dem Server
+        view.btnConnect.setOnAction(this::buttonConnect);
+        
      // register ourselves to listen for button clicks
         view.sendbutton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -27,6 +31,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
                 buttonClick();
             }
         });
+        
 
         // register ourselves to handle window-closing event
         view.getStage().setOnCloseRequest(new EventHandler<WindowEvent>() {
@@ -44,5 +49,10 @@ public class App_Controller extends Controller<App_Model, App_View> {
           
 
              
+    }
+    //Methode die Eingaben ausliest und eine Verbindung zum Server herstellten soll
+    public void buttonConnect(Event connect) {
+    	String ip = view.txtIpAddress.getText();
+    	String port = view.txtPort.getText();
     }
 }

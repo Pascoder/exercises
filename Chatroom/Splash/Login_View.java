@@ -52,7 +52,7 @@ public Button btnlogin, btnerstellen;
 		root.add(btnerstellen, 2, 2);
 		root.add(status, 1, 3);
 		
-		Scene scene = new Scene(root);
+		Scene scene = new Scene(root,400,150);
 		stage.setScene(scene);
 		
 		stage.show();
