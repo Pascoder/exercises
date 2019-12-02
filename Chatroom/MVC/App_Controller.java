@@ -1,6 +1,10 @@
 package MVC;
 
 import Splash.ServiceLocator;
+
+import java.io.IOException;
+import java.net.UnknownHostException;
+
 import MVC.Model;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -22,7 +26,17 @@ public class App_Controller extends Controller<App_Model, App_View> {
         super(model, view);
         
         //Verbinden mit dem Server
-        view.btnConnect.setOnAction(this::buttonConnect);
+        view.btnConnect.setOnAction(event -> {
+			try {
+				buttonConnect(event);
+			} catch (UnknownHostException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		});
         
      // register ourselves to listen for button clicks
         view.sendbutton.setOnAction(new EventHandler<ActionEvent>() {
@@ -51,8 +65,16 @@ public class App_Controller extends Controller<App_Model, App_View> {
              
     }
     //Methode die Eingaben ausliest und eine Verbindung zum Server herstellten soll
-    public void buttonConnect(Event connect) {
+    public void buttonConnect(Event connect) throws UnknownHostException, IOException {
     	String ip = view.txtIpAddress.getText();
     	String port = view.txtPort.getText();
+    	
+    	boolean connected = model.Connect(ip, port);
+    	if(connected == false) {
+    		view.txtChatArea.setText("Wrong IP or Port");
+    	}else {
+    		
+    		view.txtChatArea.setText("Conncected");
+    	}
     }
 }

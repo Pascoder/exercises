@@ -25,7 +25,7 @@ public class Client implements Sendable {
 
 	private Account account = null;
 	private String token = null;
-	private Socket socket;
+	private Socket socket; //IP, Portnumber
 	private boolean clientReachable = true;
 	private Instant lastUsage;
 
