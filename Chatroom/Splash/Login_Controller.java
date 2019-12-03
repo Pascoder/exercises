@@ -59,7 +59,11 @@ public class Login_Controller {
 		
 		if(username.isEmpty() || password.isEmpty()) {
 			view.status.setText("Please try again");
-		}else {
+		}if(username.length() < 3 || password.length() < 3) {
+			view.status.setText("Password and username must have at least 3 characters");
+			
+		}
+		else {
 			
 			String succsesfull = model.createAccount(username, password);
 			
