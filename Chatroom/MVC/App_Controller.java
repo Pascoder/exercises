@@ -26,6 +26,9 @@ public class App_Controller extends Controller<App_Model, App_View> {
     public App_Controller(App_Model model, App_View view) {
         super(model, view);
         
+        //Accounts vom Server löschen
+        view.options.setOnAction(this::deleteAccounts);
+        
         //Verbinden mit dem Server
         view.btnConnect.setOnAction(event -> {
 			try {
@@ -78,5 +81,10 @@ public class App_Controller extends Controller<App_Model, App_View> {
     		
     		view.txtChatArea.setText("Conncected");
     	}
+    }
+    
+    public void deleteAccounts(Event e) {
+    	Account.cleanupAccounts();
+    	view.txtChatArea.setText("Deleted Accounts if they was older then 3 days");
     }
 }

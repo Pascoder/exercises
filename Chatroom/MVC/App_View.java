@@ -33,6 +33,7 @@ public class App_View extends View<App_Model> {
 	Menu menuFile;
     Menu menuFileLanguage;
     Menu menuHelp;
+    Menu options;
     
     //Top Controlls
     Label lblIpAddress;
@@ -65,7 +66,10 @@ public class App_View extends View<App_Model> {
 	    MenuBar menuBar = new MenuBar();
 	    menuFile = new Menu();
 	    menuFileLanguage = new Menu();
+	    options = new Menu();
 	    menuFile.getItems().add(menuFileLanguage);
+	    menuFile.getItems().add(options);
+	    
 	    
        for (Locale locale : sl.getLocales()) {
            MenuItem language = new MenuItem(locale.getLanguage());
@@ -146,7 +150,7 @@ public class App_View extends View<App_Model> {
 	       menuFile.setText(t.getString("program.menu.file"));
 	       menuFileLanguage.setText(t.getString("program.menu.file.language"));
            menuHelp.setText(t.getString("program.menu.help"));
-           
+           options.setText(t.getString("program.menu.option"));
            // Top Controls
            lblIpAddress.setText(t.getString("label.lblIpAddress"));
            lblPort.setText(t.getString("label.lblPort"));
