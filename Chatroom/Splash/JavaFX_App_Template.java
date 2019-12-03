@@ -6,6 +6,7 @@ import MVC.App_View;
 import MVC.App_Controller;
 import Splash.Splash_Model;
 import Splash.Splash_View;
+import chatroom.server.Account;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
@@ -92,6 +93,7 @@ public class JavaFX_App_Template extends Application {
     //Login Menu wird gestartet
     public void startLoginMenu() {
     	 splashView.stop();
+    	Account.readAccounts();// Accounts hier lesen befor Login GUI startet
     	primary = new Stage();
     	Login_Model model = new Login_Model();
 		login_view = new Login_View(primary, model);

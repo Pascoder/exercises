@@ -1,6 +1,7 @@
 package MVC;
 
 import Splash.ServiceLocator;
+import chatroom.server.Account;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
@@ -51,6 +52,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
         view.getStage().setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent event) {
+            	Account.saveAccounts();//Accounts vor dem schliessen speichern auf dem Server
                 Platform.exit();
             }
         });

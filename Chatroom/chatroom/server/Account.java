@@ -97,6 +97,7 @@ public class Account implements Serializable {
 				}
 				out.flush();
 				out.close();
+				logger.info("saved on server");//frank: added info
 			}
 		} catch (IOException e) {
 			logger.severe("Unable to save accounts: " + e.getMessage());

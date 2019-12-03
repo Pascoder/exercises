@@ -51,7 +51,7 @@ public class Splash_Model extends Model {
 
             this.updateProgress(6,  6);
             
-            
+         
 
             return null;
         }
