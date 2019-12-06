@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import Splash.ServiceLocator;
 import MVC.View;
 import Splash.Translator;
+import chatroom.server.Chatroom;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -13,11 +14,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -45,7 +49,11 @@ public class App_View extends View<App_Model> {
 	Button btnConnect;
     
     //Chat Area
-	TextArea txtChatArea;
+	TextField txtChatArea;
+	VBox chatRoomBox;
+	TableView<Chatroom> chatRooms;
+	TableColumn nameColumn, ownerColumn, isPublicColumn;
+	
     
     //Bottom Controlls
 	TextField txtChatMessage; 
@@ -116,8 +124,20 @@ public class App_View extends View<App_Model> {
         
         //Message Box
         
-        txtChatArea = new TextArea();
-        root.add(txtChatArea, 0, 2);
+        txtChatArea = new TextField();
+        chatRoomBox = new VBox();
+        chatRooms = new TableView<Chatroom>();
+        
+        nameColumn = new TableColumn("Name");
+        ownerColumn = new TableColumn("Owner");
+        isPublicColumn = new TableColumn("Public ?");
+        
+        chatRooms.getColumns().addAll(nameColumn,ownerColumn, isPublicColumn);
+        
+        
+        chatRoomBox.getChildren().addAll(txtChatArea,chatRooms);
+        
+        root.add(chatRoomBox, 0, 2);
         
         
         //Bottom Pane

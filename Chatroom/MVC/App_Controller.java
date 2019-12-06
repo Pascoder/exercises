@@ -2,6 +2,7 @@ package MVC;
 
 import Splash.ServiceLocator;
 import chatroom.server.Account;
+import chatroom.server.Chatroom;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
@@ -26,7 +27,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
     public App_Controller(App_Model model, App_View view) {
         super(model, view);
         
-        //Accounts vom Server löschen
+        //Accounts vom Server lï¿½schen
         view.options.setOnAction(this::deleteAccounts);
         
         //Verbinden mit dem Server
@@ -87,4 +88,31 @@ public class App_Controller extends Controller<App_Model, App_View> {
     	Account.cleanupAccounts();
     	view.txtChatArea.setText("Deleted Accounts if they was older then 3 days");
     }
+    
+    
+    //Diese Methode aktualisiert die ChatroomTableView
+    
+    public void refreshChatrooms() {
+    	
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
