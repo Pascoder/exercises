@@ -1,6 +1,10 @@
 package Splash;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.Socket;
 
 import chatroom.server.Account;
 import javafx.event.Event;
@@ -9,16 +13,18 @@ public class Login_Controller {
 	private Login_Model model;
 	private Login_View view;
 	private final JavaFX_App_Template template;
+	private Socket socket;
 	
 	
-	public Login_Controller(Login_Model model, Login_View view, final JavaFX_App_Template javaFX_App_Template) {
+	public Login_Controller(Login_Model model, Login_View view, final JavaFX_App_Template javaFX_App_Template, Socket socket) {
 		this.model = model;
 		this.view = view;
 		this.template = javaFX_App_Template;
+		this.socket = socket; //Socket aus Start Klasse an Controller übergeben
 		
 		
 		view.btnlogin.setOnAction(this::clickLogin);
-		view.btnerstellen.setOnAction(this::createAccount);
+		view.btnerstellen.setOnAction(this::createLogin);
 		
 	
 	}
@@ -52,11 +58,10 @@ public class Login_Controller {
 		
 	}
 	
-	public void createAccount(Event e) {
+	public void createLogin(Event e) {
 		String username, password;
 		username = view.txtusername.getText();
 		password = view.pwpassword.getText();
-		
 		
 		
 		if(username.isEmpty() || password.isEmpty()) {
@@ -68,14 +73,23 @@ public class Login_Controller {
 		else {
 			
 			//Hier werden DAten für den Account an Server geschickt
-			try(BufferedWriter writer = new BufferedWriter(new OutPutStream())){
-				
-			}catch(Exception e) {
-				
-			}
-			String succsesfull = model.createAccount(username, password);
+			try(BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+				BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+			){
+			//Senden einer neuen Loggin Datei  an Server
+			String senden = "CreateLogin|"+username+"|"+password;
+			writer.write(senden);
+			writer.write("\n");
+			writer.flush();
 			
-			view.status.setText(succsesfull);
+			//Empfangen der Antwort des Servers
+			String servermessage = reader.readLine();
+			view.status.setText(servermessage);
+			
+			}catch(Exception exeption) {
+				exeption.printStackTrace();
+			}
+		
 			view.txtusername.clear();
 			view.pwpassword.clear();
 		}

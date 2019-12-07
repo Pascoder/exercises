@@ -101,12 +101,12 @@ public class JavaFX_App_Template extends Application {
     //Login Menu wird gestartet
     public void startLoginMenu() {
     	createSocket();
-    	 splashView.stop();
+    	splashView.stop();
     	
     	primary = new Stage();
     	Login_Model model = new Login_Model();
 		login_view = new Login_View(primary, model);
-		Login_Controller controller = new Login_Controller(model, login_view, mainProgram);
+		Login_Controller controller = new Login_Controller(model, login_view, mainProgram, socket);
 		
 		/* Mit dem Loggin Button ist es nun möglich in den Messenger zu kommen, muss angepasst werden
 		 * wenn dies so gemacht wird wird im controller setOnAction von btnlogin übersprungen
