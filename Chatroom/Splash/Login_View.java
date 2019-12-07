@@ -6,6 +6,8 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -13,7 +15,9 @@ import javafx.stage.Stage;
 
 public class Login_View {
 
+protected Menu options;
 protected Stage stage;
+private MenuBar menubar;
 private Login_Model model;
 protected Label username, password, placeholder, status;
 protected TextField txtusername;
@@ -25,6 +29,8 @@ public Button btnlogin, btnerstellen;
 		this.stage = primary;
 		this.model = model;
 		
+		
+		
 		this.username = new Label();
 		this.txtusername = new TextField();
 		this.password = new Label();
@@ -35,6 +41,14 @@ public Button btnlogin, btnerstellen;
 		this.status = new Label();
 		
 		
+		
+		//MenuBar
+		this.options = new Menu();
+		this.menubar = new MenuBar();
+		
+		
+		this.menubar.getMenus().add(options);
+		
 		updateTexts();
 		
 		GridPane root = new GridPane();
@@ -43,14 +57,15 @@ public Button btnlogin, btnerstellen;
 		root.setHgap(10);
 		root.setVgap(10);
 		
-		root.add(username, 0, 0);
-		root.add(txtusername, 1, 0);
-		root.add(password, 0, 1);
-		root.add(pwpassword, 1, 1);
-		root.add(placeholder, 0, 2);
-		root.add(btnlogin, 1, 2);
-		root.add(btnerstellen, 2, 2);
-		root.add(status, 1, 3);
+		root.add(menubar, 3, 0);
+		root.add(username, 0, 1);
+		root.add(txtusername, 1, 1);
+		root.add(password, 0, 2);
+		root.add(pwpassword, 1, 2);
+		root.add(placeholder, 0, 3);
+		root.add(btnlogin, 1, 3);
+		root.add(btnerstellen, 2, 3);
+		root.add(status, 1, 4);
 		
 		Scene scene = new Scene(root,400,150);
 		stage.setScene(scene);
@@ -63,6 +78,7 @@ public Button btnlogin, btnerstellen;
 		
         
         // The menu entries
+		options.setText("Options");
        username.setText("Username:	");
       password.setText("Password:	");
        btnlogin.setText("Login");

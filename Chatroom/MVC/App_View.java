@@ -7,7 +7,7 @@ import Splash.ServiceLocator;
 import MVC.View;
 import Splash.Translator;
 import chatroom.server.Chatroom;
-import javafx.geometry.Pos;
+
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -16,7 +16,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
+
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -37,6 +37,7 @@ public class App_View extends View<App_Model> {
 	Menu menuFile;
     Menu menuFileLanguage;
     Menu menuHelp;
+    Menu password;
 
     
     //Top Controlls
@@ -54,6 +55,7 @@ public class App_View extends View<App_Model> {
     //Bottom Controlls
 	TextField txtChatMessage; 
     Button sendbutton;
+    Button changepw;
     
   
 
@@ -86,6 +88,8 @@ public class App_View extends View<App_Model> {
         }
 	    
         menuHelp = new Menu();
+        password = new Menu();
+        menuHelp.getItems().add(password);
 	    menuBar.getMenus().addAll(menuFile, menuHelp);
 		
 	    
@@ -97,6 +101,7 @@ public class App_View extends View<App_Model> {
 	
 		lblName = new Label();
 		txtName = new TextField();
+		changepw = new Button();
 		
        
 		lblName.setMinSize(Button.USE_PREF_SIZE, Button.USE_PREF_SIZE);
@@ -107,7 +112,7 @@ public class App_View extends View<App_Model> {
 		
 		txtName.setMinWidth(150); txtName.setPrefWidth(150);
         
-		HBox top = new HBox(lblName, txtName);
+		HBox top = new HBox(lblName, txtName, changepw);
 		top.getStyleClass().add("hbox"); 
         root.add(top, 0, 1);
         
@@ -117,9 +122,9 @@ public class App_View extends View<App_Model> {
         chatRoomBox = new VBox();
         chatRooms = new TableView<Chatroom>();
         
-        nameColumn = new TableColumn("Name");
-        ownerColumn = new TableColumn("Owner");
-        isPublicColumn = new TableColumn("Public ?");
+        nameColumn = new TableColumn();
+        ownerColumn = new TableColumn();
+        isPublicColumn = new TableColumn();
         
         chatRooms.getColumns().addAll(nameColumn,ownerColumn, isPublicColumn);
         
@@ -145,7 +150,7 @@ public class App_View extends View<App_Model> {
         
         
         updateTexts();
-		
+		//@TODO make GUI Design dynamic
         Scene scene = new Scene(root);
         scene.getStylesheets().add(
                 getClass().getResource("style.css").toExternalForm());
@@ -159,6 +164,8 @@ public class App_View extends View<App_Model> {
 	       menuFile.setText(t.getString("program.menu.file"));
 	       menuFileLanguage.setText(t.getString("program.menu.file.language"));
            menuHelp.setText(t.getString("program.menu.help"));
+           password.setText(t.getString("program.menu.password"));
+           changepw.setText(t.getString("button.changepw"));
            
            // Top Controls
            lblName.setText(t.getString("label.lblname"));
@@ -166,6 +173,9 @@ public class App_View extends View<App_Model> {
 	        
 	        // Bottom Controls
            sendbutton.setText(t.getString("button.sendbutton"));
+           nameColumn.setText(t.getString("program.nameColumn"));
+           ownerColumn.setText(t.getString("program.ownerColumn"));
+           isPublicColumn.setText(t.getString("program.isPublicColumn"));
            
            stage.setTitle(t.getString("program.name"));
 	    }

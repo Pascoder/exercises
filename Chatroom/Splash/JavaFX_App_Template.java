@@ -30,6 +30,7 @@ public class JavaFX_App_Template extends Application {
     protected Stage primary;
     private Login_View login_view;
     private Socket socket; //Damit socket in allen Klassen genutzt werden kann ist nötig für writer
+   
     
     
 
@@ -108,6 +109,8 @@ public class JavaFX_App_Template extends Application {
 		login_view = new Login_View(primary, model);
 		Login_Controller controller = new Login_Controller(model, login_view, mainProgram, socket);
 		
+		
+		
 		/* Mit dem Loggin Button ist es nun möglich in den Messenger zu kommen, muss angepasst werden
 		 * wenn dies so gemacht wird wird im controller setOnAction von btnlogin übersprungen
 		*/
@@ -119,15 +122,15 @@ public class JavaFX_App_Template extends Application {
     
    
 
-	public void startApp() {
+	public void startApp(String salt) {
         Stage appStage = new Stage();
-
+        
         // Initialize the application MVC components. Note that these components
         // can only be initialized now, because they may depend on the
         // resources initialized by the splash screen
         App_Model model = new App_Model();
         view = new App_View(appStage, model);
-        new App_Controller(model, view);
+        new App_Controller(model, view, socket, salt);
 
         // Resources are now initialized
         serviceLocator = ServiceLocator.getServiceLocator();
