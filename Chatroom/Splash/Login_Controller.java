@@ -6,9 +6,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 
-import com.sun.media.jfxmedia.logging.Logger;
-
-
 import javafx.event.Event;
 
 public class Login_Controller {
@@ -24,7 +21,7 @@ public class Login_Controller {
 		this.model = model;
 		this.view = view;
 		this.template = javaFX_App_Template;
-		this.socket = socket; //Socket aus Start Klasse an Controller übergeben
+		this.socket = socket; //Socket aus Start Klasse an Controller ï¿½bergeben
 		
 		
 		view.btnlogin.setOnAction(this::clickLogin);
@@ -34,7 +31,7 @@ public class Login_Controller {
 	
 	}
 	
-	//@TODO Fehler nach dem erstellen eines Loggins kann nicht direkt dieser Button gerdrückt werden, programm muss zuerst geschlossen werden??
+	//@TODO Fehler nach dem erstellen eines Loggins kann nicht direkt dieser Button gerdrï¿½ckt werden, programm muss zuerst geschlossen werden??
 	public void clickLogin(Event e) {
 		String username, password;
 		username = view.txtusername.getText();
@@ -46,7 +43,7 @@ public class Login_Controller {
 		if(username.length() <3 || password.length() <3) {
 			view.status.setText("Please enter password and Username with more then 3 character");	
 		}else {
-			//Prüfen ob das Login auf dem Server existiert
+			//Prï¿½fen ob das Login auf dem Server existiert
 			try(BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 					BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 				){
@@ -97,7 +94,7 @@ public class Login_Controller {
 			
 		}
 		else {
-			//Hier werden DAten für das Login an Server geschickt
+			//Hier werden DAten fï¿½r das Login an Server geschickt
 			try(BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 				BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			){
