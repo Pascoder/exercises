@@ -11,7 +11,6 @@ import java.net.UnknownHostException;
 import MVC.App_Controller;
 import Splash.Splash_Model;
 import Splash.Splash_View;
-import chatroom.server.Account;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;

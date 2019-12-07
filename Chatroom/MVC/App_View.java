@@ -6,8 +6,7 @@ import java.util.logging.Logger;
 import Splash.ServiceLocator;
 import MVC.View;
 import Splash.Translator;
-import chatroom.server.Chatroom;
-
+import chatroom.testClient.Chatroom;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -150,7 +149,7 @@ public class App_View extends View<App_Model> {
         
         
         updateTexts();
-		//@TODO make GUI Design dynamic
+		//@TODO make GUI Design 
         Scene scene = new Scene(root);
         scene.getStylesheets().add(
                 getClass().getResource("style.css").toExternalForm());

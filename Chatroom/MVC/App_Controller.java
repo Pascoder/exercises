@@ -1,8 +1,7 @@
 package MVC;
 
 import Splash.ServiceLocator;
-import chatroom.server.Account;
-import chatroom.server.Chatroom;
+
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

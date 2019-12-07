@@ -1,7 +1,7 @@
 package MVC;
 
 import Splash.ServiceLocator;
-import chatroom.server.Client;
+
 
 import java.io.IOException;
 import java.net.Socket;
