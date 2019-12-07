@@ -27,21 +27,10 @@ public class App_Controller extends Controller<App_Model, App_View> {
     public App_Controller(App_Model model, App_View view) {
         super(model, view);
         
-        //Accounts vom Server l�schen
-        view.options.setOnAction(this::deleteAccounts);
+      
         
         //Verbinden mit dem Server
-        view.btnConnect.setOnAction(event -> {
-			try {
-				buttonConnect(event);
-			} catch (UnknownHostException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		});
+      
         
      // register ourselves to listen for button clicks
         view.sendbutton.setOnAction(new EventHandler<ActionEvent>() {
@@ -56,7 +45,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
         view.getStage().setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent event) {
-            	Account.saveAccounts();//Accounts vor dem schliessen speichern auf dem Server
+            
                 Platform.exit();
             }
         });
@@ -70,49 +59,8 @@ public class App_Controller extends Controller<App_Model, App_View> {
 
              
     }
-    //Methode die Eingaben ausliest und eine Verbindung zum Server herstellten soll
-    public void buttonConnect(Event connect) throws UnknownHostException, IOException {
-    	String ip = view.txtIpAddress.getText();
-    	String port = view.txtPort.getText();
-    	
-    	boolean connected = model.Connect(ip, port);
-    	if(connected == false) {
-    		view.txtChatArea.setText("Wrong IP or Port");
-    	}else {
-    		
-    		view.txtChatArea.setText("Conncected");
-    	}
-    }
-    
-    public void deleteAccounts(Event e) {
-    	Account.cleanupAccounts();
-    	view.txtChatArea.setText("Deleted Accounts if they was older then 3 days");
-    }
     
     
-    //Diese Methode aktualisiert die ChatroomTableView
-    
-    public void refreshChatrooms() {
-    	
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     
 }

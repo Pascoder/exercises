@@ -3,6 +3,11 @@ package Splash;
 
 import MVC.App_Model;
 import MVC.App_View;
+
+import java.io.IOException;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
 import MVC.App_Controller;
 import Splash.Splash_Model;
 import Splash.Splash_View;
@@ -24,6 +29,7 @@ public class JavaFX_App_Template extends Application {
     private App_View view;
     protected Stage primary;
     private Login_View login_view;
+    private Socket socket; //Damit socket in allen Klassen genutzt werden kann ist nötig für writer
     
     
 
@@ -77,6 +83,8 @@ public class JavaFX_App_Template extends Application {
 
         // Display the splash screen and begin the initialization
         splashModel.initialize();
+        
+        
     }
 
     /**
@@ -92,8 +100,9 @@ public class JavaFX_App_Template extends Application {
      */
     //Login Menu wird gestartet
     public void startLoginMenu() {
+    	createSocket();
     	 splashView.stop();
-    	Account.readAccounts();// Accounts hier lesen befor Login GUI startet
+    	
     	primary = new Stage();
     	Login_Model model = new Login_Model();
 		login_view = new Login_View(primary, model);
@@ -158,6 +167,24 @@ public class JavaFX_App_Template extends Application {
     protected static JavaFX_App_Template getMainProgram() {
         return mainProgram;
     }
+    private void createSocket() {
+		//Hier wird Socket erstellt
+			try {
+				this.socket = new Socket("147.86.8.31", 50001);
+			} catch (UnknownHostException e) {
+				serviceLocator.getLogger().warning("Problem with Socket");
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				serviceLocator.getLogger().warning("Problem with Socket");
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			
+		}
+    
 
 	
 }

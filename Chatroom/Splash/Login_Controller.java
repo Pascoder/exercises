@@ -1,5 +1,7 @@
 package Splash;
 
+import java.io.BufferedReader;
+
 import chatroom.server.Account;
 import javafx.event.Event;
 
@@ -65,6 +67,12 @@ public class Login_Controller {
 		}
 		else {
 			
+			//Hier werden DAten für den Account an Server geschickt
+			try(BufferedWriter writer = new BufferedWriter(new OutPutStream())){
+				
+			}catch(Exception e) {
+				
+			}
 			String succsesfull = model.createAccount(username, password);
 			
 			view.status.setText(succsesfull);

@@ -1,5 +1,8 @@
 package Splash;
 
+import java.io.IOException;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.logging.FileHandler;
 import java.util.logging.Handler;
 import java.util.logging.Level;
@@ -47,6 +50,8 @@ public class Splash_Model extends Model {
             serviceLocator.setTranslator(new Translator(language));
             this.updateProgress(5,  6);
             
+           
+            serviceLocator.getLogger().info("Socket created and connected");
             // ... more resources would go here...
 
             this.updateProgress(6,  6);
@@ -55,6 +60,8 @@ public class Splash_Model extends Model {
 
             return null;
         }
+
+		
     };
 
     public void initialize() {

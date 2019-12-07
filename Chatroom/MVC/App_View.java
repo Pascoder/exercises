@@ -37,16 +37,12 @@ public class App_View extends View<App_Model> {
 	Menu menuFile;
     Menu menuFileLanguage;
     Menu menuHelp;
-    Menu options;
+
     
     //Top Controlls
-    Label lblIpAddress;
-    TextField txtIpAddress;
-	Label lblPort;
-	TextField txtPort;
 	Label lblName;
 	TextField txtName;
-	Button btnConnect;
+
     
     //Chat Area
 	TextField txtChatArea;
@@ -74,9 +70,9 @@ public class App_View extends View<App_Model> {
 	    MenuBar menuBar = new MenuBar();
 	    menuFile = new Menu();
 	    menuFileLanguage = new Menu();
-	    options = new Menu();
+	 
 	    menuFile.getItems().add(menuFileLanguage);
-	    menuFile.getItems().add(options);
+	 
 	    
 	    
        for (Locale locale : sl.getLocales()) {
@@ -98,27 +94,20 @@ public class App_View extends View<App_Model> {
 		root.add(menuBar, 0, 0);
 		
 		//Top
-		
-		lblIpAddress = new Label();
-		txtIpAddress = new TextField();
-		lblPort = new Label();
-		txtPort = new TextField();
+	
 		lblName = new Label();
 		txtName = new TextField();
-		btnConnect = new Button();
-        
 		
-		lblIpAddress.setMinSize(Button.USE_PREF_SIZE, Button.USE_PREF_SIZE);
-		lblPort.setMinSize(Button.USE_PREF_SIZE, Button.USE_PREF_SIZE);
+       
 		lblName.setMinSize(Button.USE_PREF_SIZE, Button.USE_PREF_SIZE);
-		btnConnect.setMinSize(Button.USE_PREF_SIZE, Button.USE_PREF_SIZE);
+	
 		
 			// Set sizes for top TextFields
-		txtIpAddress.setMinWidth(150); txtIpAddress.setPrefWidth(150);
-		txtPort.setMinWidth(60); txtPort.setPrefWidth(60);
+	
+		
 		txtName.setMinWidth(150); txtName.setPrefWidth(150);
         
-		HBox top = new HBox(lblIpAddress, txtIpAddress, lblPort, txtPort, lblName, txtName, btnConnect);
+		HBox top = new HBox(lblName, txtName);
 		top.getStyleClass().add("hbox"); 
         root.add(top, 0, 1);
         
@@ -170,12 +159,10 @@ public class App_View extends View<App_Model> {
 	       menuFile.setText(t.getString("program.menu.file"));
 	       menuFileLanguage.setText(t.getString("program.menu.file.language"));
            menuHelp.setText(t.getString("program.menu.help"));
-           options.setText(t.getString("program.menu.option"));
+           
            // Top Controls
-           lblIpAddress.setText(t.getString("label.lblIpAddress"));
-           lblPort.setText(t.getString("label.lblPort"));
            lblName.setText(t.getString("label.lblname"));
-           btnConnect.setText(t.getString("button.btnConnect"));
+          
 	        
 	        // Bottom Controls
            sendbutton.setText(t.getString("button.sendbutton"));
