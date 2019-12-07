@@ -2,6 +2,9 @@ package chatroom.testClient;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+
+//import java.io.BufferedReader;
+
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
@@ -12,7 +15,7 @@ import java.util.Scanner;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.SSLSocket;
 
-import com.sun.net.ssl.internal.ssl.Provider;
+
 
 /**
  * This is a really simple test client: It reads from the scanner, sends to the
@@ -54,7 +57,8 @@ public class TestClient {
 			try {
 				if (secure) {
 					// Registering the JSSE provider
-					Security.addProvider(new Provider());
+					
+//					Security.addProvider(new Provider());
 					
 					// Specifying the Truststore details. This is needed if you have created a
 					// truststore, for example, for self-signed certificates
