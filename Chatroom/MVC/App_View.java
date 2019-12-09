@@ -37,6 +37,7 @@ public class App_View extends View<App_Model> {
     Menu menuFileLanguage;
     Menu menuHelp;
     Menu password;
+    Menu delete;
 
     
     //Top Controlls
@@ -88,7 +89,9 @@ public class App_View extends View<App_Model> {
 	    
         menuHelp = new Menu();
         password = new Menu();
+        delete = new Menu();
         menuHelp.getItems().add(password);
+        menuHelp.getItems().add(delete);
 	    menuBar.getMenus().addAll(menuFile, menuHelp);
 		
 	    
@@ -165,6 +168,7 @@ public class App_View extends View<App_Model> {
            menuHelp.setText(t.getString("program.menu.help"));
            password.setText(t.getString("program.menu.password"));
            changepw.setText(t.getString("button.changepw"));
+           delete.setText(t.getString("program.delete"));
            
            // Top Controls
            lblName.setText(t.getString("label.lblname"));

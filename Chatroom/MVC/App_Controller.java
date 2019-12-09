@@ -13,6 +13,7 @@ import java.net.UnknownHostException;
 
 import MVC.Model;
 import javafx.application.Platform;
+import javafx.beans.property.BooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -28,17 +29,21 @@ import javafx.stage.WindowEvent;
 public class App_Controller extends Controller<App_Model, App_View> {
     ServiceLocator servicelocator;
     private String salt;
+   
  
 
     public App_Controller(App_Model model, App_View view, String salt) {
         super(model, view);
-        
+       
         this.salt = salt;
+     
         servicelocator = ServiceLocator.getServiceLocator();
         
      // register ourselves to listen for button clicks
         view.password.setOnAction(this::changePassword);
-        view.changepw.setOnAction(this::btnchangePW);
+        view.changepw.setOnAction(this::OptionStart);
+        view.delete.setOnAction(this::deleteUser);
+        view.changepw.setDisable(true);
         view.sendbutton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -77,16 +82,34 @@ public class App_Controller extends Controller<App_Model, App_View> {
 	
 	
 	
-	
+	//Sprache Ändern
 	public void changePassword(Event password) {
+		view.changepw.setDisable(false);
+		
 		if(view.password.getText().equals("change password")) {
 			view.lblName.setText("Enter password: ");
-	
+			view.changepw.setText("change");
+			
 		}else {
 			view.lblName.setText("Passwort eingeben: ");
-		
+			view.changepw.setText("wechseln");
 		}
 		
+	}
+	
+	//Sprache Ändern 
+	public void deleteUser(Event delete) {
+		view.changepw.setDisable(false);
+		
+		if(view.password.getText().equals("change password")) {
+			view.lblName.setText("Delete User: ");
+			view.changepw.setText("delete");
+			
+		}else {
+			view.lblName.setText("Benutzer löschen: ");
+			view.changepw.setText("löschen");
+		
+		}
 	}
 	
 	
@@ -94,12 +117,14 @@ public class App_Controller extends Controller<App_Model, App_View> {
 	
 	
 	
-	public void btnchangePW(Event btnchangePW) {
+	public void OptionStart(Event option) {
+		
+		//wenn auf Button change oder wechseln steht dann diese Methode 
+		
+		if(view.changepw.getText().equals("change")||view.changepw.getText().equals("wechseln")) {
 		String servermessage = null;
 		String pw = view.txtName.getText();
 		
-		
-			
 			try{
 				//Senden eines neuen Passwort
 				System.out.println("SocketTest: "+servicelocator.getConfiguration().getSocket());
@@ -121,7 +146,14 @@ public class App_Controller extends Controller<App_Model, App_View> {
 					this.servicelocator.getLogger().info("Something goes wrong by changing password");
 					exception.getMessage();
 				}
+		}
 		
+		
+		//Wenn auf Button delete oder löschen steht dann diese Methode
+		
+		if(view.changepw.getText().equals("delete")||view.changepw.getText().equals("löschen")) {
+			this.servicelocator.getLogger().info("Button delete clicked");
+		}
 			
 		
 		
