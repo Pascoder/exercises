@@ -26,15 +26,15 @@ import javafx.stage.WindowEvent;
  * @author Brad Richards
  */
 public class App_Controller extends Controller<App_Model, App_View> {
-    ServiceLocator serviceLocator;
-    private Socket socket;
+    ServiceLocator servicelocator;
     private String salt;
  
 
-    public App_Controller(App_Model model, App_View view, Socket socket, String salt) {
+    public App_Controller(App_Model model, App_View view, String salt) {
         super(model, view);
-        this.socket = socket;// Socket vom Main Programm übergeben damit überall gleicher Socket genutzt wird
+        
         this.salt = salt;
+        servicelocator = ServiceLocator.getServiceLocator();
         
      // register ourselves to listen for button clicks
         view.password.setOnAction(this::changePassword);
@@ -54,8 +54,8 @@ public class App_Controller extends Controller<App_Model, App_View> {
             
                 
                 try {
-					socket.close();
-					serviceLocator.getLogger().info("Socket is closed");//Socket schliessen
+                	servicelocator.getConfiguration().getSocket().close();
+					servicelocator.getLogger().info("Socket is closed");//Socket schliessen
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -65,8 +65,8 @@ public class App_Controller extends Controller<App_Model, App_View> {
             }
         });
         
-        serviceLocator = ServiceLocator.getServiceLocator();        
-        serviceLocator.getLogger().info("Application controller initialized");
+              
+        servicelocator.getLogger().info("Application controller initialized");
     }
     
    
@@ -91,16 +91,15 @@ public class App_Controller extends Controller<App_Model, App_View> {
 	public void btnchangePW(Event btnchangePW) {
 		String servermessage = null;
 		String pw = view.txtName.getText();
-		System.out.println(this.salt);//Test
 		if(pw.length() < 3) {
 			view.txtName.setText("password to small");
 		}else {
 			
-			try(BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-					BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+			try(BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(servicelocator.getConfiguration().getSocket().getOutputStream()));
+					BufferedReader reader = new BufferedReader(new InputStreamReader(servicelocator.getConfiguration().getSocket().getInputStream()));
 				){
 				//Senden eines neuen Passwort
-				
+				System.out.println("SocketTest: "+servicelocator.getConfiguration().getSocket());
 				String senden = "ChangePassword|"+salt+"|"+pw; //<--@TODO Fehler salt verändert sich
 				System.out.println(senden);
 				
@@ -114,7 +113,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
 				view.txtName.setText(servermessage);
 				
 				}catch(Exception exeption) {
-					this.serviceLocator.getLogger().info("Something goes wrong by changing password");
+					this.servicelocator.getLogger().info("Something goes wrong by changing password");
 					
 				}
 		

@@ -12,17 +12,16 @@ public class Login_Controller {
 	private Login_Model model;
 	private Login_View view;
 	private final JavaFX_App_Template template;
-	private Socket socket;
 	private ServiceLocator servicelocator;
 	private  String salt;
 	
 	
-	public Login_Controller(Login_Model model, Login_View view, final JavaFX_App_Template javaFX_App_Template, Socket socket) {
+	public Login_Controller(Login_Model model, Login_View view, final JavaFX_App_Template javaFX_App_Template) {
 		this.model = model;
 		this.view = view;
 		this.template = javaFX_App_Template;
-		this.socket = socket; //Socket aus Start Klasse an Controller �bergeben
 		
+		servicelocator = ServiceLocator.getServiceLocator();
 		
 		view.btnlogin.setOnAction(this::clickLogin);
 		view.btnerstellen.setOnAction(this::createLogin);
@@ -44,8 +43,8 @@ public class Login_Controller {
 			view.status.setText("Please enter password and Username with more then 3 character");	
 		}else {
 			//Pr�fen ob das Login auf dem Server existiert
-			try(BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-					BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+			try(BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(servicelocator.getConfiguration().getSocket().getOutputStream())); 
+					BufferedReader reader = new BufferedReader(new InputStreamReader(servicelocator.getConfiguration().getSocket().getInputStream()));
 				){
 				//Senden einer neuen Loggin Datei  an Server
 				String senden = "Login|"+username+"|"+password;
@@ -95,8 +94,8 @@ public class Login_Controller {
 		}
 		else {
 			//Hier werden DAten f�r das Login an Server geschickt
-			try(BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-				BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+			try(BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(servicelocator.getConfiguration().getSocket().getOutputStream()));
+				BufferedReader reader = new BufferedReader(new InputStreamReader(servicelocator.getConfiguration().getSocket().getInputStream()));
 			){
 			//Senden einer neuen Loggin Datei  an Server
 			String senden = "CreateLogin|"+username+"|"+password;

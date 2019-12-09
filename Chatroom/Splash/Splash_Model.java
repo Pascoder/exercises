@@ -55,7 +55,7 @@ public class Splash_Model extends Model {
             // ... more resources would go here...
 
             this.updateProgress(6,  6);
-            
+            serviceLocator.getConfiguration().connectToServer();
          
 
             return null;

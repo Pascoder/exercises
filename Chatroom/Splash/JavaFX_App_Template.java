@@ -28,7 +28,7 @@ public class JavaFX_App_Template extends Application {
     private App_View view;
     protected Stage primary;
     private Login_View login_view;
-    private Socket socket; //Damit socket in allen Klassen genutzt werden kann ist nötig für writer
+     
    
     
     
@@ -100,13 +100,13 @@ public class JavaFX_App_Template extends Application {
      */
     //Login Menu wird gestartet
     public void startLoginMenu() {
-    	createSocket();
+    	
     	splashView.stop();
     	
     	primary = new Stage();
     	Login_Model model = new Login_Model();
 		login_view = new Login_View(primary, model);
-		Login_Controller controller = new Login_Controller(model, login_view, mainProgram, socket);
+		Login_Controller controller = new Login_Controller(model, login_view, mainProgram);
 		
 		
 		
@@ -129,7 +129,7 @@ public class JavaFX_App_Template extends Application {
         // resources initialized by the splash screen
         App_Model model = new App_Model();
         view = new App_View(appStage, model);
-        new App_Controller(model, view, socket, salt);
+        new App_Controller(model, view, salt);
 
         // Resources are now initialized
         serviceLocator = ServiceLocator.getServiceLocator();
@@ -169,23 +169,7 @@ public class JavaFX_App_Template extends Application {
     protected static JavaFX_App_Template getMainProgram() {
         return mainProgram;
     }
-    private void createSocket() {
-		//Hier wird Socket erstellt
-			try {
-				this.socket = new Socket("147.86.8.31", 50001);
-			} catch (UnknownHostException e) {
-				serviceLocator.getLogger().warning("Problem with Socket");
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				serviceLocator.getLogger().warning("Problem with Socket");
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			
-			
-		}
+   
     
 
 	

@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.Enumeration;
 import java.util.Properties;
 import java.util.logging.Logger;
@@ -29,6 +31,7 @@ public class Configuration {
 
     private Properties defaultOptions;
     private Properties localOptions;
+    private Socket socket = null;
 
     public Configuration() {
         // Load default properties from wherever the code is
@@ -95,5 +98,24 @@ public class Configuration {
     
     public void setLocalOption(String name, String value) {
         localOptions.setProperty(name, value);
+    }
+    
+    public void connectToServer() {
+		//Hier wird Socket erstellt
+			try {
+				this.socket = new Socket("147.86.8.31", 50001);
+			} catch (UnknownHostException e) {
+				e.printStackTrace();
+			
+			} catch (IOException e) {
+				e.printStackTrace();
+				
+			}
+			
+			
+			
+		}
+    public Socket getSocket() {
+    	return this.socket;
     }
 }
