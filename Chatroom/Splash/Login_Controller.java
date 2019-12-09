@@ -55,7 +55,8 @@ public class Login_Controller {
 				this.salt = servermessage.substring(12,44);
 				view.status.setText(servermessage);
 			
-			String ok = "true";
+				String ok = "true";
+				servicelocator.getLogger().info("Login succsesfull");
 			if(servermessage.substring(7,11).equals(ok)) {
 				template.startApp(this.salt);
 				view.stage.close();
@@ -97,7 +98,7 @@ public class Login_Controller {
 			servicelocator.getConfiguration().getWriter().flush();
 			
 			String servermessage = servicelocator.getConfiguration().getReader().readLine();
-			
+			servicelocator.getLogger().info("createLogin succsessfull");
 			}catch(Exception exeption) {
 				this.servicelocator.getLogger().info("Something goes wrong by Creating your login");
 			}

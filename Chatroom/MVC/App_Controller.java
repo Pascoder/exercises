@@ -46,6 +46,8 @@ public class App_Controller extends Controller<App_Model, App_View> {
             }
         });
         
+        
+        
 
         // register ourselves to handle window-closing event
         view.getStage().setOnCloseRequest(new EventHandler<WindowEvent>() {
@@ -63,19 +65,18 @@ public class App_Controller extends Controller<App_Model, App_View> {
                 
                 Platform.exit();
             }
-        });
-        
-              
+        });    
         servicelocator.getLogger().info("Application controller initialized");
     }
     
    
 
-	public void buttonClick() {
-          
-
-             
+	public void buttonClick() {     
     }
+	
+	
+	
+	
 	
 	public void changePassword(Event password) {
 		if(view.password.getText().equals("change password")) {
@@ -87,6 +88,11 @@ public class App_Controller extends Controller<App_Model, App_View> {
 		}
 		
 	}
+	
+	
+	
+	
+	
 	
 	public void btnchangePW(Event btnchangePW) {
 		String servermessage = null;
@@ -109,7 +115,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
 				servermessage = servicelocator.getConfiguration().getReader().readLine();
 				
 				view.txtName.setText(servermessage);
-				
+				servicelocator.getLogger().info("Password changed");
 				
 				}catch(IOException exception) {
 					this.servicelocator.getLogger().info("Something goes wrong by changing password");
