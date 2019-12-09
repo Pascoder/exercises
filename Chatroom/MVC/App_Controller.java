@@ -91,35 +91,34 @@ public class App_Controller extends Controller<App_Model, App_View> {
 	public void btnchangePW(Event btnchangePW) {
 		String servermessage = null;
 		String pw = view.txtName.getText();
-		if(pw.length() < 3) {
-			view.txtName.setText("password to small");
-		}else {
+		
+		
 			
-			try(BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(servicelocator.getConfiguration().getSocket().getOutputStream()));
-					BufferedReader reader = new BufferedReader(new InputStreamReader(servicelocator.getConfiguration().getSocket().getInputStream()));
-				){
+			try{
 				//Senden eines neuen Passwort
 				System.out.println("SocketTest: "+servicelocator.getConfiguration().getSocket());
-				String senden = "ChangePassword|"+salt+"|"+pw; //<--@TODO Fehler salt verändert sich
-				System.out.println(senden);
+				String senden = "ChangePassword|"+salt+"|"+pw; 
 				
-				writer.write(senden);
-				writer.write("\n");
-				writer.flush();
+				
+				servicelocator.getConfiguration().getWriter().write(senden);
+				servicelocator.getConfiguration().getWriter().write("\n");
+				servicelocator.getConfiguration().getWriter().flush();
+				
 				
 				//Empfangen der Antwort des Servers
-				servermessage = reader.readLine();
+				servermessage = servicelocator.getConfiguration().getReader().readLine();
 				
 				view.txtName.setText(servermessage);
 				
-				}catch(Exception exeption) {
+				
+				}catch(IOException exception) {
 					this.servicelocator.getLogger().info("Something goes wrong by changing password");
-					
+					exception.getMessage();
 				}
 		
 			
 		
-		}
+		
 	}
     
     

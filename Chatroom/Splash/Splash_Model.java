@@ -56,6 +56,8 @@ public class Splash_Model extends Model {
 
             this.updateProgress(6,  6);
             serviceLocator.getConfiguration().connectToServer();
+            serviceLocator.getConfiguration().createBufferedReader();
+            serviceLocator.getConfiguration().createBufferedWriter();
          
 
             return null;

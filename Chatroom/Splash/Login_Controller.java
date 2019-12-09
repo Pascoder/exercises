@@ -43,24 +43,18 @@ public class Login_Controller {
 			view.status.setText("Please enter password and Username with more then 3 character");	
 		}else {
 			//Pr�fen ob das Login auf dem Server existiert
-			try(BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(servicelocator.getConfiguration().getSocket().getOutputStream())); 
-					BufferedReader reader = new BufferedReader(new InputStreamReader(servicelocator.getConfiguration().getSocket().getInputStream()));
-				){
-				//Senden einer neuen Loggin Datei  an Server
+			
 				String senden = "Login|"+username+"|"+password;
-				writer.write(senden);
-				writer.write("\n");
-				writer.flush();
 				
-				//Empfangen der Antwort des Servers
-				servermessage = reader.readLine();
+				servicelocator.getConfiguration().getWriter().write(senden);
+				servicelocator.getConfiguration().getWriter().write("\n");
+				servicelocator.getConfiguration().getWriter().flush();
+				
+				
+				servermessage = servicelocator.getConfiguration().getReader().readLine();
 				this.salt = servermessage.substring(12,44);
 				view.status.setText(servermessage);
 			
-				
-				}catch(Exception exeption) {
-					this.servicelocator.getLogger().info("Something goes wrong by Login");
-				}
 			String ok = "true";
 			if(servermessage.substring(7,11).equals(ok)) {
 				template.startApp(this.salt);
@@ -94,19 +88,15 @@ public class Login_Controller {
 		}
 		else {
 			//Hier werden DAten f�r das Login an Server geschickt
-			try(BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(servicelocator.getConfiguration().getSocket().getOutputStream()));
-				BufferedReader reader = new BufferedReader(new InputStreamReader(servicelocator.getConfiguration().getSocket().getInputStream()));
-			){
+			try{
 			//Senden einer neuen Loggin Datei  an Server
 			String senden = "CreateLogin|"+username+"|"+password;
-			writer.write(senden);
-			writer.write("\n");
-			writer.flush();
 			
-			//Empfangen der Antwort des Servers
-			String servermessage = reader.readLine();
-			view.status.setText(servermessage);
+			servicelocator.getConfiguration().getWriter().write(senden);
+			servicelocator.getConfiguration().getWriter().write("\n");
+			servicelocator.getConfiguration().getWriter().flush();
 			
+			String servermessage = servicelocator.getConfiguration().getReader().readLine();
 			
 			}catch(Exception exeption) {
 				this.servicelocator.getLogger().info("Something goes wrong by Creating your login");

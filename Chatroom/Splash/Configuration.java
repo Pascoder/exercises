@@ -1,10 +1,14 @@
 package Splash;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Enumeration;
@@ -32,6 +36,9 @@ public class Configuration {
     private Properties defaultOptions;
     private Properties localOptions;
     private Socket socket = null;
+    private BufferedWriter writer;
+    private BufferedReader reader;
+    
 
     public Configuration() {
         // Load default properties from wherever the code is
@@ -118,4 +125,26 @@ public class Configuration {
     public Socket getSocket() {
     	return this.socket;
     }
+    public BufferedWriter getWriter() {
+    	return this.writer;
+    }
+    public void createBufferedWriter() {
+    	try{
+    		writer = new BufferedWriter(new OutputStreamWriter(this.socket.getOutputStream())); 
+    	}catch(Exception ex) {
+    		ex.getMessage();
+    	}	
+			
+    }
+    public void createBufferedReader() {
+    	try{
+    		reader = new BufferedReader(new InputStreamReader(this.socket.getInputStream())); 
+    	}catch(Exception ex) {
+    		ex.getMessage();
+    	}	
+    }
+    public BufferedReader getReader() {
+    	return this.reader;
+    }
+    
 }
