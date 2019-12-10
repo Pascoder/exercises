@@ -4,6 +4,8 @@ package Splash;
 import MVC.App_Model;
 import MVC.App_View;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -138,6 +140,8 @@ public class JavaFX_App_Template extends Application {
         // Splash_XXX objects can be garbage collected
         splashView.stop();
         splashView = null;
+        
+
 
         view.start();
     }

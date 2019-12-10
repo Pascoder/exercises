@@ -107,7 +107,7 @@ public class Configuration {
         localOptions.setProperty(name, value);
     }
     
-    public void connectToServer() {
+    public void connectToServer() throws IOException {
 		//Hier wird Socket erstellt
 			try {
 				this.socket = new Socket("147.86.8.31", 50001);
@@ -118,7 +118,6 @@ public class Configuration {
 				e.printStackTrace();
 				
 			}
-			
 			
 			
 		}
