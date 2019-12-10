@@ -183,7 +183,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
 			
 			System.out.println(msg);
 			
-			String [] chatrooms = msg.split("|");
+			String [] chatrooms = msg.split("\\|");
 			
 			
 			for (String s : chatrooms) System.out.println(s);
