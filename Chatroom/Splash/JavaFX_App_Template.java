@@ -110,8 +110,8 @@ public class JavaFX_App_Template extends Application {
 		
 		
 		
-		/* Mit dem Loggin Button ist es nun möglich in den Messenger zu kommen, muss angepasst werden
-		 * wenn dies so gemacht wird wird im controller setOnAction von btnlogin übersprungen
+		/* Mit dem Loggin Button ist es nun mï¿½glich in den Messenger zu kommen, muss angepasst werden
+		 * wenn dies so gemacht wird wird im controller setOnAction von btnlogin ï¿½bersprungen
 		*/
 		
 		
@@ -121,7 +121,7 @@ public class JavaFX_App_Template extends Application {
     
    
 
-	public void startApp(String salt) {
+	public void startApp(String salt) throws IOException {
         Stage appStage = new Stage();
         
         // Initialize the application MVC components. Note that these components

@@ -32,7 +32,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
    
  
 
-    public App_Controller(App_Model model, App_View view, String salt) {
+    public App_Controller(App_Model model, App_View view, String salt) throws IOException {
         super(model, view);
        
         this.salt = salt;
@@ -73,7 +73,35 @@ public class App_Controller extends Controller<App_Model, App_View> {
         });    
         servicelocator.getLogger().info("Application controller initialized");
         
+        //Chatrooms laden
         loadChatrooms();
+        
+        //Thread starten um Nachrichten zu empfangen
+        
+        try (BufferedReader socketIn = new BufferedReader(new InputStreamReader
+        		(ServiceLocator.getServiceLocator().getConfiguration().getSocket().getInputStream()));
+				OutputStreamWriter socketOut = new OutputStreamWriter
+				(ServiceLocator.getServiceLocator().getConfiguration().getSocket().getOutputStream())) {
+			// Create thread to read incoming messages
+			Runnable r = new Runnable() {
+				@Override
+				public void run() {
+					while (true) {
+						String msg;
+						try {
+							msg = socketIn.readLine();
+							System.out.println("Message Received: " + msg);
+						} catch (IOException e) {
+							break;
+						}
+						if (msg == null) break; // In case the server closes the socket
+					}
+				}
+			};
+			Thread t = new Thread(r);
+			t.start();
+			
+        }
     }
     
    
@@ -164,7 +192,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
 	
 	private void loadChatrooms() {
 		String msg;
-		String REG = ("|");
+		
 		
 		try{
 			//Senden eines neuen Passwort
@@ -187,6 +215,11 @@ public class App_Controller extends Controller<App_Model, App_View> {
 			
 			
 			for (String s : chatrooms) System.out.println(s);
+			
+			for(int i= 2; i<chatrooms.length; i++) {
+				view.addChatbox(chatrooms[i]);
+				
+			}
 			
 			servicelocator.getLogger().info("Chatrooms loaded");
 			

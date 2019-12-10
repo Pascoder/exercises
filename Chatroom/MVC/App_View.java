@@ -3,6 +3,9 @@ package MVC;
 import java.util.Locale;
 import java.util.logging.Logger;
 
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 import Splash.ServiceLocator;
 import MVC.View;
 import Splash.Translator;
@@ -48,8 +51,7 @@ public class App_View extends View<App_Model> {
     //Chat Area
 	TextField txtChatArea;
 	VBox chatRoomBox;
-	TableView<Chatroom> chatRooms;
-	TableColumn nameColumn, ownerColumn, isPublicColumn;
+	
 	
     
     //Bottom Controlls
@@ -122,18 +124,17 @@ public class App_View extends View<App_Model> {
         
         txtChatArea = new TextField();
         chatRoomBox = new VBox();
-        chatRooms = new TableView<Chatroom>();
-        
-        nameColumn = new TableColumn();
-        ownerColumn = new TableColumn();
-        isPublicColumn = new TableColumn();
-        
-        chatRooms.getColumns().addAll(nameColumn,ownerColumn, isPublicColumn);
         
         
-        chatRoomBox.getChildren().addAll(txtChatArea,chatRooms);
+    
+    	
+    	
+        
+        chatRoomBox.getChildren().addAll(txtChatArea );
+        
         
         root.add(chatRoomBox, 0, 2);
+        
         
         
         //Bottom Pane
@@ -176,10 +177,24 @@ public class App_View extends View<App_Model> {
 	        
 	        // Bottom Controls
            sendbutton.setText(t.getString("button.sendbutton"));
-           nameColumn.setText(t.getString("program.nameColumn"));
-           ownerColumn.setText(t.getString("program.ownerColumn"));
-           isPublicColumn.setText(t.getString("program.isPublicColumn"));
+//           nameColumn.setText(t.getString("program.nameColumn"));
+//           ownerColumn.setText(t.getString("program.ownerColumn"));
+//           isPublicColumn.setText(t.getString("program.isPublicColumn"));
            
            stage.setTitle(t.getString("program.name"));
 	    }
+
+	
+
+	public void addChatbox(String string) {
+		HBox ChatBox = new HBox();
+		Button sendButton = new Button("Send Message");
+		Label chatRoomName = new Label (string);
+		
+		chatRoomName.setPrefWidth(200);
+		ChatBox.getChildren().addAll(chatRoomName, sendButton);
+		chatRoomBox.getChildren().add(ChatBox);
+		
+		
+	}
 }
