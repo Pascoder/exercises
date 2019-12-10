@@ -19,7 +19,7 @@ protected Menu options;
 protected Stage stage;
 private MenuBar menubar;
 private Login_Model model;
-protected Label username, password, placeholder, status;
+protected Label username, password, placeholder, placeholder1, placeholder2, status;
 protected TextField txtusername;
 protected PasswordField pwpassword;//TextField to insert a pw
 
@@ -39,6 +39,8 @@ public Button btnlogin, btnerstellen;
 		this.btnerstellen = new Button();
 		this.placeholder = new Label();
 		this.status = new Label();
+		this.placeholder1 = new Label();
+		this.placeholder2 = new Label();
 		
 		
 		
@@ -57,19 +59,22 @@ public Button btnlogin, btnerstellen;
 		root.setHgap(10);
 		root.setVgap(10);
 		
-		root.add(menubar, 3, 0);
-		root.add(username, 0, 1);
-		root.add(txtusername, 1, 1);
-		root.add(password, 0, 2);
-		root.add(pwpassword, 1, 2);
-		root.add(placeholder, 0, 3);
-		root.add(btnlogin, 1, 3);
-		root.add(btnerstellen, 2, 3);
-		root.add(status, 1, 4);
+		root.add(placeholder1, 0, 0);
+		root.add(placeholder2, 0, 1);
+		root.add(menubar, 3, 2);
+		root.add(username, 0, 3);
+		root.add(txtusername, 1, 3);
+		root.add(password, 0, 4);
+		root.add(pwpassword, 1, 4);
+		root.add(placeholder, 0, 5);
+		root.add(btnlogin, 1, 5);
+		root.add(btnerstellen, 2, 5);
+		root.add(status, 1, 6);
 		
-		Scene scene = new Scene(root,400,150);
+		Scene scene = new Scene(root,450,220);
 		stage.setScene(scene);
-		
+		scene.getStylesheets().addAll(
+                this.getClass().getResource("login.css").toExternalForm());
 		stage.show();
 		
 	}
@@ -87,7 +92,7 @@ public Button btnlogin, btnerstellen;
        btnerstellen.setText("Create");
       
        
-       stage.setTitle("Login Menu");
+       stage.setTitle("WhatsUp");
        status.setText("-");
 		
 	}

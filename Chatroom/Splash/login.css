@@ -1,0 +1,10 @@
+.root{
+    -fx-background-image: url("whatsup.png");
+       
+    -fx-background-size: 600 315;
+    -fx-background-position: center center;
+}
+
+
+
+
