@@ -72,6 +72,8 @@ public class App_Controller extends Controller<App_Model, App_View> {
             }
         });    
         servicelocator.getLogger().info("Application controller initialized");
+        
+        loadChatrooms();
     }
     
    
@@ -82,7 +84,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
 	
 	
 	
-	//Sprache Ändern
+	//Sprache ï¿½ndern
 	public void changePassword(Event password) {
 		view.changepw.setDisable(false);
 		
@@ -97,7 +99,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
 		
 	}
 	
-	//Sprache Ändern 
+	//Sprache ï¿½ndern 
 	public void deleteUser(Event delete) {
 		view.changepw.setDisable(false);
 		
@@ -106,8 +108,8 @@ public class App_Controller extends Controller<App_Model, App_View> {
 			view.changepw.setText("delete");
 			
 		}else {
-			view.lblName.setText("Benutzer löschen: ");
-			view.changepw.setText("löschen");
+			view.lblName.setText("Benutzer lï¿½schen: ");
+			view.changepw.setText("lï¿½schen");
 		
 		}
 	}
@@ -149,9 +151,9 @@ public class App_Controller extends Controller<App_Model, App_View> {
 		}
 		
 		
-		//Wenn auf Button delete oder löschen steht dann diese Methode
+		//Wenn auf Button delete oder lï¿½schen steht dann diese Methode
 		
-		if(view.changepw.getText().equals("delete")||view.changepw.getText().equals("löschen")) {
+		if(view.changepw.getText().equals("delete")||view.changepw.getText().equals("lï¿½schen")) {
 			this.servicelocator.getLogger().info("Button delete clicked");
 		}
 			
@@ -159,7 +161,44 @@ public class App_Controller extends Controller<App_Model, App_View> {
 		
 	}
     
+	
+	private void loadChatrooms() {
+		String msg;
+		String REG = ("|");
+		
+		try{
+			//Senden eines neuen Passwort
+			System.out.println("SocketTest: "+servicelocator.getConfiguration().getSocket());
+			String loadChats = "ListChatrooms|"+salt; 
+			
+			
+			servicelocator.getConfiguration().getWriter().write(loadChats);
+			servicelocator.getConfiguration().getWriter().write("\n");
+			servicelocator.getConfiguration().getWriter().flush();
+			
+			
+			//Empfangen der Antwort des Servers
+			msg = servicelocator.getConfiguration().getReader().readLine();
+			msg.toString();
+			
+			System.out.println(msg);
+			
+			String [] chatrooms = msg.split(REG,10);
+			
+			
+			for (String s : chatrooms) System.out.println(s);
+			
+			servicelocator.getLogger().info("Chatrooms loaded");
+			
+			}catch(IOException exception) {
+				this.servicelocator.getLogger().info("Something goes wrong by loading chatrooms");
+				exception.getMessage();
+			}
+			}
+		
+		
+	}
     
 
     
-}
+
