@@ -179,11 +179,11 @@ public class App_Controller extends Controller<App_Model, App_View> {
 			
 			//Empfangen der Antwort des Servers
 			msg = servicelocator.getConfiguration().getReader().readLine();
-			msg.toString();
+			
 			
 			System.out.println(msg);
 			
-			String [] chatrooms = msg.split(REG,10);
+			String [] chatrooms = msg.split("|");
 			
 			
 			for (String s : chatrooms) System.out.println(s);
