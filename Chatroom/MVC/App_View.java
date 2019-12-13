@@ -3,22 +3,14 @@ package MVC;
 import java.util.Locale;
 import java.util.logging.Logger;
 
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-
 import Splash.ServiceLocator;
-import MVC.View;
 import Splash.Translator;
-import chatroom.testClient.Chatroom;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;

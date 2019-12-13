@@ -78,28 +78,32 @@ public class App_Controller extends Controller<App_Model, App_View> {
         
 //      //Thread starten um Nachrichten zu empfangen
 //        
-//        try (	BufferedReader socketIn = ServiceLocator.getServiceLocator().getConfiguration().getReader();
-//        		BufferedWriter socketOut = ServiceLocator.getServiceLocator().getConfiguration().getWriter()) {
-//			// Create thread to read incoming messages
-//			Runnable r = new Runnable() {
-//				@Override
-//				public void run() {
-//					while (true) {
-//						String msg;
-//						try {
-//							msg = socketIn.readLine();
-//							System.out.println("Message Received: " + msg);
-//						} catch (IOException e) {
-//							break;
-//						}
-//						if (msg == null) break; // In case the server closes the socket
-//					}
-//				}
-//			};
-//			Thread t = new Thread(r);
-//			t.start();
-//			
-//        }
+        System.out.println("before thread");
+        try (	BufferedReader socketIn = ServiceLocator.getServiceLocator().getConfiguration().getReader();
+        		BufferedWriter socketOut = ServiceLocator.getServiceLocator().getConfiguration().getWriter()) {
+			// Create thread to read incoming messages
+			Runnable r = new Runnable() {
+				@Override
+				public void run() {
+					System.out.println("within thread");
+					while (true) {
+						System.out.println("thread execution");
+						String msg;
+						try {
+							msg = socketIn.readLine();
+							System.out.println("Message Received: " + msg);
+						} catch (IOException e) {
+							break;
+						}
+						if (msg == null) break; // In case the server closes the socket
+					}
+				}
+			};
+			Thread t = new Thread(r);
+			System.out.println("thread start");
+			t.start();
+			
+        }
 		
     }
     
