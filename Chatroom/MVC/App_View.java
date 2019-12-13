@@ -41,7 +41,10 @@ public class App_View extends View<App_Model> {
     Menu menuHelp;
     Menu password;
     Menu delete;
-
+    Menu chatroom;
+    Menu createChatroom;
+    Menu joinChatroom;
+    Menu addUser;
     
     //Top Controlls
 	Label lblName;
@@ -92,9 +95,16 @@ public class App_View extends View<App_Model> {
         menuHelp = new Menu();
         password = new Menu();
         delete = new Menu();
+        chatroom = new Menu();
+        createChatroom = new Menu();
+        joinChatroom = new Menu();
+        addUser = new Menu();
         menuHelp.getItems().add(password);
         menuHelp.getItems().add(delete);
-	    menuBar.getMenus().addAll(menuFile, menuHelp);
+        chatroom.getItems().add(createChatroom);
+        chatroom.getItems().add(joinChatroom);
+        chatroom.getItems().add(addUser);
+	    menuBar.getMenus().addAll(menuFile, menuHelp,chatroom);
 		
 	    
 	   //Menu 
@@ -170,7 +180,10 @@ public class App_View extends View<App_Model> {
            password.setText(t.getString("program.menu.password"));
            changepw.setText(t.getString("button.changepw"));
            delete.setText(t.getString("program.delete"));
-           
+           chatroom.setText(t.getString("program.chatroom"));
+           createChatroom.setText(t.getString("program.createchatroom"));
+           joinChatroom.setText(t.getString("program.joinchatroom"));
+           addUser.setText(t.getString("program.adduser"));
            // Top Controls
            lblName.setText(t.getString("label.lblname"));
           
