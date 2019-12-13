@@ -3,14 +3,22 @@ package MVC;
 import java.util.Locale;
 import java.util.logging.Logger;
 
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 import Splash.ServiceLocator;
+import MVC.View;
 import Splash.Translator;
+import chatroom.testClient.Chatroom;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -35,13 +43,13 @@ public class App_View extends View<App_Model> {
     Menu delete;
     Menu chatroom;
     Menu createChatroom;
-    Menu joinChatroom;
     Menu addUser;
     
     //Top Controlls
-	Label lblName;
-	TextField txtName;
-
+	Label lblMulti;
+	TextField txt1;
+	TextField txt2;
+	Button btnMulti;
     
     //Chat Area
 	TextField txtChatArea;
@@ -52,7 +60,7 @@ public class App_View extends View<App_Model> {
     //Bottom Controlls
 	TextField txtChatMessage; 
     Button sendbutton;
-    Button changepw;
+   
     
   
 
@@ -89,12 +97,10 @@ public class App_View extends View<App_Model> {
         delete = new Menu();
         chatroom = new Menu();
         createChatroom = new Menu();
-        joinChatroom = new Menu();
         addUser = new Menu();
         menuHelp.getItems().add(password);
         menuHelp.getItems().add(delete);
         chatroom.getItems().add(createChatroom);
-        chatroom.getItems().add(joinChatroom);
         chatroom.getItems().add(addUser);
 	    menuBar.getMenus().addAll(menuFile, menuHelp,chatroom);
 		
@@ -105,20 +111,23 @@ public class App_View extends View<App_Model> {
 		
 		//Top
 	
-		lblName = new Label();
-		txtName = new TextField();
-		changepw = new Button();
+		lblMulti = new Label();
+		
+		txt1 = new TextField();
+		
+		txt2 = new TextField();
+		btnMulti = new Button();
 		
        
-		lblName.setMinSize(Button.USE_PREF_SIZE, Button.USE_PREF_SIZE);
+		lblMulti.setMinSize(Button.USE_PREF_SIZE, Button.USE_PREF_SIZE);
 	
 		
 			// Set sizes for top TextFields
 	
 		
-		txtName.setMinWidth(150); txtName.setPrefWidth(150);
+		txt1.setMinWidth(150); txt1.setPrefWidth(150);
         
-		HBox top = new HBox(lblName, txtName, changepw);
+		HBox top = new HBox(lblMulti, txt1,txt2, btnMulti);
 		top.getStyleClass().add("hbox"); 
         root.add(top, 0, 1);
         
@@ -170,14 +179,13 @@ public class App_View extends View<App_Model> {
 	       menuFileLanguage.setText(t.getString("program.menu.file.language"));
            menuHelp.setText(t.getString("program.menu.help"));
            password.setText(t.getString("program.menu.password"));
-           changepw.setText(t.getString("button.changepw"));
+           btnMulti.setText(t.getString("button.changepw"));
            delete.setText(t.getString("program.delete"));
            chatroom.setText(t.getString("program.chatroom"));
            createChatroom.setText(t.getString("program.createchatroom"));
-           joinChatroom.setText(t.getString("program.joinchatroom"));
            addUser.setText(t.getString("program.adduser"));
            // Top Controls
-           lblName.setText(t.getString("label.lblname"));
+           lblMulti.setText(t.getString("label.lblname"));
           
 	        
 	        // Bottom Controls

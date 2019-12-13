@@ -18,10 +18,26 @@ import MVC.Model;
  */
 public class App_Model extends Model {
     ServiceLocator serviceLocator;
+    
+    
+    //0=kein Menu ausgewählt, 1= Chatroom erstellen, 2= Chatroom beitreten, 3= User hinzufügen
+    private int menuOption = 0;
  
     
     
-    public App_Model() {
+    public int getMenuOption() {
+		return menuOption;
+	}
+
+
+
+	public void setMenuOption(int menuOption) {
+		this.menuOption = menuOption;
+	}
+
+
+
+	public App_Model() {
         
         
         serviceLocator = ServiceLocator.getServiceLocator();        
