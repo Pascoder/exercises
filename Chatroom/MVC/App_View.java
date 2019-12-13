@@ -44,6 +44,7 @@ public class App_View extends View<App_Model> {
     Menu chatroom;
     Menu createChatroom;
     Menu addUser;
+    Menu leavechatroom;
     
     //Top Controlls
 	Label lblMulti;
@@ -98,10 +99,12 @@ public class App_View extends View<App_Model> {
         chatroom = new Menu();
         createChatroom = new Menu();
         addUser = new Menu();
+        leavechatroom = new Menu();
         menuHelp.getItems().add(password);
         menuHelp.getItems().add(delete);
         chatroom.getItems().add(createChatroom);
         chatroom.getItems().add(addUser);
+        chatroom.getItems().add(leavechatroom);
 	    menuBar.getMenus().addAll(menuFile, menuHelp,chatroom);
 		
 	    
@@ -186,7 +189,7 @@ public class App_View extends View<App_Model> {
            addUser.setText(t.getString("program.adduser"));
            // Top Controls
            lblMulti.setText(t.getString("label.lblname"));
-          
+          leavechatroom.setText(t.getString("program.leavechatroom"));
 	        
 	        // Bottom Controls
            sendbutton.setText(t.getString("button.sendbutton"));

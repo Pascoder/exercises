@@ -45,6 +45,8 @@ public class App_Controller extends Controller<App_Model, App_View> {
         view.delete.setOnAction(this::deleteUser);
         view.addUser.setOnAction(this::addUser); 
         view.createChatroom.setOnAction(this::createChatroom); //Menu Create Chatroom
+        view.sendbutton.setOnAction(this::senden);
+        view.leavechatroom.setOnAction(this::leavechatroom);
         
         view.txt1.setDisable(true);
 		view.txt2.setDisable(true);
@@ -181,6 +183,20 @@ public void createChatroom(Event e) {
 		view.txt2.setText("(Chatroom)");
 		view.txt2.setDisable(false);
 	}
+	public void leavechatroom(Event e) {
+		model.setMenuOption(5);
+		view.btnMulti.setText("Verlassen");
+		view.btnMulti.setDisable(false);
+		
+		view.lblMulti.setText("Chatroom verlassen");
+		view.lblMulti.setDisable(false);
+		
+		view.txt1.setText("(Username)");
+		view.txt1.setDisable(false);
+		
+		view.txt2.setText("(Chatroom)");
+		view.txt2.setDisable(false);
+	}
 	
 	
 	
@@ -205,6 +221,9 @@ public void createChatroom(Event e) {
 					
 			senden = "DeleteLogin|"+salt+"|"+text1;
 			break;
+		case 5:
+			senden = "LeaveChatroom|"+salt+"|"+text2+"|"+ text1;
+			break;
 		}
 		servicelocator.getConfiguration().getWriter().write(senden);
 		servicelocator.getConfiguration().getWriter().write("\n");
@@ -221,44 +240,30 @@ public void createChatroom(Event e) {
 	
 	private void loadChatrooms() {
 		String msg;
-		
-		
 		try{
 			//Senden eines neuen Passwort
 			System.out.println("SocketTest: "+servicelocator.getConfiguration().getSocket());
 			String loadChats = "ListChatrooms|"+salt; 
-			
-			
 			servicelocator.getConfiguration().getWriter().write(loadChats);
 			servicelocator.getConfiguration().getWriter().write("\n");
 			servicelocator.getConfiguration().getWriter().flush();
-			
-			
 			//Empfangen der Antwort des Servers
 			msg = servicelocator.getConfiguration().getReader().readLine();
-			
-			
 			System.out.println(msg);
-			
 			String [] chatrooms = msg.split("\\|");
-			
-			
 			for (String s : chatrooms) System.out.println(s);
-			
 			for(int i= 2; i<chatrooms.length; i++) {
 				view.addChatbox(chatrooms[i]);
-				
 			}
-			
 			servicelocator.getLogger().info("Chatrooms loaded");
-			
 			}catch(IOException exception) {
 				this.servicelocator.getLogger().info("Something goes wrong by loading chatrooms");
 				exception.getMessage();
 			}
 			}
-		
-		
+	private void senden(Event senden) {
+		//SendMessage|4FA4563A5C2FFD1E703B49190DC348BD|CatChat|Hello, all cat people! 
+	}
 	}
     
 
