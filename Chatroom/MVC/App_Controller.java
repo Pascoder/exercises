@@ -134,8 +134,6 @@ public class App_Controller extends Controller<App_Model, App_View> {
 		view.btnMulti.setText("change");
 		view.txt1.setText("new password");
 		view.txt2.setDisable(true);
-
-		
 	}
 	
 	//User loeschen
@@ -217,8 +215,7 @@ public void createChatroom(Event e) {
 		case 3:
 			senden = "ChangePassword|"+salt+"|"+text1;
 			break;
-		case 4:
-					
+		case 4:	
 			senden = "DeleteLogin|"+salt+"|"+text1;
 			break;
 		case 5:
