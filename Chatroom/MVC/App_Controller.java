@@ -84,7 +84,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
         
         //Chatrooms laden
         loadChatrooms();
-      //             !!!Fehler!!!! 
+      //             !!!Fehler brauchen wir momentan noch nicht evt beim senden und empfangen von nachrichten!!!! 
       //Thread starten um Nachrichten zu empfangen
         
         
