@@ -43,8 +43,8 @@ public class App_Controller extends Controller<App_Model, App_View> {
         view.password.setOnAction(this::changePassword);
         view.btnMulti.setOnAction(this::OptionStart);
         view.delete.setOnAction(this::deleteUser);
-        view.addUser.setOnAction(this::addUser);
-        view.createChatroom.setOnAction(this::createChatroom);
+        view.addUser.setOnAction(this::addUser); 
+        view.createChatroom.setOnAction(this::createChatroom); //Menu Create Chatroom
         
         view.txt1.setDisable(true);
 		view.txt2.setDisable(true);
@@ -82,23 +82,23 @@ public class App_Controller extends Controller<App_Model, App_View> {
         
         //Chatrooms laden
         loadChatrooms();
+      //             !!!Fehler!!!! 
+      //Thread starten um Nachrichten zu empfangen
         
-//      //Thread starten um Nachrichten zu empfangen
-//        
-        System.out.println("before thread");
-        try (	BufferedReader socketIn = ServiceLocator.getServiceLocator().getConfiguration().getReader();
+        
+       /* try (	BufferedReader socketIn = ServiceLocator.getServiceLocator().getConfiguration().getReader();
         		BufferedWriter socketOut = ServiceLocator.getServiceLocator().getConfiguration().getWriter()) {
 			// Create thread to read incoming messages
 			Runnable r = new Runnable() {
 				@Override
 				public void run() {
-					System.out.println("within thread");
+					
 					while (true) {
-						System.out.println("thread execution");
+						
 						String msg;
 						try {
 							msg = socketIn.readLine();
-							System.out.println("Message Received: " + msg);
+						
 						} catch (IOException e) {
 							break;
 						}
@@ -110,7 +110,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
 			System.out.println("thread start");
 			t.start();
 			
-        }
+        }*/
 		
     }
     
@@ -124,32 +124,29 @@ public class App_Controller extends Controller<App_Model, App_View> {
 	
 	//Sprache aendern
 	public void changePassword(Event password) {
+		model.setMenuOption(3);
 		view.btnMulti.setDisable(false);
-		
-		if(view.password.getText().equals("change password")) {
-			view.lblMulti.setText("Enter password: ");
-			view.btnMulti.setText("change");
-			
-		}else {
-			view.lblMulti.setText("Passwort eingeben: ");
-			view.btnMulti.setText("wechseln");
-		}
+		view.lblMulti.setDisable(false);
+		view.txt1.setDisable(false);
+		view.lblMulti.setText("Enter password: ");
+		view.btnMulti.setText("change");
+		view.txt1.setText("new password");
+		view.txt2.setDisable(true);
+
 		
 	}
 	
 	//User loeschen
 	public void deleteUser(Event delete) {
+		model.setMenuOption(4);
 		view.btnMulti.setDisable(false);
+		view.txt1.setDisable(false);
+		view.lblMulti.setDisable(false);
+		view.lblMulti.setText("Delete User: ");
+		view.btnMulti.setText("delete");
+		view.txt1.setText("(name of User)");
+		view.txt2.setDisable(true);
 		
-		if(view.password.getText().equals("change password")) {
-			view.lblMulti.setText("Delete User: ");
-			view.btnMulti.setText("delete");
-			
-		}else {
-			view.lblMulti.setText("Benutzer loeschen: ");
-			view.btnMulti.setText("loeschen");
-		
-		}
 	}
 	
 public void createChatroom(Event e) {
@@ -189,83 +186,34 @@ public void createChatroom(Event e) {
 	
 	public void OptionStart(Event option) {
 		
+		try {
 		String senden = null;
 		String text1 = view.txt1.getText();
 		String text2 = view.txt2.getText();
-		
-		//0=kein Menu ausgewählt, 1= Chatroom erstellen, 2= Chatroom beitreten
+		//0=kein Menu ausgewaehlt, 1= Chatroom erstellen, 2= Chatroom beitreten
 		switch(model.getMenuOption()){
-		
 		case 1:
-			senden = "CreateChatroom|" + salt + "|" + text1 + "|" + "true";
+			senden = "CreateChatroom|"+salt+"|"+text1 +"|"+"true";
 			break;
-			
 		case 2:
-			senden = "JoinChatroom|" + salt +"|"+ text2 +"|" + text1;
+			senden = "JoinChatroom|"+salt+"|"+text2+"|"+ text1;
 			break;
-		
-		
-		
-			
+		case 3:
+			senden = "ChangePassword|"+salt+"|"+text1;
+			break;
+		case 4:
+					
+			senden = "DeleteLogin|"+salt+"|"+text1;
+			break;
 		}
-		
-		
-		try {
-			
-		
 		servicelocator.getConfiguration().getWriter().write(senden);
 		servicelocator.getConfiguration().getWriter().write("\n");
 		servicelocator.getConfiguration().getWriter().flush();
-		
 		view.txt1.setText(servicelocator.getConfiguration().getReader().readLine());
-		
 		servicelocator.getLogger().info("Erfolgreich");
-		
 		} catch(IOException exception) {
-			this.servicelocator.getLogger().info(exception.getMessage());}
-		
-		
-		//wenn auf Button change oder wechseln steht dann diese Methode 
-		
-		if(view.btnMulti.getText().equals("change")||view.btnMulti.getText().equals("wechseln")) {
-		String servermessage = null;
-		String pw = view.txt1.getText();
-		
-			try{
-				//Senden eines neuen Passwort
-				System.out.println("SocketTest: "+servicelocator.getConfiguration().getSocket());
-				String sende = "ChangePassword|"+salt+"|"+pw; 
-				
-				
-				servicelocator.getConfiguration().getWriter().write(sende);
-				servicelocator.getConfiguration().getWriter().write("\n");
-				servicelocator.getConfiguration().getWriter().flush();
-				
-				
-				//Empfangen der Antwort des Servers
-				servermessage = servicelocator.getConfiguration().getReader().readLine();
-				
-				view.txt1.setText(servermessage);
-				servicelocator.getLogger().info("Password changed");
-				
-				}catch(IOException e) {
-					this.servicelocator.getLogger().info("Something goes wrong by changing password");
-					e.getMessage();
-				}
-		}
-		
-		
-		//Wenn auf Button delete oder loeschen steht dann diese Methode
-		
-		if(view.btnMulti.getText().equals("delete")||view.btnMulti.getText().equals("loeschen")) {
-			this.servicelocator.getLogger().info("Button delete clicked");
-		}
-		
-		//Methode User hinzufuegen, Wenn auf Button Hinzufuegen geklickt wird
-			
-		
-			
-			
+			this.servicelocator.getLogger().info(exception.getMessage());
+			}
 		}
 		
 	
