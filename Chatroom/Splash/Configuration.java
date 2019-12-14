@@ -137,40 +137,52 @@ public class Configuration {
     	}	
 			
     }
-    public void createBufferedReader() {
+    
+    public synchronized void createBufferedReader() {
     	try{
     		reader = new BufferedReader(new InputStreamReader(this.socket.getInputStream())); 
     	}catch(Exception ex) {
     		ex.getMessage();
-    	}	
+    	}
     }
+    
+  
+
+    
+    
     public BufferedReader getReader() {
     	return this.reader;
     }
     
     
-    public void messageThread() {
+    
+    public synchronized void messageThread() {
     	// Create thread to read incoming messages
+    	
+    	
     				Runnable r = new Runnable() {
     					@Override
     					public void run() {
     						while (true) {
+    							
     							String msg = null;
     							
     							try {
-    								System.out.println("Thread fast gestartet");
+    						
     								msg = reader.readLine();
+    							
     							} catch (IOException e) {
     								// TODO Auto-generated catch block
     								e.printStackTrace();
     							}
-    							Message.addnewMessage(msg);
+    							System.out.println(Message.addnewMessage(msg));
     								}
     							}
     						};
+    						
     						Thread t = new Thread(r);
     						t.start();
-    						System.out.println("Thread gestartet");
+    						
     }
     
 }

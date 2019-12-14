@@ -50,7 +50,7 @@ public class Login_Controller {
 				servicelocator.getConfiguration().getWriter().write("\n");
 				servicelocator.getConfiguration().getWriter().flush();
 				
-				
+				//Hier muss Nachricht aus Message geholt werden
 				servermessage = servicelocator.getConfiguration().getReader().readLine();
 				this.salt = servermessage.substring(12,44);
 				view.status.setText(servermessage);

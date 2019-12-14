@@ -124,6 +124,7 @@ public class JavaFX_App_Template extends Application {
    
 
 	public void startApp(String salt) throws IOException {
+		
         Stage appStage = new Stage();
         
         // Initialize the application MVC components. Note that these components

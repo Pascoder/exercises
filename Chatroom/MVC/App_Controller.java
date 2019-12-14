@@ -29,7 +29,7 @@ import javafx.stage.WindowEvent;
 public class App_Controller extends Controller<App_Model, App_View> {
     ServiceLocator servicelocator;
     private String salt;
-   
+   private  String acutalchatroom = null;
  
 
     public App_Controller(App_Model model, App_View view, String salt) throws IOException {
@@ -211,6 +211,7 @@ public void createChatroom(Event e) {
 			break;
 		case 2:
 			senden = "JoinChatroom|"+salt+"|"+text2+"|"+ text1;
+			this.acutalchatroom = text2;
 			break;
 		case 3:
 			senden = "ChangePassword|"+salt+"|"+text1;
@@ -220,6 +221,7 @@ public void createChatroom(Event e) {
 			break;
 		case 5:
 			senden = "LeaveChatroom|"+salt+"|"+text2+"|"+ text1;
+			this.acutalchatroom =null;
 			break;
 		}
 		servicelocator.getConfiguration().getWriter().write(senden);
@@ -238,8 +240,8 @@ public void createChatroom(Event e) {
 	private void loadChatrooms() {
 		String msg;
 		try{
-			//Senden eines neuen Passwort
-			System.out.println("SocketTest: "+servicelocator.getConfiguration().getSocket());
+			
+			
 			String loadChats = "ListChatrooms|"+salt; 
 			servicelocator.getConfiguration().getWriter().write(loadChats);
 			servicelocator.getConfiguration().getWriter().write("\n");
@@ -258,8 +260,27 @@ public void createChatroom(Event e) {
 				exception.getMessage();
 			}
 			}
-	private void senden(Event senden) {
-		//SendMessage|4FA4563A5C2FFD1E703B49190DC348BD|CatChat|Hello, all cat people! 
+	
+	
+	private void senden(Event ev) {
+		
+		if(acutalchatroom==null) {
+		servicelocator.getLogger().info("zuerst Chatroom wählen");
+		}else {
+		String message = view.txtChatMessage.getText();
+		
+		try {
+		String send = "SendMessage|"+this.salt+"|"+this.acutalchatroom+"|"+message;
+		servicelocator.getConfiguration().getWriter().write(send);
+		servicelocator.getConfiguration().getWriter().write("\n");
+		servicelocator.getConfiguration().getWriter().flush();
+		servicelocator.getLogger().info("gesendet");
+		
+		}catch(Exception ex) {
+			ex.printStackTrace();
+			servicelocator.getLogger().info("problem beim senden");
+		}
+		}
 	}
 	}
     
