@@ -16,6 +16,7 @@ public class Login_Controller {
 	private  String salt;
 	
 	
+	
 	public Login_Controller(Login_Model model, Login_View view, final JavaFX_App_Template javaFX_App_Template) {
 		this.model = model;
 		this.view = view;
@@ -42,7 +43,7 @@ public class Login_Controller {
 		if(username.length() <3 || password.length() <3) {
 			view.status.setText("Please enter password and Username with more then 3 character");	
 		}else {
-			//Pr�fen ob das Login auf dem Server existiert
+			//Pruefen ob das Login auf dem Server existiert
 			
 				String senden = "Login|"+username+"|"+password;
 				
@@ -51,7 +52,8 @@ public class Login_Controller {
 				servicelocator.getConfiguration().getWriter().flush();
 				
 				//Hier muss Nachricht aus Message geholt werden
-				servermessage = servicelocator.getConfiguration().getReader().readLine();
+				//Fehler ist hier!!
+				servermessage = servicelocator.getConfiguration().getInput();
 				this.salt = servermessage.substring(12,44);
 				view.status.setText(servermessage);
 			
@@ -60,6 +62,7 @@ public class Login_Controller {
 			if(servermessage.substring(7,11).equals(ok)) {
 				template.startApp(this.salt);
 				view.stage.close();
+
 			}else {
 				
 				view.status.setText("wrong password or Username");
@@ -88,7 +91,7 @@ public class Login_Controller {
 			
 		}
 		else {
-			//Hier werden DAten f�r das Login an Server geschickt
+			//Hier werden DAten fuer das Login an Server geschickt
 			try{
 			//Senden einer neuen Loggin Datei  an Server
 			String senden = "CreateLogin|"+username+"|"+password;
@@ -113,6 +116,8 @@ public class Login_Controller {
 	public String getSalt() {
 		return this.salt;
 	}
+
+	
 	
 
 }

@@ -31,6 +31,7 @@ public class Splash_Controller extends Controller<Splash_Model, Splash_View> {
                     if (newValue == Worker.State.SUCCEEDED)
                     	
                     	javaFX_App_Template.startLoginMenu();
+                    
                     	
                         
                 });

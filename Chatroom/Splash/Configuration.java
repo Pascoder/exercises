@@ -38,6 +38,7 @@ public class Configuration {
     private Socket socket = null;
     private BufferedWriter writer;
     private BufferedReader reader;
+
     
 
     public Configuration() {
@@ -107,56 +108,41 @@ public class Configuration {
         localOptions.setProperty(name, value);
     }
     
+    
+    
+    
+    //Hier wird Socket erstellt
     public void connectToServer() throws IOException {
-		//Hier wird Socket erstellt
-		try {
-			this.socket = new Socket("147.86.8.31", 50001);
-				
-				
+		try { this.socket = new Socket("147.86.8.31", 50001);		
 			} catch (UnknownHostException e) {
 				e.printStackTrace();
-			
 			} catch (IOException e) {
-				e.printStackTrace();
-				
-			}
-			
-			
+				e.printStackTrace();	
+			}	
 		}
-    public Socket getSocket() {
-    	return this.socket;
-    }
-    public BufferedWriter getWriter() {
-    	return this.writer;
-    }
-    public void createBufferedWriter() {
+    
+    
+    
+      public void createBufferedWriter() {
     	try{
-    		writer = new BufferedWriter(new OutputStreamWriter(this.socket.getOutputStream())); 
+    		this.writer = new BufferedWriter(new OutputStreamWriter(this.socket.getOutputStream())); 
     	}catch(Exception ex) {
     		ex.getMessage();
     	}	
-			
     }
     
-    public synchronized void createBufferedReader() {
+    
+      
+    public void createBufferedReader() {
     	try{
-    		reader = new BufferedReader(new InputStreamReader(this.socket.getInputStream())); 
+    		this.reader = new BufferedReader(new InputStreamReader(this.socket.getInputStream())); 
     	}catch(Exception ex) {
     		ex.getMessage();
     	}
-    }
-    
-  
-
-    
-    
-    public BufferedReader getReader() {
-    	return this.reader;
-    }
-    
-    
-    
-    public synchronized void messageThread() {
+    }  
+      
+      
+    public void messageThread() {
     	// Create thread to read incoming messages
     	
     	
@@ -164,25 +150,42 @@ public class Configuration {
     					@Override
     					public void run() {
     						while (true) {
-    							
     							String msg = null;
-    							
-    							try {
-    						
-    								msg = reader.readLine();
-    							
-    							} catch (IOException e) {
-    								// TODO Auto-generated catch block
-    								e.printStackTrace();
-    							}
+    							msg = getInput();
     							System.out.println(Message.addnewMessage(msg));
     								}
     							}
     						};
     						
     						Thread t = new Thread(r);
-    						t.start();
-    						
+    						t.start();						
+    }  
+      
+    
+    public synchronized String getInput() {
+    	String input = null;
+    	try {
+    		input = reader.readLine();
+    	} catch (IOException e) {
+    		e.printStackTrace();
+    	
+    	}
+    	return input;
     }
+    
+    public Socket getSocket() {
+    	return this.socket;
+    }
+    public BufferedWriter getWriter() {
+    	return this.writer;
+    }
+ 
+    public BufferedReader getReader() {
+    	return this.reader;
+    }
+    
+    
+    
+    
     
 }

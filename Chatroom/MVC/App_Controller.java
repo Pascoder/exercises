@@ -84,6 +84,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
         
         //Chatrooms laden
         loadChatrooms();
+        
       //             !!!Fehler brauchen wir momentan noch nicht evt beim senden und empfangen von nachrichten!!!! 
       //Thread starten um Nachrichten zu empfangen
         
@@ -265,7 +266,7 @@ public void createChatroom(Event e) {
 	private void senden(Event ev) {
 		
 		if(acutalchatroom==null) {
-		servicelocator.getLogger().info("zuerst Chatroom wählen");
+		servicelocator.getLogger().info("zuerst Chatroom waehlen");
 		}else {
 		String message = view.txtChatMessage.getText();
 		
