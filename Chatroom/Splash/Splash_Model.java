@@ -58,6 +58,7 @@ public class Splash_Model extends Model {
             serviceLocator.getConfiguration().connectToServer();
             serviceLocator.getConfiguration().createBufferedReader();
             serviceLocator.getConfiguration().createBufferedWriter();
+            serviceLocator.getConfiguration().messageThread();
          
 
             return null;

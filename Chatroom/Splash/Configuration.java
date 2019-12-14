@@ -109,8 +109,10 @@ public class Configuration {
     
     public void connectToServer() throws IOException {
 		//Hier wird Socket erstellt
-			try {
-				this.socket = new Socket("147.86.8.31", 50001);
+		try {
+			this.socket = new Socket("147.86.8.31", 50001);
+				
+				
 			} catch (UnknownHostException e) {
 				e.printStackTrace();
 			
@@ -144,6 +146,31 @@ public class Configuration {
     }
     public BufferedReader getReader() {
     	return this.reader;
+    }
+    
+    
+    public void messageThread() {
+    	// Create thread to read incoming messages
+    				Runnable r = new Runnable() {
+    					@Override
+    					public void run() {
+    						while (true) {
+    							String msg = null;
+    							
+    							try {
+    								System.out.println("Thread fast gestartet");
+    								msg = reader.readLine();
+    							} catch (IOException e) {
+    								// TODO Auto-generated catch block
+    								e.printStackTrace();
+    							}
+    							Message.addnewMessage(msg);
+    								}
+    							}
+    						};
+    						Thread t = new Thread(r);
+    						t.start();
+    						System.out.println("Thread gestartet");
     }
     
 }

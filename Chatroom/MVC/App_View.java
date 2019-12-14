@@ -2,10 +2,6 @@ package MVC;
 
 import java.util.Locale;
 import java.util.logging.Logger;
-
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-
 import Splash.ServiceLocator;
 import MVC.View;
 import Splash.Translator;
