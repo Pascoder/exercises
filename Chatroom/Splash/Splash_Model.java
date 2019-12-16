@@ -45,6 +45,7 @@ public class Splash_Model extends Model {
 
             serviceLocator.setConfiguration(new Configuration());
             this.updateProgress(4,  6);
+            
 
             String language = serviceLocator.getConfiguration().getOption("Language");
             serviceLocator.setTranslator(new Translator(language));
@@ -59,7 +60,7 @@ public class Splash_Model extends Model {
             serviceLocator.getConfiguration().createBufferedReader();
             serviceLocator.getConfiguration().createBufferedWriter();
             
-//          serviceLocator.getConfiguration().messageThread();
+           // serviceLocator.getConfiguration().messageThread();
          
 
             return null;

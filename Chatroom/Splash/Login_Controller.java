@@ -53,14 +53,19 @@ public class Login_Controller {
 				
 				//Hier muss Nachricht aus Message geholt werden
 				//Fehler ist hier!!
-				servermessage = servicelocator.getConfiguration().getInput();
-				this.salt = servermessage.substring(12,44);
-				view.status.setText(servermessage);
-			
-				String ok = "true";
+				 Integer i = 0;
+                 while (i <= 10000000) {
+                     i++;
+                 }
+
+               
+                System.out.println("Login: "+servicelocator.getConfiguration().getCorrectLogin());
+
+				
+				
+			if(servicelocator.getConfiguration().getCorrectLogin()==true) {
 				servicelocator.getLogger().info("Login succsesfull");
-			if(servermessage.substring(7,11).equals(ok)) {
-				template.startApp(this.salt);
+				template.startApp();
 				view.stage.close();
 
 			}else {
@@ -69,6 +74,7 @@ public class Login_Controller {
 			}
 		}
 		}catch (Exception ex) {
+			
 			view.status.setText("Account don't exist");
 		}
 	}

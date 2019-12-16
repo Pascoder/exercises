@@ -81,10 +81,10 @@ public class JavaFX_App_Template extends Application {
         Splash_Model splashModel = new Splash_Model();
         splashView = new Splash_View(primaryStage, splashModel);
         new Splash_Controller(this, splashModel, splashView);
-        splashView.start();
-
-        // Display the splash screen and begin the initialization
         splashModel.initialize();
+        splashView.start();
+        // Display the splash screen and begin the initialization
+        
         
         
     }
@@ -123,7 +123,7 @@ public class JavaFX_App_Template extends Application {
     
    
 
-	public void startApp(String salt) throws IOException {
+	public void startApp() throws IOException {
 		
         Stage appStage = new Stage();
         
@@ -132,19 +132,20 @@ public class JavaFX_App_Template extends Application {
         // resources initialized by the splash screen
         App_Model model = new App_Model();
         view = new App_View(appStage, model);
-        new App_Controller(model, view, salt);
+        new App_Controller(model, view);
 
         // Resources are now initialized
         serviceLocator = ServiceLocator.getServiceLocator();
 
         // Close the splash screen, and set the reference to null, so that all
         // Splash_XXX objects can be garbage collected
-        splashView.stop();
-        splashView = null;
         
+       splashView.stop();
+       splashView = null;
+        
+       view.start();
 
-
-        view.start();
+        
     }
     
 

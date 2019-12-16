@@ -11,9 +11,12 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.Properties;
 import java.util.logging.Logger;
+
 
 import Splash.ServiceLocator;
 
@@ -38,6 +41,10 @@ public class Configuration {
     private Socket socket = null;
     private BufferedWriter writer;
     private BufferedReader reader;
+    private String token;
+    private boolean correctLogin;
+    private ArrayList<String> chatroomArray;
+    Thread serverCommunicationThread;
 
     
 
@@ -130,48 +137,61 @@ public class Configuration {
     		ex.getMessage();
     	}	
     }
-    
-    
       
+      
+    
     public void createBufferedReader() {
-    	try{
-    		this.reader = new BufferedReader(new InputStreamReader(this.socket.getInputStream())); 
-    	}catch(Exception ex) {
-    		ex.getMessage();
-    	}
+        try {
+            BufferedReader socketIn = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+
+            serverCommunicationThread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    while (true) {
+                        try {
+                            String serverMessage = socketIn.readLine();
+                            logger.info("Received: " + serverMessage);
+                            sortMessaged(serverMessage);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            break;
+                        }
+                    }
+                }
+
+                private void sortMessaged(String serverMessages) {
+                  String [] messages = serverMessages.split("\\|");
+                    
+                    
+                    //Test
+                    for(int i = 0; i < messages.length;i++) {
+                    	System.out.println(messages[i]);
+                    }
+
+                    //check for correct Login
+                    if (messages.length == 3 && messages[0].equals("Result") && messages[1].equals("true")) {
+                        correctLogin = true;
+                        token = messages[2];
+                    }
+
+                    if (messages.length > 3 && messages[0].equals("Result") && messages[1].equals("true")) {
+                        String[] chatrooms = serverMessages.split("\\|");
+
+                        chatroomArray = new ArrayList<>();
+                        for (int i = 2; i < chatrooms.length; i++) {
+                            chatroomArray.add(chatrooms[i]);
+                        }
+                    }
+                }
+            });
+            serverCommunicationThread.setDaemon(true);
+            serverCommunicationThread.start();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }  
       
-      
-    public void messageThread() {
-    	// Create thread to read incoming messages
-    	
-    	
-    				Runnable r = new Runnable() {
-    					@Override
-    					public void run() {
-    						while (true) {
-    							String msg = null;
-    							msg = getInput();
-    							System.out.println(Message.addnewMessage(msg));
-    								}
-    							}
-    						};
-    						
-    						Thread t = new Thread(r);
-    						t.start();						
-    }  
-      
-    
-    public synchronized String getInput() {
-    	String input = null;
-    	try {
-    		input = reader.readLine();
-    	} catch (IOException e) {
-    		e.printStackTrace();
-    	
-    	}
-    	return input;
-    }
     
     public Socket getSocket() {
     	return this.socket;
@@ -184,8 +204,13 @@ public class Configuration {
     	return this.reader;
     }
     
+    public boolean getCorrectLogin() {
+    	return this.correctLogin;
+    }
     
-    
+    public String getSalt() {
+    	return this.token;
+    }
     
     
 }

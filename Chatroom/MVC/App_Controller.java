@@ -28,14 +28,14 @@ import javafx.stage.WindowEvent;
  */
 public class App_Controller extends Controller<App_Model, App_View> {
     ServiceLocator servicelocator;
-    private String salt;
+    
    private  String acutalchatroom = null;
  
 
-    public App_Controller(App_Model model, App_View view, String salt) throws IOException {
+    public App_Controller(App_Model model, App_View view) throws IOException {
         super(model, view);
        
-        this.salt = salt;
+       
      
         servicelocator = ServiceLocator.getServiceLocator();
         
@@ -84,36 +84,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
         
         //Chatrooms laden
         loadChatrooms();
-        
-      //             !!!Fehler brauchen wir momentan noch nicht evt beim senden und empfangen von nachrichten!!!! 
-      //Thread starten um Nachrichten zu empfangen
-        
-        
-       /* try (	BufferedReader socketIn = ServiceLocator.getServiceLocator().getConfiguration().getReader();
-        		BufferedWriter socketOut = ServiceLocator.getServiceLocator().getConfiguration().getWriter()) {
-			// Create thread to read incoming messages
-			Runnable r = new Runnable() {
-				@Override
-				public void run() {
-					
-					while (true) {
-						
-						String msg;
-						try {
-							msg = socketIn.readLine();
-						
-						} catch (IOException e) {
-							break;
-						}
-						if (msg == null) break; // In case the server closes the socket
-					}
-				}
-			};
-			Thread t = new Thread(r);
-			System.out.println("thread start");
-			t.start();
-			
-        }*/
+    
 		
     }
     
@@ -208,20 +179,20 @@ public void createChatroom(Event e) {
 		//0=kein Menu ausgewaehlt, 1= Chatroom erstellen, 2= Chatroom beitreten
 		switch(model.getMenuOption()){
 		case 1:
-			senden = "CreateChatroom|"+salt+"|"+text1 +"|"+"true";
+			senden = "CreateChatroom|"+servicelocator.getConfiguration().getSalt()+"|"+text1 +"|"+"true";
 			break;
 		case 2:
-			senden = "JoinChatroom|"+salt+"|"+text2+"|"+ text1;
+			senden = "JoinChatroom|"+servicelocator.getConfiguration().getSalt()+"|"+text2+"|"+ text1;
 			this.acutalchatroom = text2;
 			break;
 		case 3:
-			senden = "ChangePassword|"+salt+"|"+text1;
+			senden = "ChangePassword|"+servicelocator.getConfiguration().getSalt()+"|"+text1;
 			break;
 		case 4:	
-			senden = "DeleteLogin|"+salt+"|"+text1;
+			senden = "DeleteLogin|"+servicelocator.getConfiguration().getSalt()+"|"+text1;
 			break;
 		case 5:
-			senden = "LeaveChatroom|"+salt+"|"+text2+"|"+ text1;
+			senden = "LeaveChatroom|"+servicelocator.getConfiguration().getSalt()+"|"+text2+"|"+ text1;
 			this.acutalchatroom =null;
 			break;
 		}
@@ -243,7 +214,7 @@ public void createChatroom(Event e) {
 		try{
 			
 			
-			String loadChats = "ListChatrooms|"+salt; 
+			String loadChats = "ListChatrooms|"+servicelocator.getConfiguration().getSalt(); 
 			servicelocator.getConfiguration().getWriter().write(loadChats);
 			servicelocator.getConfiguration().getWriter().write("\n");
 			servicelocator.getConfiguration().getWriter().flush();
@@ -271,7 +242,7 @@ public void createChatroom(Event e) {
 		String message = view.txtChatMessage.getText();
 		
 		try {
-		String send = "SendMessage|"+this.salt+"|"+this.acutalchatroom+"|"+message;
+		String send = "SendMessage|"+this.servicelocator.getConfiguration().getSalt()+"|"+this.acutalchatroom+"|"+message;
 		servicelocator.getConfiguration().getWriter().write(send);
 		servicelocator.getConfiguration().getWriter().write("\n");
 		servicelocator.getConfiguration().getWriter().flush();
