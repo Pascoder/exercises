@@ -215,6 +215,12 @@ public void createChatroom(Event e) {
 		servicelocator.getConfiguration().getWriter().write(senden);
 		servicelocator.getConfiguration().getWriter().write("\n");
 		servicelocator.getConfiguration().getWriter().flush();
+		
+		Integer i = 0;
+        while (i <= 15000000) { //<--muss mit einer Property ersetzt werden
+            i++;
+        }
+        
 		view.txt1.setText(servicelocator.getConfiguration().getReader().readLine());
 		servicelocator.getLogger().info("Erfolgreich");
 		} catch(IOException exception) {
@@ -244,7 +250,7 @@ public void createChatroom(Event e) {
 			}
 		
 		Integer i = 0;
-        while (i <= 10000000) { //<--muss mit einer Property ersetzt werden
+        while (i <= 15000000) { //<--muss mit einer Property ersetzt werden
             i++;
         }
 			

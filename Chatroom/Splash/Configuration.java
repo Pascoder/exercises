@@ -139,7 +139,7 @@ public class Configuration {
     	}	
     }
       
-      
+      private int messagecounter = 0;
     
     public void createBufferedReader() {
         try {
@@ -159,8 +159,10 @@ public class Configuration {
                         }
                     }
                 }
-
+                boolean chatroomscreated = false;
+                
                 private void sortMessaged(String serverMessages) {
+                	messagecounter++;
                   String [] messages = serverMessages.split("\\|");
                   
                     
@@ -168,14 +170,19 @@ public class Configuration {
                     for(int i = 0; i < messages.length;i++) {
                     	System.out.println(messages[i]);
                     }
-
-                    //check for correct Login
+                    
+                    
+                    //nur Login hat 3 Zeichen hat Result|true|4FA4563A5C2FFD1E703B49190DC348BD also ist create login ausgeschlossen
                     if (messages.length == 3 && messages[0].equals("Result") && messages[1].equals("true")) {
                         correctLogin = true;
                         token = messages[2];
                     }
                     
-                    if (messages.length > 3 && messages[0].equals("Result") && messages[1].equals("true")) {
+                    if(messages.length == 2 && messages[0].equals("Result") && messages[1].equals("true")) {
+                    	
+                    }
+                    //Nachrichten können nur 1 mal hier rein weil boolean done nur beim 1. mal false ist also nur für Chatrooms laden nutzbar
+                    if (messages.length > 3 && messages[0].equals("Result") && messages[1].equals("true") && chatroomscreated == false) {
                         String[] chatrooms = serverMessages.split("\\|");
 
                         chatroomArray = new ArrayList<>();
@@ -184,8 +191,13 @@ public class Configuration {
                             chatroomArray.add(chatrooms[i]);
                             
                         }
-                        
+                        done = true;
                     }
+                    //Hier alle anderen nachrichten
+                    
+                    
+                    //Hier Messages
+                
                 }
             });
             serverCommunicationThread.setDaemon(true);

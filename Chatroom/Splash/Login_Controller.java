@@ -52,8 +52,9 @@ public class Login_Controller {
 				servicelocator.getConfiguration().getWriter().flush();
 				
 				
+				
 				 Integer i = 0;
-                 while (i <= 10000000) {//<--muss mit einer Property ersetzt werden
+                 while (i <= 20000000) {//<--muss mit einer Property ersetzt werden
                      i++;
                  }
 
