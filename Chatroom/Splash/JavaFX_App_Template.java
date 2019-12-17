@@ -131,8 +131,11 @@ public class JavaFX_App_Template extends Application {
         // can only be initialized now, because they may depend on the
         // resources initialized by the splash screen
         App_Model model = new App_Model();
+        System.out.println("Model geladen");
         view = new App_View(appStage, model);
+        System.out.println("View geladen");
         new App_Controller(model, view);
+        System.out.println("Controller geladen");
 
         // Resources are now initialized
         serviceLocator = ServiceLocator.getServiceLocator();

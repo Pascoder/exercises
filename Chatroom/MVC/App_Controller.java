@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 
 import MVC.Model;
 import javafx.application.Platform;
@@ -84,11 +85,26 @@ public class App_Controller extends Controller<App_Model, App_View> {
         
         //Chatrooms laden
         loadChatrooms();
-    
+        empfangenChatrooms();
 		
     }
     
    
+
+	private void empfangenChatrooms() {
+		ArrayList <String> msg;
+		msg = servicelocator.getConfiguration().getChatrooms();
+		
+		
+		
+		for(int i= 0; i<msg.size(); i++) {
+			view.addChatbox(msg.get(i));
+			
+		}
+		
+	}
+
+
 
 	public void buttonClick() {     
     }
@@ -209,8 +225,8 @@ public void createChatroom(Event e) {
 	
     
 	
-	private void loadChatrooms() {
-		String msg;
+	private void loadChatrooms()  {
+		
 		try{
 			
 			
@@ -219,18 +235,21 @@ public void createChatroom(Event e) {
 			servicelocator.getConfiguration().getWriter().write("\n");
 			servicelocator.getConfiguration().getWriter().flush();
 			//Empfangen der Antwort des Servers
-			msg = servicelocator.getConfiguration().getReader().readLine();
-			System.out.println(msg);
-			String [] chatrooms = msg.split("\\|");
-			for (String s : chatrooms) System.out.println(s);
-			for(int i= 2; i<chatrooms.length; i++) {
-				view.addChatbox(chatrooms[i]);
-			}
+			
+			
 			servicelocator.getLogger().info("Chatrooms loaded");
 			}catch(IOException exception) {
 				this.servicelocator.getLogger().info("Something goes wrong by loading chatrooms");
 				exception.getMessage();
 			}
+		
+		Integer i = 0;
+        while (i <= 10000000) { //<--muss mit einer Property ersetzt werden
+            i++;
+        }
+			
+			
+		
 			}
 	
 	

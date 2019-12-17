@@ -19,6 +19,7 @@ import java.util.logging.Logger;
 
 
 import Splash.ServiceLocator;
+import javafx.beans.property.BooleanProperty;
 
 /**
  * Copyright 2015, FHNW, Prof. Dr. Brad Richards. All rights reserved. This code
@@ -45,7 +46,7 @@ public class Configuration {
     private boolean correctLogin;
     private ArrayList<String> chatroomArray;
     Thread serverCommunicationThread;
-
+ 
     
 
     public Configuration() {
@@ -161,7 +162,7 @@ public class Configuration {
 
                 private void sortMessaged(String serverMessages) {
                   String [] messages = serverMessages.split("\\|");
-                    
+                  
                     
                     //Test
                     for(int i = 0; i < messages.length;i++) {
@@ -173,14 +174,17 @@ public class Configuration {
                         correctLogin = true;
                         token = messages[2];
                     }
-
+                    
                     if (messages.length > 3 && messages[0].equals("Result") && messages[1].equals("true")) {
                         String[] chatrooms = serverMessages.split("\\|");
 
                         chatroomArray = new ArrayList<>();
+                        
                         for (int i = 2; i < chatrooms.length; i++) {
                             chatroomArray.add(chatrooms[i]);
+                            
                         }
+                        
                     }
                 }
             });
@@ -211,6 +215,10 @@ public class Configuration {
     public String getSalt() {
     	return this.token;
     }
+    public ArrayList<String> getChatrooms(){
+    	return this.chatroomArray;
+    }
+   
     
     
 }

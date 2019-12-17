@@ -51,10 +51,9 @@ public class Login_Controller {
 				servicelocator.getConfiguration().getWriter().write("\n");
 				servicelocator.getConfiguration().getWriter().flush();
 				
-				//Hier muss Nachricht aus Message geholt werden
-				//Fehler ist hier!!
+				
 				 Integer i = 0;
-                 while (i <= 10000000) {
+                 while (i <= 10000000) {//<--muss mit einer Property ersetzt werden
                      i++;
                  }
 
@@ -64,9 +63,13 @@ public class Login_Controller {
 				
 				
 			if(servicelocator.getConfiguration().getCorrectLogin()==true) {
+				System.out.println("In Login reingekommen");
 				servicelocator.getLogger().info("Login succsesfull");
+				System.out.println("Service Locator aufgeruffen");
 				template.startApp();
+				System.out.println("App gestartet");
 				view.stage.close();
+				System.out.println("Login Fenster geschlossen");
 
 			}else {
 				
