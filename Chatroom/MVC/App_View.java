@@ -139,7 +139,6 @@ public class App_View extends View<App_Model> {
         middleBox = new HBox();
         chatRoomBox = new VBox();
         textArea = new TextArea();
-        textArea.setText("Hier kommen die Chats rein....");
         textArea.setMinSize(100, 100);
         
         

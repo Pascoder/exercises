@@ -48,7 +48,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
         view.createChatroom.setOnAction(this::createChatroom); //Menu Create Chatroom
         view.sendbutton.setOnAction(this::senden);
         view.leavechatroom.setOnAction(this::leavechatroom);
-        view.sendbutton.setOnAction(this::openChatBox);
+      //  view.sendbutton.setOnAction(this::openChatBox);
         servicelocator.getConfiguration().getNachrichtProperty().addListener((observable, old, neu) -> updateGUI());
         
         view.txt1.setDisable(true);
@@ -56,12 +56,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
 		view.lblMulti.setDisable(true);
 		view.btnMulti.setDisable(true);
 
-        view.sendbutton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                buttonClick();
-            }
-        });
+       
         
         
         
@@ -102,17 +97,17 @@ public class App_Controller extends Controller<App_Model, App_View> {
 		chatmessage+=messages.get(i)+"\n";
 		
 		}
-		view.txtChatMessage.setText(chatmessage);//muss noch geändert werden auf TextArea
+		view.textArea.appendText(chatmessage);//muss noch geändert werden auf TextArea
 		return null;
 	}
 
 
 
 
-private void openChatBox(Event e) {
+/*private void openChatBox(Event e) {
 	   
 	   
-   }
+   }*/
 
    
    
@@ -132,8 +127,7 @@ private void openChatBox(Event e) {
 
 
 
-	public void buttonClick() {     
-    }
+
 	
 	
 	
@@ -301,6 +295,9 @@ public void createChatroom(Event e) {
 		servicelocator.getConfiguration().getWriter().write("\n");
 		servicelocator.getConfiguration().getWriter().flush();
 		servicelocator.getLogger().info("gesendet");
+		view.textArea.appendText(message+"\n");
+		view.txtChatMessage.clear();
+		
 		
 		}catch(Exception ex) {
 			ex.printStackTrace();
