@@ -30,6 +30,8 @@ public class JavaFX_App_Template extends Application {
     private App_View view;
     protected Stage primary;
     private Login_View login_view;
+   
+    
      
    
     
@@ -105,12 +107,13 @@ public class JavaFX_App_Template extends Application {
     	
     	splashView.stop();
     	
+    	
     	primary = new Stage();
     	Login_Model model = new Login_Model();
 		login_view = new Login_View(primary, model);
 		Login_Controller controller = new Login_Controller(model, login_view, mainProgram);
 		
-		
+	
 		
 		/* Mit dem Loggin Button ist es nun m�glich in den Messenger zu kommen, muss angepasst werden
 		 * wenn dies so gemacht wird wird im controller setOnAction von btnlogin �bersprungen
@@ -178,6 +181,7 @@ public class JavaFX_App_Template extends Application {
     protected static JavaFX_App_Template getMainProgram() {
         return mainProgram;
     }
+   
    
     
 

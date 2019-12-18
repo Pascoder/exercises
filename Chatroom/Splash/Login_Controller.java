@@ -64,14 +64,14 @@ public class Login_Controller {
 				
 				
 			if(servicelocator.getConfiguration().getCorrectLogin()==true) {
-				System.out.println("In Login reingekommen");
+				
 				servicelocator.getLogger().info("Login succsesfull");
-				System.out.println("Service Locator aufgeruffen");
+			
 				template.startApp();
-				System.out.println("App gestartet");
+				
 				view.stage.close();
-				System.out.println("Login Fenster geschlossen");
-
+				servicelocator.getConfiguration().setAccountCreated(true);
+				
 			}else {
 				
 				view.status.setText("wrong password or Username");
@@ -110,8 +110,19 @@ public class Login_Controller {
 			servicelocator.getConfiguration().getWriter().write("\n");
 			servicelocator.getConfiguration().getWriter().flush();
 			
-			String servermessage = servicelocator.getConfiguration().getReader().readLine();
+			
+			 Integer i = 0;
+             while (i <= 20000000) {//<--muss mit einer Property ersetzt werden
+                 i++;
+             }
+             
+             
+			boolean servermessage = servicelocator.getConfiguration().accountCreated();
+			if(servermessage==true) {
 			servicelocator.getLogger().info("createLogin succsessfull");
+			}else {
+			servicelocator.getLogger().info("login not created");
+			}
 			}catch(Exception exeption) {
 				this.servicelocator.getLogger().info("Something goes wrong by Creating your login");
 			}
@@ -126,6 +137,7 @@ public class Login_Controller {
 	public String getSalt() {
 		return this.salt;
 	}
+	
 
 	
 	

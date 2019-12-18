@@ -45,7 +45,9 @@ public class Configuration {
     private String token;
     private boolean correctLogin;
     private ArrayList<String> chatroomArray;
+    private boolean accountcreated;
     Thread serverCommunicationThread;
+    JavaFX_App_Template template;
  
     
 
@@ -159,11 +161,12 @@ public class Configuration {
                         }
                     }
                 }
-                boolean chatroomscreated = false;
+                
+               
                 
                 private void sortMessaged(String serverMessages) {
                 	messagecounter++;
-                  String [] messages = serverMessages.split("\\|");
+                  String [] messages = serverMessages.split("\\|"); //Jede nachricht wird nach aufteilung in Message typ gelöscht
                   
                     
                     //Test
@@ -173,16 +176,18 @@ public class Configuration {
                     
                     
                     //nur Login hat 3 Zeichen hat Result|true|4FA4563A5C2FFD1E703B49190DC348BD also ist create login ausgeschlossen
-                    if (messages.length == 3 && messages[0].equals("Result") && messages[1].equals("true")) {
+                    if (messages.length == 3 && messages[0].equals("Result") && messages[1].equals("true") && correctLogin ==false) {
                         correctLogin = true;
                         token = messages[2];
                     }
+                    //Create Account Message --> account created wird im Login Controller auf true gesetzt falls schon in die app gewechselt wurde somit können spätere nachrichten nicht mehr hier gespeichert werden
+                    System.out.println(accountcreated);
+                    if(messages.length == 2 && messages[0].equals("Result") && messages[1].equals("true")&&accountcreated==false) {
+                    	accountcreated = true;
                     
-                    if(messages.length == 2 && messages[0].equals("Result") && messages[1].equals("true")) {
-                    	
                     }
                     //Nachrichten können nur 1 mal hier rein weil boolean done nur beim 1. mal false ist also nur für Chatrooms laden nutzbar
-                    if (messages.length > 3 && messages[0].equals("Result") && messages[1].equals("true") && chatroomscreated == false) {
+                    if (messages.length > 3 && messages[0].equals("Result") && messages[1].equals("true")) {
                         String[] chatrooms = serverMessages.split("\\|");
 
                         chatroomArray = new ArrayList<>();
@@ -191,7 +196,7 @@ public class Configuration {
                             chatroomArray.add(chatrooms[i]);
                             
                         }
-                        done = true;
+                       
                     }
                     //Hier alle anderen nachrichten
                     
@@ -229,6 +234,12 @@ public class Configuration {
     }
     public ArrayList<String> getChatrooms(){
     	return this.chatroomArray;
+    }
+    public void setAccountCreated(boolean created) {
+    	this.accountcreated=created;
+    }
+    public boolean accountCreated() {
+    	return this.accountcreated;
     }
    
     
