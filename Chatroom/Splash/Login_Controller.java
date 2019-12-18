@@ -59,9 +59,7 @@ public class Login_Controller {
                  }
 
                
-                System.out.println("Login: "+servicelocator.getConfiguration().getCorrectLogin());
-
-				
+              
 				
 			if(servicelocator.getConfiguration().getCorrectLogin()==true) {
 				
@@ -70,6 +68,7 @@ public class Login_Controller {
 				template.startApp();
 				
 				view.stage.close();
+				//Hier wird AccountCreated auf true gesetzt nun kann in Sort Message (Configurator) keine Nachricht mehr für den createaccount empfangen werden
 				servicelocator.getConfiguration().setAccountCreated(true);
 				
 			}else {

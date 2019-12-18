@@ -49,6 +49,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
         view.sendbutton.setOnAction(this::senden);
         view.leavechatroom.setOnAction(this::leavechatroom);
         view.sendbutton.setOnAction(this::openChatBox);
+        servicelocator.getConfiguration().getNachrichtProperty().addListener((observable, old, neu) -> updateGUI());
         
         view.txt1.setDisable(true);
 		view.txt2.setDisable(true);
@@ -92,8 +93,23 @@ public class App_Controller extends Controller<App_Model, App_View> {
     
     
     
-    
-   private void openChatBox(Event e) {
+    //wird von Property ausgelöst
+   private Object updateGUI() {
+	   servicelocator.getLogger().info("GUI wurde aktualisiert nachricht empfangen");
+		ArrayList<String> messages = servicelocator.getConfiguration().getRecivedMessages();
+		String chatmessage = null;
+		for(int i = 0; i<messages.size();i++) {
+		chatmessage+=messages.get(i)+"\n";
+		
+		}
+		view.txtChatMessage.setText(chatmessage);//muss noch geändert werden auf TextArea
+		return null;
+	}
+
+
+
+
+private void openChatBox(Event e) {
 	   
 	   
    }
@@ -231,8 +247,11 @@ public void createChatroom(Event e) {
             i++;
         }
         
-		view.txt1.setText(servicelocator.getConfiguration().getReader().readLine());
+		if(servicelocator.getConfiguration().getOthers()==true) {
 		servicelocator.getLogger().info("Erfolgreich");
+		}else {
+		servicelocator.getLogger().info("OptionStart: "+model.getMenuOption()+" ist gescheitert");
+		}
 		} catch(IOException exception) {
 			this.servicelocator.getLogger().info(exception.getMessage());
 			}
@@ -272,7 +291,7 @@ public void createChatroom(Event e) {
 	private void senden(Event ev) {
 		
 		if(acutalchatroom==null) {
-		servicelocator.getLogger().info("zuerst Chatroom waehlen");
+		view.txtChatMessage.setText("Zuerst einem Chatroom beitreten");
 		}else {
 		String message = view.txtChatMessage.getText();
 		

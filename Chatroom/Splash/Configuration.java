@@ -1,4 +1,4 @@
-package Splash;
+ package Splash;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -20,6 +20,8 @@ import java.util.logging.Logger;
 
 import Splash.ServiceLocator;
 import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
 
 /**
  * Copyright 2015, FHNW, Prof. Dr. Brad Richards. All rights reserved. This code
@@ -48,7 +50,11 @@ public class Configuration {
     private boolean accountcreated;
     Thread serverCommunicationThread;
     JavaFX_App_Template template;
- 
+    private boolean others;
+    
+    //Message
+    private ArrayList<String> recivedmessages;
+    private SimpleBooleanProperty nachricht = new SimpleBooleanProperty(); //wenn neue Nachricht gui updaten
     
 
     public Configuration() {
@@ -171,7 +177,7 @@ public class Configuration {
                     
                     //Test
                     for(int i = 0; i < messages.length;i++) {
-                    	System.out.println(messages[i]);
+                    	System.out.println("Server Nachricht"+messagecounter+" :"+messages[i]);
                     }
                     
                     
@@ -181,11 +187,19 @@ public class Configuration {
                         token = messages[2];
                     }
                     //Create Account Message --> account created wird im Login Controller auf true gesetzt falls schon in die app gewechselt wurde somit kï¿½nnen spï¿½tere nachrichten nicht mehr hier gespeichert werden
-                    System.out.println(accountcreated);
+                  
                     if(messages.length == 2 && messages[0].equals("Result") && messages[1].equals("true")&&accountcreated==false) {
                     	accountcreated = true;
                     
-                    }
+                    }else {
+                    	others = false;//<-- jedes mal wenn eine 2 Stellige nachricht rein kommt wird zuerst others auf false gesetzt um ein korrektes ergebnis zu haben für jeweilige Anfrage
+                     //Wenn Account schon erstellt wurde oder sich das Programm nicht mehr im Login Menu befindet gehen spätere nachrichten hier ein
+                    if(messages.length == 2 && messages[0].equals("Result") && messages[1].equals("true")) {
+                        others = true;
+                        
+                        }
+                    	
+                        }
                     //Nachrichten koennen nur 1 mal hier rein weil boolean done nur beim 1. mal false ist also nur fuer Chatrooms laden nutzbar
                     if (messages.length > 3 && messages[0].equals("Result") && messages[1].equals("true")) {
                         String[] chatrooms = serverMessages.split("\\|");
@@ -198,10 +212,16 @@ public class Configuration {
                         }
                        
                     }
-                    //Hier alle anderen nachrichten
-                    
-                    
-                    //Hier Messages
+                    //Hier werden alle Nachrichten aus dem Chat gespeichert
+                    if(messages.length > 1 && messages[0].equals("MessageText")) {
+                    	for (int i = 2; i < messages.length; i++) {
+                    		String sentfrom = messages[1];
+                    		String chat = messages[2];
+                    		recivedmessages.add(sentfrom+"|"+chat+": "+messages[i]);
+                            
+                        }
+                    	setNachrichtProperty(true);
+                    }
                 
                 }
             });
@@ -241,6 +261,19 @@ public class Configuration {
     public boolean accountCreated() {
     	return this.accountcreated;
     }
+    public boolean getOthers() {
+    	return this.others;
+    }
+    public void setNachrichtProperty(boolean newValue) {
+    	this.nachricht.set(newValue);
+    }
+    public SimpleBooleanProperty getNachrichtProperty() {
+    	return this.nachricht;
+    }
+    public ArrayList<String> getRecivedMessages(){
+    	return this.recivedmessages;
+    }
+    
    
     
     

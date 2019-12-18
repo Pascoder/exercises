@@ -14,7 +14,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -52,7 +52,8 @@ public class App_View extends View<App_Model> {
 	Label txtChatArea;
 	VBox chatRoomBox;
 	HBox middleBox;
-	Label textArea;
+	
+	TextArea textArea;
 	
 	
     
@@ -108,7 +109,7 @@ public class App_View extends View<App_Model> {
 	    
 	   //Menu 
 		GridPane root = new GridPane();
-		root.add(menuBar, 0, 0);
+		root.add(menuBar, 0, 0,3,1);
 		
 		//Top
 	
@@ -130,14 +131,14 @@ public class App_View extends View<App_Model> {
         
 		HBox top = new HBox(lblMulti, txt1,txt2, btnMulti);
 		top.getStyleClass().add("hbox"); 
-        root.add(top, 0, 1);
+        root.add(top, 0, 1,3,1);
         
         //Message Box
         
         txtChatArea = new Label();
         middleBox = new HBox();
         chatRoomBox = new VBox();
-        textArea = new Label();
+        textArea = new TextArea();
         textArea.setText("Hier kommen die Chats rein....");
         textArea.setMinSize(100, 100);
         
@@ -164,7 +165,7 @@ public class App_View extends View<App_Model> {
         sendbutton.setMinSize(Button.USE_PREF_SIZE, Button.USE_PREF_SIZE);
         HBox bottom = new HBox(txtChatMessage, sendbutton);
         bottom.getStyleClass().add("hbox");
-        root.add(bottom, 0, 3);
+        root.add(bottom, 0, 3,3,1);
         
         
         
