@@ -49,8 +49,10 @@ public class App_View extends View<App_Model> {
 	Button btnMulti;
     
     //Chat Area
-	TextField txtChatArea;
+	Label txtChatArea;
 	VBox chatRoomBox;
+	HBox middleBox;
+	Label textArea;
 	
 	
     
@@ -132,18 +134,23 @@ public class App_View extends View<App_Model> {
         
         //Message Box
         
-        txtChatArea = new TextField();
+        txtChatArea = new Label();
+        middleBox = new HBox();
         chatRoomBox = new VBox();
+        textArea = new Label();
+        textArea.setText("Hier kommen die Chats rein....");
+        textArea.setMinSize(100, 100);
         
         
     
     	
     	
-        
+        middleBox.getChildren().addAll(chatRoomBox, textArea);
         chatRoomBox.getChildren().addAll(txtChatArea );
         
         
         root.add(chatRoomBox, 0, 2);
+        root.add(middleBox, 2, 2);
         
         
         
@@ -200,11 +207,12 @@ public class App_View extends View<App_Model> {
 
 	public void addChatbox(String string) {
 		HBox ChatBox = new HBox();
-		Button sendButton = new Button("Send Message");
-		Label chatRoomName = new Label (string);
+		Button sendButton = new Button(string);
 		
-		chatRoomName.setPrefWidth(200);
-		ChatBox.getChildren().addAll(chatRoomName, sendButton);
+		
+		sendButton.setPrefWidth(200);
+		
+		ChatBox.getChildren().addAll(sendButton);
 		chatRoomBox.getChildren().add(ChatBox);
 		
 		

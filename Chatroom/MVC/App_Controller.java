@@ -48,6 +48,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
         view.createChatroom.setOnAction(this::createChatroom); //Menu Create Chatroom
         view.sendbutton.setOnAction(this::senden);
         view.leavechatroom.setOnAction(this::leavechatroom);
+        view.sendbutton.setOnAction(this::openChatBox);
         
         view.txt1.setDisable(true);
 		view.txt2.setDisable(true);
@@ -89,8 +90,17 @@ public class App_Controller extends Controller<App_Model, App_View> {
 		
     }
     
-   
+    
+    
+    
+   private void openChatBox(Event e) {
+	   
+	   
+   }
 
+   
+   
+   
 	private void empfangenChatrooms() {
 		ArrayList <String> msg;
 		msg = servicelocator.getConfiguration().getChatrooms();

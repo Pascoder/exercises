@@ -166,7 +166,7 @@ public class Configuration {
                 
                 private void sortMessaged(String serverMessages) {
                 	messagecounter++;
-                  String [] messages = serverMessages.split("\\|"); //Jede nachricht wird nach aufteilung in Message typ gelöscht
+                  String [] messages = serverMessages.split("\\|"); //Jede nachricht wird nach aufteilung in Message typ geloescht
                   
                     
                     //Test
@@ -180,13 +180,13 @@ public class Configuration {
                         correctLogin = true;
                         token = messages[2];
                     }
-                    //Create Account Message --> account created wird im Login Controller auf true gesetzt falls schon in die app gewechselt wurde somit können spätere nachrichten nicht mehr hier gespeichert werden
+                    //Create Account Message --> account created wird im Login Controller auf true gesetzt falls schon in die app gewechselt wurde somit kï¿½nnen spï¿½tere nachrichten nicht mehr hier gespeichert werden
                     System.out.println(accountcreated);
                     if(messages.length == 2 && messages[0].equals("Result") && messages[1].equals("true")&&accountcreated==false) {
                     	accountcreated = true;
                     
                     }
-                    //Nachrichten können nur 1 mal hier rein weil boolean done nur beim 1. mal false ist also nur für Chatrooms laden nutzbar
+                    //Nachrichten koennen nur 1 mal hier rein weil boolean done nur beim 1. mal false ist also nur fuer Chatrooms laden nutzbar
                     if (messages.length > 3 && messages[0].equals("Result") && messages[1].equals("true")) {
                         String[] chatrooms = serverMessages.split("\\|");
 
