@@ -1,5 +1,6 @@
 package MVC;
 
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.logging.Logger;
 import Splash.ServiceLocator;
@@ -52,6 +53,7 @@ public class App_View extends View<App_Model> {
 	Label txtChatArea;
 	VBox chatRoomBox;
 	HBox middleBox;
+	ArrayList<Button> btnArray = new ArrayList<Button>();
 	
 	TextArea textArea;
 	
@@ -205,17 +207,36 @@ public class App_View extends View<App_Model> {
 
 	
 
-	public void addChatbox(String string) {
+	public void addChatbox(String name) {
 		HBox ChatBox = new HBox();
-		Button sendButton = new Button(string);
 		
 		
-		sendButton.setPrefWidth(200);
+		Button btn = new Button(name);
+		btnArray.add(btn);
 		
-		ChatBox.getChildren().addAll(sendButton);
+		
+		btn.setPrefWidth(200);
+		
+		ChatBox.getChildren().addAll(btn);
 		chatRoomBox.getChildren().add(ChatBox);
 		
 		
 	}
+
+	public ArrayList<Button> getBtnArray() {
+		return btnArray;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

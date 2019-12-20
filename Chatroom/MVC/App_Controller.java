@@ -12,12 +12,16 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
+
 import MVC.Model;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.scene.control.Button;
 import javafx.stage.WindowEvent;
 
 /**
@@ -31,12 +35,14 @@ public class App_Controller extends Controller<App_Model, App_View> {
     ServiceLocator servicelocator;
     
    private  String acutalchatroom = null;
+   private Chatraum chatraum;
+   
  
 
     public App_Controller(App_Model model, App_View view) throws IOException {
         super(model, view);
        
-       
+    
      
         servicelocator = ServiceLocator.getServiceLocator();
         
@@ -48,7 +54,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
         view.createChatroom.setOnAction(this::createChatroom); //Menu Create Chatroom
         view.sendbutton.setOnAction(this::senden);
         view.leavechatroom.setOnAction(this::leavechatroom);
-      //  view.sendbutton.setOnAction(this::openChatBox);
+       
         servicelocator.getConfiguration().getNachrichtProperty().addListener((observable, old, neu) -> updateGUI());
         
         view.txt1.setDisable(true);
@@ -56,8 +62,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
 		view.lblMulti.setDisable(true);
 		view.btnMulti.setDisable(true);
 
-       
-        
+		
         
         
 
@@ -88,7 +93,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
     
     
     
-    //wird von Property ausgelöst
+    //wird von Property ausgelï¿½st
    private Object updateGUI() {
 	   servicelocator.getLogger().info("GUI wurde aktualisiert nachricht empfangen");
 		ArrayList<String> messages = servicelocator.getConfiguration().getRecivedMessages();
@@ -97,21 +102,54 @@ public class App_Controller extends Controller<App_Model, App_View> {
 		chatmessage+=messages.get(i)+"\n";
 		
 		}
-		view.textArea.appendText(chatmessage);//muss noch geändert werden auf TextArea
+		view.textArea.appendText(chatmessage);//muss noch geï¿½ndert werden auf TextArea
 		return null;
 	}
 
 
 
-
-/*private void openChatBox(Event e) {
+   	// ObservableList soll erstellt werden. Inhalt: 
+   //Chat Messages des jeweiligen Chatrooms. View wird akualisiert und zeigt inhalt der ObservableList
+   
+   private void openChatBox(Event e) {
 	   
 	   
-   }*/
-
+	   
+	   
+	   
+   }
    
    
+   //Stellt Anfrage beim Server fÃ¼r Chatrooms
+   private void loadChatrooms()  {
+		
+		try{
+			
+			
+			String loadChats = "ListChatrooms|"+servicelocator.getConfiguration().getSalt(); 
+			servicelocator.getConfiguration().getWriter().write(loadChats);
+			servicelocator.getConfiguration().getWriter().write("\n");
+			servicelocator.getConfiguration().getWriter().flush();
+			//Empfangen der Antwort des Servers
+			
+			
+			servicelocator.getLogger().info("Chatrooms loaded");
+			}catch(IOException exception) {
+				this.servicelocator.getLogger().info("Something goes wrong by loading chatrooms");
+				exception.getMessage();
+			}
+		
+		Integer i = 0;
+        while (i <= 15000000) { //<--muss mit einer Property ersetzt werden
+            i++;
+        }
+			
+			
+		
+			}
    
+   
+   	// Empfangen der Chatrooms vom Server
 	private void empfangenChatrooms() {
 		ArrayList <String> msg;
 		msg = servicelocator.getConfiguration().getChatrooms();
@@ -119,12 +157,25 @@ public class App_Controller extends Controller<App_Model, App_View> {
 		
 		
 		for(int i= 0; i<msg.size(); i++) {
-			view.addChatbox(msg.get(i));
+			
+			//Chatroom name
+			String g = msg.get(i);
+			
+			Chatraum chatraum = new Chatraum(g);
+			String f = chatraum.getBtn().getText();
+			view.addChatbox(f);
+			
+			final Button but = view.btnArray.get(i);
+			
+			but.setOnAction((ActionEvent event) -> {
+			    updateChatArea(chatraum);
+			});
 			
 		}
 		
 	}
 
+	
 
 
 
@@ -132,6 +183,19 @@ public class App_Controller extends Controller<App_Model, App_View> {
 	
 	
 	
+	private Object updateChatArea(Chatraum chatraum) {
+		
+		//Test
+		System.out.println(chatraum.getName());
+		
+		for(int i =0; i<chatraum.chatRoomList.size();i++) {
+			view.textArea.setText(chatraum.chatRoomList.get(i));
+		}
+		return null;
+	}
+
+
+
 	//Sprache aendern
 	public void changePassword(Event password) {
 		model.setMenuOption(3);
@@ -142,6 +206,8 @@ public class App_Controller extends Controller<App_Model, App_View> {
 		view.btnMulti.setText("change");
 		view.txt1.setText("new password");
 		view.txt2.setDisable(true);
+		
+		view.menuHelp.hide();
 	}
 	
 	//User loeschen
@@ -154,6 +220,9 @@ public class App_Controller extends Controller<App_Model, App_View> {
 		view.btnMulti.setText("delete");
 		view.txt1.setText("(name of User)");
 		view.txt2.setDisable(true);
+		
+		view.menuHelp.hide();
+
 		
 	}
 	
@@ -171,6 +240,8 @@ public void createChatroom(Event e) {
 		
 		
 		view.txt2.setDisable(true);
+		
+		view.chatroom.hide();
 	}
 	
 	
@@ -188,6 +259,8 @@ public void createChatroom(Event e) {
 		
 		view.txt2.setText("(Chatroom)");
 		view.txt2.setDisable(false);
+		
+		view.chatroom.hide();
 	}
 	public void leavechatroom(Event e) {
 		model.setMenuOption(5);
@@ -202,6 +275,8 @@ public void createChatroom(Event e) {
 		
 		view.txt2.setText("(Chatroom)");
 		view.txt2.setDisable(false);
+		
+		view.chatroom.hide();
 	}
 	
 	
@@ -254,32 +329,7 @@ public void createChatroom(Event e) {
 	
     
 	
-	private void loadChatrooms()  {
-		
-		try{
-			
-			
-			String loadChats = "ListChatrooms|"+servicelocator.getConfiguration().getSalt(); 
-			servicelocator.getConfiguration().getWriter().write(loadChats);
-			servicelocator.getConfiguration().getWriter().write("\n");
-			servicelocator.getConfiguration().getWriter().flush();
-			//Empfangen der Antwort des Servers
-			
-			
-			servicelocator.getLogger().info("Chatrooms loaded");
-			}catch(IOException exception) {
-				this.servicelocator.getLogger().info("Something goes wrong by loading chatrooms");
-				exception.getMessage();
-			}
-		
-		Integer i = 0;
-        while (i <= 15000000) { //<--muss mit einer Property ersetzt werden
-            i++;
-        }
-			
-			
-		
-			}
+	
 	
 	
 	private void senden(Event ev) {
