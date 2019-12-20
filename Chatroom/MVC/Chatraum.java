@@ -16,12 +16,6 @@ public class Chatraum {
 		btn = new Button(name);
 		
 		
-		
-		
-	
-		
-		
-		
 	}
 	
 	

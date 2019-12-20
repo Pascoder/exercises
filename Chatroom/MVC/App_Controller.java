@@ -36,6 +36,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
     
    private  String acutalchatroom = null;
    private Chatraum chatraum;
+   private ArrayList <Chatraum> chatraumArray = new ArrayList<>();
    
  
 
@@ -93,17 +94,27 @@ public class App_Controller extends Controller<App_Model, App_View> {
     
     
     
-    //wird von Property ausgelï¿½st
+    //sorted message --> addListener --> updateGUI
    private Object updateGUI(String neu) {
 	   servicelocator.getLogger().info("GUI wurde aktualisiert nachricht empfangen");
-		//ArrayList<String> messages = servicelocator.getConfiguration().getRecivedMessages();
-		//String chatmessage = null;
-		//for(int i = 0; i<messages.size();i++) {
-		//chatmessage+=messages.get(i)+"\n";
 		
-		//}
-		view.textArea.appendText("Empfangene Chat Nachricht: "+neu);//muss noch geï¿½ndert werden auf TextArea
+		
+		
+	   String[] msg =  neu.split("\\|");//Aufteilen von chatroom|nachricht
+
+		view.textArea.appendText(neu);//muss noch geï¿½ndert werden auf TextArea
+		for(int i = 0; i<chatraumArray.size();i++) {
+			if(chatraumArray.get(i).getName().equals(msg[0])) {
+				System.out.println("chat gefunden");
+				chatraumArray.get(i).addChatMessage(msg[1]); //!!Hier werden nachrichten am passenden Chatraum hinzugefügt
+				System.out.println("Message hinzugefügt zu Chatraum: "+msg[0]);
+			}
+		}
+		
 		return null;
+		
+		
+		
 	}
 
 
@@ -162,6 +173,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
 			String g = msg.get(i);
 			
 			Chatraum chatraum = new Chatraum(g);
+			chatraumArray.add(chatraum);
 			String f = chatraum.getBtn().getText();
 			view.addChatbox(f);
 			
@@ -175,14 +187,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
 		
 	}
 
-	
-
-
-
-	
-	
-	
-	
+	//Chatroom gibt namen der Chats in TextArea aus
 	private Object updateChatArea(Chatraum chatraum) {
 		
 		//Test
@@ -345,7 +350,7 @@ public void createChatroom(Event e) {
 		servicelocator.getConfiguration().getWriter().write("\n");
 		servicelocator.getConfiguration().getWriter().flush();
 		servicelocator.getLogger().info("gesendet");
-		view.textArea.appendText(message+"\n");
+		//view.textArea.appendText(message+"\n");
 		view.txtChatMessage.clear();
 		
 		

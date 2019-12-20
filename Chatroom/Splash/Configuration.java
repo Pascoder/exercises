@@ -221,8 +221,9 @@ public class Configuration {
                     		recivedmessages.add(sentfrom+"|"+chat+"|"+messages[3]);
                     		String message = messages[3];
                             
-                        System.out.println("Message sorted: "+messages[3]);
-                    	setNachrichtProperty(messages[3]);
+                       
+                    	setNachrichtProperty(chat+"|"+message); //wird in Controller setonAction ausgelöst
+                    	
                         
                     }
                 
