@@ -53,8 +53,9 @@ public class Configuration {
     private boolean others;
     
     //Message
-    private ArrayList<String> recivedmessages;
-    private SimpleBooleanProperty nachricht = new SimpleBooleanProperty(); //wenn neue Nachricht gui updaten
+    
+   private ArrayList<String> recivedmessages = new ArrayList<String>();
+   private SimpleStringProperty nachricht = new SimpleStringProperty(); //wenn neue Nachricht gui updaten
     
 
     public Configuration() {
@@ -213,14 +214,16 @@ public class Configuration {
                        
                     }
                     //Hier werden alle Nachrichten aus dem Chat gespeichert
-                    if(messages.length > 1 && messages[0].equals("MessageText")) {
-                    	for (int i = 2; i < messages.length; i++) {
+                    if(messages[0].equals("MessageText")) {
+                    	
                     		String sentfrom = messages[1];
                     		String chat = messages[2];
-                    		recivedmessages.add(sentfrom+"|"+chat+": "+messages[i]);
+                    		recivedmessages.add(sentfrom+"|"+chat+"|"+messages[3]);
+                    		String message = messages[3];
                             
-                        }
-                    	setNachrichtProperty(true);
+                        System.out.println("Message sorted: "+messages[3]);
+                    	setNachrichtProperty(messages[3]);
+                        
                     }
                 
                 }
@@ -264,12 +267,13 @@ public class Configuration {
     public boolean getOthers() {
     	return this.others;
     }
-    public void setNachrichtProperty(boolean newValue) {
+   public void setNachrichtProperty(String newValue) {
     	this.nachricht.set(newValue);
     }
-    public SimpleBooleanProperty getNachrichtProperty() {
+    public SimpleStringProperty getNachrichtProperty() {
     	return this.nachricht;
     }
+    
     public ArrayList<String> getRecivedMessages(){
     	return this.recivedmessages;
     }

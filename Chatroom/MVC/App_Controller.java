@@ -55,7 +55,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
         view.sendbutton.setOnAction(this::senden);
         view.leavechatroom.setOnAction(this::leavechatroom);
        
-        servicelocator.getConfiguration().getNachrichtProperty().addListener((observable, old, neu) -> updateGUI());
+        servicelocator.getConfiguration().getNachrichtProperty().addListener((observable, old, neu) -> updateGUI(neu));
         
         view.txt1.setDisable(true);
 		view.txt2.setDisable(true);
@@ -94,15 +94,15 @@ public class App_Controller extends Controller<App_Model, App_View> {
     
     
     //wird von Property ausgel�st
-   private Object updateGUI() {
+   private Object updateGUI(String neu) {
 	   servicelocator.getLogger().info("GUI wurde aktualisiert nachricht empfangen");
-		ArrayList<String> messages = servicelocator.getConfiguration().getRecivedMessages();
-		String chatmessage = null;
-		for(int i = 0; i<messages.size();i++) {
-		chatmessage+=messages.get(i)+"\n";
+		//ArrayList<String> messages = servicelocator.getConfiguration().getRecivedMessages();
+		//String chatmessage = null;
+		//for(int i = 0; i<messages.size();i++) {
+		//chatmessage+=messages.get(i)+"\n";
 		
-		}
-		view.textArea.appendText(chatmessage);//muss noch ge�ndert werden auf TextArea
+		//}
+		view.textArea.appendText("Empfangene Chat Nachricht: "+neu);//muss noch ge�ndert werden auf TextArea
 		return null;
 	}
 
