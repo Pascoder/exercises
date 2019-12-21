@@ -204,11 +204,11 @@ public class App_Controller extends Controller<App_Model, App_View> {
 	//#DIESE METHODE IST FUER DEN 1. KLICK AUF EINEN CHAT BUTTON
 	//Chatroom gibt namen der Chats in TextArea aus
 	private Object updateChatArea(Chatraum chatraum) {
-	
+	view.textArea.clear();
 		
 		//Am Anfang noch leer muss von File lesen wenn wir alte chats laden wollen
 		for(int i =0; i<chatraum.chatRoomList.size();i++) {
-			view.textArea.setText(chatraum.chatRoomList.get(i));
+			view.textArea.appendText(chatraum.chatRoomList.get(i)+"\n");
 		}
 		return null;
 	}
