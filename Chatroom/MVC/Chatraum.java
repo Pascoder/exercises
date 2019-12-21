@@ -7,12 +7,12 @@ import javafx.scene.control.Button;
 public class Chatraum {
 	private String name;
 	private Button btn;
-	ObservableList <String> chatRoomList;
+	ObservableList <String> messageList;
 	
 	
 	public Chatraum(String name) {
 		this.name = name;
-		chatRoomList = FXCollections.observableArrayList();
+		messageList = FXCollections.observableArrayList();
 		btn = new Button(name);
 		
 		
@@ -21,7 +21,7 @@ public class Chatraum {
 	
 	
 	public void addChatMessage(String Message) {
-		chatRoomList.add(Message);
+		messageList.add(Message);
 		
 	}
 
@@ -37,12 +37,12 @@ public class Chatraum {
 
 
 	public ObservableList<String> getChatRoomList() {
-		return chatRoomList;
+		return messageList;
 	}
 
 
-	public void setChatRoomList(ObservableList<String> chatRoomList) {
-		this.chatRoomList = chatRoomList;
+	public void setChatRoomList(ObservableList<String> messageList) {
+		this.messageList = messageList;
 	}
 
 

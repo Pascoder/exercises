@@ -50,7 +50,7 @@ public class App_View extends View<App_Model> {
 	Button btnMulti;
     
     //Chat Area
-	Label txtChatArea;
+	Label lblInfo, lblUsersOnline;
 	VBox chatRoomBox;
 	HBox middleBox;
 	ArrayList<Button> btnArray = new ArrayList<Button>();
@@ -137,9 +137,10 @@ public class App_View extends View<App_Model> {
         
         //Message Box
         
-        txtChatArea = new Label();
+        lblInfo = new Label();
         middleBox = new HBox();
         chatRoomBox = new VBox();
+        lblUsersOnline = new Label();
         textArea = new TextArea();
         textArea.setMinSize(100, 100);
         
@@ -148,11 +149,11 @@ public class App_View extends View<App_Model> {
     	
     	
         middleBox.getChildren().addAll(chatRoomBox, textArea);
-        chatRoomBox.getChildren().addAll(txtChatArea );
+        chatRoomBox.getChildren().addAll(lblInfo );
         
-        
-        root.add(chatRoomBox, 0, 2);
-        root.add(middleBox, 2, 2);
+        root.add(lblUsersOnline, 1, 2,3,1);
+        root.add(chatRoomBox, 0, 3);
+        root.add(middleBox, 2, 3);
         
         
         
@@ -166,7 +167,7 @@ public class App_View extends View<App_Model> {
         sendbutton.setMinSize(Button.USE_PREF_SIZE, Button.USE_PREF_SIZE);
         HBox bottom = new HBox(txtChatMessage, sendbutton);
         bottom.getStyleClass().add("hbox");
-        root.add(bottom, 0, 3,3,1);
+        root.add(bottom, 0, 4,3,1);
         
         
         
@@ -192,16 +193,14 @@ public class App_View extends View<App_Model> {
            chatroom.setText(t.getString("program.chatroom"));
            createChatroom.setText(t.getString("program.createchatroom"));
            addUser.setText(t.getString("program.adduser"));
+           
            // Top Controls
            lblMulti.setText(t.getString("label.lblname"));
-          leavechatroom.setText(t.getString("program.leavechatroom"));
+           leavechatroom.setText(t.getString("program.leavechatroom"));
+           lblInfo.setText(t.getString("label.lblInfo"));
 	        
 	        // Bottom Controls
            sendbutton.setText(t.getString("button.sendbutton"));
-//           nameColumn.setText(t.getString("program.nameColumn"));
-//           ownerColumn.setText(t.getString("program.ownerColumn"));
-//           isPublicColumn.setText(t.getString("program.isPublicColumn"));
-           
            stage.setTitle(t.getString("program.name"));
 	    }
 

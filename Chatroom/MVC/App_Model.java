@@ -45,6 +45,28 @@ public class App_Model extends Model {
     }
 
 
+
+	public String getUsersOnline(String chatraum) {
+		String senden = "ListChatroomUsers|"+serviceLocator.getConfiguration().getSalt()+"|"+chatraum;
+		
+		
+		try {
+			serviceLocator.getConfiguration().getWriter().write(senden);
+			serviceLocator.getConfiguration().getWriter().write("\n");
+			serviceLocator.getConfiguration().getWriter().flush();
+			Integer a = 0;
+	        while (a <= 15000000) { //<--muss mit einer Property ersetzt werden
+	            
+	        	a++;
+	        }
+		} catch (IOException e) {
+			serviceLocator.getLogger().info("ListChatroomUsers nicht möglich");
+		}
+		
+		return null;
+	}
+
+
 	
 
   

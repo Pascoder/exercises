@@ -52,6 +52,7 @@ public class Configuration {
     JavaFX_App_Template template;
     private boolean others;
     private String actualUser = null;
+    private String usersOnline = "";
     
     //Message
     
@@ -125,10 +126,7 @@ public class Configuration {
     public void setLocalOption(String name, String value) {
         localOptions.setProperty(name, value);
     }
-    
-    
-    
-    
+     
     //Hier wird Socket erstellt
     public void connectToServer() throws IOException {
 		try { this.socket = new Socket("147.86.8.31", 50001);		
@@ -139,8 +137,7 @@ public class Configuration {
 			}	
 		}
     
-    
-    
+ 
       public void createBufferedWriter() {
     	try{
     		this.writer = new BufferedWriter(new OutputStreamWriter(this.socket.getOutputStream())); 
@@ -188,14 +185,14 @@ public class Configuration {
                         correctLogin = true;
                         token = messages[2];
                     }
-                    //Create Account Message --> account created wird im Login Controller auf true gesetzt falls schon in die app gewechselt wurde somit kï¿½nnen spï¿½tere nachrichten nicht mehr hier gespeichert werden
+                    //Create Account Message --> account created wird im Login Controller auf true gesetzt falls schon in die app gewechselt wurde somit koennen spaetere nachrichten nicht mehr hier gespeichert werden
                   
-                    if(messages.length == 2 && messages[0].equals("Result") && messages[1].equals("true")&&accountcreated==false) {
+                    if(messages.length == 2 && messages[0].equals("Result") && messages[1].equals("true")&& accountcreated==false) {
                     	accountcreated = true;
                     
                     }else {
-                    	others = false;//<-- jedes mal wenn eine 2 Stellige nachricht rein kommt wird zuerst others auf false gesetzt um ein korrektes ergebnis zu haben für jeweilige Anfrage
-                     //Wenn Account schon erstellt wurde oder sich das Programm nicht mehr im Login Menu befindet gehen spätere nachrichten hier ein
+                    	others = false;//<-- jedes mal wenn eine 2 Stellige nachricht rein kommt wird zuerst others auf false gesetzt um ein korrektes ergebnis zu haben fuer jeweilige Anfrage
+                     //Wenn Account schon erstellt wurde oder sich das Programm nicht mehr im Login Menu befindet gehen spaetere nachrichten hier ein
                     if(messages.length == 2 && messages[0].equals("Result") && messages[1].equals("true")) {
                         others = true;
                         
@@ -203,12 +200,17 @@ public class Configuration {
                     	
                         }
                     //Nachrichten koennen nur 1 mal hier rein weil boolean done nur beim 1. mal false ist also nur fuer Chatrooms laden nutzbar
-                    if (messages.length > 3 && messages[0].equals("Result") && messages[1].equals("true")) {
+                    if (messages.length > 2 && messages[0].equals("Result") && messages[1].equals("true")) {
                         String[] chatrooms = serverMessages.split("\\|");
 
                         chatroomArray = new ArrayList<>();
                         
                         for (int i = 2; i < chatrooms.length; i++) {
+                        	//Wenn der aktuelle User drin ist, ist es die Liste der aktuell online Users
+                        	if(chatrooms[i].equals(actualUser) ) {
+                        		usersOnline += chatrooms[i] + ", ";
+                        		
+                        }else
                             chatroomArray.add(chatrooms[i]);
                             
                         }
@@ -220,10 +222,11 @@ public class Configuration {
                     		String sentfrom = messages[1];
                     		String chat = messages[2];
                     		recivedmessages.add(sentfrom+"|"+chat+"|"+messages[3]);
-                    		String message = messages[3];
+                    		//Message wird mit Username konkateniert, kÃ¶nnte besser gelÃ¶st werden mit Message Objekt!
+                    		String message = sentfrom + ": " + messages[3];
                             
                        
-                    	setNachrichtProperty(chat+"|"+message); //wird in Controller setonAction ausgelöst
+                    	setNachrichtProperty(chat+"|"+ message); //wird in Controller setonAction ausgelï¿½st
                     	
                         
                     }
@@ -285,6 +288,14 @@ public class Configuration {
     public String getActualUser() {
     	return this.actualUser;
     }
+
+	public String getUsersOnline() {
+		return usersOnline;
+	}
+
+	public void setUsersOnline(String usersOnline) {
+		this.usersOnline = usersOnline;
+	}
     
    
     

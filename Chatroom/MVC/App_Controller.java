@@ -34,7 +34,7 @@ import javafx.stage.WindowEvent;
 public class App_Controller extends Controller<App_Model, App_View> {
     ServiceLocator servicelocator;
     
-   private  String acutalchatroom = null;
+   private String acutalchatroom = null;
    private String actualUser = null;
    
    private ArrayList <Chatraum> chatraumArray = new ArrayList<>();
@@ -107,8 +107,8 @@ public class App_Controller extends Controller<App_Model, App_View> {
 		for(int i = 0; i<chatraumArray.size();i++) {
 			if(chatraumArray.get(i).getName().equals(msg[0])) {
 				System.out.println("chat gefunden");
-				chatraumArray.get(i).addChatMessage(msg[1]); //!!Hier werden nachrichten am passenden Chatraum hinzugefügt
-				System.out.println("Message hinzugefügt zu Chatraum: "+msg[0]);
+				chatraumArray.get(i).addChatMessage(msg[1]); //!!Hier werden nachrichten am passenden Chatraum hinzugefuegt
+				System.out.println("Message hinzugefuegt zu Chatraum: "+msg[0]);
 				
 			}
 		}
@@ -186,7 +186,8 @@ public class App_Controller extends Controller<App_Model, App_View> {
 					servicelocator.getConfiguration().getWriter().flush();
 					Integer a = 0;
 			        while (a <= 15000000) { //<--muss mit einer Property ersetzt werden
-			            a++;
+			            
+			        	a++;
 			        }
 				} catch (IOException e) {
 					servicelocator.getLogger().info("Konnte nicht ge Joint werden");
@@ -202,13 +203,18 @@ public class App_Controller extends Controller<App_Model, App_View> {
 	}
 	
 	//#DIESE METHODE IST FUER DEN 1. KLICK AUF EINEN CHAT BUTTON
-	//Chatroom gibt namen der Chats in TextArea aus
 	private Object updateChatArea(Chatraum chatraum) {
 	view.textArea.clear();
+	view.lblUsersOnline.setText("");
+	servicelocator.getConfiguration().setUsersOnline("");
+	model.getUsersOnline(chatraum.getName());
+	view.lblUsersOnline.setText("Users online: " + servicelocator.getConfiguration().getUsersOnline());
+	
+	
 		
 		//Am Anfang noch leer muss von File lesen wenn wir alte chats laden wollen
-		for(int i =0; i<chatraum.chatRoomList.size();i++) {
-			view.textArea.appendText(chatraum.chatRoomList.get(i)+"\n");
+		for(int i =0; i<chatraum.messageList.size();i++) {
+			view.textArea.appendText(chatraum.messageList.get(i)+"\n");
 		}
 		return null;
 	}
@@ -245,7 +251,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
 		
 	}
 	
-public void createChatroom(Event e) {
+	public void createChatroom(Event e) {
 		
 		model.setMenuOption(1);
 		view.btnMulti.setText("Erstellen");
