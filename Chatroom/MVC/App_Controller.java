@@ -88,7 +88,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
         servicelocator.getLogger().info("Application controller initialized");
         
         //Chatrooms laden
-        loadChatrooms();
+        model.loadChats();
         empfangenChatrooms();
 		
     }
@@ -119,42 +119,6 @@ public class App_Controller extends Controller<App_Model, App_View> {
 		
 		
 	}
-
-
-
-   	// ObservableList soll erstellt werden. Inhalt: 
-   //Chat Messages des jeweiligen Chatrooms. View wird akualisiert und zeigt inhalt der ObservableList
-   
-
-   
-   
-   //Stellt Anfrage beim Server für Chatrooms
-   private void loadChatrooms()  {
-		
-		try{
-			
-			
-			String loadChats = "ListChatrooms|"+servicelocator.getConfiguration().getSalt(); 
-			servicelocator.getConfiguration().getWriter().write(loadChats);
-			servicelocator.getConfiguration().getWriter().write("\n");
-			servicelocator.getConfiguration().getWriter().flush();
-			//Empfangen der Antwort des Servers
-			
-			
-			servicelocator.getLogger().info("Chatrooms loaded");
-			}catch(IOException exception) {
-				this.servicelocator.getLogger().info("Something goes wrong by loading chatrooms");
-				exception.getMessage();
-			}
-		
-		Integer i = 0;
-        while (i <= 15000000) { //<--muss mit einer Property ersetzt werden
-            i++;
-        }
-			
-			
-		
-			}
    
    
    	// Empfangen der Chatrooms vom Server

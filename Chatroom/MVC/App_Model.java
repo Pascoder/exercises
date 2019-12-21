@@ -65,6 +65,27 @@ public class App_Model extends Model {
 		
 		return null;
 	}
+	public void loadChats() {
+		try{
+			
+			
+			String loadChats = "ListChatrooms|"+serviceLocator.getConfiguration().getSalt(); 
+			serviceLocator.getConfiguration().getWriter().write(loadChats);
+			serviceLocator.getConfiguration().getWriter().write("\n");
+			serviceLocator.getConfiguration().getWriter().flush();
+			//Empfangen der Antwort des Servers
+			
+			
+			serviceLocator.getLogger().info("Chatrooms loaded");
+		}catch(IOException exception) {
+				this.serviceLocator.getLogger().info("Something goes wrong by loading chatrooms");
+				exception.getMessage();
+		}
+		Integer i = 0;
+        while (i <= 15000000) { //<--muss mit einer Property ersetzt werden
+            i++;
+        }
+	}
 
 
 	
