@@ -53,6 +53,7 @@ public class Configuration {
     private boolean others;
     private String actualUser = null;
     private String usersOnline = "";
+    private boolean booleanuseronline = false;
     
     //Message
     
@@ -199,6 +200,7 @@ public class Configuration {
                         }
                     	
                         }
+                    
                     //Nachrichten koennen nur 1 mal hier rein weil boolean done nur beim 1. mal false ist also nur fuer Chatrooms laden nutzbar
                     if (messages.length > 2 && messages[0].equals("Result") && messages[1].equals("true")) {
                         String[] chatrooms = serverMessages.split("\\|");
@@ -208,12 +210,24 @@ public class Configuration {
                         for (int i = 2; i < chatrooms.length; i++) {
                         	//Wenn der aktuelle User drin ist, ist es die Liste der aktuell online Users
                         	if(chatrooms[i].equals(actualUser) ) {
-                        		usersOnline += chatrooms[i] + ", ";
+                        		booleanuseronline = true;
                         		
-                        }else
-                            chatroomArray.add(chatrooms[i]);
-                            
                         }
+                        }
+                        if(booleanuseronline == true) {
+                        	for(int b = 2; b<messages.length;b++) {
+                        		usersOnline += chatrooms[b] + ", ";
+                        	}
+                        	booleanuseronline=false;
+                        }else {
+                        	for(int c = 2; c<chatrooms.length;c++) {
+                        		chatroomArray.add(chatrooms[c]);
+                        	}
+                        	
+                        }
+                        	
+                        	
+                        
                        
                     }
                     //Hier werden alle Nachrichten aus dem Chat gespeichert

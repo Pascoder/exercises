@@ -55,7 +55,7 @@ public class App_Model extends Model {
 			serviceLocator.getConfiguration().getWriter().write("\n");
 			serviceLocator.getConfiguration().getWriter().flush();
 			Integer a = 0;
-	        while (a <= 15000000) { //<--muss mit einer Property ersetzt werden
+	        while (a <= 200000000) { //<--muss mit einer Property ersetzt werden
 	            
 	        	a++;
 	        }
