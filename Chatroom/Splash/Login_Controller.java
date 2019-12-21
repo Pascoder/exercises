@@ -17,6 +17,7 @@ public class Login_Controller {
 	
 	
 	
+	
 	public Login_Controller(Login_Model model, Login_View view, final JavaFX_App_Template javaFX_App_Template) {
 		this.model = model;
 		this.view = view;
@@ -50,6 +51,8 @@ public class Login_Controller {
 				servicelocator.getConfiguration().getWriter().write(senden);
 				servicelocator.getConfiguration().getWriter().write("\n");
 				servicelocator.getConfiguration().getWriter().flush();
+				servicelocator.getConfiguration().setAcutalUser(username);
+				
 				
 				
 				
@@ -136,6 +139,8 @@ public class Login_Controller {
 	public String getSalt() {
 		return this.salt;
 	}
+	
+	
 	
 
 	

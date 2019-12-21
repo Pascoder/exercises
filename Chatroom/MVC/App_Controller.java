@@ -35,7 +35,8 @@ public class App_Controller extends Controller<App_Model, App_View> {
     ServiceLocator servicelocator;
     
    private  String acutalchatroom = null;
-   private Chatraum chatraum;
+   private String actualUser = null;
+   
    private ArrayList <Chatraum> chatraumArray = new ArrayList<>();
    
  
@@ -55,7 +56,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
         view.createChatroom.setOnAction(this::createChatroom); //Menu Create Chatroom
         view.sendbutton.setOnAction(this::senden);
         view.leavechatroom.setOnAction(this::leavechatroom);
-       
+  
         servicelocator.getConfiguration().getNachrichtProperty().addListener((observable, old, neu) -> updateGUI(neu));
         
         view.txt1.setDisable(true);
@@ -93,7 +94,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
     }
     
     
-    
+    //#DIESE METHODE IST UM DEN CHAT VERLAUF IN DIE CHATRAUME AUFZUTEILEN UND DIE GUI ZU AKTUALISEREN
     //sorted message --> addListener --> updateGUI
    private Object updateGUI(String neu) {
 	   servicelocator.getLogger().info("GUI wurde aktualisiert nachricht empfangen");
@@ -102,16 +103,18 @@ public class App_Controller extends Controller<App_Model, App_View> {
 		
 	   String[] msg =  neu.split("\\|");//Aufteilen von chatroom|nachricht
 
-		view.textArea.appendText(msg[1]+"\n");//muss noch geï¿½ndert werden auf TextArea
+		view.textArea.appendText(msg[1]+"\n");
 		for(int i = 0; i<chatraumArray.size();i++) {
 			if(chatraumArray.get(i).getName().equals(msg[0])) {
 				System.out.println("chat gefunden");
 				chatraumArray.get(i).addChatMessage(msg[1]); //!!Hier werden nachrichten am passenden Chatraum hinzugefügt
 				System.out.println("Message hinzugefügt zu Chatraum: "+msg[0]);
+				
 			}
 		}
 		
 		return null;
+		
 		
 		
 		
@@ -122,13 +125,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
    	// ObservableList soll erstellt werden. Inhalt: 
    //Chat Messages des jeweiligen Chatrooms. View wird akualisiert und zeigt inhalt der ObservableList
    
-   private void openChatBox(Event e) {
-	   
-	   
-	   
-	   
-	   
-   }
+
    
    
    //Stellt Anfrage beim Server fÃ¼r Chatrooms
@@ -179,20 +176,37 @@ public class App_Controller extends Controller<App_Model, App_View> {
 			
 			final Button but = view.btnArray.get(i);
 			
-			but.setOnAction((ActionEvent event) -> {
+			but.setOnAction(c -> {
+				String senden = "JoinChatroom|"+servicelocator.getConfiguration().getSalt()+"|"+chatraum.getName()+"|"+servicelocator.getConfiguration().getActualUser();
+				this.acutalchatroom = chatraum.getName();
+				
+				try {
+					servicelocator.getConfiguration().getWriter().write(senden);
+					servicelocator.getConfiguration().getWriter().write("\n");
+					servicelocator.getConfiguration().getWriter().flush();
+					Integer a = 0;
+			        while (a <= 15000000) { //<--muss mit einer Property ersetzt werden
+			            a++;
+			        }
+				} catch (IOException e) {
+					servicelocator.getLogger().info("Konnte nicht ge Joint werden");
+				}
+				
+				
+				
 			    updateChatArea(chatraum);
 			});
 			
 		}
 		
 	}
-
+	
+	//#DIESE METHODE IST FUER DEN 1. KLICK AUF EINEN CHAT BUTTON
 	//Chatroom gibt namen der Chats in TextArea aus
 	private Object updateChatArea(Chatraum chatraum) {
+	
 		
-		//Test
-		System.out.println(chatraum.getName());
-		
+		//Am Anfang noch leer muss von File lesen wenn wir alte chats laden wollen
 		for(int i =0; i<chatraum.chatRoomList.size();i++) {
 			view.textArea.setText(chatraum.chatRoomList.get(i));
 		}
@@ -360,6 +374,8 @@ public void createChatroom(Event e) {
 		}
 		}
 	}
+	
+	
 	}
     
 

@@ -51,6 +51,7 @@ public class Configuration {
     Thread serverCommunicationThread;
     JavaFX_App_Template template;
     private boolean others;
+    private String actualUser = null;
     
     //Message
     
@@ -277,6 +278,12 @@ public class Configuration {
     
     public ArrayList<String> getRecivedMessages(){
     	return this.recivedmessages;
+    }
+    public void setAcutalUser(String user) {
+    	this.actualUser = user;
+    }
+    public String getActualUser() {
+    	return this.actualUser;
     }
     
    
