@@ -1,6 +1,7 @@
 .root {
 	-fx-padding: 0px 10px 0px 10px;
 	-fx-spacing: 10px;
+	-fx-background-image:url(default-wallpaper.png)
 }
 
 .hbox {
@@ -8,5 +9,16 @@
 	-fx-spacing: 10px;
 }
 .button{
+    -fx-font:  italic 10pt "Arial";
+    -fx-effect: dropshadow( one-pass-box , black , 8 , 0.0 , 2 , 0 );
+    -fx-border-radius: 50;
+    -fx-background-radius: 20;
 	
 }
+
+.label{
+	-fx-font: italic 10pt "Arial";
+}
+
+
+	

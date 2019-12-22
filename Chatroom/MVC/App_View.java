@@ -48,9 +48,12 @@ public class App_View extends View<App_Model> {
 	TextField txt1;
 	TextField txt2;
 	Button btnMulti;
+	
+	Label lblUserInfo, lblUser;
     
     //Chat Area
-	Label lblInfo, lblUsersOnline;
+	HBox infoBox;
+	Label lblInfo, lblUsersOnline, lblActualChatroom;
 	VBox chatRoomBox;
 	HBox middleBox;
 	ArrayList<Button> btnArray = new ArrayList<Button>();
@@ -116,11 +119,12 @@ public class App_View extends View<App_Model> {
 		//Top
 	
 		lblMulti = new Label();
-		
 		txt1 = new TextField();
-		
 		txt2 = new TextField();
 		btnMulti = new Button();
+		
+		lblUserInfo = new Label();
+		lblUser = new Label();
 		
        
 		lblMulti.setMinSize(Button.USE_PREF_SIZE, Button.USE_PREF_SIZE);
@@ -131,18 +135,19 @@ public class App_View extends View<App_Model> {
 		
 		txt1.setMinWidth(150); txt1.setPrefWidth(150);
         
-		HBox top = new HBox(lblMulti, txt1,txt2, btnMulti);
+		HBox top = new HBox(lblMulti, txt1,txt2, btnMulti,lblUserInfo, lblUser);
 		top.getStyleClass().add("hbox"); 
         root.add(top, 0, 1,3,1);
         
         //Message Box
-        
+        infoBox = new HBox();
         lblInfo = new Label();
         middleBox = new HBox();
         chatRoomBox = new VBox();
         lblUsersOnline = new Label();
+        lblActualChatroom = new Label();
         textArea = new TextArea();
-        textArea.setMinSize(100, 100);
+        textArea.setMinSize(80, 80);
         
         
     
@@ -150,8 +155,9 @@ public class App_View extends View<App_Model> {
     	
         middleBox.getChildren().addAll(chatRoomBox, textArea);
         chatRoomBox.getChildren().addAll(lblInfo );
+        infoBox.getChildren().addAll(lblActualChatroom, lblUsersOnline);
         
-        root.add(lblUsersOnline, 1, 2,3,1);
+        root.add(infoBox, 1, 2,3,1);
         root.add(chatRoomBox, 0, 3);
         root.add(middleBox, 2, 3);
         
@@ -198,6 +204,7 @@ public class App_View extends View<App_Model> {
            lblMulti.setText(t.getString("label.lblname"));
            leavechatroom.setText(t.getString("program.leavechatroom"));
            lblInfo.setText(t.getString("label.lblInfo"));
+           lblUserInfo.setText(t.getString("label.lblUserInfo"));
 	        
 	        // Bottom Controls
            sendbutton.setText(t.getString("button.sendbutton"));

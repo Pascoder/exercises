@@ -65,7 +65,8 @@ public class App_Controller extends Controller<App_Model, App_View> {
 		view.btnMulti.setDisable(true);
 
 		
-        
+        //Aktuell eingeloggter User anzeigen
+		view.lblUser.setText(servicelocator.getConfiguration().getActualUser());
         
 
         // register ourselves to handle window-closing event
@@ -173,6 +174,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
 	servicelocator.getConfiguration().setUsersOnline("");
 	model.getUsersOnline(chatraum.getName());
 	view.lblUsersOnline.setText("Users online: " + servicelocator.getConfiguration().getUsersOnline());
+	view.lblActualChatroom.setText("Actual Chatroom: " + acutalchatroom + "                 ");
 	
 	
 		
@@ -293,7 +295,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
 			break;
 		case 5:
 			senden = "LeaveChatroom|"+servicelocator.getConfiguration().getSalt()+"|"+text2+"|"+ text1;
-			this.acutalchatroom =null;
+			this.acutalchatroom = null;
 			break;
 		}
 		servicelocator.getConfiguration().getWriter().write(senden);
