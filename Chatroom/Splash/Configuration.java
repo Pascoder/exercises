@@ -54,6 +54,7 @@ public class Configuration {
     private String actualUser = null;
     private String usersOnline = "";
     private boolean booleanuseronline = false;
+    private boolean threadrunning = true;
     
     //Message
     
@@ -156,14 +157,18 @@ public class Configuration {
             serverCommunicationThread = new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    while (true) {
+                    while (threadrunning) {
                         try {
                             String serverMessage = socketIn.readLine();
                             logger.info("Received: " + serverMessage);
                             sortMessaged(serverMessage);
                         } catch (IOException e) {
-                            e.printStackTrace();
+                        	if(threadrunning) {
+                            logger.info("Lost Connection to Server");
                             break;
+                        	}else {
+                        	logger.info("Thread closed");
+                        	}
                         }
                     }
                 }
@@ -310,8 +315,11 @@ public class Configuration {
 	public void setUsersOnline(String usersOnline) {
 		this.usersOnline = usersOnline;
 	}
-    
+	public void closeThread() {
+		this.threadrunning = false;
+	}
+	
    
-    
-    
+	
+	
 }

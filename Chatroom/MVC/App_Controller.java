@@ -76,6 +76,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
             
                 
                 try {
+                	servicelocator.getConfiguration().closeThread();
                 	servicelocator.getConfiguration().getSocket().close();
 					servicelocator.getLogger().info("Socket is closed");//Socket schliessen
 				} catch (IOException e) {
