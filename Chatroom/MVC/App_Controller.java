@@ -103,16 +103,19 @@ public class App_Controller extends Controller<App_Model, App_View> {
 		
 		
 	   String[] msg =  neu.split("\\|");//Aufteilen von chatroom|nachricht
-
-		view.textArea.appendText(msg[1]+"\n");//hier nicht ausgeben
+	   
+		
 		for(int i = 0; i<chatraumArray.size();i++) {
 			if(chatraumArray.get(i).getName().equals(msg[0])) {
 				System.out.println("chat gefunden");
 				chatraumArray.get(i).addChatMessage(msg[1]); //!!Hier werden nachrichten am passenden Chatraum hinzugefuegt
 				System.out.println("Message hinzugefuegt zu Chatraum: "+msg[0]);
-				
+				if(this.acutalchatroom.equals(msg[0])) {
+				view.textArea.appendText(msg[1]+"\n"); //wenn die Nachricht für den Aktuellen Chatroom ist TextArea updaten
+				}
 			}
 		}
+		
 		
 		return null;
 		
