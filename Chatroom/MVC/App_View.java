@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -55,6 +56,7 @@ public class App_View extends View<App_Model> {
 	HBox infoBox;
 	Label lblInfo, lblUsersOnline, lblActualChatroom;
 	VBox chatRoomBox;
+	ScrollPane scroll;
 	HBox middleBox;
 	ArrayList<Button> btnArray = new ArrayList<Button>();
 	
@@ -144,16 +146,17 @@ public class App_View extends View<App_Model> {
         lblInfo = new Label();
         middleBox = new HBox();
         chatRoomBox = new VBox();
+        scroll = new ScrollPane(chatRoomBox);
         lblUsersOnline = new Label();
         lblActualChatroom = new Label();
         textArea = new TextArea();
         textArea.setMinSize(80, 80);
         
-        
+        scroll.setMinWidth(220);
     
     	
     	
-        middleBox.getChildren().addAll(chatRoomBox, textArea);
+        middleBox.getChildren().addAll(scroll, textArea);
         chatRoomBox.getChildren().addAll(lblInfo );
         infoBox.getChildren().addAll(lblActualChatroom, lblUsersOnline);
         
@@ -180,7 +183,7 @@ public class App_View extends View<App_Model> {
         
         updateTexts();
 		//@TODO make GUI Design 
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(root,700,800);
         scene.getStylesheets().add(
                 getClass().getResource("style.css").toExternalForm());
         return scene;

@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 
 public class Chatraum {
+	private int newmessages = 0;
 	private String name;
 	private Button btn;
 	ObservableList <String> messageList;
@@ -21,6 +22,7 @@ public class Chatraum {
 	
 	
 	public void addChatMessage(String Message) {
+		this.newmessages++;
 		messageList.add(Message);
 		
 	}
@@ -53,6 +55,12 @@ public class Chatraum {
 
 	public void setBtn(Button btn) {
 		this.btn = btn;
+	}
+	public int getnewMessageCounter() {
+		return this.newmessages;
+	}
+	public void clearnewMessageCounter() {
+		this.newmessages = 0;
 	}
 	
 	
