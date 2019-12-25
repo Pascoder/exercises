@@ -54,11 +54,12 @@ public class App_View extends View<App_Model> {
     
     //Chat Area
 	HBox infoBox;
-	Label lblInfo, lblUsersOnline, lblActualChatroom;
+	Label lblInfo, lblUsersOnline, lblActualChatroom, lblNewMsg;
 	VBox chatRoomBox;
 	ScrollPane scroll;
 	HBox middleBox;
 	ArrayList<Button> btnArray = new ArrayList<Button>();
+	
 	
 	TextArea textArea;
 	
@@ -149,6 +150,7 @@ public class App_View extends View<App_Model> {
         scroll = new ScrollPane(chatRoomBox);
         lblUsersOnline = new Label();
         lblActualChatroom = new Label();
+        lblNewMsg = new Label();
         textArea = new TextArea();
         textArea.setMinSize(80, 80);
         
@@ -216,17 +218,19 @@ public class App_View extends View<App_Model> {
 
 	
 
-	public void addChatbox(String name) {
+	public void addChatbox(String name, String x) {
 		HBox ChatBox = new HBox();
 		
 		
 		Button btn = new Button(name);
 		btnArray.add(btn);
 		
+		Label lblNewMessage = new Label(x);
 		
-		btn.setPrefWidth(200);
 		
-		ChatBox.getChildren().addAll(btn);
+		btn.setPrefWidth(180);
+		
+		ChatBox.getChildren().addAll(btn,lblNewMessage);
 		chatRoomBox.getChildren().add(ChatBox);
 		
 		
