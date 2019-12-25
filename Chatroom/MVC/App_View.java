@@ -218,14 +218,15 @@ public class App_View extends View<App_Model> {
 
 	
 
-	public void addChatbox(String name, String x) {
+	public void addChatbox(String name, Chatraum c) {
 		HBox ChatBox = new HBox();
 		
 		
 		Button btn = new Button(name);
 		btnArray.add(btn);
 		
-		Label lblNewMessage = new Label(x);
+		Label lblNewMessage = new Label();
+		lblNewMessage.textProperty().bind(c.newmsgProperty().asString());
 		
 		
 		btn.setPrefWidth(180);

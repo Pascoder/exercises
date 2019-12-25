@@ -112,7 +112,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
 				chatraumArray.get(i).addChatMessage(msg[1]); //!!Hier werden nachrichten am passenden Chatraum hinzugefuegt
 				System.out.println("Message hinzugefuegt zu Chatraum: "+msg[0]);
 				if(this.acutalchatroom.equals(msg[0])) {
-				view.textArea.appendText(msg[1]+"\n"); //wenn die Nachricht für den Aktuellen Chatroom ist TextArea updaten
+				view.textArea.appendText(msg[1]+"\n"); //wenn die Nachricht fï¿½r den Aktuellen Chatroom ist TextArea updaten
 				}
 			}
 		}
@@ -141,7 +141,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
 			Chatraum chatraum = new Chatraum(g);
 			chatraumArray.add(chatraum);
 			String f = chatraum.getBtn().getText();
-			view.addChatbox(f);
+			view.addChatbox(f, chatraum);
 			
 			final Button but = view.btnArray.get(i);
 			

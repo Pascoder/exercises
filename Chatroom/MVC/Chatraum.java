@@ -1,5 +1,6 @@
 package MVC;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
@@ -9,12 +10,15 @@ public class Chatraum {
 	private String name;
 	private Button btn;
 	ObservableList <String> messageList;
+	SimpleIntegerProperty newmsg;
 	
 	
 	public Chatraum(String name) {
 		this.name = name;
 		messageList = FXCollections.observableArrayList();
 		btn = new Button(name);
+		newmsg = new SimpleIntegerProperty();
+		newmsg.set(0);
 		
 		
 	}
@@ -24,6 +28,7 @@ public class Chatraum {
 	public void addChatMessage(String Message) {
 		this.newmessages++;
 		messageList.add(Message);
+		newmsg.add(1);
 		
 	}
 
@@ -62,6 +67,27 @@ public class Chatraum {
 	public void clearnewMessageCounter() {
 		this.newmessages = 0;
 	}
+
+
+
+	public final SimpleIntegerProperty newmsgProperty() {
+		return this.newmsg;
+	}
+	
+
+
+
+	public final int getNewmsg() {
+		return this.newmsgProperty().get();
+	}
+	
+
+
+
+	public final void setNewmsg(final int newmsg) {
+		this.newmsgProperty().set(newmsg);
+	}
+	
 	
 	
 	
