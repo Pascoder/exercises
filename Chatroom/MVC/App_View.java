@@ -225,6 +225,7 @@ public class App_View extends View<App_Model> {
 		Button btn = new Button(name);
 		btnArray.add(btn);
 		
+		//Soll neue Nachricht anzeigen, rechts neben Button
 		Label lblNewMessage = new Label();
 		lblNewMessage.textProperty().bind(c.newmsgProperty().asString());
 		
