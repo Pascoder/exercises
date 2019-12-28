@@ -165,7 +165,7 @@ public class Configuration {
                         } catch (IOException e) {
                         	if(threadrunning) {
                             logger.info("Lost Connection to Server");
-                            break;
+                           // break;
                         	}else {
                         	logger.info("Thread closed");
                         	}

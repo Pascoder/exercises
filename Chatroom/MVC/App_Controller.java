@@ -44,8 +44,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
     public App_Controller(App_Model model, App_View view) throws IOException {
         super(model, view);
        
-    
-     
+   
         servicelocator = ServiceLocator.getServiceLocator();
         
      // register ourselves to listen for button clicks
@@ -59,6 +58,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
   
         servicelocator.getConfiguration().getNachrichtProperty().addListener((observable, old, neu) -> updateGUI(neu));
         
+        
         view.txt1.setDisable(true);
 		view.txt2.setDisable(true);
 		view.lblMulti.setDisable(true);
@@ -67,6 +67,8 @@ public class App_Controller extends Controller<App_Model, App_View> {
 		
         //Aktuell eingeloggter User anzeigen
 		view.lblUser.setText(servicelocator.getConfiguration().getActualUser());
+		
+		
         
 
         // register ourselves to handle window-closing event
@@ -111,6 +113,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
 				System.out.println("chat gefunden");
 				chatraumArray.get(i).addChatMessage(msg[1]); //!!Hier werden nachrichten am passenden Chatraum hinzugefuegt
 				System.out.println("Message hinzugefuegt zu Chatraum: "+msg[0]);
+				
 				if(this.acutalchatroom.equals(msg[0])) {
 				view.textArea.appendText(msg[1]+"\n"); //wenn die Nachricht f�r den Aktuellen Chatroom ist TextArea updaten
 				}
@@ -144,11 +147,15 @@ public class App_Controller extends Controller<App_Model, App_View> {
 			view.addChatbox(f, chatraum);
 			
 			final Button but = view.btnArray.get(i);
+		
+			
 			
 			but.setOnAction(c -> {
 				String senden = "JoinChatroom|"+servicelocator.getConfiguration().getSalt()+"|"+chatraum.getName()+"|"+servicelocator.getConfiguration().getActualUser();
 				this.acutalchatroom = chatraum.getName();
 				
+				//chatraum.getLabel().setText("-");
+				//chatraum.setMsgCounter();
 				try {
 					servicelocator.getConfiguration().getWriter().write(senden);
 					servicelocator.getConfiguration().getWriter().write("\n");

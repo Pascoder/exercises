@@ -2,6 +2,7 @@ package MVC;
 
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.TreeMap;
 import java.util.logging.Logger;
 import Splash.ServiceLocator;
 import MVC.View;
@@ -59,6 +60,9 @@ public class App_View extends View<App_Model> {
 	ScrollPane scroll;
 	HBox middleBox;
 	ArrayList<Button> btnArray = new ArrayList<Button>();
+
+	
+	HBox chatbox;
 	
 	
 	TextArea textArea;
@@ -225,14 +229,12 @@ public class App_View extends View<App_Model> {
 		Button btn = new Button(name);
 		btnArray.add(btn);
 		
-		//Soll neue Nachricht anzeigen, rechts neben Button
-		Label lblNewMessage = new Label();
-		lblNewMessage.textProperty().bind(c.newmsgProperty().asString());
+		
 		
 		
 		btn.setPrefWidth(180);
 		
-		ChatBox.getChildren().addAll(btn,lblNewMessage);
+		ChatBox.getChildren().addAll(btn,c.getLabel());
 		chatRoomBox.getChildren().add(ChatBox);
 		
 		
@@ -241,6 +243,12 @@ public class App_View extends View<App_Model> {
 	public ArrayList<Button> getBtnArray() {
 		return btnArray;
 	}
+	
+
+
+	
+	
+	
 	
 	
 	

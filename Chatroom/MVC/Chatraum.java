@@ -4,21 +4,26 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 
 public class Chatraum {
-	private int newmessages = 0;
+
 	private String name;
 	private Button btn;
+	private Label lbl;
 	ObservableList <String> messageList;
-	SimpleIntegerProperty newmsg;
+	
+	
+
+	private int msgcounter = 0;
 	
 	
 	public Chatraum(String name) {
 		this.name = name;
 		messageList = FXCollections.observableArrayList();
 		btn = new Button(name);
-		newmsg = new SimpleIntegerProperty();
-		newmsg.set(0);
+		lbl = new Label("-");
+		
 		
 		
 	}
@@ -26,9 +31,12 @@ public class Chatraum {
 	
 	
 	public void addChatMessage(String Message) {
-		this.newmessages++;
+	
+		msgcounter++;
+	
 		messageList.add(Message);
-		newmsg.add(1);
+		lbl.setText(msgcounter+"");
+		
 		
 	}
 
@@ -61,32 +69,19 @@ public class Chatraum {
 	public void setBtn(Button btn) {
 		this.btn = btn;
 	}
-	public int getnewMessageCounter() {
-		return this.newmessages;
-	}
-	public void clearnewMessageCounter() {
-		this.newmessages = 0;
-	}
-
-
-
-	public final SimpleIntegerProperty newmsgProperty() {
-		return this.newmsg;
+	
+	
+	
+	public Label getLabel() {
+		return this.lbl;
 	}
 	
-
-
-
-	public final int getNewmsg() {
-		return this.newmsgProperty().get();
+	public void setMsgCounter() {
+		this.msgcounter = 0;
 	}
+
+
 	
-
-
-
-	public final void setNewmsg(final int newmsg) {
-		this.newmsgProperty().set(newmsg);
-	}
 	
 	
 	
