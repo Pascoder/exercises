@@ -33,20 +33,14 @@ import javafx.stage.WindowEvent;
  * @author Brad Richards
  */
 public class App_Controller extends Controller<App_Model, App_View> {
-    ServiceLocator servicelocator;
-    
-   private String acutalchatroom = null;
-   private String actualUser = null;
+   ServiceLocator serviceLocator;
    
-   private ArrayList <Chatraum> chatraumArray = new ArrayList<>();
-   
- 
 
     public App_Controller(App_Model model, App_View view) throws IOException {
         super(model, view);
        
    
-        servicelocator = ServiceLocator.getServiceLocator();
+        serviceLocator = ServiceLocator.getServiceLocator();
         
      // register ourselves to listen for button clicks
         view.password.setOnAction(this::changePassword);
@@ -56,72 +50,109 @@ public class App_Controller extends Controller<App_Model, App_View> {
         view.createChatroom.setOnAction(this::createChatroom); //Menu Create Chatroom
         view.sendbutton.setOnAction(this::senden);
         view.leavechatroom.setOnAction(this::leavechatroom);
-  
-        servicelocator.getConfiguration().getNachrichtProperty().addListener((observable, old, neu) -> updateGUI(neu));
-        
-        
         view.txt1.setDisable(true);
 		view.txt2.setDisable(true);
 		view.lblMulti.setDisable(true);
 		view.btnMulti.setDisable(true);
-
 		
+        serviceLocator.getConfiguration().getNachrichtProperty().
+        addListener((observable, old, neu) -> updateGUI(neu));
+ 
         //Aktuell eingeloggter User anzeigen
-		view.lblUser.setText(servicelocator.getConfiguration().getActualUser());
-		
-		
-        
-
+		view.lblUser.setText(serviceLocator.getConfiguration().getActualUser());
+	
         // register ourselves to handle window-closing event
         view.getStage().setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent event) {
-            
-                
+    
                 try {
-                	servicelocator.getConfiguration().closeThread();
-                	servicelocator.getConfiguration().getSocket().close();
-					servicelocator.getLogger().info("Socket is closed");//Socket schliessen
+                	serviceLocator.getConfiguration().closeThread();
+                	serviceLocator.getConfiguration().getSocket().close();
+					serviceLocator.getLogger().info("Socket is closed");//Socket schliessen
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
+					
 					e.printStackTrace();
 				}
                 
                 Platform.exit();
             }
         });    
-        servicelocator.getLogger().info("Application controller initialized");
+        serviceLocator.getLogger().info("Application controller initialized");
         
         //Chatrooms laden
-        model.loadChats();
-        empfangenChatrooms();
+        model.loadChatrooms();
+        model.receiveChatrooms();
+        addChatboxes();
 		
     }
     
     
-    //#DIESE METHODE IST UM DEN CHAT VERLAUF IN DIE CHATRAUME AUFZUTEILEN UND DIE GUI ZU AKTUALISEREN
+    private void addChatboxes() {
+    	for(int i= 0; i<model.getMsg().size(); i++) {
+			
+			//Chatroom name
+			String g = model.getMsg().get(i);
+			//Add Available Chatrooms to the view
+			Chatraum chatraum = new Chatraum(g);
+			model.getChatraumArray().add(chatraum);
+			String f = chatraum.getBtn().getText();
+			view.addChatbox(f, chatraum);
+			
+			final Button but = view.btnArray.get(i);
+	
+			but.setOnAction(c -> {
+				String senden = "JoinChatroom|"+serviceLocator.getConfiguration().
+						getSalt()+"|"+chatraum.getName()+"|"+serviceLocator.getConfiguration().getActualUser();
+				model.setAcutalchatroom(chatraum.getName());
+			
+				chatraum.getLabel().setText("-");
+				chatraum.setMsgCounter();
+				try {
+					serviceLocator.getConfiguration().getWriter().write(senden);
+					serviceLocator.getConfiguration().getWriter().write("\n");
+					serviceLocator.getConfiguration().getWriter().flush();
+					Integer a = 0;
+			        while (a <= 15000000) {
+			            
+			        	a++;
+			        }
+				} catch (IOException e) {
+					serviceLocator.getLogger().info("Konnte nicht ge Joint werden");
+				}
+		
+			    updateChatArea(chatraum);
+			});
+			
+		}
+		
+	}
+
+
+	//#DIESE METHODE IST UM DEN CHAT VERLAUF IN DIE CHATRAUME AUFZUTEILEN UND DIE GUI ZU AKTUALISEREN
     //sorted message --> addListener --> updateGUI
    private Object updateGUI(String neu) {
-	   servicelocator.getLogger().info("GUI wurde aktualisiert nachricht empfangen");
+	   serviceLocator.getLogger().info("GUI wurde aktualisiert nachricht empfangen");
 		
 		
 		
 	   String[] msg =  neu.split("\\|");//Aufteilen von chatroom|nachricht
 	   
 		
-		for(int i = 0; i<chatraumArray.size();i++) {
-			if(chatraumArray.get(i).getName().equals(msg[0])) {
+		for(int i = 0; i<model.getChatraumArray().size();i++) {
+			if(model.getChatraumArray().get(i).getName().equals(msg[0])) {
 				
 				System.out.println("chat gefunden");
-				chatraumArray.get(i).addChatMessage(msg[1]); //!!Hier werden nachrichten am passenden Chatraum hinzugefuegt
+				model.getChatraumArray().get(i).addChatMessage(msg[1]); //!!Hier werden nachrichten am passenden Chatraum hinzugefuegt
 				System.out.println("Message hinzugefuegt zu Chatraum: "+msg[0]);
 				int counter = i;
-				if(this.acutalchatroom!=chatraumArray.get(i).getName()) {//Wenn ich im Chat bin dann muss ich counter nicht hochzählen da ich ja die nachricht dann schon gelesen habe
-				Platform.runLater(()->{chatraumArray.get(counter).getLabel().setText(chatraumArray.get(counter).getMsgCounter()+"");});
+				if(model.getAcutalchatroom()!=model.getChatraumArray().get(i).getName()) {//Wenn ich im Chat bin dann muss ich counter nicht hochzï¿½hlen da ich ja die nachricht dann schon gelesen habe
+				Platform.runLater(()->{model.getChatraumArray().get(counter).
+					getLabel().setText(model.getChatraumArray().get(counter).getMsgCounter()+"");});
 				}
 				
-				if(this.acutalchatroom.equals(msg[0])) {
-				view.textArea.appendText(msg[1]+"\n"); //wenn die Nachricht fï¿½r den Aktuellen Chatroom ist TextArea updaten
+				if(model.getAcutalchatroom().equals(msg[0])) {
+				view.textArea.appendText(msg[1]+"\n"); //wenn die Nachricht fuer den Aktuellen Chatroom ist TextArea updaten
 				}
 			}
 		}
@@ -135,63 +166,16 @@ public class App_Controller extends Controller<App_Model, App_View> {
 	}
    
    
-   	// Empfangen der Chatrooms vom Server
-	private void empfangenChatrooms() {
-		ArrayList <String> msg;
-		msg = servicelocator.getConfiguration().getChatrooms();
-		
-		
-		
-		for(int i= 0; i<msg.size(); i++) {
-			
-			//Chatroom name
-			String g = msg.get(i);
-			
-			Chatraum chatraum = new Chatraum(g);
-			chatraumArray.add(chatraum);
-			String f = chatraum.getBtn().getText();
-			view.addChatbox(f, chatraum);
-			
-			final Button but = view.btnArray.get(i);
-			
-		
-			
-			but.setOnAction(c -> {
-				String senden = "JoinChatroom|"+servicelocator.getConfiguration().getSalt()+"|"+chatraum.getName()+"|"+servicelocator.getConfiguration().getActualUser();
-				this.acutalchatroom = chatraum.getName();
-			
-				chatraum.getLabel().setText("-");
-				chatraum.setMsgCounter();
-				try {
-					servicelocator.getConfiguration().getWriter().write(senden);
-					servicelocator.getConfiguration().getWriter().write("\n");
-					servicelocator.getConfiguration().getWriter().flush();
-					Integer a = 0;
-			        while (a <= 15000000) { //<--muss mit einer Property ersetzt werden
-			            
-			        	a++;
-			        }
-				} catch (IOException e) {
-					servicelocator.getLogger().info("Konnte nicht ge Joint werden");
-				}
-				
-				
-				
-			    updateChatArea(chatraum);
-			});
-			
-		}
-		
-	}
+   	
 	
 	//#DIESE METHODE IST FUER DEN 1. KLICK AUF EINEN CHAT BUTTON
 	private Object updateChatArea(Chatraum chatraum) {
 	view.textArea.clear();
 	view.lblUsersOnline.setText("");
-	servicelocator.getConfiguration().setUsersOnline("");
+	serviceLocator.getConfiguration().setUsersOnline("");
 	model.getUsersOnline(chatraum.getName());
-	view.lblUsersOnline.setText("Users online: " + servicelocator.getConfiguration().getUsersOnline());
-	view.lblActualChatroom.setText("Actual Chatroom: " + acutalchatroom + "                 ");
+	view.lblUsersOnline.setText("Users online: " + serviceLocator.getConfiguration().getUsersOnline());
+	view.lblActualChatroom.setText("Actual Chatroom: " + model.getAcutalchatroom() + "                 ");
 	
 	
 		
@@ -288,7 +272,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
 	}
 	
 	
-	
+	//btnMulti gedrueckt, je nach case -> switch Option
 	public void OptionStart(Event option) {
 		
 		try {
@@ -298,39 +282,39 @@ public class App_Controller extends Controller<App_Model, App_View> {
 		//0=kein Menu ausgewaehlt, 1= Chatroom erstellen, 2= Chatroom beitreten
 		switch(model.getMenuOption()){
 		case 1:
-			senden = "CreateChatroom|"+servicelocator.getConfiguration().getSalt()+"|"+text1 +"|"+"true";
+			senden = "CreateChatroom|"+serviceLocator.getConfiguration().getSalt()+"|"+text1 +"|"+"true";
 			break;
 		case 2:
-			senden = "JoinChatroom|"+servicelocator.getConfiguration().getSalt()+"|"+text2+"|"+ text1;
-			this.acutalchatroom = text2;
+			senden = "JoinChatroom|"+serviceLocator.getConfiguration().getSalt()+"|"+text2+"|"+ text1;
+			model.setAcutalchatroom(text2);
 			break;
 		case 3:
-			senden = "ChangePassword|"+servicelocator.getConfiguration().getSalt()+"|"+text1;
+			senden = "ChangePassword|"+serviceLocator.getConfiguration().getSalt()+"|"+text1;
 			break;
 		case 4:	
-			senden = "DeleteLogin|"+servicelocator.getConfiguration().getSalt()+"|"+text1;
+			senden = "DeleteLogin|"+serviceLocator.getConfiguration().getSalt()+"|"+text1;
 			break;
 		case 5:
-			senden = "LeaveChatroom|"+servicelocator.getConfiguration().getSalt()+"|"+text2+"|"+ text1;
-			this.acutalchatroom = null;
+			senden = "LeaveChatroom|"+serviceLocator.getConfiguration().getSalt()+"|"+text2+"|"+ text1;
+			model.setAcutalchatroom(null);
 			break;
 		}
-		servicelocator.getConfiguration().getWriter().write(senden);
-		servicelocator.getConfiguration().getWriter().write("\n");
-		servicelocator.getConfiguration().getWriter().flush();
+		serviceLocator.getConfiguration().getWriter().write(senden);
+		serviceLocator.getConfiguration().getWriter().write("\n");
+		serviceLocator.getConfiguration().getWriter().flush();
 		
 		Integer i = 0;
         while (i <= 15000000) { //<--muss mit einer Property ersetzt werden
             i++;
         }
         
-		if(servicelocator.getConfiguration().getOthers()==true) {
-		servicelocator.getLogger().info("Erfolgreich");
+		if(serviceLocator.getConfiguration().getOthers()==true) {
+		serviceLocator.getLogger().info("Erfolgreich");
 		}else {
-		servicelocator.getLogger().info("OptionStart: "+model.getMenuOption()+" ist gescheitert");
+		serviceLocator.getLogger().info("OptionStart: "+model.getMenuOption()+" ist gescheitert");
 		}
 		} catch(IOException exception) {
-			this.servicelocator.getLogger().info(exception.getMessage());
+			this.serviceLocator.getLogger().info(exception.getMessage());
 			}
 		}
 		
@@ -342,24 +326,24 @@ public class App_Controller extends Controller<App_Model, App_View> {
 	
 	private void senden(Event ev) {
 		
-		if(acutalchatroom==null) {
+		if(model.getAcutalchatroom()==null) {
 		view.txtChatMessage.setText("Zuerst einem Chatroom beitreten");
 		}else {
 		String message = view.txtChatMessage.getText();
 		
 		try {
-		String send = "SendMessage|"+this.servicelocator.getConfiguration().getSalt()+"|"+this.acutalchatroom+"|"+message;
-		servicelocator.getConfiguration().getWriter().write(send);
-		servicelocator.getConfiguration().getWriter().write("\n");
-		servicelocator.getConfiguration().getWriter().flush();
-		servicelocator.getLogger().info("gesendet");
+		String send = "SendMessage|"+this.serviceLocator.getConfiguration().getSalt()+"|" + model.getAcutalchatroom()+"|"+message;
+		serviceLocator.getConfiguration().getWriter().write(send);
+		serviceLocator.getConfiguration().getWriter().write("\n");
+		serviceLocator.getConfiguration().getWriter().flush();
+		serviceLocator.getLogger().info("gesendet");
 		//view.textArea.appendText(message+"\n");
 		view.txtChatMessage.clear();
 		
 		
 		}catch(Exception ex) {
 			ex.printStackTrace();
-			servicelocator.getLogger().info("problem beim senden");
+			serviceLocator.getLogger().info("problem beim senden");
 		}
 		}
 	}

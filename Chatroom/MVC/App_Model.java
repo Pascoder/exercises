@@ -1,11 +1,12 @@
 package MVC;
 
 import Splash.ServiceLocator;
-
+import javafx.scene.control.Button;
 
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 
 import MVC.Model;
 
@@ -18,28 +19,18 @@ import MVC.Model;
  */
 public class App_Model extends Model {
     ServiceLocator serviceLocator;
-    
+    private ArrayList<String> msg;
+    private ArrayList <Chatraum> chatraumArray = new ArrayList<>();
+    private String acutalchatroom = null;
+    private String actualUser = null;
     
     //0=kein Menu ausgewählt, 1= Chatroom erstellen, 2= Chatroom beitreten, 3= User hinzufügen
     private int menuOption = 0;
  
-    
-    
-    public int getMenuOption() {
-		return menuOption;
-	}
-
-
-
-	public void setMenuOption(int menuOption) {
-		this.menuOption = menuOption;
-	}
-
-
 
 	public App_Model() {
         
-        
+        msg = new ArrayList<String>();
         serviceLocator = ServiceLocator.getServiceLocator();        
         serviceLocator.getLogger().info("Application model initialized");
     }
@@ -55,7 +46,7 @@ public class App_Model extends Model {
 			serviceLocator.getConfiguration().getWriter().write("\n");
 			serviceLocator.getConfiguration().getWriter().flush();
 			Integer a = 0;
-	        while (a <= 200000000) { //<--muss mit einer Property ersetzt werden
+	        while (a <= 200000000) { 
 	            
 	        	a++;
 	        }
@@ -65,7 +56,7 @@ public class App_Model extends Model {
 		
 		return null;
 	}
-	public void loadChats() {
+	public void loadChatrooms() {
 		try{
 			
 			
@@ -82,15 +73,80 @@ public class App_Model extends Model {
 				exception.getMessage();
 		}
 		Integer i = 0;
-        while (i <= 15000000) { //<--muss mit einer Property ersetzt werden
+        while (i <= 15000000) { 
             i++;
         }
 	}
 
+	// Empfangen der Chatrooms vom Server
+		public void receiveChatrooms() {
+			
+			msg = serviceLocator.getConfiguration().getChatrooms();
+			
+			
+			
+			
+			
+		}
 
+
+
+		public ArrayList<String> getMsg() {
+			return msg;
+		}
+
+
+
+		public void setMsg(ArrayList<String> msg) {
+			this.msg = msg;
+		}
+
+
+
+		public ArrayList<Chatraum> getChatraumArray() {
+			return chatraumArray;
+		}
+
+
+
+		public void setChatraumArray(ArrayList<Chatraum> chatraumArray) {
+			this.chatraumArray = chatraumArray;
+		}
+
+
+
+		public String getAcutalchatroom() {
+			return acutalchatroom;
+		}
+
+
+
+		public void setAcutalchatroom(String acutalchatroom) {
+			this.acutalchatroom = acutalchatroom;
+		}
+
+
+
+		public String getActualUser() {
+			return actualUser;
+		}
+
+
+
+		public void setActualUser(String actualUser) {
+			this.actualUser = actualUser;
+		}
 	
 
-  
+		 public int getMenuOption() {
+				return menuOption;
+			}
+
+
+
+			public void setMenuOption(int menuOption) {
+				this.menuOption = menuOption;
+			}
   
     
     

@@ -44,27 +44,27 @@ public class Configuration {
     ServiceLocator sl = ServiceLocator.getServiceLocator();  // for easy reference
     Logger logger = sl.getLogger();                          // for easy reference
 
-    private Properties defaultOptions;
-    private Properties localOptions;
-    private Socket socket = null;
-    private BufferedWriter writer;
-    private BufferedReader reader;
-    private String token;
-    private boolean correctLogin;
-    private ArrayList<String> chatroomArray;
-    private boolean accountcreated;
-    Thread serverCommunicationThread;
-    JavaFX_App_Template template;
-    private boolean others;
-    private String actualUser = null;
-    private String usersOnline = "";
-    private boolean booleanuseronline = false;
-    private boolean threadrunning = true;
-    
+    private Properties 			defaultOptions;
+    private Properties 			localOptions;
+    private Socket 				socket = null;
+    private BufferedWriter 		writer;
+    private BufferedReader 		reader;
+    private String 				token;
+    private boolean 			correctLogin;
+    private ArrayList<String> 	chatroomArray;
+    private boolean 			accountcreated;
+    private Thread 				serverCommunicationThread;
+    private JavaFX_App_Template template;
+    private boolean 			onSort;
+    private String 				actualUser = null;
+    private String 				usersOnline = "";
+    private boolean 			booleanuseronline = false;
+    private boolean 			threadrunning = true;
+    private int 				messagecounter = 0;
     //Message
     
-   private ArrayList<String> recivedmessages = new ArrayList<String>();
-   private SimpleStringProperty nachricht = new SimpleStringProperty(); //wenn neue Nachricht gui updaten
+    private ArrayList<String> 	recivedmessages = new ArrayList<String>();
+    private SimpleStringProperty nachricht = new SimpleStringProperty(); //wenn neue Nachricht gui updaten
     
 
     public Configuration() {
@@ -126,13 +126,7 @@ public class Configuration {
         }
     }
     
-    public String getOption(String name) {
-        return localOptions.getProperty(name);
-    }
-    
-    public void setLocalOption(String name, String value) {
-        localOptions.setProperty(name, value);
-    }
+
      
     //Hier wird Socket erstellt
     public void connectToServer() throws IOException {
@@ -145,7 +139,7 @@ public class Configuration {
 		}
     
  
-      public void createBufferedWriter() {
+    public void createBufferedWriter() {
     	try{
     		this.writer = new BufferedWriter(new OutputStreamWriter(this.socket.getOutputStream())); 
     	}catch(Exception ex) {
@@ -153,35 +147,32 @@ public class Configuration {
     	}	
     }
       
-      private int messagecounter = 0;
+
     
     public void createBufferedReader() {
         try {
             BufferedReader socketIn = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
             serverCommunicationThread = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    while (threadrunning) {
-                        try {
-                            String serverMessage = socketIn.readLine();
-                            logger.info("Received: " + serverMessage);
-                            	
-                            		sortMessaged(serverMessage);
+            @Override
+            public void run() {
+               while (threadrunning) {
+                  try {
+                      	String serverMessage = socketIn.readLine();
+                      	logger.info("Received: " + serverMessage);
+                      	sortMessaged(serverMessage);
                           
                         } catch (IOException e) {
                         	if(threadrunning) {
                         		Platform.runLater(new Runnable() {
-									public void run() {
-										showAlert();
-										
-									}
+								public void run() {
+								showAlert();
+								}
                         		
-                        		});
+                        });
                         		
-                        	
-                            logger.info("Lost Connection to Server");
-                           // break;
+                        		logger.info("Lost Connection to Server");
+                           
                         	}else {
                         	logger.info("Thread closed");
                         	}
@@ -195,7 +186,7 @@ public class Configuration {
 
 
 
-				private void sortMessaged(String serverMessages) {
+private void sortMessaged(String serverMessages) {
                 	messagecounter++;
                   String [] messages = serverMessages.split("\\|"); //Jede nachricht wird nach aufteilung in Message typ geloescht
                   
@@ -217,10 +208,10 @@ public class Configuration {
                     	accountcreated = true;
                     
                     }else {
-                    	others = false;//<-- jedes mal wenn eine 2 Stellige nachricht rein kommt wird zuerst others auf false gesetzt um ein korrektes ergebnis zu haben fuer jeweilige Anfrage
+                    	onSort = false;//<-- jedes mal wenn eine 2 Stellige nachricht rein kommt wird zuerst others auf false gesetzt um ein korrektes ergebnis zu haben fuer jeweilige Anfrage
                      //Wenn Account schon erstellt wurde oder sich das Programm nicht mehr im Login Menu befindet gehen spaetere nachrichten hier ein
                     if(messages.length == 2 && messages[0].equals("Result") && messages[1].equals("true")) {
-                        others = true;
+                    	onSort = true;
                         
                         }
                     	
@@ -281,22 +272,25 @@ public class Configuration {
     }  
     
     
-     private void showAlert() {
+    private void showAlert() {
     	
-    	    	Alert alert = new Alert(AlertType.CONFIRMATION);
-    	    	alert.setTitle("Warning!");
-    	    	alert.setHeaderText("Lost Server Connection");
-    	    	alert.setContentText("Exit Programm?");
-    	    	Optional<ButtonType> result = alert.showAndWait();
-    	    	if (result.get() == ButtonType.OK) {
-    	    		template.stop();
-    	    	} else {
-    	    		//Login Fenster oeffnen
-    	    		template.stop();
+    Alert alert = new Alert(AlertType.CONFIRMATION);
+    	alert.setTitle("Warning!");
+    	alert.setHeaderText("Lost Server Connection");
+    	alert.setContentText("Exit Programm?");
+    	Optional<ButtonType> result = alert.showAndWait();
+    	    if (result.get() == ButtonType.OK) {
+    	    	template.stop();
+    	    } else {
+    	    	//Login Fenster oeffnen
+    	    	template.stop();
     	    	}
     	    
-    	    	}					
-				  
+    	    }					
+
+    
+    
+    //Getter & Setter
     
     public Socket getSocket() {
     	return this.socket;
@@ -326,7 +320,7 @@ public class Configuration {
     	return this.accountcreated;
     }
     public boolean getOthers() {
-    	return this.others;
+    	return this.onSort;
     }
    public void setNachrichtProperty(String newValue) {
     	this.nachricht.set(newValue);
@@ -356,7 +350,13 @@ public class Configuration {
 		this.threadrunning = false;
 	}
 	
-   
+    public String getOption(String name) {
+        return localOptions.getProperty(name);
+    }
+    
+    public void setLocalOption(String name, String value) {
+        localOptions.setProperty(name, value);
+    }
 	
 	
 }
