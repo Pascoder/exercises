@@ -14,14 +14,19 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Optional;
 import java.util.Properties;
 import java.util.logging.Logger;
 
 
 import Splash.ServiceLocator;
+import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 
 /**
  * Copyright 2015, FHNW, Prof. Dr. Brad Richards. All rights reserved. This code
@@ -161,9 +166,20 @@ public class Configuration {
                         try {
                             String serverMessage = socketIn.readLine();
                             logger.info("Received: " + serverMessage);
-                            sortMessaged(serverMessage);
+                            	
+                            		sortMessaged(serverMessage);
+                          
                         } catch (IOException e) {
                         	if(threadrunning) {
+                        		Platform.runLater(new Runnable() {
+									public void run() {
+										showAlert();
+										
+									}
+                        		
+                        		});
+                        		
+                        	
                             logger.info("Lost Connection to Server");
                            // break;
                         	}else {
@@ -175,7 +191,11 @@ public class Configuration {
                 
                
                 
-                private void sortMessaged(String serverMessages) {
+               
+
+
+
+				private void sortMessaged(String serverMessages) {
                 	messagecounter++;
                   String [] messages = serverMessages.split("\\|"); //Jede nachricht wird nach aufteilung in Message typ geloescht
                   
@@ -259,7 +279,24 @@ public class Configuration {
             e.printStackTrace();
         }
     }  
-      
+    
+    
+     private void showAlert() {
+    	
+    	    	Alert alert = new Alert(AlertType.CONFIRMATION);
+    	    	alert.setTitle("Warning!");
+    	    	alert.setHeaderText("Lost Server Connection");
+    	    	alert.setContentText("Exit Programm?");
+    	    	Optional<ButtonType> result = alert.showAndWait();
+    	    	if (result.get() == ButtonType.OK) {
+    	    		template.stop();
+    	    	} else {
+    	    		//Login Fenster oeffnen
+    	    		template.stop();
+    	    	}
+    	    
+    	    	}					
+				  
     
     public Socket getSocket() {
     	return this.socket;

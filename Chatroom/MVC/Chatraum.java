@@ -22,7 +22,7 @@ public class Chatraum {
 		this.name = name;
 		messageList = FXCollections.observableArrayList();
 		btn = new Button(name);
-		lbl = new Label("-");
+		lbl = new Label();
 		
 		
 		

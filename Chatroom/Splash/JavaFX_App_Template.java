@@ -15,6 +15,8 @@ import Splash.Splash_Model;
 import Splash.Splash_View;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 /**

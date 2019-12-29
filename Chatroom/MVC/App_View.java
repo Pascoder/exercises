@@ -225,15 +225,9 @@ public class App_View extends View<App_Model> {
 
 	public void addChatbox(String name, Chatraum c) {
 		HBox ChatBox = new HBox();
-		
-		
 		Button btn = new Button(name);
 		btnArray.add(btn);
-		
-		
-		
-		
-		
+
 		btn.setPrefWidth(180);
 		
 		ChatBox.getChildren().addAll(btn,c.getLabel());
