@@ -61,6 +61,7 @@ public class App_View extends View<App_Model> {
 	HBox middleBox;
 	ArrayList<Button> btnArray = new ArrayList<Button>();
 
+
 	
 	HBox chatbox;
 	
@@ -232,6 +233,7 @@ public class App_View extends View<App_Model> {
 		
 		
 		
+		
 		btn.setPrefWidth(180);
 		
 		ChatBox.getChildren().addAll(btn,c.getLabel());
@@ -243,7 +245,7 @@ public class App_View extends View<App_Model> {
 	public ArrayList<Button> getBtnArray() {
 		return btnArray;
 	}
-	
+
 
 
 	

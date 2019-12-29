@@ -22,6 +22,7 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.WindowEvent;
 
 /**
@@ -110,9 +111,14 @@ public class App_Controller extends Controller<App_Model, App_View> {
 		
 		for(int i = 0; i<chatraumArray.size();i++) {
 			if(chatraumArray.get(i).getName().equals(msg[0])) {
+				
 				System.out.println("chat gefunden");
 				chatraumArray.get(i).addChatMessage(msg[1]); //!!Hier werden nachrichten am passenden Chatraum hinzugefuegt
 				System.out.println("Message hinzugefuegt zu Chatraum: "+msg[0]);
+				int counter = i;
+				if(this.acutalchatroom!=chatraumArray.get(i).getName()) {//Wenn ich im Chat bin dann muss ich counter nicht hochzählen da ich ja die nachricht dann schon gelesen habe
+				Platform.runLater(()->{chatraumArray.get(counter).getLabel().setText(chatraumArray.get(counter).getMsgCounter()+"");});
+				}
 				
 				if(this.acutalchatroom.equals(msg[0])) {
 				view.textArea.appendText(msg[1]+"\n"); //wenn die Nachricht fï¿½r den Aktuellen Chatroom ist TextArea updaten
@@ -147,15 +153,15 @@ public class App_Controller extends Controller<App_Model, App_View> {
 			view.addChatbox(f, chatraum);
 			
 			final Button but = view.btnArray.get(i);
-		
 			
+		
 			
 			but.setOnAction(c -> {
 				String senden = "JoinChatroom|"+servicelocator.getConfiguration().getSalt()+"|"+chatraum.getName()+"|"+servicelocator.getConfiguration().getActualUser();
 				this.acutalchatroom = chatraum.getName();
-				
-				//chatraum.getLabel().setText("-");
-				//chatraum.setMsgCounter();
+			
+				chatraum.getLabel().setText("-");
+				chatraum.setMsgCounter();
 				try {
 					servicelocator.getConfiguration().getWriter().write(senden);
 					servicelocator.getConfiguration().getWriter().write("\n");

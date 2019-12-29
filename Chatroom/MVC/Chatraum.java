@@ -35,7 +35,7 @@ public class Chatraum {
 		msgcounter++;
 	
 		messageList.add(Message);
-		lbl.setText(msgcounter+"");
+
 		
 		
 	}
@@ -78,6 +78,9 @@ public class Chatraum {
 	
 	public void setMsgCounter() {
 		this.msgcounter = 0;
+	}
+	public int getMsgCounter() {
+		return this.msgcounter;
 	}
 
 
