@@ -23,6 +23,7 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.WindowEvent;
 
 /**
@@ -97,16 +98,35 @@ public class App_Controller extends Controller<App_Model, App_View> {
 			Chatraum chatraum = new Chatraum(g);
 			model.getChatraumArray().add(chatraum);
 			String f = chatraum.getBtn().getText();
+
+		
 			view.addChatbox(f, chatraum);
 			
 			final Button but = view.btnArray.get(i);
+			//Button Styling from http://fxexperience.com/2011/12/styling-fx-buttons-with-css/
+			but.setId("record-sales");
+			but.setOnMouseEntered(new EventHandler<MouseEvent>() {
+
+				@Override
+				public void handle(MouseEvent event) {
+					 	but.setScaleX(1.2);
+				        but.setScaleY(1.2);
+				}
 	
+			});
+			but.setOnMouseExited(new EventHandler<MouseEvent>() {
+				    public void handle(MouseEvent e) {
+				        but.setScaleX(1);
+				        but.setScaleY(1);
+				      
+				    }
+				});
 			but.setOnAction(c -> {
 				String senden = "JoinChatroom|"+serviceLocator.getConfiguration().
 						getSalt()+"|"+chatraum.getName()+"|"+serviceLocator.getConfiguration().getActualUser();
 				model.setAcutalchatroom(chatraum.getName());
 			
-				chatraum.getLabel().setText("-");
+				chatraum.getLabel().setText("");
 				chatraum.setMsgCounter();
 				try {
 					serviceLocator.getConfiguration().getWriter().write(senden);
@@ -142,9 +162,9 @@ public class App_Controller extends Controller<App_Model, App_View> {
 		for(int i = 0; i<model.getChatraumArray().size();i++) {
 			if(model.getChatraumArray().get(i).getName().equals(msg[0])) {
 				
-				System.out.println("chat gefunden");
-				model.getChatraumArray().get(i).addChatMessage(msg[1]); //!!Hier werden nachrichten am passenden Chatraum hinzugefuegt
-				System.out.println("Message hinzugefuegt zu Chatraum: "+msg[0]);
+				//!!Hier werden nachrichten am passenden Chatraum hinzugefuegt
+				model.getChatraumArray().get(i).addChatMessage(msg[1]); 
+				
 				int counter = i;
 					//Wenn ich im Chat bin dann muss ich counter nicht hochzaehlen da ich ja die nachricht dann schon gelesen habe
 					if(model.getAcutalchatroom()!= model.getChatraumArray().get(i).getName()) {
@@ -329,7 +349,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
 	private void senden(Event ev) {
 		
 		if(model.getAcutalchatroom()==null) {
-		view.txtChatMessage.setText("Zuerst einem Chatroom beitreten");
+		view.lblInfo.setText("Zuerst einem Chatroom beitreten");
 		}else {
 		String message = view.txtChatMessage.getText();
 		

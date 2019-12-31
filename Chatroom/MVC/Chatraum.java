@@ -3,8 +3,11 @@ package MVC;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Font;
 
 public class Chatraum {
@@ -23,9 +26,12 @@ public class Chatraum {
 		this.name = name;
 		messageList = FXCollections.observableArrayList();
 		btn = new Button(name);
+		
 		lbl = new Label();
-		lbl.setFont(new Font(30));
+		lbl.setFont(new Font(35));
 		lbl.setStyle("-fx-text-fill: red");
+		lbl.setStyle("-fx-font-weight: bold");
+		
 		
 		
 		

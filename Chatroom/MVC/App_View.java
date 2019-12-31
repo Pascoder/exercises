@@ -156,12 +156,12 @@ public class App_View extends View<App_Model> {
         textArea = new TextArea();
         textArea.setEditable(false);
        
-//        textArea.setDisable(true);
+
       
         
         textArea.setMinSize(80, 80);
         
-        scroll.setMinWidth(220);
+        scroll.setMinWidth(300);
     
     	
     	
@@ -229,11 +229,13 @@ public class App_View extends View<App_Model> {
 	public void addChatbox(String name, Chatraum c) {
 		HBox ChatBox = new HBox();
 		Button btn = new Button(name);
+		Label lblSpacer1 = new Label("            ");
+		Label lblSpacer = new Label("   ");
 		btnArray.add(btn);
 
 		btn.setPrefWidth(180);
 		
-		ChatBox.getChildren().addAll(btn,c.getLabel());
+		ChatBox.getChildren().addAll(lblSpacer1, btn,lblSpacer,c.getLabel());
 		chatRoomBox.getChildren().add(ChatBox);
 		
 		
