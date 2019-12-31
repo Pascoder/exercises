@@ -188,8 +188,11 @@ public class Configuration {
 
 private void sortMessaged(String serverMessages) {
                 	messagecounter++;
-                  String [] messages = serverMessages.split("\\|"); //Jede nachricht wird nach aufteilung in Message typ geloescht
+                
+                	
+                	String [] messages = serverMessages.split("\\|"); //Jede nachricht wird nach aufteilung in Message typ geloescht
                   
+                   
                     
                     //Test
                     for(int i = 0; i < messages.length;i++) {
@@ -266,7 +269,7 @@ private void sortMessaged(String serverMessages) {
             serverCommunicationThread.setDaemon(true);
             serverCommunicationThread.start();
 
-        } catch (IOException e) {
+        } catch (IOException  e) {
             e.printStackTrace();
         }
     }  
