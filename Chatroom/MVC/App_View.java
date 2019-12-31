@@ -19,10 +19,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
@@ -60,16 +62,9 @@ public class App_View extends View<App_Model> {
 	ScrollPane scroll;
 	HBox middleBox;
 	ArrayList<Button> btnArray = new ArrayList<Button>();
-
-
-	
 	HBox chatbox;
-	
-	
 	TextArea textArea;
 	
-	
-    
     //Bottom Controlls
 	TextField txtChatMessage; 
     Button sendbutton;
@@ -152,11 +147,18 @@ public class App_View extends View<App_Model> {
         lblInfo = new Label();
         middleBox = new HBox();
         chatRoomBox = new VBox();
+        
         scroll = new ScrollPane(chatRoomBox);
+        
         lblUsersOnline = new Label();
         lblActualChatroom = new Label();
         lblNewMsg = new Label();
         textArea = new TextArea();
+        textArea.setEditable(false);
+       
+//        textArea.setDisable(true);
+      
+        
         textArea.setMinSize(80, 80);
         
         scroll.setMinWidth(220);
@@ -190,7 +192,8 @@ public class App_View extends View<App_Model> {
         
         updateTexts();
 		//@TODO make GUI Design 
-        Scene scene = new Scene(root,700,800);
+        Scene scene = new Scene(root,800,800);
+        
         scene.getStylesheets().add(
                 getClass().getResource("style.css").toExternalForm());
         return scene;

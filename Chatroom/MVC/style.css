@@ -2,6 +2,7 @@
 	-fx-padding: 0px 10px 0px 10px;
 	-fx-spacing: 10px;
 	-fx-background-image:url(default-wallpaper.png)
+	
 }
 
 .hbox {
@@ -20,5 +21,22 @@
 	-fx-font: italic 10pt "Arial";
 }
 
+.text-area {
+    -fx-background-color: transparent;
+    -fx-font-size: 25;
+}
+
+.text-area .scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.text-area .scroll-pane .viewport{
+    -fx-background-color: transparent;
+}
+
+
+.text-area .scroll-pane .content{
+    -fx-background-color: transparent;
+}
 
 	

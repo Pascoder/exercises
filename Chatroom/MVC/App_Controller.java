@@ -146,13 +146,15 @@ public class App_Controller extends Controller<App_Model, App_View> {
 				model.getChatraumArray().get(i).addChatMessage(msg[1]); //!!Hier werden nachrichten am passenden Chatraum hinzugefuegt
 				System.out.println("Message hinzugefuegt zu Chatraum: "+msg[0]);
 				int counter = i;
-				if(model.getAcutalchatroom()!=model.getChatraumArray().get(i).getName()) {//Wenn ich im Chat bin dann muss ich counter nicht hochz�hlen da ich ja die nachricht dann schon gelesen habe
-				Platform.runLater(()->{model.getChatraumArray().get(counter).
-					getLabel().setText(model.getChatraumArray().get(counter).getMsgCounter()+"");});
-				}
+					//Wenn ich im Chat bin dann muss ich counter nicht hochzaehlen da ich ja die nachricht dann schon gelesen habe
+					if(model.getAcutalchatroom()!= model.getChatraumArray().get(i).getName()) {
+						Platform.runLater(()->{model.getChatraumArray().get(counter).
+							getLabel().setText(model.getChatraumArray().get(counter).getMsgCounter()+"");});
+					}
 				
-				if(model.getAcutalchatroom().equals(msg[0])) {
-				view.textArea.appendText(msg[1]+"\n"); //wenn die Nachricht fuer den Aktuellen Chatroom ist TextArea updaten
+						if(model.getAcutalchatroom().equals(msg[0])) {
+							view.textArea.appendText(msg[1]+"\n"); //wenn die Nachricht fuer den Aktuellen Chatroom ist TextArea updaten
+							
 				}
 			}
 		}

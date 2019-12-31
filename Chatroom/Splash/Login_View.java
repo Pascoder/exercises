@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 
 public class Login_View {
 
-protected Menu options;
+//protected Menu options;
 protected Stage stage;
 private MenuBar menubar;
 private Login_Model model;
@@ -28,6 +28,7 @@ public Button btnlogin, btnerstellen;
 	public Login_View(Stage primary, Login_Model model) {
 		this.stage = primary;
 		this.model = model;
+		primary.setResizable(false);
 		
 		
 		
@@ -45,11 +46,11 @@ public Button btnlogin, btnerstellen;
 		
 		
 		//MenuBar
-		this.options = new Menu();
+//		this.options = new Menu();
 		this.menubar = new MenuBar();
 		
 		
-		this.menubar.getMenus().add(options);
+//		this.menubar.getMenus().add(options);
 		
 		updateTexts();
 		
@@ -83,7 +84,7 @@ public Button btnlogin, btnerstellen;
 		
         
         // The menu entries
-		options.setText("Options");
+//		options.setText("Options");
        username.setText("Username:	");
       password.setText("Password:	");
        btnlogin.setText("Login");

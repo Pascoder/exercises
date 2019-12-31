@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.text.Font;
 
 public class Chatraum {
 
@@ -23,6 +24,9 @@ public class Chatraum {
 		messageList = FXCollections.observableArrayList();
 		btn = new Button(name);
 		lbl = new Label();
+		lbl.setFont(new Font(30));
+		lbl.setStyle("-fx-text-fill: red");
+		
 		
 		
 		
