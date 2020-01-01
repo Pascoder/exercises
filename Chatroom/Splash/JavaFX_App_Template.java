@@ -32,7 +32,7 @@ public class JavaFX_App_Template extends Application {
     private App_View view;
     protected Stage primary;
     private Login_View login_view;
-   
+    
     
       
     
