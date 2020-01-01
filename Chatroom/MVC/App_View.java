@@ -37,7 +37,7 @@ import javafx.stage.Stage;
 public class App_View extends View<App_Model> {
    //Menu
 	
-	Menu menuFile;
+	
     Menu menuFileLanguage;
     Menu menuHelp;
     Menu password;
@@ -83,10 +83,10 @@ public class App_View extends View<App_Model> {
 	    Logger logger = sl.getLogger();
 	    
 	    MenuBar menuBar = new MenuBar();
-	    menuFile = new Menu();
+	   
 	    menuFileLanguage = new Menu();
 	 
-	    menuFile.getItems().add(menuFileLanguage);
+	    
 	 
 	    
 	    
@@ -109,10 +109,12 @@ public class App_View extends View<App_Model> {
         leavechatroom = new Menu();
         menuHelp.getItems().add(password);
         menuHelp.getItems().add(delete);
+        menuHelp.getItems().add(menuFileLanguage);
         chatroom.getItems().add(createChatroom);
         chatroom.getItems().add(addUser);
         chatroom.getItems().add(leavechatroom);
-	    menuBar.getMenus().addAll(menuFile, menuHelp,chatroom);
+        
+	    menuBar.getMenus().addAll(menuHelp,chatroom);
 		
 	    
 	   //Menu 
@@ -203,7 +205,6 @@ public class App_View extends View<App_Model> {
 	       Translator t = ServiceLocator.getServiceLocator().getTranslator();
 	        
 	        // The menu entries
-	       menuFile.setText(t.getString("program.menu.file"));
 	       menuFileLanguage.setText(t.getString("program.menu.file.language"));
            menuHelp.setText(t.getString("program.menu.help"));
            password.setText(t.getString("program.menu.password"));

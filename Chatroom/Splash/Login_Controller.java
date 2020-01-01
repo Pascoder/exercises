@@ -45,7 +45,7 @@ public class Login_Controller {
 		try {
 		
 		if(username.length() <3 || password.length() <3) {
-			view.status.setText("Please enter password and Username with more then 3 character");	
+			view.status.setText("Password or Username to short (min 3 letters)");	
 		}else {
 			//Pruefen ob das Login auf dem Server existiert
 			
@@ -99,10 +99,8 @@ public class Login_Controller {
 		password = view.pwpassword.getText();
 		
 		
-		if(username.isEmpty() || password.isEmpty()) {
-			view.status.setText("Please try again");
-		}if(username.length() < 3 || password.length() < 3) {
-			view.status.setText("Password and username must have at least 3 characters");
+		if(username.length() < 3 || password.length() < 3) {
+			view.status.setText("Password or Username to short (min 3 letters)");
 			
 		}
 		else {

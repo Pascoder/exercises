@@ -216,9 +216,17 @@ public class App_Controller extends Controller<App_Model, App_View> {
 		view.btnMulti.setDisable(false);
 		view.lblMulti.setDisable(false);
 		view.txt1.setDisable(false);
+		
+		//Aktuelle sprache wird mit Local verglichen und so entschieden welche sprache die korrekte ist
+		if(serviceLocator.getTranslator().getCurrentLocale().toString().equals("de")) {
+		view.lblMulti.setText("Passwort eifügen: ");
+		view.btnMulti.setText("wechseln");
+		view.txt1.setText("neues Passwort");
+		}else {
 		view.lblMulti.setText("Enter password: ");
 		view.btnMulti.setText("change");
 		view.txt1.setText("new password");
+		}
 		view.txt2.setDisable(true);
 		
 		view.menuHelp.hide();
@@ -230,9 +238,17 @@ public class App_Controller extends Controller<App_Model, App_View> {
 		view.btnMulti.setDisable(false);
 		view.txt1.setDisable(false);
 		view.lblMulti.setDisable(false);
+		//Aktuelle sprache wird mit Local verglichen und so entschieden welche sprache die korrekte ist
+		if(serviceLocator.getTranslator().getCurrentLocale().toString().equals("de")) {
+		view.lblMulti.setText("Benutzer löschen: ");
+		view.btnMulti.setText("löschen");
+		view.txt1.setText("(Benutzername)");
+		}else {
 		view.lblMulti.setText("Delete User: ");
 		view.btnMulti.setText("delete");
 		view.txt1.setText("(name of User)");
+		}
+		
 		view.txt2.setDisable(true);
 		
 		view.menuHelp.hide();
@@ -243,14 +259,19 @@ public class App_Controller extends Controller<App_Model, App_View> {
 	public void createChatroom(Event e) {
 		
 		model.setMenuOption(1);
-		view.btnMulti.setText("Erstellen");
 		view.btnMulti.setDisable(false);
-		
-		view.lblMulti.setText("Neuen Chatroom erstellen");
 		view.lblMulti.setDisable(false);
-		
-		view.txt1.setText("(Chatroom)");
 		view.txt1.setDisable(false);
+		//Aktuelle sprache wird mit Local verglichen und so entschieden welche sprache die korrekte ist
+		if(serviceLocator.getTranslator().getCurrentLocale().toString().equals("de")) {
+		view.btnMulti.setText("Erstellen");
+		view.lblMulti.setText("Neuen Chatroom erstellen");
+		view.txt1.setText("(Chatraum)");
+		}else {
+		view.btnMulti.setText("Create");
+		view.lblMulti.setText("create new chatroom");
+		view.txt1.setText("(Chatroom)");	
+		}
 		
 		
 		view.txt2.setDisable(true);
@@ -262,32 +283,42 @@ public class App_Controller extends Controller<App_Model, App_View> {
 	public void addUser(Event e) {
 		
 		model.setMenuOption(2);
+		//Aktuelle sprache wird mit Local verglichen und so entschieden welche sprache die korrekte ist
+		if(serviceLocator.getTranslator().getCurrentLocale().toString().equals("de")) {
 		view.btnMulti.setText("Hinzufuegen");
-		view.btnMulti.setDisable(false);
-		
 		view.lblMulti.setText("User hinzufuegen");
-		view.lblMulti.setDisable(false);
-		
+		view.txt1.setText("(Benutzername)");
+		view.txt2.setText("(Chatraum)");
+		}else {
+		view.btnMulti.setText("Add");
+		view.lblMulti.setText("Add User");
 		view.txt1.setText("(Username)");
-		view.txt1.setDisable(false);
-		
-		view.txt2.setText("(Chatroom)");
+		view.txt2.setText("(Chatroom)");	
+		}
 		view.txt2.setDisable(false);
+		view.btnMulti.setDisable(false);
+		view.txt1.setDisable(false);
+		view.lblMulti.setDisable(false);
 		
 		view.chatroom.hide();
 	}
 	public void leavechatroom(Event e) {
 		model.setMenuOption(5);
+		//Aktuelle sprache wird mit Local verglichen und so entschieden welche sprache die korrekte ist
+		if(serviceLocator.getTranslator().getCurrentLocale().toString().equals("de")) {
 		view.btnMulti.setText("Verlassen");
-		view.btnMulti.setDisable(false);
-		
 		view.lblMulti.setText("Chatroom verlassen");
-		view.lblMulti.setDisable(false);
-		
+		view.txt1.setText("(Benutzername)");
+		view.txt2.setText("(Chatraum)");
+		}else {
+		view.btnMulti.setText("Leave");
+		view.lblMulti.setText("Leave chatroom");
 		view.txt1.setText("(Username)");
-		view.txt1.setDisable(false);
-		
 		view.txt2.setText("(Chatroom)");
+		}
+		view.lblMulti.setDisable(false);
+		view.txt1.setDisable(false);
+		view.btnMulti.setDisable(false);
 		view.txt2.setDisable(false);
 		
 		view.chatroom.hide();
