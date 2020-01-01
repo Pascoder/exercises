@@ -1,10 +1,16 @@
 package Splash;
 
 import Splash.JavaFX_App_Template;
+
+import java.io.IOException;
+
 import MVC.Controller;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Worker;
+import javafx.event.EventHandler;
+import javafx.stage.WindowEvent;
 
 
 /**
@@ -16,6 +22,8 @@ import javafx.concurrent.Worker;
  */
 public class Splash_Controller extends Controller<Splash_Model, Splash_View> {
 	private Login_View viewlogin;
+	private JavaFX_App_Template javaFX_App_Template;
+	
 
     public Splash_Controller(final JavaFX_App_Template javaFX_App_Template, Splash_Model model, Splash_View view) {
         super(model, view);
@@ -35,6 +43,8 @@ public class Splash_Controller extends Controller<Splash_Model, Splash_View> {
                     	
                         
                 });
+        
+       
         
         
         }

@@ -145,11 +145,12 @@ public class JavaFX_App_Template extends Application {
 
         // Close the splash screen, and set the reference to null, so that all
         // Splash_XXX objects can be garbage collected
-        
+      
        splashView.stop();
        splashView = null;
-        
        view.start();
+     
+       
 
         
     }
@@ -166,15 +167,21 @@ public class JavaFX_App_Template extends Application {
      */
     @Override
     public void stop() {
+    	try {
         serviceLocator.getConfiguration().save();
+        
+    	}catch(Exception ex) {
+    	//Programm wurde bereits terminiert, da keine Internet Verbindung bestand (siehe Configuration)
+    	Platform.exit();
+    	}
         if (view != null) {
             // Make the view invisible
+        	
             view.stop();
+        	
         }
 
-        // More cleanup code as needed
-
-        serviceLocator.getLogger().info("Application terminated");
+       
     }
 
     // Static getter for a reference to the main program object

@@ -20,10 +20,11 @@ import javafx.stage.StageStyle;
  */
 public class Splash_View extends View<Splash_Model> {
     ProgressBar progress;
-   
+   Stage stage;
 
     public Splash_View(Stage stage, Splash_Model model) {
         super(stage, model);
+        this.stage = stage;
         stage.initStyle(StageStyle.TRANSPARENT); // also undecorated
     }
 
@@ -46,4 +47,10 @@ public class Splash_View extends View<Splash_Model> {
 
         return scene;
     }
+    
+    public Stage getStage() {
+    	return this.stage;
+    }
+    
+ 
 }

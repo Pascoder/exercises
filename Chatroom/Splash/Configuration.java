@@ -61,6 +61,7 @@ public class Configuration {
     private boolean 			booleanuseronline = false;
     private boolean 			threadrunning = true;
     private int 				messagecounter = 0;
+
     //Message
     
     private ArrayList<String> 	recivedmessages = new ArrayList<String>();
@@ -132,9 +133,32 @@ public class Configuration {
     public void connectToServer() throws IOException {
 		try { this.socket = new Socket("147.86.8.31", 50001);		
 			} catch (UnknownHostException e) {
-				e.printStackTrace();
+				Platform.runLater(new Runnable() {
+					public void run() {
+					
+						Alert alert = new Alert(Alert.AlertType.WARNING, "Unknow host, please try again");
+						alert.showAndWait();
+						Platform.exit();
+						
+					
+					}
+            		
+            });
 			} catch (IOException e) {
-				e.printStackTrace();	
+				Platform.runLater(new Runnable() {
+					public void run() {
+					
+						Alert alert = new Alert(Alert.AlertType.WARNING, "No internet connection, please reconnect");
+						alert.showAndWait();
+						logger.info("Program terminated");
+						Platform.exit();
+						
+						
+					
+					}
+            		
+            });
+				
 			}	
 		}
     
@@ -164,15 +188,21 @@ public class Configuration {
                           
                         } catch (IOException e) {
                         	if(threadrunning) {
+                        		
+                        		
                         		Platform.runLater(new Runnable() {
 								public void run() {
+								
 								showAlert();
+								
 								}
                         		
                         });
                         		
                         		logger.info("Lost Connection to Server");
-                           
+                        		
+                        	
+                        	
                         	}else {
                         	logger.info("Thread closed");
                         	}
@@ -183,6 +213,14 @@ public class Configuration {
                
                 
                
+
+
+
+
+
+
+
+
 
 
 
@@ -276,7 +314,7 @@ private void sortMessaged(String serverMessages) {
     
     
     private void showAlert() {
-    	
+    
     Alert alert = new Alert(AlertType.CONFIRMATION);
     	alert.setTitle("Warning!");
     	alert.setHeaderText("Lost Server Connection");
@@ -288,7 +326,7 @@ private void sortMessaged(String serverMessages) {
     	    	//Login Fenster oeffnen
     	    	template.stop();
     	    	}
-    	    
+    
     	    }					
 
     
