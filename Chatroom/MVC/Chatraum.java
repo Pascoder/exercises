@@ -54,9 +54,11 @@ public class Chatraum {
 		//Play sound when receiving a new Message
 		String musicFile = "WhatsApp.mp3";
 		
-		Media sound = new Media(new File(musicFile).toURI().toString());
-		MediaPlayer mp = new MediaPlayer(sound);
-		mp.play();
+		try {Media sound = new Media(new File(musicFile).toURI().toString());
+			MediaPlayer mp = new MediaPlayer(sound);
+			mp.play();} catch(Exception e) {
+				e.getMessage();
+		}
 	
 		
 		
