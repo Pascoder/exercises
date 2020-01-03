@@ -163,7 +163,10 @@ public class App_Controller extends Controller<App_Model, App_View> {
 			if(model.getChatraumArray().get(i).getName().equals(msg[0])) {
 				
 				//!!Hier werden nachrichten am passenden Chatraum hinzugefuegt
-				model.getChatraumArray().get(i).addChatMessage(msg[1]); 
+				
+				
+				
+				model.getChatraumArray().get(i).addChatMessage(msg[1] ); 
 				
 				int counter = i;
 					//Wenn ich im Chat bin dann muss ich counter nicht hochzaehlen da ich ja die nachricht dann schon gelesen habe
@@ -219,7 +222,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
 		
 		//Aktuelle sprache wird mit Local verglichen und so entschieden welche sprache die korrekte ist
 		if(serviceLocator.getTranslator().getCurrentLocale().toString().equals("de")) {
-		view.lblMulti.setText("Passwort eifügen: ");
+		view.lblMulti.setText("Passwort eifï¿½gen: ");
 		view.btnMulti.setText("wechseln");
 		view.txt1.setText("neues Passwort");
 		}else {
@@ -240,8 +243,8 @@ public class App_Controller extends Controller<App_Model, App_View> {
 		view.lblMulti.setDisable(false);
 		//Aktuelle sprache wird mit Local verglichen und so entschieden welche sprache die korrekte ist
 		if(serviceLocator.getTranslator().getCurrentLocale().toString().equals("de")) {
-		view.lblMulti.setText("Benutzer löschen: ");
-		view.btnMulti.setText("löschen");
+		view.lblMulti.setText("Benutzer lï¿½schen: ");
+		view.btnMulti.setText("lï¿½schen");
 		view.txt1.setText("(Benutzername)");
 		}else {
 		view.lblMulti.setText("Delete User: ");

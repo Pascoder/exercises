@@ -35,31 +35,19 @@ public class Chatraum {
 		lbl.setFont(new Font(35));
 		lbl.setStyle("-fx-text-fill: red");
 		lbl.setStyle("-fx-font-weight: bold");
-		
-		
-		
-		
+	
 		
 	}
 	
 	
 	
-	public void addChatMessage(String Message) {
+	public void addChatMessage(String Message ) {
 	
 		msgcounter++;
-	
 		messageList.add(Message);
-		
 		playSound();
 		
-		
-	
-		
-		
-		
-       
 
-		
 		
 	}
 
