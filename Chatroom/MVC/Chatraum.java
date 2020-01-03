@@ -50,15 +50,9 @@ public class Chatraum {
 	
 		messageList.add(Message);
 		
+		playSound();
 		
-		//Play sound when receiving a new Message
-		String musicFile = "WhatsApp.mp3";
 		
-		try {Media sound = new Media(new File(musicFile).toURI().toString());
-			MediaPlayer mp = new MediaPlayer(sound);
-			mp.play();} catch(Exception e) {
-				e.getMessage();
-		}
 	
 		
 		
@@ -68,6 +62,19 @@ public class Chatraum {
 		
 		
 	}
+
+
+	private void playSound() {
+		//Play sound when receiving a new Message
+				String musicFile = "WhatsApp.mp3";
+				
+				try {Media sound = new Media(new File(musicFile).toURI().toString());
+					MediaPlayer mp = new MediaPlayer(sound);
+					mp.play();} catch(Exception e) {
+						e.getMessage();
+				}		
+	}
+
 
 
 	public String getName() {
