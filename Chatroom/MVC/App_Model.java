@@ -129,17 +129,14 @@ public class App_Model extends Model {
 				this.menuOption = menuOption;
 			}
 			
-//Alle Nachrichten sollen von hier aus gesendet werden damit man 1 mal Thread.Sleep() verwenden kann			
+//Alle Nachrichten sollen von hier aus gesendet werden damit man 1 mal Thread.Sleep() verwendet werden kann			
   public void sendMessagetoServer(String message) {
 	  try {
 	  serviceLocator.getConfiguration().getWriter().write(message);
 		serviceLocator.getConfiguration().getWriter().write("\n");
 		serviceLocator.getConfiguration().getWriter().flush();
-		Integer a = 0;
-      while (a <= 200000000) { 
-          
-      	a++;
-      }
+		Thread.sleep(100);
+	
 	  }catch (Exception msg){
 		  msg.printStackTrace();
 	  }
