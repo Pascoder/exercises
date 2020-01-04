@@ -192,7 +192,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
 				
 				
 				
-				model.getChatraumArray().get(i).addChatMessage(msg[1] ); 
+				model.getChatraumArray().get(i).addChatMessage(msg[1]); 
 				
 				int counter = i;
 					//Wenn ich im Chat bin dann muss ich counter nicht hochzaehlen da ich ja die nachricht dann schon gelesen habe

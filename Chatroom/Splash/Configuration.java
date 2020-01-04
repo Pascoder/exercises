@@ -61,6 +61,7 @@ public class Configuration {
     private boolean 			booleanuseronline = false;
     private boolean 			threadrunning = true;
     private int 				messagecounter = 0;
+    private int 				chatmessagecounter = 0;
 
     //Message
     
@@ -295,9 +296,9 @@ private void sortMessaged(String serverMessages) {
                     		recivedmessages.add(sentfrom+"|"+chat+"|"+messages[3]);
                     		//Message wird mit Username konkateniert, könnte besser gelöst werden mit Message Objekt!
                     		String message = sentfrom + ": " + messages[3];
-                            
+                    		chatmessagecounter++;
                        
-                    	setNachrichtProperty(chat+"|"+ message); //wird in Controller setonAction ausgel�st
+                    	setNachrichtProperty(chat+"|"+ message+"|"+chatmessagecounter); //wird in Controller setonAction ausgel�st
                     	
                         
                     }
