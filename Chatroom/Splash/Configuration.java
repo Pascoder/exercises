@@ -213,17 +213,7 @@ public class Configuration {
                 
                
                 
-               
-
-
-
-
-
-
-
-
-
-
+          
 
 private void sortMessaged(String serverMessages) {
                 	messagecounter++;

@@ -33,7 +33,7 @@ public class Chatraum {
 		
 		lbl = new Label();
 		lbl.setFont(new Font(35));
-		lbl.setStyle("-fx-text-fill: red");
+		lbl.setStyle("-fx-text-fill: green");
 		lbl.setStyle("-fx-font-weight: bold");
 	
 		
@@ -41,11 +41,14 @@ public class Chatraum {
 	
 	
 	
-	public void addChatMessage(String Message ) {
-	
+	public void addChatMessage(String Message, String actualUser) {
+		
 		msgcounter++;
 		messageList.add(Message);
-		playSound();
+		if(!Message.contains(actualUser+": ")){
+			playSound();
+		}
+		
 		
 
 		
