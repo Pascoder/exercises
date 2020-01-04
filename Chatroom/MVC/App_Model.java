@@ -39,53 +39,34 @@ public class App_Model extends Model {
 
 	public String getUsersOnline(String chatraum) {
 		String senden = "ListChatroomUsers|"+serviceLocator.getConfiguration().getSalt()+"|"+chatraum;
-		
-		
 		try {
-			serviceLocator.getConfiguration().getWriter().write(senden);
-			serviceLocator.getConfiguration().getWriter().write("\n");
-			serviceLocator.getConfiguration().getWriter().flush();
-			Integer a = 0;
-	        while (a <= 200000000) { 
-	            
-	        	a++;
-	        }
-		} catch (IOException e) {
+			sendMessagetoServer(senden);
+		} catch (Exception e) {
 			serviceLocator.getLogger().info("ListChatroomUsers nicht möglich");
 		}
 		
 		return null;
 	}
+	
+	
 	public void loadChatrooms() {
 		try{
-			
-			
 			String loadChats = "ListChatrooms|"+serviceLocator.getConfiguration().getSalt(); 
-			serviceLocator.getConfiguration().getWriter().write(loadChats);
-			serviceLocator.getConfiguration().getWriter().write("\n");
-			serviceLocator.getConfiguration().getWriter().flush();
-			//Empfangen der Antwort des Servers
-			
-			
+				sendMessagetoServer(loadChats);
 			serviceLocator.getLogger().info("Chatrooms loaded");
-		}catch(IOException exception) {
+		}catch(Exception exception) {
 				this.serviceLocator.getLogger().info("Something goes wrong by loading chatrooms");
 				exception.getMessage();
 		}
-		Integer i = 0;
-        while (i <= 15000000) { 
-            i++;
-        }
+		
 	}
 
+	
+	
 	// Empfangen der Chatrooms vom Server
 		public void receiveChatrooms() {
 			
 			msg = serviceLocator.getConfiguration().getChatrooms();
-			
-			
-			
-			
 			
 		}
 
@@ -147,7 +128,22 @@ public class App_Model extends Model {
 			public void setMenuOption(int menuOption) {
 				this.menuOption = menuOption;
 			}
-  
+			
+//Alle Nachrichten sollen von hier aus gesendet werden damit man 1 mal Thread.Sleep() verwenden kann			
+  public void sendMessagetoServer(String message) {
+	  try {
+	  serviceLocator.getConfiguration().getWriter().write(message);
+		serviceLocator.getConfiguration().getWriter().write("\n");
+		serviceLocator.getConfiguration().getWriter().flush();
+		Integer a = 0;
+      while (a <= 200000000) { 
+          
+      	a++;
+      }
+	  }catch (Exception msg){
+		  msg.printStackTrace();
+	  }
+  }
     
     
 }
