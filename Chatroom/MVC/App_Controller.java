@@ -68,6 +68,32 @@ public class App_Controller extends Controller<App_Model, App_View> {
             public void handle(WindowEvent event) {
     
                 try {
+                	//LeaveChatrooms
+                	for(int b = 0; b< model.getChatraumArray().size(); b++) {
+                	String senden = "LeaveChatroom|"+serviceLocator.getConfiguration().getSalt()+"|"+model.getChatraumArray().get(b).getName()+"|"+ model.getActualUser();
+                	serviceLocator.getConfiguration().getWriter().write(senden);
+            		serviceLocator.getConfiguration().getWriter().write("\n");
+            		serviceLocator.getConfiguration().getWriter().flush();
+            		
+            		serviceLocator.getLogger().info("LeaveChatroom: "+model.getChatraumArray().get(b).getName());
+            		
+            		Integer i = 0;
+                    while (i <= 15000000) { //<--muss mit einer Property ersetzt werden
+                        i++;
+                    }
+                	}
+                	//Logout
+                	serviceLocator.getConfiguration().getWriter().write("Logout");
+					serviceLocator.getConfiguration().getWriter().write("\n");
+					serviceLocator.getConfiguration().getWriter().flush();
+					
+					serviceLocator.getLogger().info("Logged out");
+					Integer a = 0;
+			        while (a <= 15000000) {
+			            
+			        	a++;
+			        }
+                	
                 	serviceLocator.getConfiguration().closeThread();
                 	serviceLocator.getConfiguration().getSocket().close();
 					serviceLocator.getLogger().info("Socket is closed");//Socket schliessen
