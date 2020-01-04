@@ -185,8 +185,23 @@ public class Configuration {
                   try {
                       	String serverMessage = socketIn.readLine();
                       	logger.info("Received: " + serverMessage);
-                      	sortMessaged(serverMessage);
-                          
+                      	if(serverMessage != null)sortMessaged(serverMessage);
+                      	else {
+                      		try {
+								serverCommunicationThread.sleep(30000);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+                      		Platform.runLater(new Runnable() {
+								public void run() {
+								
+								showAlert();
+								
+								}
+                        		
+                        });
+                      	}
                         } catch (IOException e) {
                         	if(threadrunning) {
                         		
@@ -212,16 +227,36 @@ public class Configuration {
                 }
                 
                
+private void showAlert() {
                 
+     Alert alert = new Alert(AlertType.CONFIRMATION);
+     
+     alert.setTitle("Warning!");
+     alert.setHeaderText("Lost Server Connection");
+     alert.setContentText("Exit Programm?");
+    
+     Optional<ButtonType> result = alert.showAndWait();
+                
+     if (result.get() == ButtonType.OK) {
+    	 	Platform.exit();
+     		System.exit(0);
+     		//Läuft noch nicht
+     	}else template.startLoginMenu();
+                	     
+     }	               
           
 
 private void sortMessaged(String serverMessages) {
                 	messagecounter++;
                 
                 	
+
+               
+                		
+                	
                 	String [] messages = serverMessages.split("\\|"); //Jede nachricht wird nach aufteilung in Message typ geloescht
                   
-                   
+                	
                     
                     //Test
                     for(int i = 0; i < messages.length;i++) {
@@ -292,7 +327,7 @@ private void sortMessaged(String serverMessages) {
                     	
                         
                     }
-                
+                	
                 }
             });
             serverCommunicationThread.setDaemon(true);
@@ -304,21 +339,7 @@ private void sortMessaged(String serverMessages) {
     }  
     
     
-    private void showAlert() {
-    
-    Alert alert = new Alert(AlertType.CONFIRMATION);
-    	alert.setTitle("Warning!");
-    	alert.setHeaderText("Lost Server Connection");
-    	alert.setContentText("Exit Programm?");
-    	Optional<ButtonType> result = alert.showAndWait();
-    	    if (result.get() == ButtonType.OK) {
-    	    	template.stop();
-    	    } else {
-    	    	//Login Fenster oeffnen
-    	    	template.stop();
-    	    	}
-    
-    	    }					
+    				
 
     
     

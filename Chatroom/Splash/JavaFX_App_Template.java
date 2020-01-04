@@ -107,7 +107,8 @@ public class JavaFX_App_Template extends Application {
      */
     //Login Menu wird gestartet
     public void startLoginMenu() {
-    	
+    	//Wenn Verbindung verloren geht, soll keine NullPointerException geben!
+    	if(splashView.stage.isShowing())
     	splashView.stop();
     	
     	
