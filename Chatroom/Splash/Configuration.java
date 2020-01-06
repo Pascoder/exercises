@@ -181,7 +181,7 @@ public class Configuration {
             serverCommunicationThread = new Thread(new Runnable() {
             @Override
             public void run() {
-               while (threadrunning) {
+               while (threadrunning ) {
                   try {
                       	String serverMessage = socketIn.readLine();
                       	logger.info("Received: " + serverMessage);
