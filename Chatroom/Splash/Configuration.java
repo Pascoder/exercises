@@ -187,14 +187,14 @@ public class Configuration {
                       	logger.info("Received: " + serverMessage);
                       	if(serverMessage != null)sortMessaged(serverMessage);
                       	else {
-                      		try {
+                      		/*try {
                       			
 								serverCommunicationThread.sleep(30000);
 							} catch (InterruptedException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
 								
-							}
+							}*/
                       		Platform.runLater(new Runnable() {
 								public void run() {
 								
