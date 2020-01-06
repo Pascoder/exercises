@@ -241,7 +241,10 @@ private void showAlert() {
     	 	Platform.exit();
      		System.exit(0);
      		//Läuft noch nicht
-     	}else template.startLoginMenu();
+     	}else {
+     	JavaFX_App_Template.getMainProgram().stop();
+     	JavaFX_App_Template.getMainProgram().start(JavaFX_App_Template.getMainProgram().getPrimary());
+     	}
                 	     
      }	               
           
