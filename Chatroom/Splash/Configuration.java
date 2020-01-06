@@ -188,10 +188,12 @@ public class Configuration {
                       	if(serverMessage != null)sortMessaged(serverMessage);
                       	else {
                       		try {
+                      			
 								serverCommunicationThread.sleep(30000);
 							} catch (InterruptedException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
+								
 							}
                       		Platform.runLater(new Runnable() {
 								public void run() {
@@ -210,6 +212,7 @@ public class Configuration {
 								public void run() {
 								
 								showAlert();
+							
 								
 								}
                         		
@@ -217,7 +220,7 @@ public class Configuration {
                         		
                         		logger.info("Lost Connection to Server");
                         		
-                        	
+                        	break;
                         	
                         	}else {
                         	logger.info("Thread closed");
