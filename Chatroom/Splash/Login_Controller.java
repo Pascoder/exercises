@@ -44,6 +44,8 @@ public class Login_Controller {
 		username = view.txtusername.getText();
 		password = view.pwpassword.getText();// changed to pw TextField
 		String servermessage = null;
+		
+		
 			
 		try {
 		
@@ -54,18 +56,9 @@ public class Login_Controller {
 			
 				String senden = "Login|"+username+"|"+password;
 				
-				servicelocator.getConfiguration().getWriter().write(senden);
-				servicelocator.getConfiguration().getWriter().write("\n");
-				servicelocator.getConfiguration().getWriter().flush();
+				model.send(senden);
+				
 				servicelocator.getConfiguration().setAcutalUser(username);
-				
-				
-				
-				
-				 Integer i = 0;
-                 while (i <= 20000000) {//<--muss mit einer Property ersetzt werden
-                     i++;
-                 }
 
                
               
@@ -114,16 +107,9 @@ public class Login_Controller {
 			try{
 			//Senden einer neuen Loggin Datei  an Server
 			String senden = "CreateLogin|"+username+"|"+password;
-			
-			servicelocator.getConfiguration().getWriter().write(senden);
-			servicelocator.getConfiguration().getWriter().write("\n");
-			servicelocator.getConfiguration().getWriter().flush();
+			model.send(senden);
 			
 			
-			 Integer i = 0;
-             while (i <= 20000000) {//<--muss mit einer Property ersetzt werden
-                 i++;
-             }
              
              
 			boolean servermessage = servicelocator.getConfiguration().accountCreated();
