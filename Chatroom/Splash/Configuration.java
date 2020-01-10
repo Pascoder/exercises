@@ -187,14 +187,7 @@ public class Configuration {
                       	logger.info("Received: " + serverMessage);
                       	if(serverMessage != null)sortMessaged(serverMessage);
                       	else {
-                      		/*try {
-                      			
-								serverCommunicationThread.sleep(30000);
-							} catch (InterruptedException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-								
-							}*/
+                      	
                       		Platform.runLater(new Runnable() {
 								public void run() {
 								
@@ -255,11 +248,7 @@ private void showAlert() {
 private void sortMessaged(String serverMessages) {
                 	messagecounter++;
                 
-                	
-
-               
-                		
-                	
+       
                 	String [] messages = serverMessages.split("\\|"); //Jede nachricht wird nach aufteilung in Message typ geloescht
                   
                 	

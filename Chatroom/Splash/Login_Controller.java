@@ -30,7 +30,10 @@ public class Login_Controller {
 		
 		view.btnlogin.setOnAction(this::clickLogin);
 		view.btnerstellen.setOnAction(this::createLogin);
-	
+		view.btnerstellen.disableProperty().bind(view.txtusername.textProperty().isEmpty());
+		view.btnerstellen.disableProperty().bind(view.pwpassword.textProperty().isEmpty());
+		view.btnlogin.disableProperty().bind(view.txtusername.textProperty().isEmpty());
+		view.btnlogin.disableProperty().bind(view.pwpassword.textProperty().isEmpty());
 		
 	
 	}
@@ -86,6 +89,8 @@ public class Login_Controller {
 			
 			view.status.setText("Account don't exist");
 		}
+		view.txtusername.clear();
+		view.pwpassword.clear();
 	}
 	
 	
@@ -94,6 +99,7 @@ public class Login_Controller {
 	//Create Login
 	
 	public void createLogin(Event e) {
+		view.status.setText("");
 		String username, password;
 		username = view.txtusername.getText();
 		password = view.pwpassword.getText();
@@ -123,9 +129,12 @@ public class Login_Controller {
 			boolean servermessage = servicelocator.getConfiguration().accountCreated();
 			if(servermessage==true) {
 			servicelocator.getLogger().info("createLogin succsessfull");
+			view.status.setText("Created");
 			}else {
 			servicelocator.getLogger().info("login not created");
+			
 			}
+			
 			}catch(Exception exeption) {
 				this.servicelocator.getLogger().info("Something goes wrong by Creating your login");
 			}
