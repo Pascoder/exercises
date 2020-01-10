@@ -172,7 +172,9 @@ public class App_Controller extends Controller<App_Model, App_View> {
 				
 				//!!Hier werden nachrichten am passenden Chatraum hinzugefuegt
 				model.getChatraumArray().get(i).addChatMessage(msg[1], serviceLocator.getConfiguration().getActualUser()); 
-				
+				if(model.getAcutalchatroom()!=model.getChatraumArray().get(i).getName()) {
+				model.getChatraumArray().get(i).increaseCounter();
+				}
 				int counter = i;
 					//Wenn ich im Chat bin dann muss ich counter nicht hochzaehlen da ich ja die nachricht dann schon gelesen habe
 					if(model.getAcutalchatroom()!= model.getChatraumArray().get(i).getName()) {

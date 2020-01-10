@@ -232,7 +232,7 @@ public class Configuration {
                
 private void showAlert() {
                 
-     Alert alert = new Alert(AlertType.CONFIRMATION);
+     Alert alert = new Alert(AlertType.WARNING);
      
      alert.setTitle("Warning!");
      alert.setHeaderText("Lost Server Connection");

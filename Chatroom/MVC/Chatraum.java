@@ -42,8 +42,6 @@ public class Chatraum {
 	
 	
 	public void addChatMessage(String Message, String actualUser) {
-		
-		msgcounter++;
 		messageList.add(Message);
 		if(!Message.contains(actualUser+": ")){
 			playSound();
@@ -108,6 +106,9 @@ public class Chatraum {
 	}
 	public int getMsgCounter() {
 		return this.msgcounter;
+	}
+	public void increaseCounter() {
+		this.msgcounter = msgcounter+1;
 	}
 
 
