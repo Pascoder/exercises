@@ -178,6 +178,18 @@ public void saveFile() {
 
 
 
+public void deleteChatroomHistory() {
+	for(Chatraum c : chatraumArray) {
+		String chatname = c.getName();
+		
+		c.messageList.clear();
+		
+	}
+	
+}
+
+
+
 
 	
 }

@@ -46,6 +46,7 @@ public class App_View extends View<App_Model> {
     Menu createChatroom;
     Menu addUser;
     Menu leavechatroom;
+    Menu deletechatroomhistory;
     
     //Top Controlls
 	Label lblMulti;
@@ -107,12 +108,16 @@ public class App_View extends View<App_Model> {
         createChatroom = new Menu();
         addUser = new Menu();
         leavechatroom = new Menu();
+        deletechatroomhistory = new Menu();
         menuHelp.getItems().add(password);
         menuHelp.getItems().add(delete);
         menuHelp.getItems().add(menuFileLanguage);
         chatroom.getItems().add(createChatroom);
         chatroom.getItems().add(addUser);
         chatroom.getItems().add(leavechatroom);
+        chatroom.getItems().add(deletechatroomhistory);
+       
+        
         
 	    menuBar.getMenus().addAll(menuHelp,chatroom);
 		
@@ -213,6 +218,7 @@ public class App_View extends View<App_Model> {
            chatroom.setText(t.getString("program.chatroom"));
            createChatroom.setText(t.getString("program.createchatroom"));
            addUser.setText(t.getString("program.adduser"));
+           deletechatroomhistory.setText(t.getString("program.history"));
            
            // Top Controls
            lblMulti.setText(t.getString("label.lblname"));

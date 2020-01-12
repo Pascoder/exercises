@@ -59,6 +59,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
 		view.txt2.setDisable(true);
 		view.lblMulti.setDisable(true);
 		view.btnMulti.setDisable(true);
+		view.deletechatroomhistory.setOnAction(this::deleteChatroomHistory);
 		
         serviceLocator.getConfiguration().getNachrichtProperty().
         addListener((observable, old, neu) -> updateGUI(neu));
@@ -427,6 +428,10 @@ public class App_Controller extends Controller<App_Model, App_View> {
 			serviceLocator.getLogger().info("problem beim senden");
 		}
 		}
+	}
+	public void deleteChatroomHistory(Event history) {
+		model.deleteChatroomHistory();
+		view.textArea.setText("");
 	}
 	
 	
