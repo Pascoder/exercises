@@ -5,11 +5,15 @@ import Splash.ServiceLocator;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.ArrayList;
 
 
@@ -68,7 +72,10 @@ public class App_Controller extends Controller<App_Model, App_View> {
         view.getStage().setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent event) {
-    
+            	model.saveFile();
+            	
+           	
+            	
                 try {
                 	//LeaveChatrooms
                 	for(int b = 0; b< model.getChatraumArray().size(); b++) {

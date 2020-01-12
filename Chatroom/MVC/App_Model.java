@@ -1,12 +1,23 @@
 package MVC;
 
 import Splash.ServiceLocator;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.Socket;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.net.UnknownHostException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+
 
 import MVC.Model;
 
@@ -23,6 +34,7 @@ public class App_Model extends Model {
     private ArrayList <Chatraum> chatraumArray = new ArrayList<>();
     private String acutalchatroom = null;
     private String actualUser = null;
+   
     
     //0=kein Menu ausgewählt, 1= Chatroom erstellen, 2= Chatroom beitreten, 3= User hinzufügen
     private int menuOption = 0;
@@ -141,6 +153,34 @@ public class App_Model extends Model {
 		  msg.printStackTrace();
 	  }
   }
-    
-    
+
+
+
+public void saveFile() {
+	String file = "ChatRooms.txt";
+	
+
+	try(BufferedWriter writer = new BufferedWriter(new FileWriter(file));){
+		for(Chatraum c : chatraumArray) {
+			String chatname = c.getName();
+			for(int b = 0; b< c.messageList.size();b++) {
+				writer.write(chatname+"|"+c.messageList.get(b)+"\n");
+			}
+			
+		}
+		
+		writer.flush();
+	}catch(Exception e) {
+		e.getMessage();
+	}
+	
 }
+
+
+
+
+	
+}
+    
+    
+
