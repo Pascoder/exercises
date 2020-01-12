@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -62,6 +63,7 @@ public class Configuration {
     private boolean 			threadrunning = true;
     private int 				messagecounter = 0;
     private int 				chatmessagecounter = 0;
+    
 
     //Message
     
@@ -108,6 +110,10 @@ public class Configuration {
             String key = (String) i.nextElement();
             logger.config("Option: " + key + " = " + localOptions.getProperty(key));
         }
+        
+       // Load older ChatMessages
+        
+       
     }
     
     public void save() {
@@ -332,6 +338,26 @@ private void sortMessaged(String serverMessages) {
             e.printStackTrace();
         }
     }  
+    //alte Chats werden hier geladen
+    public void loadoldChatrooms() {
+    	 try {
+         	BufferedReader reader = new BufferedReader(new FileReader("ChatRooms.txt"));
+         	
+         	String zeile = reader.readLine();
+         	while(zeile!=null) {
+         		
+         		if(zeile != null&&zeile.length()>0)
+         		setNachrichtProperty(zeile);
+         		
+         		zeile = reader.readLine();
+
+         		
+         	}
+         	reader.close();
+         }catch(Exception e ) {
+         	e.getMessage();
+         }
+    }
     
     
     				

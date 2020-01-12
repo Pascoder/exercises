@@ -143,6 +143,7 @@ public class JavaFX_App_Template extends Application {
 
         // Resources are now initialized
         serviceLocator = ServiceLocator.getServiceLocator();
+        serviceLocator.getConfiguration().loadoldChatrooms();
 
         // Close the splash screen, and set the reference to null, so that all
         // Splash_XXX objects can be garbage collected

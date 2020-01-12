@@ -164,7 +164,7 @@ public void saveFile() {
 		for(Chatraum c : chatraumArray) {
 			String chatname = c.getName();
 			for(int b = 0; b< c.messageList.size();b++) {
-				writer.write(chatname+"|"+c.messageList.get(b)+"\n");
+				writer.write(chatname+"|"+c.messageList.get(b)+"|"+"OLD"+"\n");
 			}
 			
 		}

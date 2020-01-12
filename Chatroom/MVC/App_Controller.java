@@ -174,6 +174,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
    private Object updateGUI(String neu) {
 	   serviceLocator.getLogger().info("GUI wurde aktualisiert nachricht empfangen");
 	   String[] msg =  neu.split("\\|");//Aufteilen von chatroom|nachricht
+	   if(!msg[2].equals("OLD")) {
 		for(int i = 0; i<model.getChatraumArray().size();i++) {
 			if(model.getChatraumArray().get(i).getName().equals(msg[0])) {
 				
@@ -188,14 +189,28 @@ public class App_Controller extends Controller<App_Model, App_View> {
 						Platform.runLater(()->{model.getChatraumArray().get(counter).
 							getLabel().setText(model.getChatraumArray().get(counter).getMsgCounter()+"");});
 					}
-				
+						
 						if(model.getAcutalchatroom().equals(msg[0])) {
 							view.textArea.appendText(msg[1]+"\n"); //wenn die Nachricht fuer den Aktuellen Chatroom ist TextArea updaten
 							
 				}
 			}
 		}
+		//Für alte ChatNachrichten
+	   }else {
 		
+		for(int i = 0; i<model.getChatraumArray().size();i++) {
+			if(model.getChatraumArray().get(i).getName().equals(msg[0])) {
+				
+				//!!Hier werden nachrichten am passenden Chatraum hinzugefuegt
+				model.getChatraumArray().get(i).addChatMessage(msg[1], serviceLocator.getConfiguration().getActualUser()); 
+				if(model.getAcutalchatroom()!=model.getChatraumArray().get(i).getName()) {
+				model.getChatraumArray().get(i).increaseCounter();
+				}
+				
+			}
+		}
+	   }
 		
 		return null;
 	}
