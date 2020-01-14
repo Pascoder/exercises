@@ -47,27 +47,24 @@ public class App_Controller extends Controller<App_Model, App_View> {
    
         serviceLocator = ServiceLocator.getServiceLocator();
         
-     // register ourselves to listen for button clicks
+        // register ourselves to listen for button clicks
         view.password.setOnAction(this::changePassword);
         view.btnMulti.setOnAction(this::OptionStart);
         view.delete.setOnAction(this::deleteUser);
         view.addUser.setOnAction(this::addUser); 
-        view.createChatroom.setOnAction(this::createChatroom); //Menu Create Chatroom
+        view.createChatroom.setOnAction(this::createChatroom); 
+        view.deletechatroomhistory.setOnAction(this::deleteChatroomHistory);
         view.sendbutton.setOnAction(this::senden);
         view.leavechatroom.setOnAction(this::leavechatroom);
+        //hidden by default
         view.txt1.setDisable(true);
 		view.txt2.setDisable(true);
 		view.lblMulti.setDisable(true);
 		view.btnMulti.setDisable(true);
-		view.deletechatroomhistory.setOnAction(this::deleteChatroomHistory);
+		//Propertys (actual user, updateGUI)
 		view.sendbutton.disableProperty().bind(view.txtChatMessage.textProperty().isEmpty());
-		
-		
-		
         serviceLocator.getConfiguration().getNachrichtProperty().
         addListener((observable, old, neu) -> updateGUI(neu));
- 
-        //Aktuell eingeloggter User anzeigen
 		view.lblUser.setText(serviceLocator.getConfiguration().getActualUser());
 	
 		
@@ -78,10 +75,8 @@ public class App_Controller extends Controller<App_Model, App_View> {
             public void handle(WindowEvent event) {
             	model.saveFile();
             	
-           	
-            	
                 try {
-                	//LeaveChatrooms
+                	//Leave all Chatrooms
                 	for(int b = 0; b< model.getChatraumArray().size(); b++) {
                 	String senden = "LeaveChatroom|"+serviceLocator.getConfiguration().getSalt()+"|"+model.getChatraumArray().get(b).getName()+"|"+ model.getActualUser();
                 	
@@ -90,12 +85,12 @@ public class App_Controller extends Controller<App_Model, App_View> {
             		serviceLocator.getLogger().info("LeaveChatroom: "+model.getChatraumArray().get(b).getName());
                 	}
                 	
-                	//Logout
+                	//Logout automatically
                 	model.sendMessagetoServer("Logout");
 					
 					serviceLocator.getLogger().info("Logged out");
 					
-                	
+                	//terminate Thread and Socket
                 	serviceLocator.getConfiguration().closeThread();
                 	serviceLocator.getConfiguration().getSocket().close();
 					serviceLocator.getLogger().info("Socket is closed");//Socket schliessen
@@ -112,7 +107,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
         
         serviceLocator.getLogger().info("Application controller initialized");
         
-        //Chatrooms laden
+        //load chatrooms
         model.loadChatrooms();
         model.receiveChatrooms();
         addChatboxes();
@@ -136,6 +131,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
 			view.addChatbox(f, chatraum);
 			
 			final Button but = view.btnArray.get(i);
+
 			//Button Styling from http://fxexperience.com/2011/12/styling-fx-buttons-with-css/
 			but.setId("record-sales");
 			but.setOnMouseEntered(new EventHandler<MouseEvent>() {
@@ -173,41 +169,41 @@ public class App_Controller extends Controller<App_Model, App_View> {
 	}
 
 
-	//#DIESE METHODE IST UM DEN CHAT VERLAUF IN DIE CHATRAUME AUFZUTEILEN UND DIE GUI ZU AKTUALISEREN
-    //sorted message --> addListener --> updateGUI
+	//#THIS METHOD IS TO SPLIT THE CHAT FLOW INTO THE CHATROOMS AND UPDATE THE GUI
+    //process: sorted message --> addListener --> updateGUI
    private Object updateGUI(String neu) {
 	   serviceLocator.getLogger().info("GUI wurde aktualisiert nachricht empfangen");
-	   String[] msg =  neu.split("\\|");//Aufteilen von chatroom|nachricht
+	   String[] msg =  neu.split("\\|");
 	   if(!msg[2].equals("OLD")) {
 		for(int i = 0; i<model.getChatraumArray().size();i++) {
 			if(model.getChatraumArray().get(i).getName().equals(msg[0])) {
 				
-				//!!Hier werden nachrichten am passenden Chatraum hinzugefuegt
-				model.getChatraumArray().get(i).addChatMessage(msg[1], serviceLocator.getConfiguration().getActualUser()); 
+				//!!Here messages are added to the appropriate chat room
+				model.getChatraumArray().get(i).addChatMessage(msg[1], serviceLocator.getConfiguration().getActualUser(), true); 
 				if(model.getAcutalchatroom()!=model.getChatraumArray().get(i).getName()) {
 				model.getChatraumArray().get(i).increaseCounter();
 				}
 				int counter = i;
-					//Wenn ich im Chat bin dann muss ich counter nicht hochzaehlen da ich ja die nachricht dann schon gelesen habe
+					//count up message counters only when I am not in the chatroom
 					if(model.getAcutalchatroom()!= model.getChatraumArray().get(i).getName()) {
 						Platform.runLater(()->{model.getChatraumArray().get(counter).
 							getLabel().setText(model.getChatraumArray().get(counter).getMsgCounter()+"");});
 					}
 						
 						if(model.getAcutalchatroom().equals(msg[0])) {
-							view.textArea.appendText(msg[1]+"\n"); //wenn die Nachricht fuer den Aktuellen Chatroom ist TextArea updaten
+							view.textArea.appendText(msg[1]+"\n"); //if the message for the current chatroom is Update TextArea
 							
 				}
 			}
 		}
-		//Für alte ChatNachrichten
+		//For old chat messages
 	   }else {
 		
 		for(int i = 0; i<model.getChatraumArray().size();i++) {
 			if(model.getChatraumArray().get(i).getName().equals(msg[0])) {
 				
-				//!!Hier werden nachrichten am passenden Chatraum hinzugefuegt
-				model.getChatraumArray().get(i).addChatMessage(msg[1], serviceLocator.getConfiguration().getActualUser()); 
+				//!!Here messages are added to the appropriate chat room
+				model.getChatraumArray().get(i).addChatMessage(msg[1], serviceLocator.getConfiguration().getActualUser(),false); 
 				if(model.getAcutalchatroom()!=model.getChatraumArray().get(i).getName()) {
 				model.getChatraumArray().get(i).increaseCounter();
 				}
@@ -222,7 +218,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
    
    	
 	
-	//#DIESE METHODE IST FUER DEN 1. KLICK AUF EINEN CHAT BUTTON
+	//#THIS METHOD IS FOR THE 1ST CLICK ON A CHAT BUTTON
 	private Object updateChatArea(Chatraum chatraum) {
 	view.textArea.clear();
 	view.lblUsersOnline.setText("");
@@ -233,7 +229,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
 	
 	
 		
-		//Am Anfang noch leer muss von File lesen wenn wir alte chats laden wollen
+		
 		for(int i =0; i<chatraum.messageList.size();i++) {
 			view.textArea.appendText(chatraum.messageList.get(i)+"\n");
 		}
@@ -242,14 +238,14 @@ public class App_Controller extends Controller<App_Model, App_View> {
 
 
 
-	//Sprache aendern
+	//Change language
 	public void changePassword(Event password) {
 		model.setMenuOption(3);
 		view.btnMulti.setDisable(false);
 		view.lblMulti.setDisable(false);
 		view.txt1.setDisable(false);
 		
-		//Aktuelle sprache wird mit Local verglichen und so entschieden welche sprache die korrekte ist
+		//Current language is compared with Local and so it is decided which language is the correct one
 		if(serviceLocator.getTranslator().getCurrentLocale().toString().equals("de")) {
 		view.lblMulti.setText("Passwort einfuegen: ");
 		view.btnMulti.setText("wechseln");
@@ -266,16 +262,16 @@ public class App_Controller extends Controller<App_Model, App_View> {
 	
 	
 	
-	//User loeschen
+	//delete user
 	public void deleteUser(Event delete) {
 		model.setMenuOption(4);
 		view.btnMulti.setDisable(false);
 		view.txt1.setDisable(false);
 		view.lblMulti.setDisable(false);
-		//Aktuelle sprache wird mit Local verglichen und so entschieden welche sprache die korrekte ist
+		//Current language is compared with Local and so it is decided which language is the correct one
 		if(serviceLocator.getTranslator().getCurrentLocale().toString().equals("de")) {
-		view.lblMulti.setText("Benutzer lï¿½schen: ");
-		view.btnMulti.setText("lï¿½schen");
+		view.lblMulti.setText("Benutzer loeschen: ");
+		view.btnMulti.setText("loeschen");
 		view.txt1.setText("(Benutzername)");
 		}else {
 		view.lblMulti.setText("Delete User: ");
@@ -298,7 +294,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
 		view.btnMulti.setDisable(false);
 		view.lblMulti.setDisable(false);
 		view.txt1.setDisable(false);
-		//Aktuelle sprache wird mit Local verglichen und so entschieden welche sprache die korrekte ist
+		//Current language is compared with Local and so it is decided which language is the correct one
 		if(serviceLocator.getTranslator().getCurrentLocale().toString().equals("de")) {
 		view.btnMulti.setText("Erstellen");
 		view.lblMulti.setText("Neuen Chatroom erstellen");
@@ -320,7 +316,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
 	public void addUser(Event e) {
 		
 		model.setMenuOption(2);
-		//Aktuelle sprache wird mit Local verglichen und so entschieden welche sprache die korrekte ist
+		//Current language is compared with Local and so it is decided which language is the correct one
 		if(serviceLocator.getTranslator().getCurrentLocale().toString().equals("de")) {
 		view.btnMulti.setText("Hinzufuegen");
 		view.lblMulti.setText("User hinzufuegen");
@@ -344,7 +340,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
 	
 	public void leavechatroom(Event e) {
 		model.setMenuOption(5);
-		//Aktuelle sprache wird mit Local verglichen und so entschieden welche sprache die korrekte ist
+		//Current language is compared with Local and so it is decided which language is the correct one
 		if(serviceLocator.getTranslator().getCurrentLocale().toString().equals("de")) {
 		view.btnMulti.setText("Verlassen");
 		view.lblMulti.setText("Chatroom verlassen");
@@ -367,7 +363,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
 	
 	
 	
-	//btnMulti gedrueckt, je nach case -> switch Option
+	//Option and Chatroom Menu functions
 	public void OptionStart(Event option) {
 		
 		try {
@@ -376,12 +372,14 @@ public class App_Controller extends Controller<App_Model, App_View> {
 		String text1 = view.txt1.getText();
 		String text2 = view.txt2.getText();
 		if(text1.length()>2) {
-		//0=kein Menu ausgewaehlt, 1= Chatroom erstellen, 2= Chatroom beitreten
+		
 		switch(model.getMenuOption()){
+		//CreateChatroom function
 		case 1:
 			senden = "CreateChatroom|"+serviceLocator.getConfiguration().getSalt()+"|"+text1 +"|"+"true";
 			sendtoserver = true;
 			break;
+		//JoinChatroom function
 		case 2:
 			if(text2.length()>2) {
 			senden = "JoinChatroom|"+serviceLocator.getConfiguration().getSalt()+"|"+text2+"|"+ text1;
@@ -399,10 +397,12 @@ public class App_Controller extends Controller<App_Model, App_View> {
 			}
 			
 			break;
+		//ChangePassword function
 		case 3:
 			senden = "ChangePassword|"+serviceLocator.getConfiguration().getSalt()+"|"+text1;
 			sendtoserver = true;
 			break;
+		//Deletelogin function
 		case 4:	
 			
 			if(serviceLocator.getConfiguration().getActualUser().equals(text1)&&(serviceLocator.getTranslator().getCurrentLocale().toString().equals("de"))) { 
@@ -417,6 +417,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
 			sendtoserver = true;
 			break;
 		case 5:
+		//LeaveChatroom function
 			if(text2.length()>2) {
 			senden = "LeaveChatroom|"+serviceLocator.getConfiguration().getSalt()+"|"+text2+"|"+ text1;
 			model.setAcutalchatroom(null);
@@ -432,14 +433,20 @@ public class App_Controller extends Controller<App_Model, App_View> {
 			sendtoserver = false;
 			}
 			break;
+		
 		}
 		
 		if(sendtoserver == true)
 		model.sendMessagetoServer(senden);
 		
+		
         
 		if(serviceLocator.getConfiguration().getOthers()==true) {
 		serviceLocator.getLogger().info("Erfolgreich");
+		view.btnMulti.setDisable(true);
+		view.txt1.setDisable(true);
+		view.txt2.setDisable(true);
+		
 		}else {
 		serviceLocator.getLogger().info("OptionStart: "+model.getMenuOption()+" ist gescheitert");
 		}
@@ -451,7 +458,9 @@ public class App_Controller extends Controller<App_Model, App_View> {
 				view.txt1.setText("!at least 3 letters!");
 				
 				}	
+			
 		}
+		
 		} catch(Exception exception) {
 			this.serviceLocator.getLogger().info(exception.getMessage());
 			}
@@ -463,7 +472,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
 	
 	
 	
-	
+	//send chatmessage to server
 	private void senden(Event ev) {
 		
 		if(model.getAcutalchatroom()==null) {
@@ -484,6 +493,9 @@ public class App_Controller extends Controller<App_Model, App_View> {
 		}
 		}
 	}
+	
+	
+	//delete chat history
 	public void deleteChatroomHistory(Event history) {
 		model.deleteChatroomHistory();
 		view.textArea.setText("");

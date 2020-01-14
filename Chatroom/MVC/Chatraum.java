@@ -41,9 +41,9 @@ public class Chatraum {
 	
 	
 	
-	public void addChatMessage(String Message, String actualUser) {
+	public void addChatMessage(String Message, String actualUser, boolean b) {
 		messageList.add(Message);
-		if(!Message.contains(actualUser+": ")){
+		if(!Message.contains(actualUser+": ")&& b == true){
 			playSound();
 		}
 		

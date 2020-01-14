@@ -36,7 +36,7 @@ public class App_Model extends Model {
     private String actualUser = null;
    
     
-    //0=kein Menu ausgewählt, 1= Chatroom erstellen, 2= Chatroom beitreten, 3= User hinzufügen
+    //0=no menu selected, 1= create cahtroom, 2= join chatroom, 3= add user
     private int menuOption = 0;
  
 
@@ -54,7 +54,7 @@ public class App_Model extends Model {
 		try {
 			sendMessagetoServer(senden);
 		} catch (Exception e) {
-			serviceLocator.getLogger().info("ListChatroomUsers nicht möglich");
+			serviceLocator.getLogger().info("ListChatroomUsers nicht moeglich");
 		}
 		
 		return null;
@@ -75,7 +75,7 @@ public class App_Model extends Model {
 
 	
 	
-	// Empfangen der Chatrooms vom Server
+	// Receiving the chat rooms from the server
 		public void receiveChatrooms() {
 			
 			msg = serviceLocator.getConfiguration().getChatrooms();
@@ -141,7 +141,7 @@ public class App_Model extends Model {
 				this.menuOption = menuOption;
 			}
 			
-//Alle Nachrichten sollen von hier aus gesendet werden damit man 1 mal Thread.Sleep() verwendet werden kann			
+		
   public void sendMessagetoServer(String message) {
 	  try {
 	  serviceLocator.getConfiguration().getWriter().write(message);
@@ -177,7 +177,7 @@ public void saveFile() {
 }
 
 
-
+//delete all old chatroom messages
 public void deleteChatroomHistory() {
 	for(Chatraum c : chatraumArray) {
 		String chatname = c.getName();

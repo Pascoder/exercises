@@ -38,7 +38,7 @@ public class Login_Controller {
 	
 	}
 	
-	//@TODO Fehler nach dem erstellen eines Loggins kann nicht direkt dieser Button gerdrï¿½ckt werden, programm muss zuerst geschlossen werden??
+	
 	public void clickLogin(Event e) {
 		String username, password;
 		username = view.txtusername.getText();
@@ -52,7 +52,7 @@ public class Login_Controller {
 		if(username.length() <3 || password.length() <3) {
 			view.status.setText("Password or Username to short (at least 3 letters)");	
 		}else {
-			//Pruefen ob das Login auf dem Server existiert
+			//Check if the login exists on the server
 			
 				String senden = "Login|"+username+"|"+password;
 				
@@ -70,7 +70,7 @@ public class Login_Controller {
 				template.startApp();
 				
 				view.stage.close();
-				//Hier wird AccountCreated auf true gesetzt nun kann in Sort Message (Configurator) keine Nachricht mehr für den createaccount empfangen werden
+				//Here AccountCreated is set to true - now no more messages for the createaccount can be received in Sort Message (Configurator)
 				servicelocator.getConfiguration().setAccountCreated(true);
 				
 			}else {
@@ -103,9 +103,9 @@ public class Login_Controller {
 			
 		}
 		else {
-			//Hier werden DAten fuer das Login an Server geschickt
+			//Here you can send data for the login to the server
 			try{
-			//Senden einer neuen Loggin Datei  an Server
+			//Sending a new loggin file to server
 			String senden = "CreateLogin|"+username+"|"+password;
 			model.send(senden);
 			

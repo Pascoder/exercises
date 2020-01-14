@@ -107,7 +107,7 @@ public class JavaFX_App_Template extends Application {
      */
     //Login Menu wird gestartet
     public void startLoginMenu() {
-    	//Wenn Verbindung verloren geht, soll keine NullPointerException geben!
+    	
     	if(splashView.stage.isShowing())
     	splashView.stop();
     	
@@ -119,9 +119,7 @@ public class JavaFX_App_Template extends Application {
 		
 	
 		
-		/* Mit dem Loggin Button ist es nun m�glich in den Messenger zu kommen, muss angepasst werden
-		 * wenn dies so gemacht wird wird im controller setOnAction von btnlogin �bersprungen
-		*/
+		
 		
 		
 		
@@ -173,7 +171,7 @@ public class JavaFX_App_Template extends Application {
         serviceLocator.getConfiguration().save();
         
     	}catch(Exception ex) {
-    	//Programm wurde bereits terminiert, da keine Internet Verbindung bestand (siehe Configuration)
+    	//Program was already terminated because there was no Internet connection (see Configuration)
     	Platform.exit();
     	}
         if (view != null) {

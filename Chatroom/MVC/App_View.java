@@ -198,7 +198,7 @@ public class App_View extends View<App_Model> {
         
         
         updateTexts();
-		//@TODO make GUI Design 
+		
         Scene scene = new Scene(root,800,800);
         
         scene.getStylesheets().add(

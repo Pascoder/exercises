@@ -64,11 +64,12 @@ public class Configuration {
     private int 				messagecounter = 0;
     private int 				chatmessagecounter = 0;
     
+    
 
     //Message
     
     private ArrayList<String> 	recivedmessages = new ArrayList<String>();
-    private SimpleStringProperty nachricht = new SimpleStringProperty(); //wenn neue Nachricht gui updaten
+    private SimpleStringProperty nachricht = new SimpleStringProperty(); //update gui on receipt of a new message
     
 
     public Configuration() {
@@ -136,7 +137,7 @@ public class Configuration {
     
 
      
-    //Hier wird Socket erstellt
+    //Socket is created here
     public void connectToServer() throws IOException {
 		try { this.socket = new Socket("147.86.8.31", 50001);		
 			} catch (UnknownHostException e) {
@@ -179,7 +180,7 @@ public class Configuration {
     }
       
 
-    
+   //BufferedReader includes also the possibity to show an alert, if we lost the server connection 
     public void createBufferedReader() {
         try {
             BufferedReader socketIn = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -242,7 +243,7 @@ private void showAlert() {
      if (result.get() == ButtonType.OK) {
     	 	Platform.exit();
      		System.exit(0);
-     		//Läuft noch nicht
+     		
      	}else {
      	JavaFX_App_Template.getMainProgram().stop();
      	JavaFX_App_Template.getMainProgram().start(JavaFX_App_Template.getMainProgram().getPrimary());
@@ -265,19 +266,19 @@ private void sortMessaged(String serverMessages) {
                     }
                     
                     
-                    //nur Login hat 3 Zeichen hat Result|true|4FA4563A5C2FFD1E703B49190DC348BD also ist create login ausgeschlossen
+                    //only login has 3 characters
                     if (messages.length == 3 && messages[0].equals("Result") && messages[1].equals("true") && correctLogin ==false) {
                         correctLogin = true;
                         token = messages[2];
                     }
-                    //Create Account Message --> account created wird im Login Controller auf true gesetzt falls schon in die app gewechselt wurde somit koennen spaetere nachrichten nicht mehr hier gespeichert werden
+                    //Create Account Message --> account created is set to true in the login controller if you have already switched to the app so that later messages cannot be saved here
                   
                     if(messages.length == 2 && messages[0].equals("Result") && messages[1].equals("true")&& accountcreated==false) {
                     	accountcreated = true;
                     
                     }else {
-                    	onSort = false;//<-- jedes mal wenn eine 2 Stellige nachricht rein kommt wird zuerst others auf false gesetzt um ein korrektes ergebnis zu haben fuer jeweilige Anfrage
-                     //Wenn Account schon erstellt wurde oder sich das Programm nicht mehr im Login Menu befindet gehen spaetere nachrichten hier ein
+                    	onSort = false;//<-- every time a 2 digit message comes in, others is first set to false to get a correct result for each request
+                     //If account has already been created or the program is no longer in the login menu, later messages will be sent here
                     if(messages.length == 2 && messages[0].equals("Result") && messages[1].equals("true")) {
                     	onSort = true;
                         
@@ -285,14 +286,14 @@ private void sortMessaged(String serverMessages) {
                     	
                         }
                     
-                    //Nachrichten koennen nur 1 mal hier rein weil boolean done nur beim 1. mal false ist also nur fuer Chatrooms laden nutzbar
+                    //Messages can only be posted 1 time because boolean done only at the 1. time false is only usable for loading chatrooms
                     if (messages.length > 2 && messages[0].equals("Result") && messages[1].equals("true")) {
                         String[] chatrooms = serverMessages.split("\\|");
 
                         chatroomArray = new ArrayList<>();
                         
                         for (int i = 2; i < chatrooms.length; i++) {
-                        	//Wenn der aktuelle User drin ist, ist es die Liste der aktuell online Users
+                        	//If the current user is in it, it is the list of current online users
                         	if(chatrooms[i].equals(actualUser) ) {
                         		booleanuseronline = true;
                         		
@@ -314,17 +315,17 @@ private void sortMessaged(String serverMessages) {
                         
                        
                     }
-                    //Hier werden alle Nachrichten aus dem Chat gespeichert
+                    //All messages from the chat are stored here
                     if(messages[0].equals("MessageText")) {
                     	
                     		String sentfrom = messages[1];
                     		String chat = messages[2];
                     		recivedmessages.add(sentfrom+"|"+chat+"|"+messages[3]);
-                    		//Message wird mit Username konkateniert, könnte besser gelöst werden mit Message Objekt!
+                    	
                     		String message = sentfrom + ": " + messages[3];
                     		chatmessagecounter++;
                        
-                    	setNachrichtProperty(chat+"|"+ message+"|"+chatmessagecounter); //wird in Controller setonAction ausgel�st
+                    	setNachrichtProperty(chat+"|"+ message+"|"+chatmessagecounter); //is triggered in Controller setonAction
                     	
                         
                     }
@@ -338,7 +339,7 @@ private void sortMessaged(String serverMessages) {
             e.printStackTrace();
         }
     }  
-    //alte Chats werden hier geladen
+    //old chats were loaded here
     public void loadoldChatrooms() {
     	 try {
          	BufferedReader reader = new BufferedReader(new FileReader("ChatRooms.txt"));
