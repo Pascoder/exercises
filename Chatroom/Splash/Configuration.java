@@ -261,7 +261,7 @@ private void sortMessaged(String serverMessages) {
                     
                     //Test
                     for(int i = 0; i < messages.length;i++) {
-                    	System.out.println("Server Nachricht"+messagecounter+" :"+messages[i]);
+                    	
                     }
                     
                     

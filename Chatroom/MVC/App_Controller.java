@@ -63,6 +63,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
 		view.sendbutton.disableProperty().bind(view.txtChatMessage.textProperty().isEmpty());
 		
 		
+		
         serviceLocator.getConfiguration().getNachrichtProperty().
         addListener((observable, old, neu) -> updateGUI(neu));
  
@@ -387,8 +388,13 @@ public class App_Controller extends Controller<App_Model, App_View> {
 			model.setAcutalchatroom(text2);
 			sendtoserver = true;
 			}else {
-			view.txt2.setText("!!at least 3 letters!!");
+			if(serviceLocator.getTranslator().getCurrentLocale().toString().equals("de")) {
+			view.txt2.setText("!mindestends 3 Zeichen!");
 			view.txt1.clear();
+			}else {
+			view.txt2.setText("!at least 3 letters!");
+			view.txt1.clear();
+			}
 			sendtoserver = false;
 			}
 			
@@ -398,6 +404,15 @@ public class App_Controller extends Controller<App_Model, App_View> {
 			sendtoserver = true;
 			break;
 		case 4:	
+			
+			if(serviceLocator.getConfiguration().getActualUser().equals(text1)&&(serviceLocator.getTranslator().getCurrentLocale().toString().equals("de"))) { 
+			view.txtChatMessage.setVisible(false);
+			view.txt1.setText("mit neuem User einloggen");
+			}else {
+			view.txtChatMessage.setVisible(false);
+			view.txt1.setText("login with new user");
+			}
+			
 			senden = "DeleteLogin|"+serviceLocator.getConfiguration().getSalt()+"|"+text1;
 			sendtoserver = true;
 			break;
@@ -407,8 +422,13 @@ public class App_Controller extends Controller<App_Model, App_View> {
 			model.setAcutalchatroom(null);
 			sendtoserver = true;
 			}else {
-			view.txt2.setText("!!at least 3 letters!!");
-			view.txt1.clear();
+				if(serviceLocator.getTranslator().getCurrentLocale().toString().equals("de")) {
+					view.txt2.setText("!mindestends 3 Zeichen!");
+					view.txt1.clear();
+					}else {
+					view.txt2.setText("!at least 3 letters!");
+					view.txt1.clear();
+					}
 			sendtoserver = false;
 			}
 			break;
@@ -424,7 +444,13 @@ public class App_Controller extends Controller<App_Model, App_View> {
 		serviceLocator.getLogger().info("OptionStart: "+model.getMenuOption()+" ist gescheitert");
 		}
 		}else {
-		view.txt1.setText("!!at least 3 letters!!");	
+			if(serviceLocator.getTranslator().getCurrentLocale().toString().equals("de")) {
+				view.txt1.setText("!mindestends 3 Zeichen!");
+				
+				}else {
+				view.txt1.setText("!at least 3 letters!");
+				
+				}	
 		}
 		} catch(Exception exception) {
 			this.serviceLocator.getLogger().info(exception.getMessage());
