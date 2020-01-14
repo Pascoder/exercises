@@ -60,6 +60,8 @@ public class App_Controller extends Controller<App_Model, App_View> {
 		view.lblMulti.setDisable(true);
 		view.btnMulti.setDisable(true);
 		view.deletechatroomhistory.setOnAction(this::deleteChatroomHistory);
+		view.sendbutton.disableProperty().bind(view.txtChatMessage.textProperty().isEmpty());
+		
 		
         serviceLocator.getConfiguration().getNachrichtProperty().
         addListener((observable, old, neu) -> updateGUI(neu));
@@ -248,7 +250,7 @@ public class App_Controller extends Controller<App_Model, App_View> {
 		
 		//Aktuelle sprache wird mit Local verglichen und so entschieden welche sprache die korrekte ist
 		if(serviceLocator.getTranslator().getCurrentLocale().toString().equals("de")) {
-		view.lblMulti.setText("Passwort eif�gen: ");
+		view.lblMulti.setText("Passwort einfuegen: ");
 		view.btnMulti.setText("wechseln");
 		view.txt1.setText("neues Passwort");
 		}else {
@@ -368,42 +370,69 @@ public class App_Controller extends Controller<App_Model, App_View> {
 	public void OptionStart(Event option) {
 		
 		try {
+		boolean sendtoserver = false;
 		String senden = null;
 		String text1 = view.txt1.getText();
 		String text2 = view.txt2.getText();
+		if(text1.length()>2) {
 		//0=kein Menu ausgewaehlt, 1= Chatroom erstellen, 2= Chatroom beitreten
 		switch(model.getMenuOption()){
 		case 1:
 			senden = "CreateChatroom|"+serviceLocator.getConfiguration().getSalt()+"|"+text1 +"|"+"true";
+			sendtoserver = true;
 			break;
 		case 2:
+			if(text2.length()>2) {
 			senden = "JoinChatroom|"+serviceLocator.getConfiguration().getSalt()+"|"+text2+"|"+ text1;
 			model.setAcutalchatroom(text2);
+			sendtoserver = true;
+			}else {
+			view.txt2.setText("!!at least 3 letters!!");
+			view.txt1.clear();
+			sendtoserver = false;
+			}
+			
 			break;
 		case 3:
 			senden = "ChangePassword|"+serviceLocator.getConfiguration().getSalt()+"|"+text1;
+			sendtoserver = true;
 			break;
 		case 4:	
 			senden = "DeleteLogin|"+serviceLocator.getConfiguration().getSalt()+"|"+text1;
+			sendtoserver = true;
 			break;
 		case 5:
+			if(text2.length()>2) {
 			senden = "LeaveChatroom|"+serviceLocator.getConfiguration().getSalt()+"|"+text2+"|"+ text1;
 			model.setAcutalchatroom(null);
+			sendtoserver = true;
+			}else {
+			view.txt2.setText("!!at least 3 letters!!");
+			view.txt1.clear();
+			sendtoserver = false;
+			}
 			break;
 		}
+		
+		if(sendtoserver == true)
 		model.sendMessagetoServer(senden);
+		
         
 		if(serviceLocator.getConfiguration().getOthers()==true) {
 		serviceLocator.getLogger().info("Erfolgreich");
 		}else {
 		serviceLocator.getLogger().info("OptionStart: "+model.getMenuOption()+" ist gescheitert");
 		}
+		}else {
+		view.txt1.setText("!!at least 3 letters!!");	
+		}
 		} catch(Exception exception) {
 			this.serviceLocator.getLogger().info(exception.getMessage());
 			}
+		
 		}
 		
-	
+
     
 	
 	

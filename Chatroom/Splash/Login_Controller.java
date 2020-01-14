@@ -50,7 +50,7 @@ public class Login_Controller {
 		try {
 		
 		if(username.length() <3 || password.length() <3) {
-			view.status.setText("Password or Username to short (min 3 letters)");	
+			view.status.setText("Password or Username to short (at least 3 letters)");	
 		}else {
 			//Pruefen ob das Login auf dem Server existiert
 			
