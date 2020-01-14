@@ -18,7 +18,6 @@ module Pascoder {
 	exports movieCollection;
 	exports poker.version_graphics.model;
 	exports Splash;
-	exports chatroom.testClient;
 	exports MVC;
 	exports first;
 	exports webBrowser;
