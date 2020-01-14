@@ -14,16 +14,11 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.List;
 import java.util.Optional;
 import java.util.Properties;
 import java.util.logging.Logger;
-
-
 import Splash.ServiceLocator;
 import javafx.application.Platform;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -55,13 +50,11 @@ public class Configuration {
     private ArrayList<String> 	chatroomArray;
     private boolean 			accountcreated;
     private Thread 				serverCommunicationThread;
-    private JavaFX_App_Template template;
     private boolean 			onSort;
     private String 				actualUser = null;
     private String 				usersOnline = "";
     private boolean 			booleanuseronline = false;
     private boolean 			threadrunning = true;
-    private int 				messagecounter = 0;
     private int 				chatmessagecounter = 0;
     
     
@@ -253,7 +246,7 @@ private void showAlert() {
           
 
 private void sortMessaged(String serverMessages) {
-                	messagecounter++;
+                
                 
        
                 	String [] messages = serverMessages.split("\\|"); //Jede nachricht wird nach aufteilung in Message typ geloescht

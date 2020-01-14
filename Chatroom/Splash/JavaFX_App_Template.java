@@ -3,20 +3,12 @@ package Splash;
 
 import MVC.App_Model;
 import MVC.App_View;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.net.Socket;
-import java.net.UnknownHostException;
-
 import MVC.App_Controller;
 import Splash.Splash_Model;
 import Splash.Splash_View;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 /**

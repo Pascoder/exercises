@@ -1,16 +1,9 @@
 package Splash;
 
 import Splash.JavaFX_App_Template;
-
-import java.io.IOException;
-
 import MVC.Controller;
-import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Worker;
-import javafx.event.EventHandler;
-import javafx.stage.WindowEvent;
+
 
 
 /**
