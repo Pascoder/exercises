@@ -136,7 +136,7 @@ public class Configuration {
 			} catch (UnknownHostException e) {
 				Platform.runLater(new Runnable() {
 					public void run() {
-					
+						System.out.println("Alert3");
 						Alert alert = new Alert(Alert.AlertType.WARNING, "Unknow host, please try again");
 						alert.showAndWait();
 						Platform.exit();
@@ -148,7 +148,7 @@ public class Configuration {
 			} catch (IOException e) {
 				Platform.runLater(new Runnable() {
 					public void run() {
-					
+						System.out.println("Alert4");
 						Alert alert = new Alert(Alert.AlertType.WARNING, "No internet connection, please reconnect");
 						alert.showAndWait();
 						logger.info("Program terminated");
@@ -190,8 +190,12 @@ public class Configuration {
                       	
                       		Platform.runLater(new Runnable() {
 								public void run() {
-								
-								showAlert();
+									//if the internet connection was interrupted for a long time 30-60sek
+									Alert alert = new Alert(Alert.AlertType.WARNING, "internet connection lost, please reconnect");
+									 alert.showAndWait();
+									 Platform.exit();
+									 System.exit(1);
+									 alert.setOnCloseRequest(c->{Platform.exit();System.exit(1);});
 								
 								}
                         		
@@ -203,8 +207,12 @@ public class Configuration {
                         		
                         		Platform.runLater(new Runnable() {
 								public void run() {
-								
-								showAlert();
+									//if the internet connection was interrupted for a long time 30-60sek
+								Alert alert = new Alert(Alert.AlertType.WARNING, "internet connection lost, please reconnect");
+								 alert.showAndWait();  
+								 Platform.exit();
+								 System.exit(1);
+								 alert.setOnCloseRequest(c->{Platform.exit();System.exit(1);});
 							
 								
 								}
@@ -223,26 +231,7 @@ public class Configuration {
                 }
                 
                
-private void showAlert() {
-                
-     Alert alert = new Alert(AlertType.WARNING);
-     
-     alert.setTitle("Warning!");
-     alert.setHeaderText("Lost Server Connection");
-     alert.setContentText("Exit Programm?");
-    
-     Optional<ButtonType> result = alert.showAndWait();
-                
-     if (result.get() == ButtonType.OK) {
-    	 	Platform.exit();
-     		System.exit(0);
-     		
-     	}else {
-     	JavaFX_App_Template.getMainProgram().stop();
-     	JavaFX_App_Template.getMainProgram().start(JavaFX_App_Template.getMainProgram().getPrimary());
-     	}
-                	     
-     }	               
+             
           
 
 private void sortMessaged(String serverMessages) {
